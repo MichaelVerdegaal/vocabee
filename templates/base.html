@@ -10,10 +10,13 @@
 <body>
 
 <!--start navbar-->
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="/"><strong>Vocab grinder</strong></a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
-            aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+<nav class="navbar navbar-light navbar-expand-lg" style="background-color: #f5f5f5;">
+    <a class="navbar-brand" href="/">
+        <img src="{{ url_for('static', filename='images/brand-logo-vg.png') }}" width="45" height="45"
+             style="padding-bottom: 5px">
+        <strong>Vocab grinder</strong></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-navbar"
+            aria-controls="main-navbar" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
 
