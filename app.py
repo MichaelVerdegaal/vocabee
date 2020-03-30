@@ -12,4 +12,4 @@ def home():
 
 @app.route('/vocab')
 def vocab():
-    return render_template('vocab.html')
+    return render_template('vocab.html', vocab=fu.get_vocabulary())

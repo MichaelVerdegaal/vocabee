@@ -2,11 +2,8 @@
 
 {% block container %}
 
-    <label><input type="checkbox" rel="N5"/>N5</label>
-    <label><input type="checkbox" rel="N4"/>N4</label>
-    <label><input type="checkbox" rel="N3"/>N3</label>
-    <table class="table table-striped">
-        <thead>
+    <table class="table table-striped" id="vocab-table">
+        <thead id="vocab-table-header">
         <tr>
             <th>Kanji</th>
             <th>Hiragana</th>
@@ -15,26 +12,27 @@
             <th>Examples</th>
         </tr>
         </thead>
-        <tbody class="searchable">
-        <tr>
-            <td>会う</td>
-            <td>あう</td>
-            <td>to meet</td>
-            <td class="N5">N5</td>
-            <td>No</td>
-        </tr>
-        <tr>
-            <td>月</td>
-            <td>つき</td>
-            <td>moon,month</td>
-            <td class="N3">N3</td>
-            <td>None</td>
-        </tr>
+        <tbody id="vocab-table-body">
+
         </tbody>
     </table>
 
+    <script type="text/javascript" type="text/ecmascript-6">
+        let vocab = {{ vocab | tojson }};
+        let entries = vocab.entries;
+        let tableBody = document.getElementById("vocab-table-body");
 
+        for (let entry of entries) {
+            let row = document.createElement("tr");
+            row.innerHTML = `<td>${entry.kanji}</td>
+                             <td>${entry.hiragana}</td>
+                             <td>${entry.english}</td>
+                             <td>${entry.level}</td>
+                             <td>Empty for now...</td>`;
 
-    <script src="{{ url_for('static', filename='js/vocab.js') }}"></script>
+            tableBody.appendChild(row);
+        }
+
+    </script>
 
 {% endblock %}

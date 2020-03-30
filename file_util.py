@@ -27,3 +27,13 @@ def get_entries(sheet):
                  "examples": row[4].value}
         vocabulary["entries"].append(entry)
     return vocabulary
+
+
+def get_vocabulary():
+    """
+    Master function to get vocabulary
+    :return: Vocabulary entries as dictionary
+    """
+    sheet = get_excel_sheet()
+    entries = get_entries(sheet)
+    return entries
