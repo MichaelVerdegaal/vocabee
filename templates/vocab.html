@@ -2,20 +2,22 @@
 
 {% block container %}
 
-    <table class="table table-striped" id="vocab-table">
-        <thead id="vocab-table-header">
-        <tr>
-            <th>Kanji</th>
-            <th>Hiragana</th>
-            <th>English</th>
-            <th>JLPT level</th>
-            <th>Examples</th>
-        </tr>
-        </thead>
-        <tbody id="vocab-table-body">
+    <div class="table-responsive">
+        <table class="table table-striped" id="vocab-table">
+            <thead id="vocab-table-header">
+            <tr>
+                <th>Kanji</th>
+                <th>Hiragana</th>
+                <th>English</th>
+                <th>JLPT level</th>
+                <th>Examples</th>
+            </tr>
+            </thead>
+            <tbody id="vocab-table-body">
 
-        </tbody>
-    </table>
+            </tbody>
+        </table>
+    </div>
 
     <script type="text/javascript" type="text/ecmascript-6">
         let vocab = {{ vocab | tojson }};
