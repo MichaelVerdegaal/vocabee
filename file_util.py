@@ -20,11 +20,11 @@ def get_entries(sheet):
     """
     vocabulary = {"entries": []}
     for row in sheet.iter_rows():
-        entry = {"kanji": row[0].value,
-                 "hiragana": row[1].value,
-                 "english": row[2].value,
-                 "level": row[3].value,
-                 "examples": row[4].value}
+        entry = [row[0].value,
+                 row[1].value,
+                 row[2].value,
+                 row[3].value,
+                 row[4].value]
         vocabulary["entries"].append(entry)
     return vocabulary
 
