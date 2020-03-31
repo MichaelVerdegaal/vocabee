@@ -1,59 +1,32 @@
 {% extends 'base.html' %}
 
 {% block container %}
+    <link href="{{ url_for('static', filename='css/vocab.css') }}" rel="stylesheet">
 
-    <div class="table-responsive">
-        <table class="table table-striped" id="vocab-table" style="table-layout: fixed">
-            <thead id="vocab-table-header">
-            <tr>
-                <th>Kanji</th>
-                <th>Hiragana</th>
-                <th>English</th>
-                <th>JLPT level</th>
-                <th>Examples</th>
-            </tr>
-            </thead>
-            <tbody id="vocab-table-body">
-
-            </tbody>
+    <div class="table-responsive" id="vocab-table-container">
+        <table class="table table-striped" id="vocab-table">
         </table>
     </div>
 
-    <script type="text/javascript" type="text/ecmascript-6">
+    <script type="text/javascript">
         // Initialize vocabulary entries
-        let vocab = {{ vocab | tojson }};
+        let vocab = {{ vocab | safe }};
         let entries = vocab.entries;
 
-        // Create tablebody later so we only load it when it's done
-        let tableBody = document.getElementById("vocab-table-body");
-        let bodyFragment = document.createDocumentFragment();
-
-        // Fill tablebody
-        for (let entry of entries) {
-            let row = document.createElement("tr");
-
-            let kanji = document.createElement("td");
-            let hiragana = document.createElement("td");
-            let english = document.createElement("td");
-            let level = document.createElement("td");
-            let examples = document.createElement("td");
-
-            kanji.textContent = entry[0];
-            hiragana.textContent = entry[1];
-            english.textContent = entry[2];
-            level.textContent = entry[3];
-            examples.textContent = "Currently empty";
-
-            row.appendChild(kanji);
-            row.appendChild(hiragana);
-            row.appendChild(english);
-            row.appendChild(level);
-            row.appendChild(examples);
-
-            bodyFragment.appendChild(row);
-        }
-
-        tableBody.appendChild(bodyFragment);
+        $(document).ready(function () {
+            $('#vocab-table').DataTable({
+                data: entries,
+                columns: [
+                    {title: "Kanji"},
+                    {title: "Hiragana"},
+                    {title: "English"},
+                    {title: "Level"}
+                ],
+                deferRender: true,
+                orderClasses: false,
+                autoWidth: false
+            });
+        });
     </script>
 
 {% endblock %}

@@ -1,5 +1,5 @@
 from openpyxl import load_workbook
-
+import json
 
 def get_excel_sheet():
     """
@@ -36,4 +36,8 @@ def get_vocabulary():
     """
     sheet = get_excel_sheet()
     entries = get_entries(sheet)
+    entries = json.dumps(entries)
     return entries
+
+
+vocabulary = get_vocabulary()

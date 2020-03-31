@@ -1,5 +1,5 @@
 from flask import Flask, render_template
-import file_util as fu
+from file_util import vocabulary
 
 app = Flask(__name__)
 
@@ -12,4 +12,4 @@ def home():
 
 @app.route('/vocab')
 def vocab():
-    return render_template('vocab.html', vocab=fu.get_vocabulary())
+    return render_template('vocab.html', vocab=vocabulary)
