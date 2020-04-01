@@ -29,7 +29,7 @@ def get_entries(sheet):
         # We put entries in a list because DataTables only accepts rows in this format
         kanji = k if (k := row[0].value) else ""
         # Add clickable Jisho link
-        hiragana = f'<a href="https://jisho.org/search/{row[1].value}">{row[1].value}</a>'
+        hiragana = f'<a href="https://jisho.org/search/{row[1].value}" target="_blank">{row[1].value}</a>'
         english = row[2].value
         entry = [hiragana,
                  kanji,
