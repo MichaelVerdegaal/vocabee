@@ -27,10 +27,12 @@ def get_entries(sheet):
     for row in sheet.iter_rows():
         # Each row contains a Kanji, Hiragana, English, JLPT level and Example sentences in that order
         # We put entries in a list because DataTables only accepts rows in this format
-        kanji = row[0].value if row[0].value else ""
-        entry = [kanji,
-                 row[1].value,
-                 row[2].value,
+        kanji = k if (k := row[0].value) else ""
+        hiragana = row[1].value
+        english = row[2].value
+        entry = [hiragana,
+                 kanji,
+                 english,
                  "Example"]
 
         # Split by JLPT level for performance reasons

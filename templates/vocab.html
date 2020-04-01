@@ -2,9 +2,8 @@
 
 {% block container %}
 
-    <div class="table-responsive" id="vocab-table-container">
-        <table class="table table-striped" id="vocab-table">
-        </table>
+    <div class="container-fluid" id="vocab-table-container">
+        <table class="table table-striped" id="vocab-table" style="width: 100%;"></table>
     </div>
 
     <script type="text/javascript">
@@ -16,13 +15,11 @@
             $('#vocab-table').DataTable({
                 data: entries,
                 columns: [
-                    {title: "Kanji"},
                     {title: "Hiragana"},
+                    {title: "Kanji"},
                     {title: "English"},
                     {title: "Examples"}
                 ],
-                deferRender: true,
-                orderClasses: false,
                 responsive: true
             });
         });
