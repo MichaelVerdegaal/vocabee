@@ -1,3 +1,11 @@
 #vocab-table-container {
     padding: 10px;
 }
+
+#vocab-index-table-container {
+    margin-top: 10px !important;
+}
+
+.card {
+    margin-bottom: 15px;
+}

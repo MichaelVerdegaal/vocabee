@@ -2,10 +2,57 @@
 
 {% block container %}
 
-    <a href="{{ url_for('vocab', vocab_level=1) }}">Link 1</a>
-    <a href="{{ url_for('vocab', vocab_level=2) }}">Link 2</a>
-    <a href="{{ url_for('vocab', vocab_level=3) }}">Link 3</a>
-    <a href="{{ url_for('vocab', vocab_level=4) }}">Link 4</a>
-    <a href="{{ url_for('vocab', vocab_level=5) }}">Link 5</a>
+
+
+    <div class="container-fluid" id="vocab-index-table-container">
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <h5 class="card-title">N5</h5>
+                        <p class="card-text">Newbie</p>
+                        <a href="{{ url_for('vocab', vocab_level=5) }}" class="btn btn-primary">Go to</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <h5 class="card-title">N4</h5>
+                        <p class="card-text">Beginner</p>
+                        <a href="{{ url_for('vocab', vocab_level=4) }}" class="btn btn-primary">Go to</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <h5 class="card-title">N3</h5>
+                        <p class="card-text">Intermediate</p>
+                        <a href="{{ url_for('vocab', vocab_level=3) }}" class="btn btn-primary">Go to</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <h5 class="card-title">N2</h5>
+                        <p class="card-text">Advanced</p>
+                        <a href="{{ url_for('vocab', vocab_level=2) }}" class="btn btn-primary">Go to</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <h5 class="card-title">N1</h5>
+                        <p class="card-text">Near-native</p>
+                        <a href="{{ url_for('vocab', vocab_level=1) }}" class="btn btn-primary">Go to</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
 {% endblock %}
