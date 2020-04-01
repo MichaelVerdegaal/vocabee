@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 
 {% block container %}
-    <link href="{{ url_for('static', filename='css/vocab.css') }}" rel="stylesheet">
 
     <div class="table-responsive" id="vocab-table-container">
         <table class="table table-striped" id="vocab-table">
@@ -20,7 +19,7 @@
                     {title: "Kanji"},
                     {title: "Hiragana"},
                     {title: "English"},
-                    {title: "Level"}
+                    {title: "Examples"}
                 ],
                 deferRender: true,
                 orderClasses: false,

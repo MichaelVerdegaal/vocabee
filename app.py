@@ -15,9 +15,18 @@ cache = Cache(app)
 @app.route('/')
 @app.route('/home')
 def home():
-    return render_template('home.html')
+    return render_template("home.html")
 
 
 @app.route('/vocab')
-def vocab():
-    return render_template('vocab.html', vocab=vocabulary)
+def vocab_index():
+    return render_template("vocab_index.html")
+
+
+@app.route('/vocab/<int:vocab_level>')
+def vocab(vocab_level):
+    if 0 < vocab_level < 6:
+        vocab = vocabulary[vocab_level - 1]
+        return render_template("vocab.html", vocab=vocab)
+    else:
+        return render_template("vocab_index.html")
