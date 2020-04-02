@@ -7,15 +7,24 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Japanese vocab grinder</title>
+
     <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.20/r-2.2.3/datatables.min.css"/>
+    <link rel="stylesheet" type="text/css"
+          href="https://cdn.datatables.net/v/bs4/dt-1.10.20/r-2.2.3/datatables.min.css"/>
     <script src="{{ url_for('static', filename='js/jquery-3.4.1.min.js') }}"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.20/r-2.2.3/datatables.min.js"></script>
 </head>
 <body>
 
 <!--start navbar-->
+{% set navigation_bar = [
+    ('/', 'home', 'Home'),
+    ('/vocab', 'vocab', 'vocab')
+] -%}
+
+{% set active_page = active_page|default('index') -%}
+
 <nav class="navbar navbar-light navbar-expand-lg sticky-top" style="background-color: #f5f5f5;">
     <a class="navbar-brand" href="/">
         <img src="{{ url_for('static', filename='images/brand-logo-vg.png') }}" width="45" height="45"
@@ -27,13 +36,12 @@
     </button>
 
     <div class="collapse navbar-collapse" id="main-navbar">
-        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-            <li class="nav-item active">
-                <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/vocab">Vocabulary list</a>
-            </li>
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0" id="navigation">
+            {% for href, id, caption in navigation_bar %}
+                <li class="nav-item {% if id == active_page %} active {% endif %}">
+                    <a class="nav-link" href="{{ href|e }}">{{ caption|e }}</a>
+                </li>
+            {% endfor %}
         </ul>
     </div>
 </nav>

@@ -9,3 +9,16 @@
 .card {
     margin-bottom: 15px;
 }
+
+.navbar-nav {
+    color: #BABABA;
+}
+
+
+.navbar-nav > .active > a {
+    color: #F8F8F8;
+}
+
+.nav-item > a:hover {
+    color: #D9D9D9;
+}

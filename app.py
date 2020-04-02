@@ -13,7 +13,6 @@ cache = Cache(app)
 
 
 @app.route('/')
-@app.route('/home')
 def home():
     """
     Renders the home page
