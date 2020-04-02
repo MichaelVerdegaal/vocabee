@@ -27,10 +27,10 @@ def get_entries(sheet):
     for row in sheet.iter_rows():
         # Each row contains a Kanji, Hiragana, English, JLPT level and Example sentences in that order
         # We put entries in a list because DataTables only accepts rows in this format
-        kanji = k if (k := row[0].value) else ""
+        kanji = f'<a href="https://jisho.org/search/{k}" target="_blank">{k}</a>' if (k := row[0].value) else ""
         # Add clickable Jisho link
         hiragana = f'<a href="https://jisho.org/search/{row[1].value}" target="_blank">{row[1].value}</a>'
-        english = row[2].value
+        english = e if (e := row[2].value) else ""
         entry = [hiragana,
                  kanji,
                  english,
