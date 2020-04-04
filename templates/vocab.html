@@ -27,7 +27,12 @@
                     {
                         title: "Examples",
                         render: function () {
-                            return '<button type="button" class="btn btn-outline-primary" id="example-select" disabled>Show</button>\n'
+                            return '<button ' +
+                                'type="button" ' +
+                                'class="btn btn-outline-primary" ' +
+                                'id="example-select" ' +
+                                'data-toggle="modal" ' +
+                                'data-target="#modalLarge">Show</button>\n'
                         }
                     }
                 ],
@@ -43,5 +48,54 @@
             console.log(data);
         });
     </script>
+
+    <div class="modal fade modal-fullscreen" id="modalLarge" tabindex="-1" role="dialog"
+         aria-labelledby="modalLargeLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalLargeLabel">Modal with large content</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sed dui tempor, finibus ligula
+                        vitae, convallis mi. Sed posuere
+                        at neque nec hendrerit. Sed vitae felis gravida, ultricies dui eget, venenatis leo. Nunc
+                        hendrerit tellus
+                        non velit malesuada, eu dapibus sapien placerat. Sed non viverra magna, sit amet ornare erat.
+                        Fusce eros
+                        mi, consequat ac elit vel, ullamcorper molestie mauris. Proin auctor orci eget lacinia
+                        condimentum. Phasellus
+                        ultricies ligula id lacinia posuere. Nulla rutrum eros eu arcu tempor, imperdiet ornare lectus
+                        convallis.
+                        Nulla eleifend dapibus sem, vel viverra sapien.
+                    </p>
+                    <p>
+                        Integer interdum ex augue, vel egestas nibh fermentum eu. Cras ut erat eu nisi ullamcorper
+                        scelerisque vitae in lorem. In
+                        hac habitasse platea dictumst. Pellentesque in ante aliquam, porta metus eu, viverra magna. Cras
+                        blandit,
+                        augue in consequat rhoncus, nulla risus sodales mi, at tincidunt dolor leo semper mauris. Class
+                        aptent
+                        taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Vivamus
+                        pellentesque purus
+                        porta maximus blandit. Suspendisse id lorem pellentesque, vehicula nulla at, congue eros. Duis
+                        eleifend
+                        semper sodales. Morbi eu sagittis ex. Praesent commodo rhoncus nisi. Aenean quis arcu mauris.
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" id="btnTestSaveLarge" class="btn btn-default">
+                        <span class="d-none d-md-inline">Save changes</span>
+                        <span class="d-md-none">Save</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 {% endblock %}

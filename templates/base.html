@@ -8,12 +8,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Japanese vocab grinder</title>
 
+    <!--Ref: https://getbootstrap.com/docs/4.4/getting-started/download/ -->
     <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet">
-    <link rel="stylesheet" type="text/css"
-          href="https://cdn.datatables.net/v/bs4/dt-1.10.20/r-2.2.3/datatables.min.css"/>
+    <!--Ref: https://github.com/keaukraine/bootstrap4-fs-modal -->
+    <link href="{{ url_for('static', filename='css/bootstrap-fs-modal.min.css') }}" rel="stylesheet">
+    <!--Ref: https://jquery.com/download/ -->
     <script src="{{ url_for('static', filename='js/jquery-3.4.1.min.js') }}"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.20/r-2.2.3/datatables.min.js"></script>
+    <!--Ref: https://datatables.net/ -->
+    <link rel="stylesheet" type="text/css"
+          href="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.20/b-1.6.1/b-html5-1.6.1/r-2.2.3/datatables.min.css"/>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+    <script type="text/javascript"
+            src="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.20/b-1.6.1/b-html5-1.6.1/r-2.2.3/datatables.min.js"></script>
+
 </head>
 <body>
 
@@ -50,7 +59,7 @@
 <div class="container-fluid" id="content-block-container">
     {% block container %}{% endblock %}
 </div>
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<!--Ref: https://getbootstrap.com/docs/4.4/getting-started/download/ -->
 <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
 </body>
 </html>
