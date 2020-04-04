@@ -19,10 +19,28 @@
                     {title: "Hiragana"},
                     {title: "Kanji"},
                     {title: "English"},
-                    {title: "Examples"}
+                    {
+                        title: "Examples_raw",
+                        "visible": false,
+                        "searchable": false
+                    },
+                    {
+                        title: "Examples",
+                        render: function () {
+                            return '<button type="button" class="btn btn-outline-primary" id="example-select" disabled>Show</button>\n'
+                        }
+                    }
                 ],
                 responsive: true
             });
+        });
+
+        $("#vocab-table").on('click', '#example-select', function (e) {
+            // Get data from all rows, including hidden ones
+            e.preventDefault();
+            let currentRow = $(this).closest("tr");
+            let data = $('#vocab-table').DataTable().row(currentRow).data();
+            console.log(data);
         });
     </script>
 

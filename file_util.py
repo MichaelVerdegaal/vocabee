@@ -27,25 +27,27 @@ def get_entries(sheet):
     for row in sheet.iter_rows():
         # Each row contains a Kanji, Hiragana, English, JLPT level and Example sentences in that order
         # We put entries in a list because DataTables only accepts rows in this format
-        kanji = f'<a href="https://jisho.org/search/{k}" target="_blank">{k}</a>' if (k := row[0].value) else ""
         # Add clickable Jisho link
+        kanji = f'<a href="https://jisho.org/search/{e}" target="_blank">{e}</a>' if (e := row[0].value) else ""
         hiragana = f'<a href="https://jisho.org/search/{row[1].value}" target="_blank">{row[1].value}</a>'
         english = e if (e := row[2].value) else ""
+        examples = e if (e := row[4].value) else ""
         entry = [hiragana,
                  kanji,
                  english,
-                 "Example"]
+                 examples]
 
+        level = row[3].value
         # Split by JLPT level for performance reasons
-        if row[3].value == "N1":
+        if level == "N1":
             N1["entries"].append(entry)
-        elif row[3].value == "N2":
+        elif level == "N2":
             N2["entries"].append(entry)
-        elif row[3].value == "N3":
+        elif level == "N3":
             N3["entries"].append(entry)
-        elif row[3].value == "N4":
+        elif level == "N4":
             N4["entries"].append(entry)
-        elif row[3].value == "N5":
+        elif level == "N5":
             N5["entries"].append(entry)
 
     return [N1, N2, N3, N4, N5]
