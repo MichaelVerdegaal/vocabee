@@ -32,7 +32,7 @@
                                 'class="btn btn-outline-primary" ' +
                                 'id="example-select" ' +
                                 'data-toggle="modal" ' +
-                                'data-target="#modalLarge">Show</button>\n'
+                                'data-target="#vocab-modal">Show</button>\n'
                         }
                     }
                 ],
@@ -45,54 +45,63 @@
             e.preventDefault();
             let currentRow = $(this).closest("tr");
             let data = $('#vocab-table').DataTable().row(currentRow).data();
-            console.log(data);
+
+            // Examples are contained inside multiple types of quotes, so we have to split them first
+            let examples_raw = data[3];
+            examples_raw = examples_raw.substring(1, examples_raw.length - 1);
+            examples_raw = examples_raw.split(/'(.*?)'|"(.*?)"/);
+            // Due to the way we split it, we also get undefined and commas in our array, so we filter those out
+            let example_list = [];
+            for (let e of examples_raw) {
+                if (e !== undefined && e.startsWith("JP")) {
+                    let language_split = e.split(/\\n /);
+                    let jp_example = language_split[0];
+                    let en_example = language_split[1].slice(0, 2) + ": " + language_split[1].slice(3);
+                    example_list.push({
+                        JP: jp_example,
+                        EN: en_example
+                    });
+                }
+            }
+
+            // Append content to modal body
+            let modal_content = document.getElementById("vocab-modal-body");
+            modal_content.innerHTML = '';
+            if (example_list.length > 0) {
+                for (let e of example_list) {
+                    let paragraph = document.createElement("p");
+                    paragraph.innerHTML = `${e.JP}<br>${e.EN}<br>`;
+                    modal_content.appendChild(paragraph);
+                }
+            } else {
+                let paragraph = document.createElement("p");
+                paragraph.innerHTML = `Sorry, no examples for this entry...`;
+                modal_content.appendChild(paragraph);
+            }
+
+            // Set modal title
+            let modal_title = document.getElementById("modalLargeLabel");
+            // Ref: https://stackoverflow.com/questions/7864723#7864740
+            let hiragana = data[0].split(/<a[^>]*>([\s\S]*?)<\/a>/)[1];
+            modal_title.textContent = `Showing examples for ${hiragana}`;
         });
     </script>
 
-    <div class="modal fade modal-fullscreen" id="modalLarge" tabindex="-1" role="dialog"
+    <div class="modal fade modal-fullscreen" id="vocab-modal" tabindex="-1" role="dialog"
          aria-labelledby="modalLargeLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modalLargeLabel">Modal with large content</h5>
+                    <h5 class="modal-title" id="modalLargeLabel">Examples</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sed dui tempor, finibus ligula
-                        vitae, convallis mi. Sed posuere
-                        at neque nec hendrerit. Sed vitae felis gravida, ultricies dui eget, venenatis leo. Nunc
-                        hendrerit tellus
-                        non velit malesuada, eu dapibus sapien placerat. Sed non viverra magna, sit amet ornare erat.
-                        Fusce eros
-                        mi, consequat ac elit vel, ullamcorper molestie mauris. Proin auctor orci eget lacinia
-                        condimentum. Phasellus
-                        ultricies ligula id lacinia posuere. Nulla rutrum eros eu arcu tempor, imperdiet ornare lectus
-                        convallis.
-                        Nulla eleifend dapibus sem, vel viverra sapien.
-                    </p>
-                    <p>
-                        Integer interdum ex augue, vel egestas nibh fermentum eu. Cras ut erat eu nisi ullamcorper
-                        scelerisque vitae in lorem. In
-                        hac habitasse platea dictumst. Pellentesque in ante aliquam, porta metus eu, viverra magna. Cras
-                        blandit,
-                        augue in consequat rhoncus, nulla risus sodales mi, at tincidunt dolor leo semper mauris. Class
-                        aptent
-                        taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Vivamus
-                        pellentesque purus
-                        porta maximus blandit. Suspendisse id lorem pellentesque, vehicula nulla at, congue eros. Duis
-                        eleifend
-                        semper sodales. Morbi eu sagittis ex. Praesent commodo rhoncus nisi. Aenean quis arcu mauris.
-                    </p>
+                <div class="modal-body" id="vocab-modal-body">
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" id="btnTestSaveLarge" class="btn btn-default">
-                        <span class="d-none d-md-inline">Save changes</span>
-                        <span class="d-md-none">Save</span>
-                    </button>
                 </div>
             </div>
         </div>
