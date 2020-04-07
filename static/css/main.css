@@ -22,3 +22,7 @@
 .nav-item > a:hover {
     color: #D9D9D9;
 }
+
+.pagination {
+    flex-wrap: wrap;
+}
