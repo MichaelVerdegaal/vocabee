@@ -38,16 +38,18 @@
                         }
                     }
                 ],
-                // TODO find alternative way to fix responsiveness on mobile, currently faulty since column amount changes
-                responsive: false
+                responsive: true
             });
         });
 
         $("#vocab-table").on('click', '#example-select', function (e) {
-            // Get data from all rows, including hidden ones
+            // Get data from all rows, including hidden ones. Ref: https://stackoverflow.com/a/38515622
             e.preventDefault();
-            let currentRow = $(this).closest("tr");
-            let data = $('#vocab-table').DataTable().row(currentRow).data();
+            let current_row = $(this).parents('tr');
+            if (current_row.hasClass('child')) {
+                current_row = current_row.prev();
+            }
+            let data = $('#vocab-table').DataTable().row(current_row).data();
 
             // Examples are contained inside multiple types of quotes, so we have to split them first
             let examples_raw = data[3];
