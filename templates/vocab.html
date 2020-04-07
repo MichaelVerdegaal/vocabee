@@ -72,6 +72,7 @@
             // Append content to modal body
             let modal_content = document.getElementById("vocab-modal-body");
             modal_content.innerHTML = '';
+            let example_count = example_list.length;
             if (example_list.length > 0) {
                 for (let e of example_list) {
                     let paragraph = document.createElement("p");
@@ -88,7 +89,11 @@
             let modal_title = document.getElementById("modalLargeLabel");
             // Ref: https://stackoverflow.com/questions/7864723#7864740
             let hiragana = data[0].split(/<a[^>]*>([\s\S]*?)<\/a>/)[1];
-            modal_title.textContent = `Showing examples for ${hiragana}`;
+            let example_text = "examples";
+            if (example_count === 1) {
+                example_text = "example";
+            }
+            modal_title.textContent = `Showing ${example_count} ${example_text} for ${hiragana}`;
         });
     </script>
 
