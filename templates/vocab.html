@@ -38,10 +38,11 @@
                         }
                     }
                 ],
-                responsive: true
+                // TODO find alternative way to fix responsiveness on mobile, currently faulty since column amount changes
+                responsive: false
             });
         });
-        
+
         $("#vocab-table").on('click', '#example-select', function (e) {
             // Get data from all rows, including hidden ones
             e.preventDefault();
