@@ -16,14 +16,10 @@
             $('#vocab-table').DataTable({
                 data: entries,
                 columns: [
+                    {title: "ID"},
                     {title: "Hiragana"},
                     {title: "Kanji"},
                     {title: "English"},
-                    {
-                        title: "Examples_raw",
-                        visible: false,
-                        searchable: false
-                    },
                     {
                         title: "Examples",
                         orderable: false,
