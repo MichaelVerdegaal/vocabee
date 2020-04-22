@@ -1,6 +1,6 @@
 from flask import Flask, render_template
 from flask_caching import Cache
-from file_util import vocabulary
+from file_util import vocabulary, get_connection, get_cursor, get_examples_by_id
 
 config = {
     "DEBUG": False,  # Flask specific configs
@@ -42,3 +42,18 @@ def vocab(vocab_level):
         return render_template("vocab.html", vocab=vocab)
     else:
         return render_template("vocab_index.html")
+
+
+@app.route('/vocab/example/<int:vocab_id>')
+def vocab_get_examples(vocab_id):
+    """
+    AJAX endpoint to retrieve example sentences
+    :param vocab_id: vocabulary entry id
+    :return: examples in JSON
+    """
+    connection = get_connection()
+    cursor = get_cursor(connection)
+    examples = get_examples_by_id(cursor, vocab_id)
+    cursor.close()
+    connection.close()
+    return examples

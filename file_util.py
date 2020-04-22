@@ -1,6 +1,6 @@
 import json
 
-from psycopg2 import connect
+from psycopg2 import connect, sql
 from config import *
 
 
@@ -31,6 +31,19 @@ def get_all_vocab(cursor):
     vocab = cursor.fetchall()
 
     return vocab
+
+
+def get_examples_by_id(cursor, vocab_id):
+    """
+    Retrieves example sentences based on the vocabulary id they're linked to
+    :param cursor: cursor object
+    :param vocab_id: vocabulary entry id
+    :return: examples as valid json
+    """
+    cursor.execute(sql.SQL("SELECT * FROM example WHERE vocab_id = %s "), [vocab_id])
+    examples = cursor.fetchall()
+    examples = json.dumps(examples)
+    return examples
 
 
 def process_vocabulary(vocabulary):
