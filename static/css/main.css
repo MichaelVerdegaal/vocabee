@@ -1,15 +1,12 @@
-#vocab-table-container {
+.container-fluid {
     padding: 10px;
-}
-
-#vocab-index-table-container {
-    margin-top: 10px !important;
 }
 
 .card {
     margin-bottom: 15px;
 }
 
+/* Navbar settings */
 .navbar-nav {
     color: #BABABA;
 }
