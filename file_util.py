@@ -61,8 +61,9 @@ def process_vocabulary(vocabulary):
     for row in vocabulary:
         # Add clickable Jisho links
         vocab_id = row[0]
-        kanji = f'<a href="https://jisho.org/search/{e}" target="_blank">{e}</a>' if (e := row[1]) else ""
-        hiragana = f'<a href="https://jisho.org/search/{row[2]}" target="_blank">{row[2]}</a>'
+        kanji = f'<a href="https://jisho.org/search/{e}" target="_blank" rel="noopener">{e}</a>' if (
+            e := row[1]) else ""
+        hiragana = f'<a href="https://jisho.org/search/{row[2]}" target="_blank" rel="noopener">{row[2]}</a>'
         english = e if (e := row[3]) else ""
         entry = [vocab_id, kanji, hiragana, english]
 
