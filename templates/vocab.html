@@ -55,7 +55,6 @@
                 contentType: "application/json; charset=utf-8",
                 url: endpoint,
                 success: function (result) {
-                    console.log(`Retrieved examples for ID ${vocab_id}`);
                     result = $.parseJSON(result);
 
                     // Append content to modal body
@@ -76,13 +75,19 @@
 
                     // Set modal title
                     let modal_title = document.getElementById("modalLargeLabel");
-                    // Ref: https://stackoverflow.com/questions/7864723#7864740
-                    let hiragana = row_data[1].split(/<a[^>]*>([\s\S]*?)<\/a>/)[1];
                     let example_text = "examples";
                     if (example_count === 1) {
                         example_text = "example";
                     }
-                    modal_title.textContent = `Showing ${example_count} ${example_text} for ${hiragana}`;
+
+                    let hiragana = row_data[1].split(/<a[^>]*>([\s\S]*?)<\/a>/)[1];
+                    if (typeof hiragana !== 'undefined') {
+                        // Ref: https://stackoverflow.com/questions/7864723#7864740
+                        modal_title.textContent = `Showing ${example_count} ${example_text} for ${hiragana}`;
+                    } else {
+                        let kanji = row_data[2].split(/<a[^>]*>([\s\S]*?)<\/a>/)[1];
+                        modal_title.textContent = `Showing ${example_count} ${example_text} for ${kanji}`;
+                    }
                 }
             });
         })
