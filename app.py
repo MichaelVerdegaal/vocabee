@@ -9,7 +9,8 @@ config = {
     "CACHE_DEFAULT_TIMEOUT": 600
 }
 
-vocabulary = get_vocabulary()
+connection = get_connection()
+vocabulary = get_vocabulary(connection)
 app = Flask(__name__)
 app.config.from_mapping(config)
 cache = Cache(app)
@@ -54,9 +55,6 @@ def vocab_get_examples(vocab_id):
     :param vocab_id: vocabulary entry id
     :return: examples in JSON
     """
-    connection = get_connection()
     cursor = get_cursor(connection)
     examples = get_examples_by_id(cursor, vocab_id)
-    cursor.close()
-    connection.close()
     return examples

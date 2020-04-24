@@ -39,15 +39,13 @@ def process_vocabulary(vocabulary):
     return [N1, N2, N3, N4, N5]
 
 
-def get_vocabulary():
+def get_vocabulary(connection):
     """
     Master function to get vocabulary and serialize it
     :return: Vocabulary entries as dictionary
     """
-    connection = get_connection()
     cursor = get_cursor(connection)
     vocabulary = get_all_vocab(cursor)
-    cursor.close()
 
     processed_vocabulary = process_vocabulary(vocabulary)
     for level in processed_vocabulary:

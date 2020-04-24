@@ -30,6 +30,7 @@ def get_all_vocab(cursor):
     """
     cursor.execute("SELECT * FROM vocabulary")
     vocab = cursor.fetchall()
+    cursor.close()
     return vocab
 
 
@@ -43,4 +44,5 @@ def get_examples_by_id(cursor, vocab_id):
     cursor.execute(sql.SQL("SELECT * FROM example WHERE vocab_id = %s "), [vocab_id])
     examples = cursor.fetchall()
     examples = json.dumps(examples)
+    cursor.close()
     return examples
