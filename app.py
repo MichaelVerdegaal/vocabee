@@ -1,12 +1,15 @@
 from flask import Flask, render_template
 from flask_caching import Cache
-from file_util import vocabulary, get_connection, get_cursor, get_examples_by_id
+from file_util import get_vocabulary
+from db_util import get_connection, get_cursor, get_examples_by_id
 
 config = {
     "DEBUG": False,  # Flask specific configs
     "CACHE_TYPE": "simple",  # Flask-Caching related configs
     "CACHE_DEFAULT_TIMEOUT": 600
 }
+
+vocabulary = get_vocabulary()
 app = Flask(__name__)
 app.config.from_mapping(config)
 cache = Cache(app)
