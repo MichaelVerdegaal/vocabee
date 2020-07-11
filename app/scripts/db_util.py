@@ -2,7 +2,7 @@ import json
 
 from psycopg2 import connect, sql
 
-from config import host, port, database, user, password
+from app.scripts.config import host, port, database, user, password
 
 
 def get_connection():

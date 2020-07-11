@@ -128,4 +128,4 @@ dmypy.json
 .idea
 
 # Secrets
-config.py
+scripts/config.py

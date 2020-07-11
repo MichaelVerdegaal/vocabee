@@ -1,6 +1,6 @@
 import json
 
-from db_util import get_connection, get_cursor, get_all_vocab
+from app.scripts.db_util import get_cursor, get_all_vocab
 
 
 def process_vocabulary(vocabulary):
