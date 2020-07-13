@@ -44,7 +44,7 @@ def vocab(vocab_level):
     """
     if 0 < vocab_level < 6:
         vocab = vocabulary[vocab_level - 1]
-        return render_template("vocab.html", vocab=vocab)
+        return render_template("vocab.html", vocab=vocab, level=vocab_level)
     else:
         return render_template("vocab_index.html")
 
