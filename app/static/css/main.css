@@ -7,18 +7,22 @@
 }
 
 /* Navbar settings */
-.navbar-nav {
-    color: #BABABA;
+.navbar {
+    background-color: #f1d224;
 }
 
+a {
+    color: #ffffff !important;
+}
+
+a:hover {
+    color: #f19f24 !important;
+}
 
 .navbar-nav > .active > a {
-    color: #F8F8F8;
+    color: #000000 !important;
 }
 
-.nav-item > a:hover {
-    color: #D9D9D9;
-}
 
 .pagination {
     flex-wrap: wrap;
