@@ -1,3 +1,7 @@
+body {
+    font-family: "Open Sans", sans-serif;
+}
+
 .container-fluid {
     padding: 10px;
 }
@@ -8,22 +12,27 @@
 
 /* Navbar settings */
 .navbar {
-    background-color: #f1d224;
+    background-color: #422f2f;
 }
 
-a {
-    color: #ffffff !important;
+div#main-navbar {
+    padding-top: 3px;
+}
+
+a.nav-link {
+    color: #fbf9f9 !important;
 }
 
 a:hover {
-    color: #f19f24 !important;
+    color: #EFE7E7 !important;
 }
 
 .navbar-nav > .active > a {
-    color: #000000 !important;
+    color: #f1d224 !important;
 }
 
 
+/* Mobile friendlyness */
 .pagination {
     flex-wrap: wrap;
 }
