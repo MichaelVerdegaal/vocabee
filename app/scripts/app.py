@@ -2,6 +2,7 @@ from flask import Flask, render_template
 from flask_caching import Cache
 from app.scripts.file_util import get_vocabulary
 from app.scripts.db_util import get_connection, get_cursor, get_examples_by_id
+import sass
 
 config = {
     "DEBUG": False,  # Flask specific configs
@@ -12,6 +13,7 @@ config = {
 connection = get_connection()
 vocabulary = get_vocabulary(connection)
 
+sass.compile(dirname=('app/static/sass', 'app/static/css/'), output_style='compressed')
 app = Flask(__name__, template_folder='../templates/', static_folder='../static/')
 app.config.from_mapping(config)
 cache = Cache(app)

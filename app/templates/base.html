@@ -4,14 +4,13 @@
     <meta name="description" content="JLPT vocabulary browser">
     <meta name="keywords" content="Japanese, Vocabulary, Kanji, Hiragana, JP, learning, language">
     <meta name="author" content="Michael Verdegaal">
-    <link rel="icon" href="{{ url_for('static', filename='images/brand-logo-vg.png') }}">
+    <link rel="icon" href="{{ url_for('static', filename='images/brand-logo.png') }}">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!--Ref: https://getbootstrap.com/docs/4.4/getting-started/download/ -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet">
     <!--Ref: https://github.com/keaukraine/bootstrap4-fs-modal -->
     <link href="{{ url_for('static', filename='bootstrap/bootstrap-fs-modal.min.css') }}" rel="stylesheet">
     <!--Ref: https://jquery.com/download/ -->
@@ -28,6 +27,10 @@
     <!--Ref: https://fonts.google.com/specimen/Open+Sans-->
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,700;1,400&display=swap"
           rel="stylesheet">
+
+    <!--Stylesheets -->
+    <link href="{{ url_for('static', filename='css/base/base.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/layout/navbar.css') }}" rel="stylesheet">
 </head>
 <body>
 

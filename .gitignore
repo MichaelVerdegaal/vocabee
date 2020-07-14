@@ -129,3 +129,6 @@ dmypy.json
 
 # Secrets
 scripts/config.py
+
+# Ignore compiled css
+css/
