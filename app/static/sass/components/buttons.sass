@@ -5,6 +5,12 @@
   background-color: $main-orange
   border-color: $main-orange
 
-.btn-primary:hover
-  background-color: $accent-orange
-  border-color: $accent-orange
+.btn-outline-primary
+  color: $main-orange
+  border-color: $main-orange
+
+.btn-primary:hover, .btn-primary:active, .btn-primary:focus,
+.btn-outline-primary:hover, .btn-outline-primary:active, .btn-outline-primary:focus
+  background-color: $accent-orange !important
+  border-color: $accent-orange !important
+  box-shadow: none !important
