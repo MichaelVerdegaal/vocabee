@@ -4,7 +4,7 @@
   background-color: $main-black
 
 div#main-navbar
-  padding-top: 3px
+  margin-top: 3px
 
 a
   &.nav-link
@@ -13,5 +13,13 @@ a
   &:hover
     color: $accent-white !important
 
-.navbar-nav > .active > a
-  color: $main-orange !important
+@media (min-width: 992px)
+  .navbar-expand-lg .navbar-nav .nav-link
+    padding-right: 0
+    padding-left: 0
+    margin-right: .5rem
+    margin-left: .5rem
+
+  .navbar-nav > .active > a
+    text-decoration: none
+    border-bottom: 2px solid $main-orange
