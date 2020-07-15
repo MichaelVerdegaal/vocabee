@@ -1,17 +1,16 @@
 @import '../abstract/variables'
 
 .navbar
-  background-color: $accent-black
+  background-color: $mainorange
 
 div#main-navbar
   margin-top: 3px
 
-a
-  &.nav-link
-    color: $main-white !important
+.nav-link
+  color: $mainwhite !important
 
-  &:hover
-    color: $accent-white !important
+.nav-link:hover
+  color: $secondarywhite !important
 
 @media (min-width: 992px)
   .navbar-expand-lg .navbar-nav .nav-link
@@ -22,4 +21,4 @@ a
 
   .navbar-nav > .active > a
     text-decoration: none
-    border-bottom: 2px solid $main-orange
+    border-bottom: 2px solid $mainwhite

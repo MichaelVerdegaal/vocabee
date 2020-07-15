@@ -1,2 +1,23 @@
+@import '../abstract/variables'
+
 .pagination
   flex-wrap: wrap
+
+.page-item a
+  color: $mainblack
+  box-shadow: none !important
+
+.page-item a:hover
+  background-color: $secondaryorange
+  color: $mainwhite
+
+.page-item.active .page-link
+  color: $mainwhite
+  background-color: $mainorange !important
+  border-color: $mainorange !important
+
+th
+  color: $mainblack
+
+tr
+  color: $secondaryblack
