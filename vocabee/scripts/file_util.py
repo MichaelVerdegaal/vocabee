@@ -1,6 +1,6 @@
 import json
 
-from app.scripts.db_util import get_cursor, get_all_vocab
+from vocabee.scripts.db_util import get_cursor, get_all_vocab
 
 
 def process_vocabulary(vocabulary):

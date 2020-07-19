@@ -55,7 +55,7 @@
             let endpoint = "/vocab/example/" + vocab_id;
             $.ajax({
                 type: "GET",
-                contentType: "application/json; charset=utf-8",
+                contentType: "vocabee/json; charset=utf-8",
                 url: endpoint,
                 success: function (result) {
                     result = $.parseJSON(result);
