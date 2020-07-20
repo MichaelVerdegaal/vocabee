@@ -83,13 +83,13 @@
                         example_text = "example";
                     }
 
-                    let hiragana = row_data[1].split(/<a[^>]*>([\s\S]*?)<\/a>/)[1];
-                    if (typeof hiragana !== 'undefined') {
-                        // Ref: https://stackoverflow.com/questions/7864723#7864740
-                        modal_title.textContent = `Showing ${example_count} ${example_text} for ${hiragana}`;
+                    // Ref: https://stackoverflow.com/questions/7864723#7864740
+                    let kanji = row_data[1].split(/<a[^>]*>([\s\S]*?)<\/a>/)[1];
+                    let hiragana = row_data[2].split(/<a[^>]*>([\s\S]*?)<\/a>/)[1];
+                    if (typeof kanji !== 'undefined') {
+                        modal_title.textContent = `Showing ${example_count} ${example_text} for ${kanji}/${hiragana}`;
                     } else {
-                        let kanji = row_data[2].split(/<a[^>]*>([\s\S]*?)<\/a>/)[1];
-                        modal_title.textContent = `Showing ${example_count} ${example_text} for ${kanji}`;
+                        modal_title.textContent = `Showing ${example_count} ${example_text} for ${hiragana}`;
                     }
                 }
             });
