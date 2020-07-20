@@ -6,6 +6,56 @@
     <!--Stylesheets -->
     <link href="{{ url_for('static', filename='css/pages/vocab.css') }}" rel="stylesheet">
 
+    <div class="container-fluid">
+        <h1>N{{ level }} level vocabulary</h1>
+        {% if level == 5 %}
+            <p>This is the starting point of the JLPT, marking your first journey into the Japanese language.</p>
+            <p>Reading: One is able to read and understand typical expressions and sentences written in hiragana,
+                katakana, and basic kanji.<br>
+                Listening: One is able to listen and comprehend conversations about topics regularly encountered in
+                daily life and classroom situations, and is able to pick up necessary information from short
+                conversations spoken slowly.</p>
+        {% elif level == 4 %}
+            <p>You're slowly getting more familiar with the Japanese language, and starting to move beyond basic
+                concepts.</p>
+            <p>Reading: One is able to read and understand passages on familiar daily topics written in basic vocabulary
+                and kanji.<br>
+                Listening: One is able to listen and comprehend conversations encountered in daily life and generally
+                follow their contents, provided that they are spoken slowly.</p>
+        {% elif level == 3 %}
+            <p>You've now completely mastered the basics of Japanese, and can grasp the language in common
+                situations.</p>
+            <p>Reading: One is able to read and understand written materials with specific contents concerning everyday
+                topics, grasp summary information of newspaper headlines and comprehend the context of difficult topics.<br>
+                Listening: One is able to listen and comprehend coherent conversations in everyday situations, spoken at
+                near-natural speed, and is generally able to follow their contents as well as grasp the relationships
+                among the people involved.</p>
+        {% elif level == 2 %}
+            <p>You're slowly becoming very proficient in the language. In addition to grasping common situations, you
+                can now partly comprehend more uncommon occurences. </p>
+            <p>Reading: One is able to read materials written clearly on a variety of topics, such as articles and
+                commentaries in newspapers and magazines as well as simple critiques, and comprehend their contents. One
+                is also able to read written materials on general topics and follow their narratives as well as
+                understand the intent of the writers.<br>
+                Listening: One is able to comprehend orally presented materials such as coherent conversations and news
+                reports, spoken at nearly natural speed in everyday situations as well as in a variety of settings, and
+                is able to follow their ideas and comprehend their contents. One is also able to understand the
+                relationships among the people involved and the essential points of the presented materials..</p>
+        {% elif level == 1 %}
+            <p>At this level you're considered a near native as far as reading and listening goes, and you make do in a
+                variety of situations.</p>
+            <p>Reading: One is able to read writings with logical complexity and/or abstract writings on a variety of
+                topics, such as newspaper editorials and critiques, and comprehend both their structures and
+                contents. One is also able to read written materials with profound contents on various topics and follow
+                their narratives as well as understand the intent of the writers comprehensively.<br>
+                Listening: One is able to comprehend orally presented materials such as coherent conversations, news
+                reports, and lectures, spoken at natural speed in a broad variety of settings, and is able to follow
+                their ideas and comprehend their contents comprehensively. One is also able to understand the details of
+                the presented materials such as the relationships among the people involved, the logical structures, and
+                the essential points.</p>
+        {% endif %}
+    </div>
+
     <div class="container-fluid" id="vocab-table-container">
         <table class="table table-striped table-hover" id="vocab-table" style="width: 100%;"></table>
     </div>
@@ -18,6 +68,7 @@
         $(document).ready(function () {
             $('#vocab-table').DataTable({
                 data: entries,
+                pageLength: 8,
                 columns: [
                     {title: "ID"},
                     {title: "Kanji"},
