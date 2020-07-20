@@ -8,10 +8,12 @@ $navbar-padding: 3px
   padding-bottom: $navbar-padding
 
 div#main-navbar
-  margin-top: 1px
+  margin-top: -1px
 
 .nav-link
   color: $mainwhite !important
+  padding-top: 0
+  padding-bottom: 2px
 
 .nav-link:hover
   color: $secondarywhite !important
@@ -30,4 +32,4 @@ div#main-navbar
 
   .navbar-nav > .active > a
     text-decoration: none
-    border-bottom: 2px solid $mainwhite
+    box-shadow:  0 0.175em $mainwhite
