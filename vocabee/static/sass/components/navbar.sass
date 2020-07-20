@@ -1,9 +1,11 @@
 @import '../abstract/variables'
 
+$navbar-padding: 3px
+
 .navbar
   background-color: $secondaryblack
-  padding-top: 3px
-  padding-bottom: 3px
+  padding-top: $navbar-padding
+  padding-bottom: $navbar-padding
 
 div#main-navbar
   margin-top: 1px
@@ -19,7 +21,7 @@ div#main-navbar
     box-shadow: none
 
 
-@media (min-width: 980px)
+@media (min-width: $navbar-breakpoint)
   .navbar-expand-lg .navbar-nav .nav-link
     padding-right: 0
     padding-left: 0
