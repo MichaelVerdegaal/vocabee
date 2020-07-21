@@ -7,30 +7,42 @@
     <link href="{{ url_for('static', filename='css/pages/vocab.css') }}" rel="stylesheet">
 
     <div class="container-fluid">
-        <h1>N{{ level }} level vocabulary</h1>
-        {% if level == 5 %}
-            <p>This is the starting point of the JLPT, marking your first journey into the Japanese language. You should
-                be able to read and understand basic expressions, and be able to listen and comprehend common topics,
-                provided they're short and spoken slowly.</p>
-        {% elif level == 4 %}
-            <p>You're slowly getting more familiar with the Japanese language, and starting to move beyond basic
-                concepts. You can now read and understand items written with basic vocabulary, and comprehend
-                conversation about daily life, provided they're not spoken too quickly.</p>
-        {% elif level == 3 %}
-            <p>You've now mastered the basics of Japanese, and can grasp the language in common situations. You can
-                grasp contents concerning daily topics, recognize summary information from newspaper articles and
-                understand
-                the context of more diffult topics.</p>
-        {% elif level == 2 %}
-            <p>You're slowly becoming very proficient in the language. In addition to grasping common occurences, you
-                can now partly comprehend more difficult situations. You can read and understand materials written in a
-                variety of topics along with the intent of the writers, and follow coherent conversations spoken at
-                natural speed. </p>
-        {% elif level == 1 %}
-            <p>At this level you're considered a near native as far as reading and listening goes, and you can make do
-                in a variety of situations. You can read writings with logical complexity/of abstract nature and
-                comprehend conversations spoken at natural speed about a wide variety of topics.</p>
-        {% endif %}
+        <a href="{{ url_for('vocab_index') }}">
+            <i class="float-left material-icons md-30" id="back-button">arrow_back</i>
+        </a>
+        <p class="smalltext">Back to vocabulary page</p>
+
+        <div class="text-container">
+            <h1 class="">N{{ level }} level vocabulary</h1>
+            {% if level == 5 %}
+                <p>This is the starting point of the JLPT, marking your first journey into the Japanese language. You
+                    should
+                    be able to read and understand basic expressions, and be able to listen and comprehend common
+                    topics,
+                    provided they're short and spoken slowly.</p>
+            {% elif level == 4 %}
+                <p>You're slowly getting more familiar with the Japanese language, and starting to move beyond basic
+                    concepts. You can now read and understand items written with basic vocabulary, and comprehend
+                    conversation about daily life, provided they're not spoken too quickly.</p>
+            {% elif level == 3 %}
+                <p>You've now mastered the basics of Japanese, and can grasp the language in common situations. You can
+                    grasp contents concerning daily topics, recognize summary information from newspaper articles and
+                    understand
+                    the context of more diffult topics.</p>
+            {% elif level == 2 %}
+                <p>You're slowly becoming very proficient in the language. In addition to grasping common occurences,
+                    you
+                    can now partly comprehend more difficult situations. You can read and understand materials written
+                    in a
+                    variety of topics along with the intent of the writers, and follow coherent conversations spoken at
+                    natural speed. </p>
+            {% elif level == 1 %}
+                <p>At this level you're considered a near native as far as reading and listening goes, and you can make
+                    do
+                    in a variety of situations. You can read writings with logical complexity/of abstract nature and
+                    comprehend conversations spoken at natural speed about a wide variety of topics.</p>
+            {% endif %}
+        </div>
     </div>
 
     <div class="container-fluid" id="vocab-table-container">
