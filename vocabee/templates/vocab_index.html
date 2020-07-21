@@ -14,53 +14,28 @@
 
     <div class="container-fluid" id="vocab-index-table-container">
         <div class="row">
-            <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl">
-                <div class="card text-center">
-                    <div class="card-body">
-                        <h5 class="card-title">N5</h5>
-                        <p class="card-text">Newbie</p>
-                        <a href="{{ url_for('vocab', vocab_level=5) }}" class="btn btn-primary">Go</a>
+            {% for i in range(5)|reverse %}
+                <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <h5 class="card-title">N{{ i + 1 }}</h5>
+                            {% if i + 1 == 5 %}
+                                <p class="card-text">Newbie</p>
+                            {% elif i + 1 == 4 %}
+                                <p class="card-text">Beginner</p>
+                            {% elif i + 1 == 3 %}
+                                <p class="card-text">Intermediate</p>
+                            {% elif i + 1 == 2 %}
+                                <p class="card-text">Advanced</p>
+                            {% elif i + 1 == 1 %}
+                                <p class="card-text">Near-native</p>
+                            {% endif %}
+                            <a href="{{ url_for('vocab', vocab_level=i + 1) }}" class="btn btn-primary"
+                               title="JLPT N{{ i + 1 }} vocabulary">Go</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl">
-                <div class="card text-center">
-                    <div class="card-body">
-                        <h5 class="card-title">N4</h5>
-                        <p class="card-text">Beginner</p>
-                        <a href="{{ url_for('vocab', vocab_level=4) }}" class="btn btn-primary">Go</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl">
-                <div class="card text-center">
-                    <div class="card-body">
-                        <h5 class="card-title">N3</h5>
-                        <p class="card-text">Intermediate</p>
-                        <a href="{{ url_for('vocab', vocab_level=3) }}" class="btn btn-primary">Go</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl">
-                <div class="card text-center">
-                    <div class="card-body">
-                        <h5 class="card-title">N2</h5>
-                        <p class="card-text">Advanced</p>
-                        <a href="{{ url_for('vocab', vocab_level=2) }}" class="btn btn-primary">Go</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl">
-                <div class="card text-center">
-                    <div class="card-body">
-                        <h5 class="card-title">N1</h5>
-                        <p class="card-text">Near-native</p>
-                        <a href="{{ url_for('vocab', vocab_level=1) }}" class="btn btn-primary">Go</a>
-                    </div>
-                </div>
-            </div>
+            {% endfor %}
         </div>
     </div>
-
-
 {% endblock %}
