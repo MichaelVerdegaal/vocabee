@@ -1,19 +1,17 @@
 @import '../abstract/variables'
 
-
-.btn-primary
-  background-color: $mainorange
+.btn-primary, .btn-outline-primary
   border-color: $mainorange
+  box-shadow: none !important
+
+.btn-primary, .btn-primary:focus
+  background-color: $mainorange
+  color: $mainwhite
 
 .btn-outline-primary
   color: $mainorange
-  border-color: $mainorange
 
 .btn-primary:hover, .btn-primary:active,
 .btn-outline-primary:hover, .btn-outline-primary:active
   background-color: $secondaryorange !important
   border-color: $secondaryorange !important
-  box-shadow: none !important
-
-.btn-primary:focus, .btn-outline-primary:focus
-  box-shadow: none !important
