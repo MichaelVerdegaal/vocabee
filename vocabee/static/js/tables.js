@@ -1,20 +1,9 @@
-function createDataTable(target, dataset, pageLength, lengthMenu, columns) {
-    $(target).DataTable({
-        data: dataset,
-        pageLength: pageLength,
-        lengthMenu: lengthMenu,
-        columns: columns,
-        responsive: true
-    });
-}
-
 function createVocabTable() {
-    createDataTable(
-        '#vocab-table',
-        entries,
-        8,
-        [[8, 25, 50], [8, 25, 50]],
-        [
+    $("#vocab-table").DataTable({
+        data: entries,
+        pageLength: 8,
+        lengthMenu: [[8, 25, 50], [8, 25, 50]],
+        columns: [
             {title: "ID"},
             {title: "Kanji"},
             {title: "Hiragana"},
@@ -32,20 +21,46 @@ function createVocabTable() {
                         'data-target="#vocab-modal">Show</button>\n'
                 }
             }
-        ]);
+        ],
+        responsive: true
+    });
 }
+
+function createExampleTable(dataset) {
+    $("#example-table").DataTable({
+        data: dataset,
+        paging: false,
+        columns: [
+            {title: "ID"},
+            {title: "Japanese"},
+            {title: "English"}
+        ],
+        responsive: true
+    });
+}
+
 
 function fillExampleModal(data, kanji, hiragana) {
     // Fill modal with examples
     let modal_content = document.getElementById("vocab-modal-body");
     modal_content.innerHTML = '';
+
     let example_count = data.length;
     if (example_count > 0) {
-        for (let e of data) {
-            let paragraph = document.createElement("p");
-            paragraph.innerHTML = `${e[1]}<br>${e[2]}<br>`;
-            modal_content.appendChild(paragraph);
-        }
+        let exampleTableContainer = document.createElement("div");
+        exampleTableContainer.className = "container-fluid";
+        exampleTableContainer.id = "example-table-container";
+
+        let exampleTable = document.createElement("table");
+        exampleTable.className = "table table-striped table-hover";
+        exampleTable.id = "example-table";
+
+        exampleTableContainer.appendChild(exampleTable);
+        exampleTableContainer.appendChild(document.createElement("th"));
+        modal_content.appendChild(exampleTableContainer);
+
+        createExampleTable(data);
+
     } else {
         let paragraph = document.createElement("p");
         paragraph.innerHTML = `Sorry, no examples for this entry...`;
