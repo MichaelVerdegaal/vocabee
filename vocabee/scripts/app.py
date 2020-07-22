@@ -1,8 +1,9 @@
+import sass
 from flask import Flask, render_template
 from flask_caching import Cache
-from vocabee.scripts.file_util import get_vocabulary
+
 from vocabee.scripts.db_util import get_connection, get_cursor, get_examples_by_id
-import sass
+from vocabee.scripts.file_util import get_vocabulary
 
 config = {
     "DEBUG": False,  # Flask specific configs
