@@ -35,7 +35,7 @@ function createExampleTable(dataset) {
             {title: "Japanese"},
             {title: "English"}
         ],
-        responsive: true
+        responsive: false
     });
 }
 
