@@ -55,7 +55,7 @@
         let vocab = {{ vocab | safe }};
         let entries = vocab.entries;
         $(document).ready(function () {
-            createVocabTable();
+            createVocabTable(entries);
         });
 
         $("#vocab-table").on('click', '#example-select', function (e) {

@@ -1,4 +1,10 @@
-function createVocabTable() {
+/**
+ * Generate and fill a datatable with vocabulary data
+ *
+ * @param {array} entries - Multidimensional array filled with vocabulary entries
+ *
+ */
+function createVocabTable(entries) {
     $("#vocab-table").DataTable({
         data: entries,
         pageLength: 8,
@@ -26,9 +32,15 @@ function createVocabTable() {
     });
 }
 
-function createExampleTable(dataset) {
+/**
+ * Generate and fill a datatable with example data
+ *
+ * @param {array} examples - Multidimensional array filled with example entries
+ *
+ */
+function createExampleTable(examples) {
     $("#example-table").DataTable({
-        data: dataset,
+        data: examples,
         paging: false,
         columns: [
             {title: "ID"},
@@ -39,13 +51,19 @@ function createExampleTable(dataset) {
     });
 }
 
-
-function fillExampleModal(data, kanji, hiragana) {
-    // Fill modal with examples
+/**
+ * Fill a bootstrap modal with a datatable
+ *
+ * @param {array} examples - Multidimensional array filled with example entries
+ * @param {String} kanji - Example kanji
+ * @param {String} hiragana - Example hiragana
+ *
+ */
+function fillExampleModal(examples, kanji, hiragana) {
     let modal_content = document.getElementById("vocab-modal-body");
     modal_content.innerHTML = '';
 
-    let example_count = data.length;
+    let example_count = examples.length;
     if (example_count > 0) {
         let exampleTableContainer = document.createElement("div");
         exampleTableContainer.className = "container-fluid";
@@ -59,7 +77,7 @@ function fillExampleModal(data, kanji, hiragana) {
         exampleTableContainer.appendChild(document.createElement("th"));
         modal_content.appendChild(exampleTableContainer);
 
-        createExampleTable(data);
+        createExampleTable(examples);
 
     } else {
         let paragraph = document.createElement("p");
