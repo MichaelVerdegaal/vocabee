@@ -68,6 +68,9 @@
             }
             let row_data = $('#vocab-table').DataTable().row(current_row).data();
             let vocab_id = row_data[0];
+            // Ref: https://stackoverflow.com/questions/7864723#7864740
+            let kanji = row_data[1].split(/<a[^>]*>([\s\S]*?)<\/a>/)[1];
+            let hiragana = row_data[2].split(/<a[^>]*>([\s\S]*?)<\/a>/)[1];
 
             // Retrieving the example data
             let endpoint = "/vocab/example/" + vocab_id;
@@ -76,39 +79,8 @@
                 contentType: "vocabee/json; charset=utf-8",
                 url: endpoint,
                 success: function (result) {
-                    result = $.parseJSON(result);
-
-                    // Append content to modal body
-                    let modal_content = document.getElementById("vocab-modal-body");
-                    modal_content.innerHTML = '';
-                    let example_count = result.length;
-                    if (example_count > 0) {
-                        for (let e of result) {
-                            let paragraph = document.createElement("p");
-                            paragraph.innerHTML = `${e[1]}<br>${e[2]}<br>`;
-                            modal_content.appendChild(paragraph);
-                        }
-                    } else {
-                        let paragraph = document.createElement("p");
-                        paragraph.innerHTML = `Sorry, no examples for this entry...`;
-                        modal_content.appendChild(paragraph);
-                    }
-
-                    // Set modal title
-                    let modal_title = document.getElementById("modalLargeLabel");
-                    let example_text = "examples";
-                    if (example_count === 1) {
-                        example_text = "example";
-                    }
-
-                    // Ref: https://stackoverflow.com/questions/7864723#7864740
-                    let kanji = row_data[1].split(/<a[^>]*>([\s\S]*?)<\/a>/)[1];
-                    let hiragana = row_data[2].split(/<a[^>]*>([\s\S]*?)<\/a>/)[1];
-                    if (typeof kanji !== 'undefined') {
-                        modal_title.textContent = `Showing ${example_count} ${example_text} for ${kanji}/${hiragana}`;
-                    } else {
-                        modal_title.textContent = `Showing ${example_count} ${example_text} for ${hiragana}`;
-                    }
+                    let exampleData = $.parseJSON(result);
+                    fillExampleModal(exampleData, kanji, hiragana);
                 }
             });
         })
@@ -133,5 +105,4 @@
             </div>
         </div>
     </div>
-
 {% endblock %}
