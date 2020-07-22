@@ -5,6 +5,7 @@
     <title>N{{ level }} level words - VocaBee</title>
     <!--Stylesheets -->
     <link href="{{ url_for('static', filename='css/pages/vocab.css') }}" rel="stylesheet">
+    <script src="{{ url_for('static', filename='js/tables.js') }}"></script>
 
     <div class="container-fluid">
         <a href="{{ url_for('vocab_index') }}" title="Go back">
@@ -46,6 +47,7 @@
     </div>
 
     <div class="container-fluid" id="vocab-table-container">
+        <!-- TODO: move style to sass-->
         <table class="table table-striped table-hover" id="vocab-table" style="width: 100%;"></table>
     </div>
 
@@ -53,33 +55,8 @@
         // Initialize vocabulary entries
         let vocab = {{ vocab | safe }};
         let entries = vocab.entries;
-
         $(document).ready(function () {
-            $('#vocab-table').DataTable({
-                data: entries,
-                pageLength: 8,
-                lengthMenu: [[8, 25, 50], [8, 25, 50]],
-                columns: [
-                    {title: "ID"},
-                    {title: "Kanji"},
-                    {title: "Hiragana"},
-                    {title: "English"},
-                    {
-                        title: "Examples",
-                        orderable: false,
-                        searchable: false,
-                        render: function () {
-                            return '<button ' +
-                                'type="button" ' +
-                                'class="btn btn-outline-primary" ' +
-                                'id="example-select" ' +
-                                'data-toggle="modal" ' +
-                                'data-target="#vocab-modal">Show</button>\n'
-                        }
-                    }
-                ],
-                responsive: true
-            });
+            createVocabTable();
         });
 
         $("#vocab-table").on('click', '#example-select', function (e) {
