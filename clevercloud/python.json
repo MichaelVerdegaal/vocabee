@@ -1,0 +1,9 @@
+{
+    "build": {
+        "folder": "vocabee/scripts"
+    },
+    "deploy": {
+        "module": "app:app",
+        "static": "/vocabee/static/"
+    }
+}
