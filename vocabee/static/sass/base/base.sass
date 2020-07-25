@@ -1,5 +1,6 @@
 @import '../abstract/variables'
 
+// Attribute styles
 html
   height: 100%
 
@@ -16,12 +17,6 @@ h1, h2, h3, h4, h5, h6
 p, label
   color: $secondaryblack
 
-
-.smalltext
-  font-style: italic
-  margin-bottom: 5px
-
-
 a
   text-decoration: none
   color: $mainblue
@@ -29,7 +24,12 @@ a
   &:hover
     color: $secondaryblue
 
+// Text styles
+.smalltext
+  font-style: italic
+  margin-bottom: 5px
 
+// Containers
 .container-fluid
   padding: 0 !important
 
@@ -37,7 +37,7 @@ a
   padding: 10px 15px 5px !important
   flex: 1 0 auto
 
-
+// Icons
 .material-icons.md-18
   font-size: 18px
 
@@ -53,7 +53,8 @@ a
 .material-icons.md-48
   font-size: 48px
 
-
+// TODO: move this to components
+// Footer
 .footer
   flex-shrink: 0
 
