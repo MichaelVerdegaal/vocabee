@@ -1,8 +1,7 @@
 import json
+import os
 
 from psycopg2 import connect, sql
-
-from vocabee.scripts.config import host, port, database, user, password
 
 
 def get_connection():
@@ -10,7 +9,11 @@ def get_connection():
     Get database connection object
     :return: connection
     """
-    return connect(host=host, port=port, database=database, user=user, password=password)
+    return connect(host=os.environ['host'],
+                   port=os.environ['dbport'],
+                   database=os.environ['database'],
+                   user=os.environ['user'],
+                   password=os.environ['password'])
 
 
 def get_cursor(connection):
