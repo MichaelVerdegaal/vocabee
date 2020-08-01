@@ -62,3 +62,6 @@ def create_app():
         return examples
 
     return app
+
+
+app = create_app()
