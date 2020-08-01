@@ -1,1 +1,0 @@
-web: gunicorn vocabee.scripts.main:app --log-file=-
