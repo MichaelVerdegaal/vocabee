@@ -1,22 +1,25 @@
+import os
+
 import sass
+from dotenv import load_dotenv
 from flask import Flask, render_template
 from flask_caching import Cache
 
 from vocabee.scripts.db_util import get_connection, get_cursor, get_examples_by_id
 from vocabee.scripts.file_util import get_vocabulary
 
-config = {
-    "DEBUG": False,  # Flask specific configs
-    "CACHE_TYPE": "simple",  # Flask-Caching related configs
-    "CACHE_DEFAULT_TIMEOUT": 600
-}
-
+project_folder = os.path.expanduser('~/vocabee')  # adjust as appropriate
+load_dotenv(os.path.join(project_folder, '.env'))
 connection = get_connection()
 vocabulary = get_vocabulary(connection)
 
 sass.compile(dirname=('vocabee/static/sass', 'vocabee/static/css/'), output_style='compressed')
 app = Flask(__name__, template_folder='../templates/', static_folder='../static/')
-app.config.from_mapping(config)
+app.config.from_mapping({
+    "DEBUG": False,  # Flask specific configs
+    "CACHE_TYPE": "simple",  # Flask-Caching related configs
+    "CACHE_DEFAULT_TIMEOUT": 600
+})
 cache = Cache(app)
 
 
