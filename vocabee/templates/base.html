@@ -37,8 +37,8 @@
 
 <!--start navbar-->
 {% set navigation_bar = [
-    ('/', 'home', 'Home'),
-    ('/vocab', 'vocab', 'Vocabulary')
+('/', 'home', 'Home'),
+('/vocab', 'vocab', 'Vocabulary')
 ] -%}
 
 {% set active_page = active_page|default('index') -%}
@@ -55,9 +55,9 @@
     <div class="collapse navbar-collapse" id="main-navbar">
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0" id="navigation">
             {% for href, id, caption in navigation_bar %}
-                <li class="nav-item {% if id == active_page %} active {% endif %}">
-                    <a class="nav-link" href="{{ href|e }}">{{ caption|e }}</a>
-                </li>
+            <li class="nav-item {% if id == active_page %} active {% endif %}">
+                <a class="nav-link" href="{{ href|e }}">{{ caption|e }}</a>
+            </li>
             {% endfor %}
         </ul>
     </div>
@@ -74,6 +74,7 @@
         crossorigin="anonymous"></script>
 </body>
 <footer class="footer">
-    <span class="text-muted" id="footer-text">© 2020 Michael Verdegaal, All rights reserved</span>
+    <span class="text-muted footer-text">© 2020 Michael Verdegaal, All rights reserved</span>
+    <a class="footer-link" href="https://www.patreon.com/bePatron?u=40086356" target="_blank">Support VocaBee!</a>
 </footer>
 </html>
