@@ -5,12 +5,12 @@ from dotenv import load_dotenv
 from flask import Flask, render_template
 from flask_caching import Cache
 
-from vocabee.scripts.db_util import get_connection, get_cursor, get_examples_by_id
+from vocabee.scripts.db_util import create_connection, get_cursor, get_examples_by_id
 from vocabee.scripts.file_util import get_vocabulary
 
 project_folder = os.path.expanduser('~/vocabee')  # adjust as appropriate
 load_dotenv(os.path.join(project_folder, '.env'))
-connection = get_connection()
+connection = create_connection()
 vocabulary = get_vocabulary(connection)
 
 sass.compile(dirname=('vocabee/static/sass', 'vocabee/static/css/'), output_style='compressed')

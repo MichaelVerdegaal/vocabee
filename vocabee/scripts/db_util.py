@@ -4,16 +4,21 @@ import os
 from psycopg2 import connect, sql
 
 
-def get_connection():
+def create_connection():
     """
-    Get database connection object
+    Attempt to create a dabase connection
     :return: connection
     """
-    return connect(host=os.environ['host'],
-                   port=os.environ['dbport'],
-                   database=os.environ['database'],
-                   user=os.environ['user'],
-                   password=os.environ['password'])
+    for attempt in range(5):
+        try:
+            connection = connect(host=os.environ['host'],
+                                 port=os.environ['dbport'],
+                                 database=os.environ['database'],
+                                 user=os.environ['user'],
+                                 password=os.environ['password'])
+            return connection
+        except Exception as e:
+            print(e)
 
 
 def get_cursor(connection):
