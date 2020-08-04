@@ -64,4 +64,5 @@ def vocab_get_examples(vocab_id):
     """
     cursor = get_cursor(connection)
     examples = get_examples_by_id(cursor, vocab_id)
+    cursor.close()
     return examples

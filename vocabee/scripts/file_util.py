@@ -50,4 +50,5 @@ def get_vocabulary(connection):
     processed_vocabulary = process_vocabulary(vocabulary)
     for level in processed_vocabulary:
         json.dumps(level)
+    cursor.close()
     return processed_vocabulary
