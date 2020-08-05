@@ -9,16 +9,24 @@ def create_connection():
     Attempt to create a dabase connection
     :return: connection
     """
-    for attempt in range(5):
-        try:
-            connection = connect(host=os.environ['host'],
-                                 port=os.environ['dbport'],
-                                 database=os.environ['database'],
-                                 user=os.environ['user'],
-                                 password=os.environ['password'])
-            return connection
-        except Exception as e:
-            print(e)
+    try:
+        connection = connect(host=os.environ['host'],
+                             port=os.environ['dbport'],
+                             database=os.environ['database'],
+                             user=os.environ['user'],
+                             password=os.environ['password'])
+        return connection
+    except Exception as e:
+        print(e)
+
+
+def get_connection_if_exists(conn):
+    """
+    Passes connection if it exists, otherwise creates one
+    :param conn: pyscopg2 connection object
+    :return: connection
+    """
+    return conn if conn.closed == 0 else create_connection()
 
 
 def get_cursor(connection):
@@ -27,7 +35,11 @@ def get_cursor(connection):
     :param connection: database connection object
     :return: cursor
     """
-    return connection.cursor()
+    try:
+        connection = get_connection_if_exists(connection)
+        return connection.cursor()
+    except Exception as e:
+        print(e)
 
 
 def get_all_vocab(cursor):

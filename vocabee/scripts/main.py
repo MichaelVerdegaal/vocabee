@@ -10,6 +10,7 @@ from vocabee.scripts.file_util import get_vocabulary
 
 project_folder = os.path.expanduser('~/vocabee')  # adjust as appropriate
 load_dotenv(os.path.join(project_folder, '.env'))
+
 connection = create_connection()
 vocabulary = get_vocabulary(connection)
 
