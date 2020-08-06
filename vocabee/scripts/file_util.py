@@ -6,7 +6,6 @@ from vocabee.scripts.db_util import get_all_vocab
 def process_vocabulary():
     """
     Processes vocabulary entries so they can be used for the tables
-    :param vocabulary: vocabulary results as model_list of tuples
     :return: procssed vocabulary
     """
     N5 = {"entries": []}
