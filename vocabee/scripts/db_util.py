@@ -1,3 +1,5 @@
+import json
+
 from vocabee.scripts.models import Vocabulary, Example
 
 
@@ -17,6 +19,7 @@ def get_examples_by_id(vocab_id):
     :param vocab_id: vocabulary entry id
     :return: examples as valid json
     """
-    examples = Example.query.filter_by(vocab_id=vocab_id).first()
-    # examples = jsonify(examples)
+    examples = Example.query.filter_by(vocab_id=vocab_id).all()
+    examples = json.dumps(Example.serialize_list(examples))
+    print(examples)
     return examples

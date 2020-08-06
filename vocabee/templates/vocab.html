@@ -79,6 +79,8 @@
                 url: endpoint,
                 success: function (result) {
                     let exampleData = $.parseJSON(result);
+                    console.log(exampleData);
+                    console.log(typeof exampleData);
                     fillExampleModal(exampleData, kanji, hiragana);
                 }
             });
