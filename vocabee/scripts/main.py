@@ -4,24 +4,29 @@ import sass
 from dotenv import load_dotenv
 from flask import Flask, render_template
 from flask_caching import Cache
-
-from vocabee.scripts.db_util import create_connection, get_cursor, get_examples_by_id
-from vocabee.scripts.file_util import get_vocabulary
+from flask_sqlalchemy import SQLAlchemy
 
 project_folder = os.path.expanduser('~/vocabee')  # adjust as appropriate
 load_dotenv(os.path.join(project_folder, '.env'))
-
-connection = create_connection()
-vocabulary = get_vocabulary(connection)
 
 sass.compile(dirname=('vocabee/static/sass', 'vocabee/static/css/'), output_style='compressed')
 app = Flask(__name__, template_folder='../templates/', static_folder='../static/')
 app.config.from_mapping({
     "DEBUG": False,  # Flask specific configs
     "CACHE_TYPE": "simple",  # Flask-Caching related configs
-    "CACHE_DEFAULT_TIMEOUT": 600
+    "CACHE_DEFAULT_TIMEOUT": 600,
+    "SQLALCHEMY_DATABASE_URI": f"postgresql+psycopg2://{os.getenv('user')}:{os.getenv('password')}@{os.getenv('host')}:{os.getenv('dbport')}/{os.getenv('database')}",
+    "SQLALCHEMY_ECHO": False,
+    "SQLALCHEMY_TRACK_MODIFICATIONS": False
 })
 cache = Cache(app)
+db = SQLAlchemy(app)
+db.init_app(app)
+
+from vocabee.scripts.file_util import get_vocabulary
+from vocabee.scripts.db_util import get_examples_by_id
+
+vocabulary = get_vocabulary()
 
 
 @app.route('/')
@@ -63,7 +68,5 @@ def vocab_get_examples(vocab_id):
     :param vocab_id: vocabulary entry id
     :return: examples in JSON
     """
-    cursor = get_cursor(connection)
-    examples = get_examples_by_id(cursor, vocab_id)
-    cursor.close()
+    examples = get_examples_by_id(vocab_id)
     return examples

@@ -1,9 +1,9 @@
 import json
 
-from vocabee.scripts.db_util import get_cursor, get_all_vocab
+from vocabee.scripts.db_util import get_all_vocab
 
 
-def process_vocabulary(vocabulary):
+def process_vocabulary():
     """
     Processes vocabulary entries so they can be used for the tables
     :param vocabulary: vocabulary results as list of tuples
@@ -15,16 +15,17 @@ def process_vocabulary(vocabulary):
     N2 = {"entries": []}
     N1 = {"entries": []}
 
+    vocabulary = get_all_vocab()
     for row in vocabulary:
         # Add clickable Jisho links
-        vocab_id = row[0]
+        vocab_id = row.id
         kanji = f'<a href="https://jisho.org/search/{e}" target="_blank" rel="noopener">{e}</a>' if (
-            e := row[1]) else ""
-        hiragana = f'<a href="https://jisho.org/search/{row[2]}" target="_blank" rel="noopener">{row[2]}</a>'
-        english = e if (e := row[3]) else ""
+            e := row.kanji) else ""
+        hiragana = f'<a href="https://jisho.org/search/{row.hiragana}" target="_blank" rel="noopener">{row.hiragana}</a>'
+        english = e if (e := row.english) else ""
         entry = [vocab_id, kanji, hiragana, english]
 
-        level = row[4]
+        level = row.jlpt_level
         # Split by JLPT level for performance reasons
         if level == "N5":
             N5["entries"].append(entry)
@@ -39,16 +40,12 @@ def process_vocabulary(vocabulary):
     return [N1, N2, N3, N4, N5]
 
 
-def get_vocabulary(connection):
+def get_vocabulary():
     """
     Master function to get vocabulary and serialize it
     :return: Vocabulary entries as dictionary
     """
-    cursor = get_cursor(connection)
-    vocabulary = get_all_vocab(cursor)
-
-    processed_vocabulary = process_vocabulary(vocabulary)
+    processed_vocabulary = process_vocabulary()
     for level in processed_vocabulary:
         json.dumps(level)
-    cursor.close()
     return processed_vocabulary
