@@ -1,6 +1,6 @@
 from sqlalchemy.inspection import inspect
 
-from vocabee.scripts.main import db
+from vocabee import db
 
 column = db.Column
 string = db.String
