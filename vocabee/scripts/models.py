@@ -13,9 +13,15 @@ class Serializer(object):
     def serialize(self):
         return {c: getattr(self, c) for c in inspect(self).attrs.keys()}
 
+    def to_list(self):
+        return [getattr(self, c) for c in inspect(self).attrs.keys()]
+
     @staticmethod
-    def serialize_list(model_list):
-        return [model.serialize() for model in model_list]
+    def serialize_list(model_list, use_list=True):
+        if use_list:
+            return [model.to_list() for model in model_list]
+        else:
+            return [model.serialize() for model in model_list]
 
 
 class Vocabulary(db.Model, Serializer):

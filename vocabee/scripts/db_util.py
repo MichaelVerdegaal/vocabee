@@ -21,5 +21,4 @@ def get_examples_by_id(vocab_id):
     """
     examples = Example.query.filter_by(vocab_id=vocab_id).all()
     examples = json.dumps(Example.serialize_list(examples))
-    print(examples)
     return examples
