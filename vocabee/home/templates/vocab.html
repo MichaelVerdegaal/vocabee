@@ -6,6 +6,11 @@
     <!--Stylesheets -->
     <link href="{{ url_for('home.static', filename='css/pages/vocab.css') }}" rel="stylesheet">
     <script src="{{ url_for('home.static', filename='js/tables.js') }}"></script>
+    <!--Ref: https://datatables.net/ -->
+    <!--Ref: Option 1 - Bootstrap / Option 2 DataTables / Option 3 Responsive) -->
+    <link rel="stylesheet" type="text/css"
+          href="https://cdn.datatables.net/v/bs4/dt-1.10.20/r-2.2.3/datatables.min.css"/>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.20/r-2.2.3/datatables.min.js"></script>
 
     <div class="container-fluid text-container">
         <a href="{{ url_for('home.vocab_index') }}" title="Go back">
@@ -50,6 +55,26 @@
         <table class="table table-striped table-hover" id="vocab-table"></table>
     </div>
 
+    <div class="modal fade modal-fullscreen" id="vocab-modal" tabindex="-1" role="dialog"
+         aria-labelledby="modalLargeLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalLargeLabel">Examples</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="vocab-modal-body">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script type="text/javascript">
         // Initialize vocabulary entries
         let vocab = {{ vocab | safe }};
@@ -84,24 +109,4 @@
             });
         })
     </script>
-
-    <div class="modal fade modal-fullscreen" id="vocab-modal" tabindex="-1" role="dialog"
-         aria-labelledby="modalLargeLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalLargeLabel">Examples</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body" id="vocab-modal-body">
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
 {% endblock %}
