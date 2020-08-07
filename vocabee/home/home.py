@@ -12,6 +12,7 @@ home_bp = Blueprint('home',
                     static_url_path='/home')
 
 sass.compile(dirname=('vocabee/home/static/sass', 'vocabee/home/static/css/'), output_style='compressed')
+vocabulary = get_vocabulary()
 
 
 @home_bp.route('/')
@@ -42,7 +43,6 @@ def vocab(vocab_level):
     :param vocab_level: Valid JLPT vocabulary level (1-5)
     :return: Webpage
     """
-    vocabulary = get_vocabulary()
     if 0 < vocab_level < 6:
         vocab = vocabulary[vocab_level - 1]
         return render_template("vocab.html", vocab=vocab, level=vocab_level)
