@@ -2,8 +2,8 @@ import sass
 from flask import Blueprint, render_template, abort
 from jinja2 import TemplateNotFound
 
-from vocabee.db_util import get_examples_by_id
-from vocabee.file_util import get_vocabulary
+from vocabee.util.db_util import get_examples_by_id
+from vocabee.util.file_util import get_vocabulary
 
 home_bp = Blueprint('home',
                     __name__,

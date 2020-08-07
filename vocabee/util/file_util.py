@@ -1,6 +1,6 @@
 import json
 
-from vocabee.db_util import get_all_vocab
+from vocabee.util.db_util import get_all_vocab
 
 
 def process_vocabulary():
