@@ -1,16 +1,12 @@
 import os
 
-import sass
 from dotenv import load_dotenv
 from flask import Flask
 from flask_caching import Cache
 from flask_sqlalchemy import SQLAlchemy
 
-
 project_folder = os.path.expanduser('~/vocabee')  # adjust as appropriate
 load_dotenv(os.path.join(project_folder, '.env'))
-
-sass.compile(dirname=('vocabee/static/sass', 'vocabee/static/css/'), output_style='compressed')
 
 db = SQLAlchemy()
 

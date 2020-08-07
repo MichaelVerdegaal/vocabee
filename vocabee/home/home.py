@@ -1,13 +1,16 @@
+import sass
 from flask import Blueprint, render_template
 
 from vocabee.db_util import get_examples_by_id
 from vocabee.file_util import get_vocabulary
 
-home_bp = Blueprint(
-    'home_bp', __name__,
-    template_folder='templates',
-    static_folder='static'
-)
+home_bp = Blueprint('homu',
+                    __name__,
+                    template_folder='templates',
+                    static_folder='static',
+                    static_url_path='/homu')
+
+sass.compile(dirname=('vocabee/home/static/sass', 'vocabee/home/static/css/'), output_style='compressed')
 
 
 @home_bp.route('/')
@@ -16,7 +19,7 @@ def home():
     Renders the home page
     :return: Webpage
     """
-    return render_template("templates/home.html")
+    return render_template("home.html")
 
 
 @home_bp.route('/vocab')
