@@ -1,14 +1,15 @@
 import sass
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, abort
+from jinja2 import TemplateNotFound
 
 from vocabee.db_util import get_examples_by_id
 from vocabee.file_util import get_vocabulary
 
-home_bp = Blueprint('homu',
+home_bp = Blueprint('home',
                     __name__,
                     template_folder='templates',
                     static_folder='static',
-                    static_url_path='/homu')
+                    static_url_path='/home')
 
 sass.compile(dirname=('vocabee/home/static/sass', 'vocabee/home/static/css/'), output_style='compressed')
 
@@ -28,7 +29,10 @@ def vocab_index():
     Renders the vocabulary level index page
     :return: Webpage
     """
-    return render_template("vocab_index.html")
+    try:
+        return render_template("vocab_index.html")
+    except TemplateNotFound:
+        abort(404)
 
 
 @home_bp.route('/vocab/<int:vocab_level>')

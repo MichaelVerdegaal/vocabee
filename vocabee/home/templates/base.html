@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#fa9a00"/>
 
-    <link rel="icon" href="{{ url_for('homu.static', filename='images/brand-logo-favicon.png') }}">
+    <link rel="icon" href="{{ url_for('home.static', filename='images/brand-logo-favicon.png') }}">
     <!--Ref: https://getbootstrap.com/docs/4.4/getting-started/download/ -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -30,7 +30,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <!--Custom stylesheets -->
-    <link href="{{ url_for('homu.static', filename='css/main.css') }}" rel="stylesheet">
+    <link href="{{ url_for('home.static', filename='css/main.css') }}" rel="stylesheet">
 
 </head>
 <body>
@@ -45,7 +45,7 @@
 
 <nav class="navbar navbar-dark navbar-expand-lg sticky-top">
     <a class="navbar-brand" href="/" title="VocaBee homepage">
-        <img src="{{ url_for('homu.static', filename='images/brand-logo.png') }}" alt="VocaBee logo" height="35px">
+        <img src="{{ url_for('home.static', filename='images/brand-logo.png') }}" alt="VocaBee logo" height="35px">
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-navbar"
             aria-controls="main-navbar" aria-expanded="false" aria-label="Toggle navigation">
