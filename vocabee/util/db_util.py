@@ -1,6 +1,6 @@
 import json
 
-from vocabee.models import Vocabulary, Example
+from vocabee.home.models import Vocabulary, Example
 
 
 def get_all_vocab():
