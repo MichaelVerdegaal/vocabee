@@ -6,11 +6,13 @@
     <!--Stylesheets -->
     <link href="{{ url_for('home.static', filename='css/pages/vocab.css') }}" rel="stylesheet">
     <script src="{{ url_for('home.static', filename='js/tables.js') }}"></script>
+    <script src="{{ url_for('home.static', filename='js/artyom.window.min.js') }}"></script>
     <!--Ref: https://datatables.net/ -->
     <!--Ref: Option 1 - Bootstrap / Option 2 DataTables / Option 3 Responsive) -->
     <link rel="stylesheet" type="text/css"
           href="https://cdn.datatables.net/v/bs4/dt-1.10.20/r-2.2.3/datatables.min.css"/>
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.20/r-2.2.3/datatables.min.js"></script>
+
 
     <div class="container-fluid text-container">
         <a href="{{ url_for('home.vocab_index') }}" title="Go back">
@@ -76,14 +78,31 @@
     </div>
 
     <script type="text/javascript">
-        // Initialize vocabulary entries
+        /*
+            const artyom = new Artyom();
+            artyom.initialize({
+                lang: "jp-JP",
+                debug: false,
+                continuous: false
+            });
+
+            button.addEventListener("click", function () {
+                artyom.say("ファックです");
+            });
+    */
+        // Initialize vocabulary table
         let vocab = {{ vocab | safe }};
         let entries = vocab.entries;
         $(document).ready(function () {
             createVocabTable(entries);
         });
 
-        $("#vocab-table").on('click', '#example-select', function (e) {
+        $("#vocab-table").on('click', '.pronounciation_button', function (e) {
+            console.log("test");
+        });
+
+        // TODO: move this to a file
+        $("#vocab-table").on('click', '.example-select', function (e) {
             // Get data from all rows, including hidden ones. Ref: https://stackoverflow.com/a/38515622
             e.preventDefault();
             let current_row = $(this).parents('tr');
@@ -96,7 +115,7 @@
             let kanji = row_data[1].split(/<a[^>]*>([\s\S]*?)<\/a>/)[1];
             let hiragana = row_data[2].split(/<a[^>]*>([\s\S]*?)<\/a>/)[1];
 
-            // Retrieving the example data
+            // Retrieving example data
             let endpoint = "/vocab/example/" + vocab_id;
             $.ajax({
                 type: "GET",

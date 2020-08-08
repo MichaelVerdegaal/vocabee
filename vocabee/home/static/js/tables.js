@@ -19,12 +19,20 @@ function createVocabTable(entries) {
                 orderable: false,
                 searchable: false,
                 render: function () {
+                    return '<button title="Pronounce entry" class="float-left btn-outline-primary pronounciation_button"><i class="material-icons md-30 ">volume_up</i></button>'
+                }
+            },
+            {
+                title: "Examples",
+                orderable: false,
+                searchable: false,
+                render: function () {
                     return '<button ' +
                         'type="button" ' +
-                        'class="btn btn-outline-primary" ' +
-                        'id="example-select" ' +
+                        'title="Show examples"' +
+                        'class="btn btn-outline-primary example-select" ' +
                         'data-toggle="modal" ' +
-                        'data-target="#vocab-modal">Show</button>\n'
+                        'data-target="#vocab-modal">Show</button>'
                 }
             }
         ],
