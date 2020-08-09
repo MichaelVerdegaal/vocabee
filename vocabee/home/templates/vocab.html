@@ -78,30 +78,23 @@
     </div>
 
     <script type="text/javascript">
-        /*
-            const artyom = new Artyom();
-            artyom.initialize({
-                lang: "jp-JP",
-                debug: false,
-                continuous: false
-            });
-
-            button.addEventListener("click", function () {
-                artyom.say("ファックです");
-            });
-    */
+        // TODO: move all of this to a file
         // Initialize vocabulary table
         let vocab = {{ vocab | safe }};
         let entries = vocab.entries;
+
+        const artyom = new Artyom();
+        artyom.initialize({
+            lang: "jp-JP",
+            debug: false,
+            continuous: false,
+            speed: 0.55
+        });
+
         $(document).ready(function () {
             createVocabTable(entries);
         });
 
-        $("#vocab-table").on('click', '.pronounciation_button', function (e) {
-            console.log("test");
-        });
-
-        // TODO: move this to a file
         $("#vocab-table").on('click', '.example-select', function (e) {
             // Get data from all rows, including hidden ones. Ref: https://stackoverflow.com/a/38515622
             e.preventDefault();
@@ -126,6 +119,18 @@
                     fillExampleModal(exampleData, kanji, hiragana);
                 }
             });
-        })
+        });
+
+        $("#vocab-table").on('click', '.pronounciation_button', function (e) {
+            e.preventDefault();
+            let current_row = $(this).parents('tr');
+            if (current_row.hasClass('child')) {
+                current_row = current_row.prev();
+            }
+            let row_data = $('#vocab-table').DataTable().row(current_row).data();
+            // Ref: https://stackoverflow.com/questions/7864723#7864740
+            let hiragana = row_data[2].split(/<a[^>]*>([\s\S]*?)<\/a>/)[1];
+            artyom.say(hiragana);
+        });
     </script>
 {% endblock %}

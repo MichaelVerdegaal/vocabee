@@ -9,13 +9,16 @@ function createVocabTable(entries) {
         data: entries,
         pageLength: 8,
         lengthMenu: [[8, 25, 50], [8, 25, 50]],
+        oLanguage: {
+            "sLengthMenu": "Show _MENU_",
+        },
         columns: [
             {title: "ID"},
             {title: "Kanji"},
             {title: "Hiragana"},
             {title: "English"},
             {
-                title: "Examples",
+                title: "Pronounciation",
                 orderable: false,
                 searchable: false,
                 render: function () {
