@@ -11,6 +11,16 @@ def get_all_vocab():
     return Vocabulary.query.all()
 
 
+def get_vocab_by_level(jlpt_level):
+    """
+    Fetches vocabulary entries by JLPT level
+    :param jlpt_level: Vocabulary level
+    :return: Queryset
+    """
+    vocabulary = Vocabulary.query.filter_by(jlpt_level=f"N{jlpt_level}").all()
+    return vocabulary
+
+
 def get_examples_by_id(vocab_id):
     """
     Retrieves example sentences based on the vocabulary id they're linked to

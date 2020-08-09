@@ -2,8 +2,8 @@ import sass
 from flask import Blueprint, render_template, abort
 from jinja2 import TemplateNotFound
 
-from vocabee.util.db_util import get_examples_by_id
-from vocabee.util.file_util import get_vocabulary
+from vocabee.util.db_util import get_examples_by_id, get_vocab_by_level
+from vocabee.util.file_util import serialize_vocabulary
 
 home_bp = Blueprint('home',
                     __name__,
@@ -12,7 +12,6 @@ home_bp = Blueprint('home',
                     static_url_path='/home')
 
 sass.compile(dirname=('vocabee/home/static/sass', 'vocabee/home/static/css/'), output_style='compressed')
-vocabulary = get_vocabulary()
 
 
 @home_bp.route('/')
@@ -44,7 +43,8 @@ def vocab(vocab_level):
     :return: Webpage
     """
     if 0 < vocab_level < 6:
-        vocab = vocabulary[vocab_level - 1]
+        vocab = get_vocab_by_level(vocab_level)
+        vocab = serialize_vocabulary(vocab)
         return render_template("vocab.html", vocab=vocab, level=vocab_level)
     else:
         return render_template("vocab_index.html")
