@@ -12,6 +12,7 @@ function createVocabTable(entries) {
         oLanguage: {
             "sLengthMenu": "Show _MENU_",
         },
+        bSortClasses: false,
         columns: [
             {title: "ID"},
             {title: "Kanji"},
@@ -53,6 +54,7 @@ function createExampleTable(examples) {
     $("#example-table").DataTable({
         data: examples,
         paging: false,
+        bSortClasses: false,
         columns: [
             {title: "ID"},
             {title: "Japanese"},
