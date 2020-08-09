@@ -22,7 +22,7 @@ function createVocabTable(entries) {
                 orderable: false,
                 searchable: false,
                 render: function () {
-                    return '<button title="Pronounce entry" class="float-left btn-outline-primary pronounciation_button"><i class="material-icons md-30 ">volume_up</i></button>'
+                    return '<button title="Pronounce entry" class="btn-outline-primary pronounciation_button"><i class="material-icons md-30 ">volume_up</i></button>'
                 }
             },
             {
