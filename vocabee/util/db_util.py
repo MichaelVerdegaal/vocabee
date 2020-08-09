@@ -1,7 +1,8 @@
 import json
 
 from vocabee.home.models import Vocabulary, Example
-
+from flask_sqlalchemy_caching import FromCache
+from vocabee import cache
 
 def get_all_vocab():
     """
@@ -17,7 +18,7 @@ def get_vocab_by_level(jlpt_level):
     :param jlpt_level: Vocabulary level
     :return: Queryset
     """
-    vocabulary = Vocabulary.query.filter_by(jlpt_level=f"N{jlpt_level}").all()
+    vocabulary = Vocabulary.query.options(FromCache(cache)).filter_by(jlpt_level=f"N{jlpt_level}").all()
     return vocabulary
 
 
