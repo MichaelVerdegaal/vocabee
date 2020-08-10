@@ -113,6 +113,12 @@ function fillExampleModal(examples, kanji, hiragana) {
     }
 }
 
+/**
+ * On click action for the example button
+ *
+ * @param {array} row_data - Current row of the clicked button
+ *
+ */
 function exampleOnClick(row_data) {
     let vocab_id = row_data[0];
     // Ref: https://stackoverflow.com/questions/7864723#7864740
@@ -132,6 +138,13 @@ function exampleOnClick(row_data) {
     });
 }
 
+/**
+ * On click action for the pronounciation button
+ *
+ * @param {array} row_data - Current row of the clicked button
+ * @param {Artyom} artyom - Artyom instance
+ *
+ */
 function pronounciationOnClick(row_data, artyom) {
     // Ref: https://stackoverflow.com/questions/7864723#7864740
     let hiragana = row_data[2].split(/<a[^>]*>([\s\S]*?)<\/a>/)[1];
