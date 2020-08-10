@@ -43,9 +43,7 @@ def vocab(vocab_level):
     :return: Webpage
     """
     if 0 < vocab_level < 6:
-        vocab = get_vocab_by_level(vocab_level)
-        vocab = process_vocabulary(vocab)
-        return render_template("vocab.html", vocab=vocab, level=vocab_level)
+        return render_template("vocab.html", level=vocab_level)
     else:
         return render_template("vocab_index.html")
 
@@ -58,8 +56,7 @@ def ajax_vocab(vocab_level):
     :return: vocabulary in JSON
     """
     if 0 < vocab_level < 6:
-        vocab = get_vocab_by_level(vocab_level)
-        vocab = process_vocabulary(vocab)
+        vocab = process_vocabulary(get_vocab_by_level(vocab_level))
         return vocab
     else:
         "Faulty vocabulary level"

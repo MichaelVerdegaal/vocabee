@@ -4,9 +4,15 @@
  * @param {array} entries - Multidimensional array filled with vocabulary entries
  *
  */
-function createVocabTable(entries) {
+function createVocabTable(level) {
+    let endpoint = "/vocab/source/" + level;
     $("#vocab-table").DataTable({
-        data: entries,
+        ajax: {
+            url: endpoint,
+            dataType: "json",
+            dataSrc: "entries",
+            contentType: "application/json; charset=utf-8",
+        },
         pageLength: 8,
         lengthMenu: [[8, 25, 50], [8, 25, 50]],
         oLanguage: {
@@ -24,7 +30,9 @@ function createVocabTable(entries) {
                 orderable: false,
                 searchable: false,
                 render: function () {
-                    return '<button title="Pronounce entry" class="btn-outline-primary pronounciation_button"><i class="material-icons md-30 ">volume_up</i></button>'
+                    return '<button title="Pronounce entry" class="btn-outline-primary pronounciation_button">' +
+                        '<i class="material-icons md-30 ">volume_up</i>' +
+                        '</button>'
                 }
             },
             {

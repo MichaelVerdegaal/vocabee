@@ -79,8 +79,7 @@
 
     <script type="text/javascript">
         // Initialize vocabulary table
-        let vocab = {{ vocab | safe }};
-        let entries = vocab.entries;
+        let level = {{ level }};
 
         const artyom = new Artyom();
         artyom.initialize({
@@ -91,7 +90,7 @@
         });
 
         $(document).ready(function () {
-            createVocabTable(entries);
+            createVocabTable(level);
         });
 
         $("#vocab-table").on('click', '.example-select', function (e) {
