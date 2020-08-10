@@ -1,7 +1,7 @@
 /**
  * Generate and fill a datatable with vocabulary data
  *
- * @param {array} entries - Multidimensional array filled with vocabulary entries
+ * @param {string} level - JLPT level from 1-5
  *
  */
 function createVocabTable(level) {
@@ -56,10 +56,11 @@ function createVocabTable(level) {
 /**
  * Generate and fill a datatable with example data
  *
- * @param {array} examples - Multidimensional array filled with example entries
+ * @param {string} vocab_id - ID of vocabulary entry related to examples
  *
  */
-function createExampleTable(endpoint) {
+function createExampleTable(vocab_id) {
+    let endpoint = "/vocab/example/" + vocab_id;
     $("#example-table").DataTable({
         ajax: {
             url: endpoint,
@@ -82,12 +83,12 @@ function createExampleTable(endpoint) {
 /**
  * Fill a bootstrap modal with a datatable
  *
- * @param {array} examples - Multidimensional array filled with example entries
+ * @param {string} vocab_id - ID of vocabulary entry related to examples
  * @param {String} kanji - Example kanji
  * @param {String} hiragana - Example hiragana
  *
  */
-function fillExampleModal(endpoint, kanji, hiragana) {
+function fillExampleModal(vocab_id, kanji, hiragana) {
     let modal_content = document.getElementById("vocab-modal-body");
     modal_content.innerHTML = '';
 
@@ -103,7 +104,7 @@ function fillExampleModal(endpoint, kanji, hiragana) {
     exampleTableContainer.appendChild(document.createElement("th"));
     modal_content.appendChild(exampleTableContainer);
 
-    createExampleTable(endpoint);
+    createExampleTable(vocab_id);
 
     // Set modal title
     let modal_title = document.getElementById("modalLargeLabel");
@@ -127,8 +128,7 @@ function exampleOnClick(row_data) {
     let hiragana = row_data[2].split(/<a[^>]*>([\s\S]*?)<\/a>/)[1];
 
     // Retrieving example data
-    let endpoint = "/vocab/example/" + vocab_id;
-    fillExampleModal(endpoint, kanji, hiragana);
+    fillExampleModal(vocab_id, kanji, hiragana);
 }
 
 /**
