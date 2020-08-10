@@ -1,8 +1,10 @@
 import json
 
-from vocabee.home.models import Vocabulary, Example
 from flask_sqlalchemy_caching import FromCache
+
 from vocabee import cache
+from vocabee.home.models import Vocabulary, Example
+
 
 def get_all_vocab():
     """

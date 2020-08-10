@@ -3,7 +3,7 @@ from flask import Blueprint, render_template, abort
 from jinja2 import TemplateNotFound
 
 from vocabee.util.db_util import get_examples_by_id, get_vocab_by_level
-from vocabee.util.vocabulary_util import serialize_vocabulary
+from vocabee.util.vocabulary_util import process_vocabulary
 
 home_bp = Blueprint('home',
                     __name__,
@@ -44,14 +44,29 @@ def vocab(vocab_level):
     """
     if 0 < vocab_level < 6:
         vocab = get_vocab_by_level(vocab_level)
-        vocab = serialize_vocabulary(vocab)
+        vocab = process_vocabulary(vocab)
         return render_template("vocab.html", vocab=vocab, level=vocab_level)
     else:
         return render_template("vocab_index.html")
 
 
+@home_bp.route('/vocab/source/<int:vocab_level>')
+def ajax_vocab(vocab_level):
+    """
+    AJAX endpoint to retrieve vocabulary
+    :param vocab_level: Valid JLPT vocabulary level (1-5)
+    :return: vocabulary in JSON
+    """
+    if 0 < vocab_level < 6:
+        vocab = get_vocab_by_level(vocab_level)
+        vocab = process_vocabulary(vocab)
+        return vocab
+    else:
+        "Faulty vocabulary level"
+
+
 @home_bp.route('/vocab/example/<int:vocab_id>')
-def vocab_get_examples(vocab_id):
+def ajax_vocab_get_examples(vocab_id):
     """
     AJAX endpoint to retrieve example sentences
     :param vocab_id: vocabulary entry id

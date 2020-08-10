@@ -51,9 +51,14 @@ function createVocabTable(entries) {
  * @param {array} examples - Multidimensional array filled with example entries
  *
  */
-function createExampleTable(examples) {
+function createExampleTable(endpoint) {
     $("#example-table").DataTable({
-        data: examples,
+        ajax: {
+            url: endpoint,
+            dataType: "json",
+            dataSrc: "",
+            contentType: "application/json; charset=utf-8",
+        },
         paging: false,
         bSortClasses: false,
         deferRender: true,
@@ -74,42 +79,30 @@ function createExampleTable(examples) {
  * @param {String} hiragana - Example hiragana
  *
  */
-function fillExampleModal(examples, kanji, hiragana) {
+function fillExampleModal(endpoint, kanji, hiragana) {
     let modal_content = document.getElementById("vocab-modal-body");
     modal_content.innerHTML = '';
 
-    let example_count = examples.length;
-    if (example_count > 0) {
-        let exampleTableContainer = document.createElement("div");
-        exampleTableContainer.className = "container-fluid";
-        exampleTableContainer.id = "example-table-container";
+    let exampleTableContainer = document.createElement("div");
+    exampleTableContainer.className = "container-fluid";
+    exampleTableContainer.id = "example-table-container";
 
-        let exampleTable = document.createElement("table");
-        exampleTable.className = "table table-striped table-hover";
-        exampleTable.id = "example-table";
+    let exampleTable = document.createElement("table");
+    exampleTable.className = "table table-striped table-hover";
+    exampleTable.id = "example-table";
 
-        exampleTableContainer.appendChild(exampleTable);
-        exampleTableContainer.appendChild(document.createElement("th"));
-        modal_content.appendChild(exampleTableContainer);
+    exampleTableContainer.appendChild(exampleTable);
+    exampleTableContainer.appendChild(document.createElement("th"));
+    modal_content.appendChild(exampleTableContainer);
 
-        createExampleTable(examples);
-
-    } else {
-        let paragraph = document.createElement("p");
-        paragraph.innerHTML = `Sorry, no examples for this entry...`;
-        modal_content.appendChild(paragraph);
-    }
+    createExampleTable(endpoint);
 
     // Set modal title
     let modal_title = document.getElementById("modalLargeLabel");
-    let example_text = "examples";
-    if (example_count === 1) {
-        example_text = "example";
-    }
     if (typeof kanji !== 'undefined') {
-        modal_title.textContent = `Showing ${example_count} ${example_text} for ${kanji}/${hiragana}`;
+        modal_title.textContent = `Showing examples for ${kanji}/${hiragana}`;
     } else {
-        modal_title.textContent = `Showing ${example_count} ${example_text} for ${hiragana}`;
+        modal_title.textContent = `Showing examples for ${hiragana}`;
     }
 }
 
@@ -127,15 +120,7 @@ function exampleOnClick(row_data) {
 
     // Retrieving example data
     let endpoint = "/vocab/example/" + vocab_id;
-    $.ajax({
-        type: "GET",
-        contentType: "vocabee/json; charset=utf-8",
-        url: endpoint,
-        success: function (result) {
-            let exampleData = $.parseJSON(result);
-            fillExampleModal(exampleData, kanji, hiragana);
-        }
-    });
+    fillExampleModal(endpoint, kanji, hiragana);
 }
 
 /**

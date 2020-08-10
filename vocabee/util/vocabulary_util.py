@@ -17,13 +17,3 @@ def process_vocabulary(vocabulary):
         entry = [vocab_id, kanji, hiragana, english]
         vocab_dict["entries"].append(entry)
     return vocab_dict
-
-
-def serialize_vocabulary(vocabulary):
-    """
-    Master function to get vocabulary and serialize it
-    :param vocabulary: processed vocabulary
-    :return: Vocabulary entries as dictionary
-    """
-    vocabulary = process_vocabulary(vocabulary)
-    return vocabulary
