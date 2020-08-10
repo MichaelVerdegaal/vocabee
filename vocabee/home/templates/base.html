@@ -3,6 +3,8 @@
 <head>
     <meta name="description" content="JLPT vocabulary browser">
     <meta name="keywords" content="Japanese, Vocabulary, Kanji, Hiragana, JP, learning, language">
+    <meta name="description" content="VocaBee is an online learning platform dedicated to helping you pass the JLPT,
+    ensuring you'll never have problems with learning Japanese vocabulary again.">
     <meta name="author" content="Michael Verdegaal">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -47,9 +49,9 @@
     <div class="collapse navbar-collapse" id="main-navbar">
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0" id="navigation">
             {% for href, id, caption in navigation_bar %}
-            <li class="nav-item {% if id == active_page %} active {% endif %}">
-                <a class="nav-link" href="{{ href|e }}">{{ caption|e }}</a>
-            </li>
+                <li class="nav-item {% if id == active_page %} active {% endif %}">
+                    <a class="nav-link" href="{{ href|e }}">{{ caption|e }}</a>
+                </li>
             {% endfor %}
         </ul>
     </div>
@@ -67,6 +69,7 @@
 </body>
 <footer class="footer">
     <span class="text-muted footer-text">© 2020 Michael Verdegaal, All rights reserved</span>
-    <a class="footer-link" href="https://www.patreon.com/bePatron?u=40086356" target="_blank" rel="noopener">Support VocaBee!</a>
+    <a class="footer-link" href="https://www.patreon.com/bePatron?u=40086356" target="_blank" rel="noopener">Support
+        VocaBee!</a>
 </footer>
 </html>
