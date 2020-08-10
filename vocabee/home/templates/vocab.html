@@ -78,7 +78,6 @@
     </div>
 
     <script type="text/javascript">
-        // TODO: move all of this to a file
         // Initialize vocabulary table
         let vocab = {{ vocab | safe }};
         let entries = vocab.entries;
@@ -96,29 +95,14 @@
         });
 
         $("#vocab-table").on('click', '.example-select', function (e) {
-            // Get data from all rows, including hidden ones. Ref: https://stackoverflow.com/a/38515622
             e.preventDefault();
+            // Get data from all rows, including hidden ones. Ref: https://stackoverflow.com/a/38515622
             let current_row = $(this).parents('tr');
             if (current_row.hasClass('child')) {
                 current_row = current_row.prev();
             }
             let row_data = $('#vocab-table').DataTable().row(current_row).data();
-            let vocab_id = row_data[0];
-            // Ref: https://stackoverflow.com/questions/7864723#7864740
-            let kanji = row_data[1].split(/<a[^>]*>([\s\S]*?)<\/a>/)[1];
-            let hiragana = row_data[2].split(/<a[^>]*>([\s\S]*?)<\/a>/)[1];
-
-            // Retrieving example data
-            let endpoint = "/vocab/example/" + vocab_id;
-            $.ajax({
-                type: "GET",
-                contentType: "vocabee/json; charset=utf-8",
-                url: endpoint,
-                success: function (result) {
-                    let exampleData = $.parseJSON(result);
-                    fillExampleModal(exampleData, kanji, hiragana);
-                }
-            });
+            exampleOnClick(row_data);
         });
 
         $("#vocab-table").on('click', '.pronounciation_button', function (e) {
@@ -128,9 +112,7 @@
                 current_row = current_row.prev();
             }
             let row_data = $('#vocab-table').DataTable().row(current_row).data();
-            // Ref: https://stackoverflow.com/questions/7864723#7864740
-            let hiragana = row_data[2].split(/<a[^>]*>([\s\S]*?)<\/a>/)[1];
-            artyom.say(hiragana);
+            pronounciationOnClick(row_data, artyom)
         });
     </script>
 {% endblock %}

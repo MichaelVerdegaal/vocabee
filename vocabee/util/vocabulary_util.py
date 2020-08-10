@@ -1,6 +1,3 @@
-import json
-
-
 def process_vocabulary(vocabulary):
     """
     Processes vocabulary entries so they can be used for the tables

@@ -110,3 +110,28 @@ function fillExampleModal(examples, kanji, hiragana) {
         modal_title.textContent = `Showing ${example_count} ${example_text} for ${hiragana}`;
     }
 }
+
+function exampleOnClick(row_data) {
+    let vocab_id = row_data[0];
+    // Ref: https://stackoverflow.com/questions/7864723#7864740
+    let kanji = row_data[1].split(/<a[^>]*>([\s\S]*?)<\/a>/)[1];
+    let hiragana = row_data[2].split(/<a[^>]*>([\s\S]*?)<\/a>/)[1];
+
+    // Retrieving example data
+    let endpoint = "/vocab/example/" + vocab_id;
+    $.ajax({
+        type: "GET",
+        contentType: "vocabee/json; charset=utf-8",
+        url: endpoint,
+        success: function (result) {
+            let exampleData = $.parseJSON(result);
+            fillExampleModal(exampleData, kanji, hiragana);
+        }
+    });
+}
+
+function pronounciationOnClick(row_data, artyom) {
+    // Ref: https://stackoverflow.com/questions/7864723#7864740
+    let hiragana = row_data[2].split(/<a[^>]*>([\s\S]*?)<\/a>/)[1];
+    artyom.say(hiragana);
+}

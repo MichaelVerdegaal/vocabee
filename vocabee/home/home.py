@@ -3,7 +3,7 @@ from flask import Blueprint, render_template, abort
 from jinja2 import TemplateNotFound
 
 from vocabee.util.db_util import get_examples_by_id, get_vocab_by_level
-from vocabee.util.file_util import serialize_vocabulary
+from vocabee.util.vocabulary_util import serialize_vocabulary
 
 home_bp = Blueprint('home',
                     __name__,
