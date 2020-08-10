@@ -17,6 +17,7 @@ function createVocabTable(level) {
         lengthMenu: [[8, 25, 50], [8, 25, 50]],
         oLanguage: {
             "sLengthMenu": "Show _MENU_",
+            "sEmptyTable": "No vocabulary available, something probably went wrong..."
         },
         deferRender: true,
         bSortClasses: false,
@@ -67,6 +68,9 @@ function createExampleTable(vocab_id) {
             dataType: "json",
             dataSrc: "",
             contentType: "application/json; charset=utf-8",
+        },
+        oLanguage: {
+            "sEmptyTable": "No examples available for this entry..."
         },
         paging: false,
         bSortClasses: false,
