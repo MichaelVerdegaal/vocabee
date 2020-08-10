@@ -12,6 +12,7 @@ function createVocabTable(entries) {
         oLanguage: {
             "sLengthMenu": "Show _MENU_",
         },
+        deferRender: true,
         bSortClasses: false,
         columns: [
             {title: "ID"},
@@ -55,6 +56,7 @@ function createExampleTable(examples) {
         data: examples,
         paging: false,
         bSortClasses: false,
+        deferRender: true,
         columns: [
             {title: "ID"},
             {title: "Japanese"},
