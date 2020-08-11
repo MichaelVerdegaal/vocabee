@@ -7,6 +7,7 @@
 function createVocabTable(level) {
     let endpoint = "/vocab/source/" + level;
     $("#vocab-table").DataTable({
+        autoWidth: false,
         ajax: {
             url: endpoint,
             dataType: "json",
