@@ -31,7 +31,7 @@ function createVocabTable(level) {
                 orderable: false,
                 searchable: false,
                 render: function () {
-                    return '<button title="Pronounce entry" class="btn-outline-primary pronounciation_button">' +
+                    return '<button title="Pronounce entry" class="btn-outline-primary pronounciation-button">' +
                         '<i class="material-icons md-30 ">volume_up</i>' +
                         '</button>'
                 }

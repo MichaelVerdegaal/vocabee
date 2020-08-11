@@ -1,44 +1,6 @@
 @import '../abstract/variables'
 
-.pagination
-  flex-wrap: wrap
-
-@media (max-width: $navbar-breakpoint)
-  .pagination
-    justify-content: center !important
-
-.page-item a
-  color: $mainblack
-  box-shadow: none !important
-
-  &:hover
-    background-color: $mainorange
-    color: $mainwhite
-
-.page-item.active .page-link
-  color: $mainwhite
-  background-color: $mainorange !important
-  border-color: $mainorange !important
-
-th
-  color: $mainblack
-
-tr
-  color: $secondaryblack
-
-table
-  width: 100% !important
-
-td.sorting_1::before
-  height: 14px
-
-.modal
-  top: 3% !important
-
-.modal-dialog
-  max-width: 90%
-  min-width: 90%
-
+// Back button
 #back-button
   margin-top: -4px
   color: $secondaryblack
@@ -46,7 +8,63 @@ td.sorting_1::before
   &:hover
     color: $mainblack
 
-.pronounciation_button, .pronounciation_button:hover, .pronounciation_button:focus
-  background-color: unset !important
-  border: 0 !important
-  outline: none !important
+// Table
+#vocab-table
+  width: 100%
+
+  th
+    color: $mainblack
+
+  tr
+    color: $secondaryblack
+
+// Table buttons
+#vocab-table tbody tr td > .btn-outline-primary.pronounciation-button
+  color: $mainorange
+  background-color: unset
+  border: 0
+  outline: none
+
+  &:hover, &:active
+    color: $secondaryorange
+
+#vocab-table tbody tr td > .btn-outline-primary.example-select
+  color: $mainorange
+  border-color: $mainorange
+
+  &:hover, &:active
+    background-color: $secondaryorange
+    border-color: $secondaryorange
+    color: $mainwhite
+
+
+// Table pagination
+#vocab-table_paginate > ul
+  flex-wrap: wrap
+
+#vocab-table_paginate > ul > li > a
+  color: $mainblack
+  box-shadow: none
+
+  &:hover
+    background-color: $mainorange
+    color: $mainwhite
+
+#vocab-table_paginate > ul > li.page-item.active > a
+  color: $mainwhite
+  background-color: $mainorange !important
+  border-color: $mainorange !important
+
+// Media queries
+@media (max-width: $navbar-breakpoint)
+  #vocab-table_paginate > ul
+    justify-content: center
+
+@media (min-width: $navbar-breakpoint)
+  #vocab-modal
+    top: 2%
+    padding-left: 0
+
+  #vocab-modal > .modal-dialog
+    max-width: 90%
+    min-width: 90%
