@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /vocab/source/
+Disallow: /vocab/example/
+Sitemap: https://vocabee.xyz/sitemap.xml

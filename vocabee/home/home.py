@@ -1,5 +1,5 @@
 import sass
-from flask import Blueprint, render_template, abort
+from flask import Blueprint, render_template, abort, send_from_directory, request
 from jinja2 import TemplateNotFound
 
 from vocabee.util.db_util import get_examples_by_id, get_vocab_by_level
@@ -46,6 +46,12 @@ def vocab(vocab_level):
         return render_template("vocab.html", level=vocab_level)
     else:
         return render_template("vocab_index.html")
+
+
+@home_bp.route('/robots.txt')
+@home_bp.route('/sitemap.xml')
+def static_from_root():
+    return send_from_directory(home_bp.static_folder, request.path[1:])
 
 
 @home_bp.route('/vocab/source/<int:vocab_level>')
