@@ -104,7 +104,7 @@
             exampleOnClick(row_data);
         });
 
-        $("#vocab-table").on('click', '.pronounciation-button', function (e) {
+        $("#vocab-table").on('click', '.audio-button', function (e) {
             e.preventDefault();
             let current_row = $(this).parents('tr');
             if (current_row.hasClass('child')) {
