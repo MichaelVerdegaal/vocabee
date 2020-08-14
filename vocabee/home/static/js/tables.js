@@ -28,11 +28,12 @@ function createVocabTable(level) {
             {title: "Hiragana"},
             {title: "English"},
             {
-                title: "Pronounciation",
+                title: "Audio",
+                className: "audio-column",
                 orderable: false,
                 searchable: false,
                 render: function () {
-                    return '<button title="Pronounce entry" class="btn-outline-primary pronounciation-button"><i class="material-icons md-30 ">volume_up</i></button>'
+                    return '<button title="Pronounce entry" class="btn-outline-primary audio-button"><i class="material-icons md-30 ">volume_up</i></button>'
                 }
             },
             {

@@ -18,13 +18,26 @@
   tr
     color: $secondaryblack
 
+.audio-column
+  text-align: center
+
+#vocab-table > tbody > tr.child > td > ul > li
+  display: flex
+  align-items: center
+
+  span.dtr-data
+    margin-left: 10px
+
+
 // Table buttons
-#vocab-table tbody tr td > .btn-outline-primary.pronounciation-button,
-#vocab-table tbody tr td > ul > li > span > .btn-outline-primary.pronounciation-button
+#vocab-table tbody tr td > .btn-outline-primary.audio-button,
+#vocab-table tbody tr td > ul > li > span > .btn-outline-primary.audio-button
   color: $mainorange
   background-color: unset
   border: 0
   outline: none
+  padding-left: 0
+  padding-right: 0
 
   &:hover, &:active
     color: $secondaryorange
@@ -54,8 +67,8 @@
 
 #vocab-table_paginate > ul > li.page-item.active > a
   color: $mainwhite
-  background-color: $mainorange !important
-  border-color: $mainorange !important
+  background-color: $mainorange
+  border-color: $mainorange
 
 // Media queries
 @media (max-width: $navbar-breakpoint)
