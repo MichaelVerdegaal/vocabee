@@ -7,21 +7,12 @@
 function createVocabTable(level) {
     let endpoint = "/vocab/source/" + level;
     $("#vocab-table").DataTable({
-        autoWidth: false,
         ajax: {
             url: endpoint,
             dataType: "json",
             dataSrc: "entries",
             contentType: "application/json; charset=utf-8",
         },
-        pageLength: 8,
-        lengthMenu: [[8, 25, 50], [8, 25, 50]],
-        oLanguage: {
-            "sLengthMenu": "Show _MENU_",
-            "sEmptyTable": "No vocabulary available, something probably went wrong..."
-        },
-        deferRender: true,
-        bSortClasses: false,
         columns: [
             {title: "ID"},
             {title: "Kanji"},
@@ -50,9 +41,28 @@ function createVocabTable(level) {
                 }
             }
         ],
-        responsive: true
+        deferRender: true,
+        bSortClasses: false,
+        responsive: true,
+        autoWidth: false,
+        pageLength: 8,
+        lengthMenu: [[8, 25, 50], [8, 25, 50]],
+        pagingType: 'full_numbers_no_ellipses',
+        oLanguage: {
+            "sLengthMenu": "Show _MENU_",
+            "sEmptyTable": "No vocabulary available, something probably went wrong..."
+        },
+        language: {
+            paginate: {
+                previous: '<span class="material-icons">chevron_left</span>',
+                next: '<span class="material-icons">chevron_right</span>',
+                first: '<span class="material-icons">first_page</span>',
+                last: '<span class="material-icons">last_page</span>'
+            }
+        }
     });
 }
+
 
 /**
  * Generate and fill a datatable with example data
@@ -69,18 +79,18 @@ function createExampleTable(vocab_id) {
             dataSrc: "",
             contentType: "application/json; charset=utf-8",
         },
-        oLanguage: {
-            "sEmptyTable": "No examples available for this entry..."
-        },
-        paging: false,
-        bSortClasses: false,
-        deferRender: true,
         columns: [
             {title: "ID"},
             {title: "Japanese"},
             {title: "English"}
         ],
-        responsive: false
+        paging: false,
+        bSortClasses: false,
+        deferRender: true,
+        responsive: false,
+        oLanguage: {
+            "sEmptyTable": "No examples available for this entry..."
+        },
     });
 }
 

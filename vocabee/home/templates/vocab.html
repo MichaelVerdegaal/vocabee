@@ -12,6 +12,7 @@
     <link rel="stylesheet" type="text/css"
           href="https://cdn.datatables.net/v/bs4/dt-1.10.20/r-2.2.3/datatables.min.css"/>
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.20/r-2.2.3/datatables.min.js"></script>
+    <script src="{{ url_for('home.static', filename='js/full_numbers_no_ellipses.js') }}"></script>
 
 
     <div class="container-fluid text-container">
@@ -91,7 +92,9 @@
 
         $(document).ready(function () {
             createVocabTable(level);
+            $('#vocab-table').DataTable.ext.pager.numbers_length = 3;
         });
+
 
         $("#vocab-table").on('click tap touchstart', '.example-select', function (e) {
             e.preventDefault();
