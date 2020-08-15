@@ -46,6 +46,7 @@ function createVocabTable(level) {
             },
             {
                 title: "Examples",
+                class: "example-column",
                 orderable: false,
                 searchable: false,
                 render: function () {
@@ -57,6 +58,14 @@ function createVocabTable(level) {
         bSortClasses: false,
         responsive: true,
         autoWidth: false,
+        columnDefs: [
+            {width: '5%', targets: 0},
+            {width: '10%', targets: 1},
+            {width: '10%', targets: 2},
+            {width: '45%', targets: 3},
+            {width: '5%', targets: 4},
+            {width: '5%', targets: 5},
+        ],
         pageLength: 10,
         lengthMenu: [[10, 25, 50], [10, 25, 50]],
         pagingType: "full_numbers_no_ellipses",
