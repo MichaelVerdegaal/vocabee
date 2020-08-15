@@ -93,7 +93,7 @@
             createVocabTable(level);
         });
 
-        $("#vocab-table").on('click', '.example-select', function (e) {
+        $("#vocab-table").on('click tap touchstart', '.example-select', function (e) {
             e.preventDefault();
             // Get data from all rows, including hidden ones. Ref: https://stackoverflow.com/a/38515622
             let current_row = $(this).parents('tr');
@@ -104,7 +104,7 @@
             exampleOnClick(row_data);
         });
 
-        $("#vocab-table").on('click', '.audio-button', function (e) {
+        $("#vocab-table").on('click tap touchstart', '.audio-button', function (e) {
             e.preventDefault();
             let current_row = $(this).parents('tr');
             if (current_row.hasClass('child')) {
