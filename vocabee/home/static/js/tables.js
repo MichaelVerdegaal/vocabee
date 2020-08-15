@@ -6,6 +6,23 @@
  */
 function createVocabTable(level) {
     let endpoint = "/vocab/source/" + level;
+
+    let audio_button = document.createElement("button");
+    audio_button.title = "Pronounce entry";
+    audio_button.className = "btn-outline-primary audio-button";
+    let audio_icon = document.createElement("i");
+    audio_icon.className = "material-icons md-30";
+    audio_icon.innerText = "volume_up";
+    audio_button.appendChild(audio_icon);
+
+    let example_button = document.createElement("button");
+    example_button.type = "button";
+    example_button.title = "Show examples";
+    example_button.innerText = "show";
+    example_button.className = "btn btn-outline-primary example-select";
+    example_button.dataset.toggle = "modal";
+    example_button.dataset.target = "#vocab-modal";
+
     $("#vocab-table").DataTable({
         ajax: {
             url: endpoint,
@@ -24,7 +41,7 @@ function createVocabTable(level) {
                 orderable: false,
                 searchable: false,
                 render: function () {
-                    return '<button title="Pronounce entry" class="btn-outline-primary audio-button"><i class="material-icons md-30 ">volume_up</i></button>'
+                    return audio_button.outerHTML
                 }
             },
             {
@@ -32,12 +49,7 @@ function createVocabTable(level) {
                 orderable: false,
                 searchable: false,
                 render: function () {
-                    return '<button ' +
-                        'type="button" ' +
-                        'title="Show examples"' +
-                        'class="btn btn-outline-primary example-select" ' +
-                        'data-toggle="modal" ' +
-                        'data-target="#vocab-modal">Show</button>'
+                    return example_button.outerHTML
                 }
             }
         ],
@@ -47,7 +59,7 @@ function createVocabTable(level) {
         autoWidth: false,
         pageLength: 8,
         lengthMenu: [[8, 25, 50], [8, 25, 50]],
-        pagingType: 'full_numbers_no_ellipses',
+        pagingType: "full_numbers_no_ellipses",
         oLanguage: {
             "sLengthMenu": "Show _MENU_",
             "sEmptyTable": "No vocabulary available, something probably went wrong..."
