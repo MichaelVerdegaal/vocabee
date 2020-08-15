@@ -57,8 +57,8 @@ function createVocabTable(level) {
         bSortClasses: false,
         responsive: true,
         autoWidth: false,
-        pageLength: 8,
-        lengthMenu: [[8, 25, 50], [8, 25, 50]],
+        pageLength: 10,
+        lengthMenu: [[10, 25, 50], [10, 25, 50]],
         pagingType: "full_numbers_no_ellipses",
         oLanguage: {
             "sLengthMenu": "Show _MENU_",
