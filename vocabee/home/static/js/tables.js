@@ -20,8 +20,6 @@ function createVocabTable(level) {
     example_button.title = "Show examples";
     example_button.innerText = "show";
     example_button.className = "btn btn-outline-primary example-select";
-    example_button.dataset.toggle = "modal";
-    example_button.dataset.target = "#vocab-modal";
 
     $("#vocab-table").DataTable({
         ajax: {
