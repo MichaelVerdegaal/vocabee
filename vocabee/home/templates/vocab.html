@@ -96,7 +96,7 @@
         });
 
 
-        $("#vocab-table").on('touchstart click', '.example-select', function () {
+        $("#vocab-table").on('click', '.example-select', function () {
             // Get data from all rows, including hidden ones. Ref: https://stackoverflow.com/a/38515622
             let current_row = $(this).parents('tr');
             if (current_row.hasClass('child')) {
@@ -107,7 +107,7 @@
             $('#vocab-modal').modal('show');
         });
 
-        $("#vocab-table").on('touchstart click', '.audio-button', function () {
+        $("#vocab-table").on('click', '.audio-button', function () {
             let current_row = $(this).parents('tr');
             if (current_row.hasClass('child')) {
                 current_row = current_row.prev();
