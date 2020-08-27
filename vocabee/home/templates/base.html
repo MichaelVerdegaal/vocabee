@@ -3,7 +3,7 @@
 <head>
     <meta name="keywords" content="Japanese, Vocabulary, Kanji, Hiragana, JP, learning, language">
     <meta name="description" content="VocaBee is an online learning platform dedicated to helping you pass the JLPT,
-    ensuring you'll never have problems with learning Japanese vocabulary again.">
+        ensuring you'll never have problems with learning Japanese vocabulary again.">
     <meta name="author" content="Michael Verdegaal">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
@@ -45,13 +45,13 @@
 
 <!--start navbar-->
 {% set navigation_bar = [
-('/', 'home', 'Home'),
-('/vocab', 'vocab', 'Vocabulary')
-] -%}
+    ('/', 'home', 'Home'),
+    ('/vocab', 'vocab', 'Vocabulary')
+    ] -%}
 
 {% set active_page = active_page|default('index') -%}
 
-<nav class="navbar navbar-dark navbar-expand-lg sticky-top">
+<nav class="navbar navbar-dark navbar-expand-sm fixed-top">
     <a class="navbar-brand" href="/" title="VocaBee homepage">
         <img src="{{ url_for('home.static', filename='images/brand-logo.png') }}" alt="VocaBee logo" height="35px">
     </a>
