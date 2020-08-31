@@ -6,7 +6,6 @@
     <!--Stylesheets -->
     <link href="{{ url_for('home.static', filename='css/pages/vocab.css') }}" rel="stylesheet">
     <script src="{{ url_for('home.static', filename='js/tables.js') }}"></script>
-    <script src="{{ url_for('home.static', filename='js/artyom.window.min.js') }}"></script>
     <!--Ref: https://datatables.net/ -->
     <!--Ref: Option 1 - Bootstrap / Option 2 DataTables / Option 3 Responsive) -->
     <link rel="stylesheet" type="text/css"
@@ -82,15 +81,8 @@
         // Initialize vocabulary table
         let level = {{ level }};
 
-        const artyom = new Artyom();
-        artyom.initialize({
-            lang: "jp-JP",
-            debug: false,
-            continuous: false,
-            speed: 0.55
-        });
-
         $(document).ready(function () {
+            window.speechSynthesis.getVoices();
             createVocabTable(level);
             $('#vocab-table').DataTable.ext.pager.numbers_length = 3;
         });
@@ -113,7 +105,7 @@
                 current_row = current_row.prev();
             }
             let row_data = $('#vocab-table').DataTable().row(current_row).data();
-            pronounciationOnClick(row_data, artyom)
+            pronounciationOnClick(row_data)
         });
     </script>
 {% endblock %}

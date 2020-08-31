@@ -168,11 +168,46 @@ function exampleOnClick(row_data) {
  * On click action for the pronounciation button
  *
  * @param {array} row_data - Current row of the clicked button
- * @param {Artyom} artyom - Artyom instance
  *
  */
-function pronounciationOnClick(row_data, artyom) {
+function pronounciationOnClick(row_data) {
     // Ref: https://stackoverflow.com/questions/7864723#7864740
     let hiragana = row_data[2].split(/<a[^>]*>([\s\S]*?)<\/a>/)[1];
-    artyom.say(hiragana);
+
+    // Make sure TTS voices are loaded
+    if (window.speechSynthesis.getVoices().length === 0) {
+        window.speechSynthesis.addEventListener('voiceschanged', function () {
+            textToSpeech();
+        });
+    } else {
+        textToSpeech()
+    }
+
+    function getVoicesWithLangSubstring(langSubstr) {
+        let voices = speechSynthesis.getVoices().filter(function (v) {
+            return v.lang.replace('_', '-').substring(0, langSubstr.length) === langSubstr
+        })
+        return voices
+    }
+
+    function textToSpeech() {
+        // get all voices that browser offers
+        let available_voices = window.speechSynthesis.getVoices();
+
+        // Try to find Japanese voice
+        let voiceToUse = getVoicesWithLangSubstring("ja-JP")[0];
+        console.log(voiceToUse);
+        console.log(typeof voiceToUse);
+        // Speak content
+        if (voiceToUse !== '') {
+            let utter = new SpeechSynthesisUtterance();
+            utter.rate = 0.6;
+            utter.pitch = 1;
+            utter.text = hiragana;
+            utter.voice = voiceToUse;
+            window.speechSynthesis.speak(utter);
+        } else {
+            alert("Sorry, it appears that your device doesn't support this feature...")
+        }
+    }
 }
