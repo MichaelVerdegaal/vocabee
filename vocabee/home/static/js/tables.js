@@ -183,31 +183,33 @@ function pronounciationOnClick(row_data) {
         textToSpeech()
     }
 
-    function getVoicesWithLangSubstring(langSubstr) {
-        let voices = speechSynthesis.getVoices().filter(function (v) {
-            return v.lang.replace('_', '-').substring(0, langSubstr.length) === langSubstr
-        })
-        return voices
-    }
-
     function textToSpeech() {
-        // get all voices that browser offers
-        let available_voices = window.speechSynthesis.getVoices();
-
         // Try to find Japanese voice
-        let voiceToUse = getVoicesWithLangSubstring("ja-JP")[0];
-        console.log(voiceToUse);
-        console.log(typeof voiceToUse);
-        // Speak content
-        if (voiceToUse !== '') {
-            let utter = new SpeechSynthesisUtterance();
-            utter.rate = 0.6;
-            utter.pitch = 1;
-            utter.text = hiragana;
-            utter.voice = voiceToUse;
-            window.speechSynthesis.speak(utter);
+        let voiceList = getVoicesWithLangSubstring("ja-JP");
+
+        // Check if we have a good voice object
+        if (Array.isArray(voiceList) && voiceList.length) {
+            let voiceToUse = voiceList[0];
+            if (typeof voiceToUse === "object") {
+                console.log(voiceToUse);
+                // Speak content
+                let utter = new SpeechSynthesisUtterance();
+                utter.rate = 0.6;
+                utter.pitch = 1;
+                utter.text = hiragana;
+                utter.voice = voiceToUse;
+                window.speechSynthesis.speak(utter);
+            } else {
+                alert("Sorry, it appears that your device doesn't support this feature...")
+            }
         } else {
             alert("Sorry, it appears that your device doesn't support this feature...")
         }
+    }
+
+    function getVoicesWithLangSubstring(langSubstr) {
+        return speechSynthesis.getVoices().filter(function (v) {
+            return v.lang.replace('_', '-').substring(0, langSubstr.length) === langSubstr
+        })
     }
 }
