@@ -39,7 +39,7 @@ function createVocabTable(level) {
                 orderable: false,
                 searchable: false,
                 render: function () {
-                    return audio_button.outerHTML
+                    return audio_button.outerHTML;
                 }
             },
             {
@@ -48,7 +48,7 @@ function createVocabTable(level) {
                 orderable: false,
                 searchable: false,
                 render: function () {
-                    return example_button.outerHTML
+                    return example_button.outerHTML;
                 }
             }
         ],
@@ -188,10 +188,10 @@ function textToSpeech(hiragana) {
             utter.voice = voiceToUse;
             window.speechSynthesis.speak(utter);
         } else {
-            alert("Sorry, it appears that your device doesn't support this feature...")
+            alert("Sorry, it appears that your device doesn't support this feature...");
         }
     } else {
-        alert("Sorry, it appears that your device doesn't support this feature...")
+        alert("Sorry, it appears that your device doesn't support this feature...");
     }
 }
 
@@ -203,8 +203,8 @@ function textToSpeech(hiragana) {
  */
 function getVoicesWithLangSubstring(langSubstr) {
     return speechSynthesis.getVoices().filter(function (v) {
-        return v.lang.replace('_', '-').substring(0, langSubstr.length) === langSubstr
-    })
+        return v.lang.replace('_', '-').substring(0, langSubstr.length) === langSubstr;
+    });
 }
 
 /**
@@ -223,6 +223,6 @@ function pronounciationOnClick(row_data) {
             textToSpeech(hiragana);
         });
     } else {
-        textToSpeech(hiragana)
+        textToSpeech(hiragana);
     }
 }
