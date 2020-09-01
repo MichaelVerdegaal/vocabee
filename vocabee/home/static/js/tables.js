@@ -7,13 +7,6 @@
 function createVocabTable(level) {
     let endpoint = "/vocab/source/" + level;
 
-    let audio_button = document.createElement("button");
-    audio_button.title = "Pronounce entry";
-    audio_button.className = "btn-outline-primary audio-button";
-    let audio_icon = document.createElement("i");
-    audio_icon.className = "material-icons md-30";
-    audio_icon.innerText = "volume_up";
-    audio_button.appendChild(audio_icon);
 
     let example_button = document.createElement("button");
     example_button.type = "button";
@@ -34,15 +27,6 @@ function createVocabTable(level) {
             {title: "Hiragana"},
             {title: "English"},
             {
-                title: "Audio",
-                className: "audio-column",
-                orderable: false,
-                searchable: false,
-                render: function () {
-                    return audio_button.outerHTML;
-                }
-            },
-            {
                 title: "Examples",
                 class: "example-column",
                 orderable: false,
@@ -60,9 +44,8 @@ function createVocabTable(level) {
             {width: '5%', targets: 0},
             {width: '10%', targets: 1},
             {width: '10%', targets: 2},
-            {width: '45%', targets: 3},
+            {width: '50%', targets: 3},
             {width: '5%', targets: 4},
-            {width: '5%', targets: 5},
         ],
         pageLength: 10,
         lengthMenu: [[10, 25, 50], [10, 25, 50]],
@@ -162,67 +145,4 @@ function exampleOnClick(row_data) {
 
     // Retrieving example data
     fillExampleModal(vocab_id, kanji, hiragana);
-}
-
-
-/**
- *  TTS functionality
- *
- * @param {string} hiragana - Japanese text
- *
- */
-function textToSpeech(hiragana) {
-    // Try to find Japanese voice
-    let voiceList = getVoicesWithLangSubstring("ja-JP");
-
-    // Check if we have a good voice object
-    if (Array.isArray(voiceList) && voiceList.length) {
-        let voiceToUse = voiceList[0];
-        if (typeof voiceToUse === "object") {
-            console.log(voiceToUse);
-            // Speak content
-            let utter = new SpeechSynthesisUtterance();
-            utter.rate = 0.6;
-            utter.pitch = 1;
-            utter.text = hiragana;
-            utter.voice = voiceToUse;
-            window.speechSynthesis.speak(utter);
-        } else {
-            alert("Sorry, it appears that your device doesn't support this feature...");
-        }
-    } else {
-        alert("Sorry, it appears that your device doesn't support this feature...");
-    }
-}
-
-/**
- * Retrieves all voices of a language code, or a substring of one
- *
- * @param {string} langSubstr - Language code for the voice you want to retrieve
- *
- */
-function getVoicesWithLangSubstring(langSubstr) {
-    return speechSynthesis.getVoices().filter(function (v) {
-        return v.lang.replace('_', '-').substring(0, langSubstr.length) === langSubstr;
-    });
-}
-
-/**
- * On click action for the audio button
- *
- * @param {array} row_data - Current row of the clicked button
- *
- */
-function pronounciationOnClick(row_data) {
-    // Ref: https://stackoverflow.com/questions/7864723#7864740
-    let hiragana = row_data[2].split(/<a[^>]*>([\s\S]*?)<\/a>/)[1];
-
-    // Make sure TTS voices are loaded
-    if (window.speechSynthesis.getVoices().length === 0) {
-        window.speechSynthesis.addEventListener('voiceschanged', function () {
-            textToSpeech(hiragana);
-        });
-    } else {
-        textToSpeech(hiragana);
-    }
 }

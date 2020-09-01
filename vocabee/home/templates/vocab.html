@@ -82,7 +82,6 @@
         let level = {{ level }};
 
         $(document).ready(function () {
-            window.speechSynthesis.getVoices();
             createVocabTable(level);
             $('#vocab-table').DataTable.ext.pager.numbers_length = 3;
         });
@@ -97,15 +96,6 @@
             let row_data = $('#vocab-table').DataTable().row(current_row).data();
             exampleOnClick(row_data);
             $('#vocab-modal').modal('show');
-        });
-
-        $("#vocab-table").on('click', '.audio-button', function () {
-            let current_row = $(this).parents('tr');
-            if (current_row.hasClass('child')) {
-                current_row = current_row.prev();
-            }
-            let row_data = $('#vocab-table').DataTable().row(current_row).data();
-            pronounciationOnClick(row_data)
         });
     </script>
 {% endblock %}
