@@ -164,8 +164,51 @@ function exampleOnClick(row_data) {
     fillExampleModal(vocab_id, kanji, hiragana);
 }
 
+
 /**
- * On click action for the pronounciation button
+ *  TTS functionality
+ *
+ * @param {string} hiragana - Japanese text
+ *
+ */
+function textToSpeech(hiragana) {
+    // Try to find Japanese voice
+    let voiceList = getVoicesWithLangSubstring("ja-JP");
+
+    // Check if we have a good voice object
+    if (Array.isArray(voiceList) && voiceList.length) {
+        let voiceToUse = voiceList[0];
+        if (typeof voiceToUse === "object") {
+            console.log(voiceToUse);
+            // Speak content
+            let utter = new SpeechSynthesisUtterance();
+            utter.rate = 0.6;
+            utter.pitch = 1;
+            utter.text = hiragana;
+            utter.voice = voiceToUse;
+            window.speechSynthesis.speak(utter);
+        } else {
+            alert("Sorry, it appears that your device doesn't support this feature...")
+        }
+    } else {
+        alert("Sorry, it appears that your device doesn't support this feature...")
+    }
+}
+
+/**
+ * Retrieves all voices of a language code, or a substring of one
+ *
+ * @param {string} langSubstr - Language code for the voice you want to retrieve
+ *
+ */
+function getVoicesWithLangSubstring(langSubstr) {
+    return speechSynthesis.getVoices().filter(function (v) {
+        return v.lang.replace('_', '-').substring(0, langSubstr.length) === langSubstr
+    })
+}
+
+/**
+ * On click action for the audio button
  *
  * @param {array} row_data - Current row of the clicked button
  *
@@ -177,39 +220,9 @@ function pronounciationOnClick(row_data) {
     // Make sure TTS voices are loaded
     if (window.speechSynthesis.getVoices().length === 0) {
         window.speechSynthesis.addEventListener('voiceschanged', function () {
-            textToSpeech();
+            textToSpeech(hiragana);
         });
     } else {
-        textToSpeech()
-    }
-
-    function textToSpeech() {
-        // Try to find Japanese voice
-        let voiceList = getVoicesWithLangSubstring("ja-JP");
-
-        // Check if we have a good voice object
-        if (Array.isArray(voiceList) && voiceList.length) {
-            let voiceToUse = voiceList[0];
-            if (typeof voiceToUse === "object") {
-                console.log(voiceToUse);
-                // Speak content
-                let utter = new SpeechSynthesisUtterance();
-                utter.rate = 0.6;
-                utter.pitch = 1;
-                utter.text = hiragana;
-                utter.voice = voiceToUse;
-                window.speechSynthesis.speak(utter);
-            } else {
-                alert("Sorry, it appears that your device doesn't support this feature...")
-            }
-        } else {
-            alert("Sorry, it appears that your device doesn't support this feature...")
-        }
-    }
-
-    function getVoicesWithLangSubstring(langSubstr) {
-        return speechSynthesis.getVoices().filter(function (v) {
-            return v.lang.replace('_', '-').substring(0, langSubstr.length) === langSubstr
-        })
+        textToSpeech(hiragana)
     }
 }
