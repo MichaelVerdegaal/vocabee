@@ -74,3 +74,6 @@ scripts/config.py
 
 # Ignore compiled css
 css/
+
+# Ignore generated anki decks
+*.apkg

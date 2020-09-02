@@ -1,7 +1,11 @@
+import os
+from pathlib import Path
+
 import sass
-from flask import Blueprint, render_template, abort, send_from_directory, request
+from flask import Blueprint, render_template, abort, send_from_directory, request, after_this_request, Response
 from jinja2 import TemplateNotFound
 
+from vocabee.util.anki_util import create_deck_by_level
 from vocabee.util.db_util import get_examples_by_id, get_vocab_by_level
 from vocabee.util.vocabulary_util import process_vocabulary
 
@@ -12,6 +16,12 @@ home_bp = Blueprint('home',
                     static_url_path='/home')
 
 sass.compile(dirname=('vocabee/home/static/sass', 'vocabee/home/static/css/'), output_style='compressed')
+
+
+@home_bp.route('/robots.txt')
+@home_bp.route('/sitemap.xml')
+def static_from_root():
+    return send_from_directory(home_bp.static_folder, request.path[1:])
 
 
 @home_bp.route('/')
@@ -48,12 +58,6 @@ def vocab(vocab_level):
         return render_template("vocab_index.html")
 
 
-@home_bp.route('/robots.txt')
-@home_bp.route('/sitemap.xml')
-def static_from_root():
-    return send_from_directory(home_bp.static_folder, request.path[1:])
-
-
 @home_bp.route('/vocab/source/<int:vocab_level>')
 def ajax_vocab(vocab_level):
     """
@@ -77,3 +81,20 @@ def ajax_vocab_get_examples(vocab_id):
     """
     examples = get_examples_by_id(vocab_id)
     return examples
+
+
+@home_bp.route('/vocab/anki/<int:vocab_level>')
+def get_anki_deck(vocab_level):
+    vocab = get_vocab_by_level(vocab_level)
+
+    rootdir = Path(home_bp.root_path).parents[1]
+    filename = create_deck_by_level(vocab, vocab_level)
+    path = os.path.join(rootdir, filename)
+
+    with open(path, 'rb') as f:
+        data = f.readlines()
+    os.remove(path)
+    return Response(data, headers={
+        'Content-Type': 'application/octet-stream',
+        'Content-Disposition': 'attachment; filename=%s;' % filename
+    })
