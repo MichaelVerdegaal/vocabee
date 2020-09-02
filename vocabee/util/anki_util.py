@@ -17,6 +17,7 @@ vocabulary_model = genanki.Model(
     ])
 
 
+# TODO: Add doc to all functions below
 def create_note(hiragana, english):
     return genanki.Note(model=vocabulary_model, fields=[hiragana, english])
 
