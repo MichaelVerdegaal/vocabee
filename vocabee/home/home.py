@@ -85,6 +85,11 @@ def ajax_vocab_get_examples(vocab_id):
 
 @home_bp.route('/vocab/anki/<int:vocab_level>')
 def get_anki_deck(vocab_level):
+    """
+    Creates download response for generated anki decks
+    :param vocab_level: Valid JLPT vocabulary level (1-5)
+    :return: downloaded file
+    """
     vocab = get_vocab_by_level(vocab_level)
 
     project_root = Path(home_bp.root_path).parents[1]
