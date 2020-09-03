@@ -2,11 +2,11 @@ import os
 from pathlib import Path
 
 import sass
-from flask import Blueprint, render_template, abort, send_from_directory, request, after_this_request, Response
+from flask import Blueprint, render_template, abort, send_from_directory, request, Response
 from jinja2 import TemplateNotFound
 
 from vocabee.util.anki_util import create_deck_by_level
-from vocabee.util.db_util import get_examples_by_id, get_vocab_by_level
+from vocabee.util.db_util import get_examples_by_id, get_vocab_by_level, serialize_examples
 from vocabee.util.vocabulary_util import process_vocabulary
 
 home_bp = Blueprint('home',
@@ -79,7 +79,7 @@ def ajax_vocab_get_examples(vocab_id):
     :param vocab_id: vocabulary entry id
     :return: examples in JSON
     """
-    examples = get_examples_by_id(vocab_id)
+    examples = serialize_examples(get_examples_by_id(vocab_id))
     return examples
 
 

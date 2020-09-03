@@ -56,3 +56,7 @@ class Example(db.Model, Serializer):
     sentence_jp = column(string())
     sentence_en = column(string())
     vocab_id = column(integer, foreign_key('vocabulary.id'))
+
+    # TODO: improve this tostr and do one for vocab too
+    def __str__(self):
+        return f'{self.id}: "{self.sentence_en}" - "{self.sentence_jp}"'

@@ -1,4 +1,6 @@
 import genanki
+from vocabee.util.db_util import get_examples_by_id
+import random
 
 vocabulary_model = genanki.Model(
     # ID's need to be hardcoded due to anki requirements
@@ -7,18 +9,46 @@ vocabulary_model = genanki.Model(
     fields=[
         {'name': 'Hiragana'},
         {'name': 'English'},
+        {'name': 'Example'}
     ],
     templates=[
         {
             'name': 'Card',
             'qfmt': '<h1>{{Hiragana}}</h1>',
-            'afmt': '{{FrontSide}}<hr id="answer"><h2>{{English}}</h2>',
+            'afmt': '{{FrontSide}}<hr id="answer"><h1>{{English}}</h1> <hr><h3>Example sentences</h3>{{Example}}',
         },
     ])
 
 
-def create_note(hiragana, english):
-    return genanki.Note(model=vocabulary_model, fields=[hiragana, english])
+def get_example_sample(vocab_id):
+    examples = get_examples_by_id(vocab_id)
+    example_count = len(examples)
+    example_selection = []
+
+    if example_count >= 3:
+        example_selection = random.choices(examples, k=3)
+    elif example_count == 2:
+        example_selection = random.choices(examples, k=2)
+    elif example_count == 1:
+        example_selection = random.choices(examples, k=1)
+    else:
+        pass
+    return example_selection
+
+
+def create_example_note_string(example_list):
+    note_string = ''
+    for e in example_list:
+        note_string += f'<br><strong><p>English: {e.sentence_en}</p></strong><p>Japanese: {e.sentence_jp}</p>'
+    return note_string
+
+
+def create_note(hiragana, english, vocab_id):
+    examples = get_example_sample(vocab_id)
+    example_string = ''
+    if examples:
+        example_string = create_example_note_string(examples)
+    return genanki.Note(model=vocabulary_model, fields=[hiragana, english, example_string])
 
 
 def create_deck(level):
@@ -31,7 +61,7 @@ def create_deck(level):
     deck_id = 2076601991
     my_deck = genanki.Deck(deck_id=deck_id,
                            name=f'Vocabee level {level}',
-                           description='')
+                           description='Japanese vocabulary deck from vocabee.xyz')
     return my_deck
 
 
@@ -41,7 +71,7 @@ def create_notelist(vocab_list):
     :param vocab_list: vocabulary list
     :return: list of anki notes
     """
-    return [create_note(v.hiragana, v.english) for v in vocab_list]
+    return [create_note(v.hiragana, v.english, v.id) for v in vocab_list]
 
 
 def fill_deck(notelist, deck):

@@ -31,5 +31,13 @@ def get_examples_by_id(vocab_id):
     :return: examples as an multidimensional array
     """
     examples = Example.query.filter_by(vocab_id=vocab_id).all()
-    examples = json.dumps(Example.serialize_list(examples))
     return examples
+
+
+def serialize_examples(examples):
+    """
+    Serialize example queryset to json
+    :param examples: example entries
+    :return: json
+    """
+    return json.dumps(Example.serialize_list(examples))
