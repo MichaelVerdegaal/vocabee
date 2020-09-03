@@ -49,6 +49,14 @@ class Vocabulary(db.Model, Serializer):
     english = column(string(), nullable=False)
     jlpt_level = column(string(), nullable=False)
 
+    # TODO: create an universal tostring method
+    def __str__(self):
+        return (f'ID: [{self.id}],'
+                f' Kanji: [{self.kanji}],'
+                f' Hiragana: [{self.hiragana}],'
+                f' English: [{self.english}],'
+                f' JLPT level: [{self.jlpt_level}]')
+
 
 class Example(db.Model, Serializer):
     __tablename__ = 'example'
@@ -57,6 +65,5 @@ class Example(db.Model, Serializer):
     sentence_en = column(string())
     vocab_id = column(integer, foreign_key('vocabulary.id'))
 
-    # TODO: improve this tostr and do one for vocab too
     def __str__(self):
-        return f'{self.id}: "{self.sentence_en}" - "{self.sentence_jp}"'
+        return f'ID: [{self.id}], Sentence EN: [{self.sentence_en}], Sentence JP: [{self.sentence_jp}]'

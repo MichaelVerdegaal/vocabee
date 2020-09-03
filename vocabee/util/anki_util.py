@@ -21,6 +21,11 @@ vocabulary_model = genanki.Model(
 
 
 def get_example_sample(vocab_id):
+    """
+    Retrieves examples linked to a vocabulary entry and randomly samples a few
+    :param vocab_id: vocabulary id
+    :return: a list of up to 3 examples
+    """
     examples = get_examples_by_id(vocab_id)
     example_count = len(examples)
     example_selection = []
@@ -37,6 +42,11 @@ def get_example_sample(vocab_id):
 
 
 def create_example_note_string(example_list):
+    """
+    Creates a string which is used to represent example sentences in an anki note
+    :param example_list: list of example sentences
+    :return: string
+    """
     note_string = ''
     for e in example_list:
         note_string += f'<br><strong><p>English: {e.sentence_en}</p></strong><p>Japanese: {e.sentence_jp}</p>'
@@ -44,6 +54,13 @@ def create_example_note_string(example_list):
 
 
 def create_note(hiragana, english, vocab_id):
+    """
+    Creates an anki note (card)
+    :param hiragana: hiragana text
+    :param english: english text
+    :param vocab_id: vocabulary id
+    :return: anki note
+    """
     examples = get_example_sample(vocab_id)
     example_string = ''
     if examples:
