@@ -93,13 +93,14 @@ def get_anki_deck(vocab_level):
     vocab = get_vocab_by_level(vocab_level)
 
     project_root = Path(home_bp.root_path).parents[1]
-    filename = create_deck_by_level(vocab, vocab_level)
+    filename = f'vocabee{vocab_level}.apkg'
     path = os.path.join(project_root, filename)
+    if not os.path.isfile(path):
+        create_deck_by_level(vocab, vocab_level, filename)
 
     # Ref: https://stackoverflow.com/a/57998006/7174982
     with open(path, 'rb') as f:
         data = f.readlines()
-    os.remove(path)
 
     return Response(data, headers={
         'Content-Type': 'application/octet-stream',

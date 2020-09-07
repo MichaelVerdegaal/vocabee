@@ -15,9 +15,10 @@ vocabulary_model = genanki.Model(
         {
             'name': 'Card',
             'qfmt': '<h1>{{Hiragana}}</h1>',
-            'afmt': '{{FrontSide}}<hr id="answer"><h1>{{English}}</h1> <hr><h3>Example sentences</h3>{{Example}}',
+            'afmt': '{{FrontSide}}<hr id="answer"><h1>{{English}}</h1> {{Example}}',
         },
-    ])
+    ],
+    css="h1 {text-align: center;}")
 
 
 def get_example_sample(vocab_id):
@@ -65,6 +66,7 @@ def create_note(hiragana, english, vocab_id):
     example_string = ''
     if examples:
         example_string = create_example_note_string(examples)
+        example_string = f'<hr><br><h3>Example sentences</h3>{example_string}'
     return genanki.Note(model=vocabulary_model, fields=[hiragana, english, example_string])
 
 
@@ -101,27 +103,27 @@ def fill_deck(notelist, deck):
         deck.add_note(note)
 
 
-def write_deck(deck, level):
+def write_deck(deck, filename):
     """
     TODO: See if we can find a way to change where the file is generated
     Writes an anki deck to a file at the root directory of the project
     :param deck: anki deck
-    :param level: JLPT vocabulary level
+    :param filename: filename of deck
     :return: name of the generated file
     """
-    filename = f'vocabee{level}.apkg'
     genanki.Package(deck).write_to_file(filename)
     return filename
 
 
-def create_deck_by_level(vocabulary, level):
+def create_deck_by_level(vocabulary, level, filename):
     """
     Creates and writes to an anki deck from a vocabulary list
     :param vocabulary: vocabulary list
     :param level: JLPT vocabulary level
+    :param filename: filename of deck
     :return: name of the generated file
     """
     new_deck = create_deck(level)
     notelist = create_notelist(vocabulary)
     fill_deck(notelist, new_deck)
-    return write_deck(new_deck, level)
+    write_deck(new_deck, filename)
