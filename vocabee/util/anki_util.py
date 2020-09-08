@@ -8,17 +8,18 @@ vocabulary_model = genanki.Model(
     'JP model',
     fields=[
         {'name': 'Hiragana'},
+        {'name': 'Kanji'},
         {'name': 'English'},
         {'name': 'Example'}
     ],
     templates=[
         {
             'name': 'Card',
-            'qfmt': '<h1>{{Hiragana}}</h1>',
-            'afmt': '{{FrontSide}}<hr id="answer"><h1>{{English}}</h1> {{Example}}',
+            'qfmt': '<h1>{{Hiragana}}{{Kanji}}</h1>',
+            'afmt': '{{FrontSide}}<hr id="answer"><h2>{{English}}</h2> {{Example}}',
         },
     ],
-    css="h1 {text-align: center;}")
+    css="h1, h2, h3, h4, h5, h6, p {text-align: center;}")
 
 
 def get_example_sample(vocab_id):
@@ -50,24 +51,30 @@ def create_example_note_string(example_list):
     """
     note_string = ''
     for e in example_list:
-        note_string += f'<br><strong><p>English: {e.sentence_en}</p></strong><p>Japanese: {e.sentence_jp}</p>'
+        note_string += f'<br> <strong><h3>Japanese: {e.sentence_jp}</h3></strong> <h3>English: {e.sentence_en}</h3>'
     return note_string
 
 
-def create_note(hiragana, english, vocab_id):
+def create_note(hiragana, kanji, english, vocab_id):
     """
     Creates an anki note (card)
     :param hiragana: hiragana text
+    :param kanji: kanji text
     :param english: english text
     :param vocab_id: vocabulary id
     :return: anki note
     """
     examples = get_example_sample(vocab_id)
     example_string = ''
+    if kanji:
+        kanji = f"/{kanji}"
+    else:
+        kanji = ""
+
     if examples:
         example_string = create_example_note_string(examples)
-        example_string = f'<hr><br><h3>Example sentences</h3>{example_string}'
-    return genanki.Note(model=vocabulary_model, fields=[hiragana, english, example_string])
+        example_string = f'<hr><br><h2>Example usage</h2>{example_string}'
+    return genanki.Note(model=vocabulary_model, fields=[hiragana, kanji, english, example_string])
 
 
 def create_deck(level):
@@ -80,7 +87,7 @@ def create_deck(level):
     deck_id = 2076601991
     my_deck = genanki.Deck(deck_id=deck_id,
                            name=f'Vocabee level {level}',
-                           description='Japanese vocabulary deck from vocabee.xyz')
+                           description='<h4 style="text-align: center">Japanese vocabulary deck from vocabee.xyz</h4>')
     return my_deck
 
 
@@ -90,7 +97,7 @@ def create_notelist(vocab_list):
     :param vocab_list: vocabulary list
     :return: list of anki notes
     """
-    return [create_note(v.hiragana, v.english, v.id) for v in vocab_list]
+    return [create_note(v.hiragana, v.kanji, v.english, v.id) for v in vocab_list]
 
 
 def fill_deck(notelist, deck):
