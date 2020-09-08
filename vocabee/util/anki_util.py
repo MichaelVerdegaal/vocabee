@@ -1,6 +1,6 @@
 import genanki
-from vocabee.util.db_util import get_examples_by_id
-import random
+
+from vocabee.util.db_util import get_example_sample
 
 vocabulary_model = genanki.Model(
     # ID's need to be hardcoded due to anki requirements
@@ -22,27 +22,6 @@ vocabulary_model = genanki.Model(
     css="h1, h2, h3, h4, h5, h6, p {text-align: center;}")
 
 
-def get_example_sample(vocab_id):
-    """
-    Retrieves examples linked to a vocabulary entry and randomly samples a few
-    :param vocab_id: vocabulary id
-    :return: a list of up to 3 examples
-    """
-    examples = get_examples_by_id(vocab_id)
-    example_count = len(examples)
-    example_selection = []
-
-    if example_count >= 3:
-        example_selection = random.choices(examples, k=3)
-    elif example_count == 2:
-        example_selection = random.choices(examples, k=2)
-    elif example_count == 1:
-        example_selection = random.choices(examples, k=1)
-    else:
-        pass
-    return example_selection
-
-
 def create_example_note_string(example_list):
     """
     Creates a string which is used to represent example sentences in an anki note
@@ -51,7 +30,7 @@ def create_example_note_string(example_list):
     """
     note_string = ''
     for e in example_list:
-        note_string += f'<br> <strong><h3>Japanese: {e.sentence_jp}</h3></strong> <h3>English: {e.sentence_en}</h3>'
+        note_string += f'<br> <strong><h3>Japanese: {e[0]}</h3></strong> <h3>English: {e[1]}</h3>'
     return note_string
 
 
@@ -66,14 +45,14 @@ def create_note(hiragana, kanji, english, vocab_id):
     """
     examples = get_example_sample(vocab_id)
     example_string = ''
+    if examples:
+        example_string = create_example_note_string(examples)
+        example_string = f'<hr><br><h2>Example usage</h2>{example_string}'
+
     if kanji:
         kanji = f"/{kanji}"
     else:
         kanji = ""
-
-    if examples:
-        example_string = create_example_note_string(examples)
-        example_string = f'<hr><br><h2>Example usage</h2>{example_string}'
     return genanki.Note(model=vocabulary_model, fields=[hiragana, kanji, english, example_string])
 
 
@@ -106,8 +85,7 @@ def fill_deck(notelist, deck):
     :param notelist: list of anki notes
     :param deck: anki deck
     """
-    for note in notelist:
-        deck.add_note(note)
+    deck.notes = notelist
 
 
 def write_deck(deck, filename):

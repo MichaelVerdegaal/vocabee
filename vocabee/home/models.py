@@ -6,6 +6,7 @@ column = db.Column
 string = db.String
 integer = db.Integer
 foreign_key = db.ForeignKey
+model = db.Model
 
 
 class Serializer(object):
@@ -41,7 +42,7 @@ class Serializer(object):
             return [model.serialize() for model in model_list]
 
 
-class Vocabulary(db.Model, Serializer):
+class Vocabulary(model, Serializer):
     __tablename__ = 'vocabulary'
     id = column(integer, primary_key=True)
     kanji = column(string(), nullable=True)
@@ -58,7 +59,7 @@ class Vocabulary(db.Model, Serializer):
                 f' JLPT level: [{self.jlpt_level}]')
 
 
-class Example(db.Model, Serializer):
+class Example(model, Serializer):
     __tablename__ = 'example'
     id = column(integer, primary_key=True)
     sentence_jp = column(string())
