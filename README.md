@@ -1,6 +1,6 @@
 # VocaBee
  
-This is the home repository of the website code of VocaBee. VocaBee is a Japanese language vocabulary tool, meant to provide a modern solution to learning vocabulary for newer students.
+This is the home repository of the website code of VocaBee. VocaBee is a Japanese language vocabulary tool, meant to provide a modern solution to learning vocabulary for newer students. See the website at [vocabee.xyz](https://www.vocabee.xyz)!
 
 # Technology stack
 
