@@ -4,7 +4,6 @@
 {% block container %}
     <title>JLPT vocabulary - VocaBee</title>
     <!--Stylesheets -->
-    <link href="{{ url_for('home.static', filename='css/pages/vocab_index.css') }}" rel="stylesheet">
     <link href="{{ url_for('home.static', filename='css/components/cards.css') }}" rel="stylesheet">
 
     <div class="container-fluid text-container">
@@ -31,7 +30,7 @@
                             {% elif i + 1 == 1 %}
                                 <p class="card-text">Near-native</p>
                             {% endif %}
-                            <a href="{{ url_for('home.vocab', vocab_level=i + 1) }}" class="btn btn-primary index-btn"
+                            <a href="{{ url_for('home.vocab', vocab_level=i + 1) }}" class="btn btn-primary newpage-btn"
                                title="JLPT N{{ i + 1 }} vocabulary">Go</a>
                         </div>
                     </div>
