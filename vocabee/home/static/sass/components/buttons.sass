@@ -1,36 +1,30 @@
 @import '../abstract/variables'
 
+// This sass file contains button styling for buttons used in multiple places
+
+// Remove box-shadow from every button
 button:hover:focus, button:active:focus, button:focus
   box-shadow: none !important
 
-.newpage-btn, .newpage-btn:focus
-  border-color: $mainorange
-  box-shadow: none
-  background-color: $mainorange
-  color: $mainwhite
+// Generic button that does something on click
+.action-btn, .action-btn:focus,
+.dropdown-toggle, .dropdown-toggle:focus
+  border-color: $mainorange !important
+  box-shadow: none !important
+  background-color: $mainorange !important
+  color: $mainwhite !important
 
   &:hover, &:active
-    background-color: $secondaryorange
-    border-color: $secondaryorange
+    background-color: $secondaryorange !important
+    border-color: $secondaryorange !important
 
-.newpage-btn.disabled, .newpage-btn.disabled:focus
-  border-color: $maingray
-  box-shadow: none
-  background-color: $maingray
-  color: $mainwhite
-
-  &:hover, &:active
-    background-color: $maingray
-    border-color: $maingray
-
-
-#deck-content-container > div > div > div > div.card-body > div > .dropdown-toggle,
-#deck-content-container > div > div > div > div.card-body > div > .dropdown-toggle:focus
-  border-color: $mainorange
-  box-shadow: none
-  background-color: $mainorange
-  color: $mainwhite
+// Same as generic button, but action disabled
+.action-btn.disabled, .action-btn.disabled:focus
+  border-color: $maingray !important
+  box-shadow: none !important
+  background-color: $maingray !important
+  color: $mainwhite !important
 
   &:hover, &:active
-    background-color: $secondaryorange
-    border-color: $secondaryorange
+    background-color: $maingray !important
+    border-color: $maingray !important
