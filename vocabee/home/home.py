@@ -106,3 +106,15 @@ def get_anki_deck(vocab_level):
         'Content-Type': 'application/octet-stream',
         'Content-Disposition': 'attachment; filename=%s;' % filename
     })
+
+
+@home_bp.route('/deck')
+def deck():
+    """
+    Renders the Anki deck page
+    :return: Webpage
+    """
+    try:
+        return render_template("deck.html")
+    except TemplateNotFound:
+        abort(404)

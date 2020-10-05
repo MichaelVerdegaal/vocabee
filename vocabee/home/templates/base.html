@@ -13,6 +13,9 @@
     <!--Ref: https://getbootstrap.com/docs/4.4/getting-started/download/ -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
     <!--Ref: https://fonts.google.com/specimen/Open+Sans-->
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,700;1,400&display=swap"
           rel="stylesheet">
@@ -37,7 +40,6 @@
             gtag('js', new Date());
             gtag('config', '{{ GA_TRACKING_ID }}');
         }
-
     </script>
 
 </head>
@@ -46,7 +48,8 @@
 <!--start navbar-->
 {% set navigation_bar = [
     ('/', 'home', 'Home'),
-    ('/vocab', 'vocab', 'Vocabulary')
+    ('/vocab', 'vocab', 'Vocabulary'),
+    ('/deck', 'deck', 'Flashcards')
     ] -%}
 
 {% set active_page = active_page|default('index') -%}

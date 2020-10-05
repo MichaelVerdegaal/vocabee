@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% set active_page = "deck" %}
+
+{% block container %}
+    <title>Anki decks - VocaBee</title>
+    <!--Stylesheets -->
+    <link href="{{ url_for('home.static', filename='css/components/cards.css') }}" rel="stylesheet">
+
+    <div class="container-fluid text-container">
+        <h1>VocaBee flashcard decks</h1>
+        <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+    </div>
+
+    <div class="container-fluid" id="deck-content-container">
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl">
+                <div class="card text-center">
+                    <div class="card-header"><h5 class="card-title">N</h5></div>
+                    <div class="card-body">
+                        <div class="btn-group">
+                            <a class="btn btn-primary newpage-btn dropdown-toggle" data-toggle="dropdown" href="#">Select a Country
+                                <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li class="dropdown-item"><a href="#">Item I</a></li>
+                                <li class="dropdown-item"><a href="#">Item II</a></li>
+                                <li class="dropdown-item"><a href="#">Item III</a></li>
+                                <li class="dropdown-item"><a href="#">Item IV</a></li>
+                                <li class="dropdown-item"><a href="#">Item V</a></li>
+                                <li class="dropdown-item"><a href="#">Other</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(".dropdown-menu li a").click(function () {
+            let selection = $(this).text();
+            $(this).parents('.btn-group').find('.dropdown-toggle').html(selection + ' <span class="caret"></span>');
+        });
+    </script>
+{% endblock %}
