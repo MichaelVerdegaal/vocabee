@@ -8,27 +8,31 @@
 
     <div class="container-fluid text-container">
         <h1>VocaBee flashcard decks</h1>
-        <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+        <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+            ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+            nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit
+            anim id est laborum."</p>
     </div>
 
     <div class="container-fluid" id="deck-content-container">
         <div class="row">
             <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl">
                 <div class="card text-center">
-                    <div class="card-header"><h5 class="card-title">N</h5></div>
+                    <div class="card-header"><h5 class="card-title">Select your desired level</h5></div>
                     <div class="card-body">
-                        <div class="btn-group">
-                            <a class="btn btn-primary action-btn dropdown-toggle" data-toggle="dropdown" href="#">Select a Country
-                                <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li class="dropdown-item"><a href="#">Item I</a></li>
-                                <li class="dropdown-item"><a href="#">Item II</a></li>
-                                <li class="dropdown-item"><a href="#">Item III</a></li>
-                                <li class="dropdown-item"><a href="#">Item IV</a></li>
-                                <li class="dropdown-item"><a href="#">Item V</a></li>
-                                <li class="dropdown-item"><a href="#">Other</a></li>
-                            </ul>
+                        <div class="form-group">
+                            <label for="levelSelect"></label>
+                            <select class="form-control" id="levelSelect">
+                                <option>JLPT N5</option>
+                                <option>JLPT N4</option>
+                                <option>JLPT N3</option>
+                                <option>JLPT N2</option>
+                                <option>JLPT N1</option>
+                            </select>
                         </div>
+                        <a class="btn btn-primary action-btn" title="Download deck" id="deckDownloadBtn"
+                           href="{{ url_for('home.get_anki_deck', vocab_level=5) }}" download>Download</a>
                     </div>
                 </div>
             </div>
@@ -36,9 +40,14 @@
     </div>
 
     <script>
-        $(".dropdown-menu li a").click(function () {
-            let selection = $(this).text();
-            $(this).parents('.btn-group').find('.dropdown-toggle').html(selection + ' <span class="caret"></span>');
+        let urlBase = "{{ url_for('home.get_anki_deck', vocab_level=5) }}";
+
+        $("#levelSelect").click(function () {
+            let selection = this.value;
+            let selectionLevel = selection.slice(-1);
+            let newUrl = urlBase.slice(0, -1) + selectionLevel;
+            console.log(newUrl);
+            $("deckDownloadBtn").href = newUrl;
         });
     </script>
 {% endblock %}
