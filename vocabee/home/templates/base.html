@@ -55,11 +55,10 @@
 {% set active_page = active_page|default('index') -%}
 
 <nav class="navbar navbar-dark navbar-expand-md fixed-top">
-    <div id="container-fluid navbar-container">
         <a class="navbar-brand" href="/" title="VocaBee homepage">
             <img src="{{ url_for('home.static', filename='images/brand-logo.png') }}" alt="VocaBee logo" height="35px">
         </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-navbar"
+        <button class="navbar-toggler ml-auto float-xs-right" type="button" data-toggle="collapse" data-target="#main-navbar"
                 aria-controls="main-navbar" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -73,7 +72,6 @@
                 {% endfor %}
             </ul>
         </div>
-    </div>
 </nav>
 <!--end navbar-->
 
