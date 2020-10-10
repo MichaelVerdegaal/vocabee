@@ -21,18 +21,23 @@
                 <div class="card text-center">
                     <div class="card-header"><h5 class="card-title">Select your desired level</h5></div>
                     <div class="card-body">
-                        <div class="form-group">
-                            <label for="levelSelect"></label>
-                            <select class="form-control" id="levelSelect">
-                                <option>JLPT N5</option>
-                                <option>JLPT N4</option>
-                                <option>JLPT N3</option>
-                                <option>JLPT N2</option>
-                                <option>JLPT N1</option>
-                            </select>
+                        <div class="form-row">
+                            <div class="input-group">
+                                <label for="levelSelect"></label>
+                                <select class="custom-select" id="levelSelect">
+                                    <option value="5">JLPT N5</option>
+                                    <option value="4">JLPT N4</option>
+                                    <option value="3">JLPT N3</option>
+                                    <option value="2">JLPT N2</option>
+                                    <option value="1">JLPT N1</option>
+                                </select>
+                                <div class="input-group-append">
+                                    <a class="btn btn-primary action-btn" title="Download deck"
+                                       id="deckDownloadBtn"
+                                       download>Download</a>
+                                </div>
+                            </div>
                         </div>
-                        <a class="btn btn-primary action-btn" title="Download deck" id="deckDownloadBtn"
-                           download>Download</a>
                     </div>
                 </div>
             </div>
@@ -46,8 +51,7 @@
         downloadBtn.href = urlBase;
 
         $("#levelSelect").click(function () {
-            let selection = this.value;
-            let selectionLevel = selection.slice(-1);
+            let selectionLevel = this.value;
             downloadBtn.href = urlBase.slice(0, -1) + selectionLevel;
         });
     </script>
