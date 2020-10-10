@@ -8,8 +8,9 @@
 
     <div class="container-fluid text-container">
         <h1>Select your level</h1>
-        <p>The JLPT is divided into five levels, 5 being the easiest, and 1 being the hardest. To go to a specific
-            level, click on the relevant button for each card.</p>
+        <p>Our vocabulary lists are split up into five levels, following the format of the popular JLPT exam.
+            5 being the easiest, and 1 being the hardest. To go to a specific level, click on the relevant button for
+            each card.</p>
     </div>
 
     <div class="container-fluid" id="vocab-index-table-container">
@@ -17,7 +18,7 @@
             {% for i in range(5)|reverse %}
                 <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl">
                     <div class="card text-center">
-                      <div class="card-header"><h5 class="card-title">N{{ i + 1 }}</h5></div>
+                        <div class="card-header"><h5 class="card-title">N{{ i + 1 }}</h5></div>
                         <div class="card-body">
                             {% if i + 1 == 5 %}
                                 <p class="card-text">Newbie</p>
