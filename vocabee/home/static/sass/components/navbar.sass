@@ -1,32 +1,38 @@
 @import '../abstract/variables'
 
+.nav li
+  display: inline !important
+
 
 .navbar
   background-color: $secondaryblack
   padding-top: 3px
   padding-bottom: 3px
-  padding-left: 15px
+  padding-left: 10%
+
+  #navbar-container
+    max-width: 80%
 
   .navbar-toggler:focus
     outline: none
     box-shadow: none
 
-  #main-navbar
-    margin-top: -1px
+  #main-navbar #navigation
+    margin-top: 0 !important
 
-    #navigation
-      margin-top: 0
+    .nav-item.nav-link
+      color: $mainwhite
+      padding-top: 5px
 
-      > li > .nav-link
-        color: $mainwhite
-        padding-top: 5px
-
-        &:hover
-          color: $secondarywhite
+      &:hover
+        color: $secondarywhite
 
 
 @media (min-width: $navbar-breakpoint)
-  .navbar-expand-lg .navbar-nav .nav-link
+  .navbar #main-navbar
+    display: inline-flex !important
+
+  .navbar-expand-md .navbar-nav .nav-link
     padding-right: 0
     padding-left: 0
     margin-right: .5rem
