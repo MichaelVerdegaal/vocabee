@@ -1,4 +1,5 @@
 User-agent: *
 Disallow: /vocab/source/
 Disallow: /vocab/example/
+Disallow: /vocab/anki/
 Sitemap: https://vocabee.xyz/sitemap.xml
