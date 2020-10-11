@@ -52,7 +52,7 @@
         let downloadBtn = $("#deckDownloadBtn")[0];
         downloadBtn.href = urlBase;
 
-        $("#levelSelect").click(function () {
+        $("#levelSelect").change(function () {
             let selectionLevel = this.value;
             downloadBtn.href = urlBase.slice(0, -1) + selectionLevel;
         });
