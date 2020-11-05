@@ -4,7 +4,7 @@
 {% block container %}
     <title>Home - VocaBee</title>
     <div class="container-fluid text-container">
-        <div class="jumbotron">
+        <div class="jumbotron jumbo-orange">
             <h2>Learn Japanese right from the convenience of your computer</h2>
             <p class="lead">Stop struggling. Instead of grinding it out with a thick and boring vocabulary book,
                 why not make it a little easier on yourself? Make use of our convenient features and instantly boost
@@ -29,8 +29,8 @@
                 <div class="card text-center">
                     <div class="card-header"><h5 class="card-title">Dynamically generated Flashcards</h5></div>
                     <div class="card-body">
-                        <p>Flashcards are at the epitome of reliable memorization techniques, having existed for more
-                            than a century. Obviously we couldn't leave these out, and we feature these in the form of
+                        <p>As long as you're willing to put the time in, flashcards are guaranteed to steadily get you
+                            where you want. Obviously we couldn't leave these out, and we feature these in the form of
                             the ever popular Anki decks!</p>
                         <a href="{{ url_for('home.deck') }}" class="btn btn-primary action-btn"
                            title="Vocabulary browser">Learn more</a>
@@ -64,7 +64,7 @@
                     </div>
                 </div>
             </div>
-            
+
         </div>
     </div>
 {% endblock %}
