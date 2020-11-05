@@ -18,19 +18,17 @@ home_bp = Blueprint('home',
 sass.compile(dirname=('vocabee/home/static/sass', 'vocabee/home/static/css/'), output_style='compressed')
 
 
-@home_bp.route('/robots.txt')
-@home_bp.route('/sitemap.xml')
-def static_from_root():
-    return send_from_directory(home_bp.static_folder, request.path[1:])
-
-
+# Template routes
 @home_bp.route('/')
 def home():
     """
     Renders the home page
     :return: Webpage
     """
-    return render_template("home.html")
+    try:
+        return render_template("home.html")
+    except TemplateNotFound:
+        abort(404)
 
 
 @home_bp.route('/vocab')
@@ -53,11 +51,42 @@ def vocab(vocab_level):
     :return: Webpage
     """
     if 0 < vocab_level < 6:
-        return render_template("vocab.html", level=vocab_level)
+        try:
+            return render_template("vocab.html", level=vocab_level)
+        except TemplateNotFound:
+            abort(404)
     else:
-        return render_template("vocab_index.html")
+        try:
+            return render_template("vocab_index.html")
+        except TemplateNotFound:
+            abort(404)
 
 
+@home_bp.route('/deck')
+def deck():
+    """
+    Renders the Anki deck page
+    :return: Webpage
+    """
+    try:
+        return render_template("deck.html")
+    except TemplateNotFound:
+        abort(404)
+
+
+@home_bp.route('/about')
+def about():
+    """
+    Renders the about page
+    :return: Webpage
+    """
+    try:
+        return render_template("about.html")
+    except TemplateNotFound:
+        abort(404)
+
+
+# AJAX and download routes
 @home_bp.route('/vocab/source/<int:vocab_level>')
 def ajax_vocab(vocab_level):
     """
@@ -108,13 +137,8 @@ def get_anki_deck(vocab_level):
     })
 
 
-@home_bp.route('/deck')
-def deck():
-    """
-    Renders the Anki deck page
-    :return: Webpage
-    """
-    try:
-        return render_template("deck.html")
-    except TemplateNotFound:
-        abort(404)
+# Miscellaneous routes
+@home_bp.route('/robots.txt')
+@home_bp.route('/sitemap.xml')
+def static_from_root():
+    return send_from_directory(home_bp.static_folder, request.path[1:])
