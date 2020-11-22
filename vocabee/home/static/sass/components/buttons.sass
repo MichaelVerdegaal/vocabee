@@ -18,6 +18,17 @@ button:hover:focus, button:active:focus, button:focus
     background-color: $secondaryorange !important
     border-color: $secondaryorange !important
 
+// Same as generic button, but for dark backgrounds
+.action-btn-dark, .action-btn-dark:focus
+  border-color: $maingreen !important
+  box-shadow: none !important
+  background-color: $maingreen !important
+  color: $mainwhite !important
+
+  &:hover, &:active
+    background-color: $secondarygreen !important
+    border-color: $secondarygreen !important
+
 // Same as generic button, but action disabled
 .action-btn.disabled, .action-btn.disabled:focus
   border-color: $maingray !important
