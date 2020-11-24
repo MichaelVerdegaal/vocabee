@@ -3,7 +3,6 @@ import json
 from flask_sqlalchemy_caching import FromCache
 
 from vocabee import cache
-from vocabee import db
 from vocabee.home.models import Vocabulary, Example
 
 
@@ -12,7 +11,7 @@ def get_all_vocab():
     Fetches all vocabulary entries from the database
     :return: vocabulary
     """
-    return Vocabulary.query.all()
+    return Vocabulary.query.options(FromCache(cache)).all()
 
 
 def get_vocab_by_level(jlpt_level):
@@ -31,7 +30,7 @@ def get_examples_by_id(vocab_id):
     :param vocab_id: vocabulary entry id
     :return: examples as an multidimensional array
     """
-    examples = Example.query.filter_by(vocab_id=vocab_id).all()
+    examples = Example.query.options(FromCache(cache)).filter_by(vocab_id=vocab_id).all()
     return examples
 
 
@@ -50,5 +49,10 @@ def get_example_sample(vocab_id):
     :param vocab_id: vocabulary id
     :return: a list of up to 3 examples
     """
-    examples = db.engine.execute(f"SELECT sentence_jp, sentence_en FROM example WHERE example.vocab_id = {vocab_id} LIMIT 3")
-    return examples.fetchall()
+    examples = (Example.query
+                .options(FromCache(cache))
+                .with_entities(Example.sentence_jp, Example.sentence_en)
+                .filter_by(vocab_id=vocab_id)
+                .limit(3)
+                .all())
+    return examples
