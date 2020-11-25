@@ -6,14 +6,6 @@ from vocabee import cache
 from vocabee.home.models import Vocabulary, Example
 
 
-def get_all_vocab():
-    """
-    Fetches all vocabulary entries from the database
-    :return: vocabulary
-    """
-    return Vocabulary.query.options(FromCache(cache)).all()
-
-
 def get_vocab_by_level(jlpt_level):
     """
     Fetches vocabulary entries by JLPT level
