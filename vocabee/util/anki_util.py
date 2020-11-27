@@ -1,6 +1,7 @@
 import genanki
-
-from vocabee.util.db_util import get_example_sample
+import time
+import datetime
+from vocabee.util.queries import get_example_sample
 
 vocabulary_model = genanki.Model(
     # ID's need to be hardcoded due to anki requirements
@@ -34,7 +35,7 @@ def create_example_note_string(example_list):
     return note_string
 
 
-def create_note(hiragana, kanji, english, vocab_id):
+def create_note(level, hiragana, kanji, english, vocab_id):
     """
     Creates an anki note (card)
     :param hiragana: hiragana text
@@ -43,7 +44,8 @@ def create_note(hiragana, kanji, english, vocab_id):
     :param vocab_id: vocabulary id
     :return: anki note
     """
-    examples = get_example_sample(vocab_id)
+    examples = get_example_sample(level, vocab_id)
+    print(f"{datetime.datetime.now()} DEBUG: Time after retrieval")
     example_string = ''
     if examples:
         example_string = create_example_note_string(examples)
@@ -70,21 +72,13 @@ def create_deck(level):
     return my_deck
 
 
-def create_notelist(vocab_list):
+def fill_deck(level, vocab_list, deck):
     """
-    Creates a list of notes based on a vocabulary list
+    Creates a notelist and add it to the deck
     :param vocab_list: vocabulary list
-    :return: list of anki notes
-    """
-    return [create_note(v.hiragana, v.kanji, v.english, v.id) for v in vocab_list]
-
-
-def fill_deck(notelist, deck):
-    """
-    Adds a list of notes to a deck
-    :param notelist: list of anki notes
     :param deck: anki deck
     """
+    notelist = [create_note(level, v.hiragana, v.kanji, v.english, v.id) for v in vocab_list]
     deck.notes = notelist
 
 
@@ -108,7 +102,9 @@ def create_deck_by_level(vocabulary, level, filename):
     :param filename: filename of deck
     :return: name of the generated file
     """
+    start_time = time.time()
+    print(f"Starting deck creation of level {level}")
     new_deck = create_deck(level)
-    notelist = create_notelist(vocabulary)
-    fill_deck(notelist, new_deck)
+    fill_deck(level, vocabulary, new_deck)
+    print(f"Deck took {(time.time() - start_time)} seconds to create")
     write_deck(new_deck, filename)

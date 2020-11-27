@@ -1,12 +1,12 @@
+from sqlalchemy import Column, String, Integer, ForeignKey
 from sqlalchemy.inspection import inspect
 
-from vocabee import db
+from vocabee.db_util import Base
 
-column = db.Column
-string = db.String
-integer = db.Integer
-foreign_key = db.ForeignKey
-model = db.Model
+column = Column
+string = String
+integer = Integer
+foreign_key = ForeignKey
 
 
 class Serializer(object):
@@ -42,7 +42,7 @@ class Serializer(object):
             return [model.serialize() for model in model_list]
 
 
-class Vocabulary(model, Serializer):
+class Vocabulary(Base, Serializer):
     __tablename__ = 'vocabulary'
     id = column(integer, primary_key=True)
     kanji = column(string(), nullable=True)
@@ -59,7 +59,7 @@ class Vocabulary(model, Serializer):
                 f' JLPT level: [{self.jlpt_level}]')
 
 
-class Example(model, Serializer):
+class Example(Base, Serializer):
     __tablename__ = 'example'
     id = column(integer, primary_key=True)
     sentence_jp = column(string())

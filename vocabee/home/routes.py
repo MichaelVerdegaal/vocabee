@@ -6,7 +6,8 @@ from flask import Blueprint, render_template, abort, send_from_directory, reques
 from jinja2 import TemplateNotFound
 
 from vocabee.util.anki_util import create_deck_by_level
-from vocabee.util.db_util import get_examples_by_id, get_vocab_by_level, serialize_examples
+from vocabee.util.queries import get_vocab_by_level, get_examples_by_id, serialize_examples, \
+    call_create_temp_example_samples
 from vocabee.util.vocabulary_util import process_vocabulary
 
 home_bp = Blueprint('home',
@@ -120,9 +121,10 @@ def get_anki_deck(vocab_level):
     :return: downloaded file
     """
     vocab = get_vocab_by_level(vocab_level)
-
+    call_create_temp_example_samples(vocab_level)
     project_root = Path(home_bp.root_path).parents[1]
     filename = f'vocabee{vocab_level}.apkg'
+
     path = os.path.join(project_root, filename)
     if not os.path.isfile(path):
         create_deck_by_level(vocab, vocab_level, filename)
