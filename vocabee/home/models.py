@@ -1,5 +1,6 @@
 from sqlalchemy import Column, String, Integer, ForeignKey
 from sqlalchemy.inspection import inspect
+from sqlalchemy.orm import relationship
 
 from vocabee.db_util import Base
 
@@ -49,6 +50,7 @@ class Vocabulary(Base, Serializer):
     hiragana = column(string(), nullable=False)
     english = column(string(), nullable=False)
     jlpt_level = column(string(), nullable=False)
+    examples = relationship("Example", backref="vocabulary", lazy="joined")
 
     # TODO: create an universal tostring method
     def __str__(self):

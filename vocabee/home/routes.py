@@ -121,7 +121,6 @@ def get_anki_deck(vocab_level):
     :return: downloaded file
     """
     vocab = get_vocab_by_level(vocab_level)
-    call_create_temp_example_samples(vocab_level)
     project_root = Path(home_bp.root_path).parents[1]
     filename = f'vocabee{vocab_level}.apkg'
 

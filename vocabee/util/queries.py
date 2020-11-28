@@ -40,10 +40,8 @@ def get_example_sample(vocab_level, vocab_id):
     :param vocab_id: vocabulary id
     :return: a list of up to 3 examples
     """
-    examples = app.session.execute(f"SELECT sentence_jp, sentence_en "
-                                   f"FROM example_sample_lvl_{vocab_level} "
-                                   f"WHERE vocab_id = {vocab_id}")
-    return examples.fetchall()
+    examples = Example.query.filter_by(vocab_id=vocab_id).all()
+    return examples
 
 
 def call_create_temp_example_samples(vocab_level):

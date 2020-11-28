@@ -31,11 +31,11 @@ def create_example_note_string(example_list):
     """
     note_string = ''
     for e in example_list:
-        note_string += f'<br> <strong><h3>Japanese: {e[0]}</h3></strong> <h3>English: {e[1]}</h3>'
+        note_string += f'<br> <strong><h3>Japanese: {e.sentence_jp}</h3></strong> <h3>English: {e.sentence_en}</h3>'
     return note_string
 
 
-def create_note(level, hiragana, kanji, english, vocab_id):
+def create_note(example_list, hiragana, kanji, english, vocab_id):
     """
     Creates an anki note (card)
     :param hiragana: hiragana text
@@ -44,7 +44,7 @@ def create_note(level, hiragana, kanji, english, vocab_id):
     :param vocab_id: vocabulary id
     :return: anki note
     """
-    examples = get_example_sample(level, vocab_id)
+    examples = example_list[:3]
     print(f"{datetime.datetime.now()} DEBUG: Time after retrieval")
     example_string = ''
     if examples:
@@ -78,7 +78,7 @@ def fill_deck(level, vocab_list, deck):
     :param vocab_list: vocabulary list
     :param deck: anki deck
     """
-    notelist = [create_note(level, v.hiragana, v.kanji, v.english, v.id) for v in vocab_list]
+    notelist = [create_note(v.examples, v.hiragana, v.kanji, v.english, v.id) for v in vocab_list]
     deck.notes = notelist
 
 
