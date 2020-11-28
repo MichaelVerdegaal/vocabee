@@ -34,16 +34,6 @@ def serialize_examples(examples):
     return json.dumps(Example.serialize_list(examples))
 
 
-def get_example_sample(vocab_level, vocab_id):
-    """
-    Retrieves examples linked to a vocabulary entry and randomly samples a few
-    :param vocab_id: vocabulary id
-    :return: a list of up to 3 examples
-    """
-    examples = Example.query.filter_by(vocab_id=vocab_id).all()
-    return examples
-
-
 def call_create_temp_example_samples(vocab_level):
     app.session.execute(f"CALL create_temp_example_samples('example_sample_lvl_{vocab_level}', 'N{vocab_level}')")
     app.session.commit()

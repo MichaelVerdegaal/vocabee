@@ -1,7 +1,6 @@
 import genanki
 import time
 import datetime
-from vocabee.util.queries import get_example_sample
 
 vocabulary_model = genanki.Model(
     # ID's need to be hardcoded due to anki requirements
