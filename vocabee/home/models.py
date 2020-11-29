@@ -1,16 +1,16 @@
 from sqlalchemy import Column, String, Integer, ForeignKey
 from sqlalchemy_serializer import SerializerMixin
 from sqlalchemy.orm import relationship
-
-from vocabee.db_util import Base
+from vocabee import db
 
 column = Column
 string = String
 integer = Integer
 foreign_key = ForeignKey
+model = db.Model
 
 
-class Vocabulary(Base, SerializerMixin):
+class Vocabulary(model, SerializerMixin):
     __tablename__ = 'vocabulary'
     serialize_rules = ('-examples.vocabulary',)
 
@@ -30,7 +30,7 @@ class Vocabulary(Base, SerializerMixin):
                 f' JLPT level: [{self.jlpt_level}]')
 
 
-class Example(Base, SerializerMixin):
+class Example(model, SerializerMixin):
     __tablename__ = 'example'
     id = column(integer, primary_key=True)
     sentence_jp = column(string())
