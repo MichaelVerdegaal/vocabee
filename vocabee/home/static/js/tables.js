@@ -7,7 +7,6 @@
 function createVocabTable(level) {
     let endpoint = "/vocab/source/" + level;
 
-
     let example_button = document.createElement("button");
     example_button.type = "button";
     example_button.title = "Show examples";
@@ -27,6 +26,12 @@ function createVocabTable(level) {
             {title: "Hiragana"},
             {title: "English"},
             {
+                title: "example_data",
+                orderable: false,
+                searchable: false,
+                visible: false
+            },
+            {
                 title: "Examples",
                 class: "example-column",
                 orderable: false,
@@ -45,7 +50,8 @@ function createVocabTable(level) {
             {width: '10%', targets: 1},
             {width: '10%', targets: 2},
             {width: '50%', targets: 3},
-            {width: '5%', targets: 4},
+            {width: '0%', targets: 3},
+            {width: '5%', targets: 5},
         ],
         pageLength: 10,
         lengthMenu: [[10, 25, 50], [10, 25, 50]],
@@ -69,18 +75,11 @@ function createVocabTable(level) {
 /**
  * Generate and fill a datatable with example data
  *
- * @param {string} vocab_id - ID of vocabulary entry related to examples
- *
+* @param {Array} examples - List of example sentences
  */
-function createExampleTable(vocab_id) {
-    let endpoint = "/vocab/example/" + vocab_id;
+function createExampleTable(examples) {
     $("#example-table").DataTable({
-        ajax: {
-            url: endpoint,
-            dataType: "json",
-            dataSrc: "",
-            contentType: "application/json; charset=utf-8",
-        },
+        data: examples,
         columns: [
             {title: "ID"},
             {title: "Japanese"},
@@ -102,9 +101,9 @@ function createExampleTable(vocab_id) {
  * @param {string} vocab_id - ID of vocabulary entry related to examples
  * @param {String} kanji - Example kanji
  * @param {String} hiragana - Example hiragana
- *
+ * @param {Array} examples - List of example sentences
  */
-function fillExampleModal(vocab_id, kanji, hiragana) {
+function fillExampleModal(vocab_id, kanji, hiragana, examples) {
     let modal_content = document.getElementById("vocab-modal-body");
     modal_content.innerHTML = '';
 
@@ -120,7 +119,7 @@ function fillExampleModal(vocab_id, kanji, hiragana) {
     exampleTableContainer.appendChild(document.createElement("th"));
     modal_content.appendChild(exampleTableContainer);
 
-    createExampleTable(vocab_id);
+    createExampleTable(examples);
 
     // Set modal title
     let modal_title = document.getElementById("modalLargeLabel");
@@ -142,7 +141,6 @@ function exampleOnClick(row_data) {
     // Ref: https://stackoverflow.com/questions/7864723#7864740
     let kanji = row_data[1].split(/<a[^>]*>([\s\S]*?)<\/a>/)[1];
     let hiragana = row_data[2].split(/<a[^>]*>([\s\S]*?)<\/a>/)[1];
-
-    // Retrieving example data
-    fillExampleModal(vocab_id, kanji, hiragana);
+    let examples = row_data[4]
+    fillExampleModal(vocab_id, kanji, hiragana, examples);
 }
