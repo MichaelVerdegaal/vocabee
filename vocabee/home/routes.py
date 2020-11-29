@@ -113,13 +113,12 @@ def get_anki_deck(vocab_level):
     filename = f'vocabee{vocab_level}.apkg'
 
     path = os.path.join(project_root, filename)
-    if not os.path.isfile(path):
-        create_deck_by_level(vocab, vocab_level, filename)
+    create_deck_by_level(vocab, vocab_level, filename)
 
     # Ref: https://stackoverflow.com/a/57998006/7174982
     with open(path, 'rb') as f:
         data = f.readlines()
-
+    os.remove(path)
     return Response(data, headers={
         'Content-Type': 'application/octet-stream',
         'Content-Disposition': 'attachment; filename=%s;' % filename

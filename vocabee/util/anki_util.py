@@ -71,7 +71,7 @@ def create_deck(level):
     return my_deck
 
 
-def fill_deck(level, vocab_list, deck):
+def fill_deck(vocab_list, deck):
     """
     Creates a notelist and add it to the deck
     :param vocab_list: vocabulary list
@@ -101,9 +101,6 @@ def create_deck_by_level(vocabulary, level, filename):
     :param filename: filename of deck
     :return: name of the generated file
     """
-    start_time = time.time()
-    print(f"Starting deck creation of level {level}")
     new_deck = create_deck(level)
-    fill_deck(level, vocabulary, new_deck)
-    print(f"Deck took {(time.time() - start_time)} seconds to create")
+    fill_deck(vocabulary, new_deck)
     write_deck(new_deck, filename)
