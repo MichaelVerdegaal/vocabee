@@ -2,7 +2,7 @@ from vocabee import cache
 from vocabee.home.models import Vocabulary
 
 
-@cache.memoize(60)
+@cache.memoize(300)
 def get_vocab_by_level(jlpt_level):
     """
     Fetches vocabulary entries by JLPT level
