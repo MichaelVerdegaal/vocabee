@@ -10,6 +10,7 @@ def get_vocab_by_level(jlpt_level):
     :return: Queryset
     """
     vocabulary = app.session.query(Vocabulary).filter_by(jlpt_level=f"N{jlpt_level}").all()
+    app.session.remove()
     return vocabulary
 
 

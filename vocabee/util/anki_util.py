@@ -1,6 +1,6 @@
-import genanki
-import time
 import datetime
+
+import genanki
 
 vocabulary_model = genanki.Model(
     # ID's need to be hardcoded due to anki requirements
@@ -34,17 +34,16 @@ def create_example_note_string(example_list):
     return note_string
 
 
-def create_note(example_list, hiragana, kanji, english, vocab_id):
+def create_note(example_list, hiragana, kanji, english):
     """
     Creates an anki note (card)
+    :param example_list: list of example sentences
     :param hiragana: hiragana text
     :param kanji: kanji text
     :param english: english text
-    :param vocab_id: vocabulary id
     :return: anki note
     """
     examples = example_list[:3]
-    print(f"{datetime.datetime.now()} DEBUG: Time after retrieval")
     example_string = ''
     if examples:
         example_string = create_example_note_string(examples)
@@ -77,13 +76,12 @@ def fill_deck(vocab_list, deck):
     :param vocab_list: vocabulary list
     :param deck: anki deck
     """
-    notelist = [create_note(v.examples, v.hiragana, v.kanji, v.english, v.id) for v in vocab_list]
+    notelist = [create_note(v.examples, v.hiragana, v.kanji, v.english) for v in vocab_list]
     deck.notes = notelist
 
 
 def write_deck(deck, filename):
     """
-    TODO: See if we can find a way to change where the file is generated
     Writes an anki deck to a file at the root directory of the project
     :param deck: anki deck
     :param filename: filename of deck
