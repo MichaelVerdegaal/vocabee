@@ -15,10 +15,10 @@ class Vocabulary(model, SerializerMixin):
     serialize_rules = ('-examples.vocabulary',)
 
     id = column(integer, primary_key=True)
-    kanji = column(string(), nullable=True)
-    hiragana = column(string(), nullable=False)
-    english = column(string(), nullable=False)
-    jlpt_level = column(string(), nullable=False)
+    kanji = column(string(100), nullable=True)
+    hiragana = column(string(300), nullable=False)
+    english = column(string(300), nullable=False)
+    jlpt_level = column(string(5), nullable=False)
     examples = relationship("Example", backref="vocabulary", lazy="joined")
 
     # TODO: create an universal tostring method
@@ -33,8 +33,8 @@ class Vocabulary(model, SerializerMixin):
 class Example(model, SerializerMixin):
     __tablename__ = 'example'
     id = column(integer, primary_key=True)
-    sentence_jp = column(string())
-    sentence_en = column(string())
+    sentence_jp = column(string(500))
+    sentence_en = column(string(500))
     vocab_id = column(integer, foreign_key('vocabulary.id'))
 
     def __str__(self):
