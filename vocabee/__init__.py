@@ -22,8 +22,6 @@ def create_app():
     with app.app_context():
         from .home import routes, models
 
-        db.create_all()
-        db.session.commit()
         app.register_blueprint(routes.home_bp)
 
         return app
