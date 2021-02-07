@@ -13,6 +13,8 @@ jdcal==1.4.1
 Jinja2==2.11.2
 libsass==0.20.1
 MarkupSafe==1.1.1
+mysql-connector-python==8.0.23
+protobuf==3.14.0
 psycopg2-binary==2.8.6
 pystache==0.5.4
 python-dotenv==0.15.0
