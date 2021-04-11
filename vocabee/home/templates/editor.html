@@ -1,0 +1,131 @@
+{% extends 'base.html' %}
+
+{% block container %}
+    <title>Anki decks - VocaBee</title>
+    <!--Stylesheets -->
+    <link href="{{ url_for('home.static', filename='css/components/cards.css') }}" rel="stylesheet">
+
+    <div class="container-fluid text-container">
+        <h1>Editor</h1>
+        <p>
+            Large chance you're not supposed to be here. If you entered this page unwillingly, please go back to <a
+                href="{{ url_for('home.home') }}">the other pages</a> . If you entered it willingly, but are nice enough
+            to not touch it, please leave a direct message on any of the VocaBee social media to let me know how you
+            did it!
+        </p>
+    </div>
+
+    <div class="container-fluid" id="deck-content-container">
+        <div class="row">
+
+            <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                <div class="card text-center">
+                    <div class="card-header">
+                        <h5 class="card-title">Vocabulary editor</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">To update an entry, retrieve it, enter new values and
+                            click the save button. To create an entry, clear the fields, enter new values and click the
+                            add button. To remove an entry, retrieve it and click the remove button.</h6>
+                    </div>
+                    <div class="card-body">
+                        <form>
+                            <div class="form-row">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="vocab-id-prepend">ID</span>
+                                    </div>
+                                    <input type="text" id="vocab_id_input" class="form-control" placeholder="..."
+                                           aria-label="...">
+                                    <div class="input-group-append">
+                                        <a class="btn btn-primary action-btn" title="get entry"
+                                           id="vocabEntryGetBtn">get</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <br>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="kanjiOld">Old kanji</label>
+                                    <input type="text" class="form-control" id="kanjiOld" readonly>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="kanjiNew">New kanji</label>
+                                    <input type="password" class="form-control" id="kanjiNew">
+                                </div>
+                            </div>
+
+                            <br>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="hiraganaOld">Old hiragana</label>
+                                    <input type="text" class="form-control" id="hiraganaOld" readonly>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="hiraganaNew">New hiragana</label>
+                                    <input type="password" class="form-control" id="hiraganaNew">
+                                </div>
+                            </div>
+
+                            <br>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="meaningOld">Old meaning</label>
+                                    <input type="text" class="form-control" id="meaningOld" readonly>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="meaningNew">New meaning</label>
+                                    <input type="password" class="form-control" id="meaningNew">
+                                </div>
+                            </div>
+
+                            <br>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="jlptOld">Old JLPT level</label>
+                                    <input type="text" class="form-control" id="jlptOld" readonly>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="jlptNew">New JLPT level</label>
+                                    <input type="password" class="form-control" id="jlptNew">
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                <div class="card text-center">
+                    <div class="card-header">
+                        <h5 class="card-title">Example editor</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">To update an entry, retrieve it, enter new values and
+                            click the save button. To create an entry, clear the fields, enter new values and click the
+                            add button. To remove an entry, retrieve it and click the remove button.</h6>
+                    </div>
+                    <div class="card-body">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        $('#vocabEntryGetBtn').click(function () {
+            let urlBase = "{{ url_for('home.ajax_vocabulary_entry', vocab_id=5) }}";
+            let vocabID = $('#vocab_id_input').val();
+            let requestUrl = urlBase.slice(0, -1) + vocabID;
+
+            $.ajax({
+                url: requestUrl,
+                success: function (result) {
+                    $('#kanjiOld').val(result.kanji);
+                    $('#hiraganaOld').val(result.hiragana);
+                    $('#meaningOld').val(result.english);
+                    $('#jlptOld').val(result.jlpt_level);
+                }
+            });
+        })
+    </script>
+{% endblock %}

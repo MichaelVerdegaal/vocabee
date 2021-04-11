@@ -7,7 +7,7 @@ from jinja2 import TemplateNotFound
 from vocabee import cache
 
 from vocabee.util.anki_util import create_deck_by_level
-from vocabee.util.queries import get_vocab_by_level
+from vocabee.util.queries import get_vocab_by_level, get_vocab_by_id
 from vocabee.util.vocabulary_util import process_vocabulary
 
 home_bp = Blueprint('home',
@@ -92,9 +92,22 @@ def about():
         abort(404)
 
 
+@home_bp.route('/editor')
+@cache.cached(timeout=30)
+def editor():
+    """
+    Renders the editor page
+    :return: Webpage
+    """
+    try:
+        return render_template("editor.html")
+    except TemplateNotFound:
+        abort(404)
+
+
 # AJAX and download routes
 @home_bp.route('/vocab/source/<int:vocab_level>')
-def ajax_vocab(vocab_level):
+def ajax_vocabulary_full(vocab_level):
     """
     AJAX endpoint to retrieve vocabulary
     :param vocab_level: Valid JLPT vocabulary level (1-5)
@@ -105,6 +118,17 @@ def ajax_vocab(vocab_level):
         return vocab
     else:
         "Faulty vocabulary level"
+
+
+@home_bp.route('/vocab/source/entry/<int:vocab_id>')
+def ajax_vocabulary_entry(vocab_id):
+    """
+    AJAX endpoint to retrieve vocabulary
+    :param vocab_id: vocabulary id
+    :return: vocabulary entry in JSON
+    """
+    entry = get_vocab_by_id(vocab_id)
+    return entry.to_dict() if entry else ""
 
 
 @home_bp.route('/vocab/anki/<int:vocab_level>')

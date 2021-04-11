@@ -11,3 +11,15 @@ def get_vocab_by_level(jlpt_level):
     """
     vocabulary = Vocabulary.query.filter_by(jlpt_level=f"N{jlpt_level}").all()
     return vocabulary
+
+
+@cache.memoize(60)
+def get_vocab_by_id(vocab_id):
+    """
+    Fetches vocabulary entry by id
+    :param vocab_id: Vocabulary ID
+    :return: Queryset
+    """
+    entry = Vocabulary.query.filter_by(id=vocab_id).one_or_none()
+    return entry
+
