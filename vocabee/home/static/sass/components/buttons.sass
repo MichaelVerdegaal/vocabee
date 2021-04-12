@@ -2,10 +2,12 @@
 
 // This sass file contains button styling for buttons used in multiple places
 
+/////General styling
 // Remove box-shadow from every button
 a, button, button:hover:focus, button:active:focus, button:focus
   box-shadow: none !important
 
+/////"Normal" buttons
 // Generic button. Orange. Use this if you have no reason to use any other
 .action-btn, .action-btn:focus,
 .dropdown-toggle, .dropdown-toggle:focus
@@ -17,16 +19,6 @@ a, button, button:hover:focus, button:active:focus, button:focus
     background-color: $secondaryorange !important
     border-color: $secondaryorange !important
 
-// Generic outline button. Orange.
-.btn-outline-primary
-  color: $mainorange !important
-  border-color: $mainorange !important
-
-  &:hover, &:active
-    background-color: $secondaryorange !important
-    border-color: $secondaryorange !important
-    color: $mainwhite !important
-
 // Generic button. Green.
 .action-btn-green, .action-btn-green:focus
   border-color: $maingreen !important
@@ -36,6 +28,36 @@ a, button, button:hover:focus, button:active:focus, button:focus
   &:hover, &:active
     background-color: $secondarygreen !important
     border-color: $secondarygreen !important
+
+// Generic button. Gray.
+.action-btn-gray, .action-btn-gray:focus
+  border-color: $maingray !important
+  background-color: $maingray !important
+  color: $mainwhite !important
+
+  &:hover, &:active
+    background-color: $secondarygray !important
+    border-color: $secondarygray !important
+
+// Generic button. Gray.
+.action-btn-gray, .action-btn-gray:focus
+  border-color: $maingray !important
+  background-color: $maingray !important
+  color: $mainwhite !important
+
+  &:hover, &:active
+    background-color: $secondarygray !important
+    border-color: $secondarygray !important
+
+// Generic button. Red.
+.action-btn-red, .action-btn-red:focus
+  border-color: $mainred !important
+  background-color: $mainred !important
+  color: $mainwhite !important
+
+  &:hover, &:active
+    background-color: $secondaryred !important
+    border-color: $secondaryred !important
 
 // Generic button. Action disabled.
 .action-btn.disabled, .action-btn.disabled:focus
@@ -47,6 +69,27 @@ a, button, button:hover:focus, button:active:focus, button:focus
     background-color: $maingray !important
     border-color: $maingray !important
 
+/////Outline buttons
+// Generic outline button. Orange.
+.btn-outline-primary
+  color: $mainorange !important
+  border-color: $mainorange !important
+
+  &:hover, &:active
+    background-color: $secondaryorange !important
+    border-color: $secondaryorange !important
+    color: $mainwhite !important
+
+.btn-outline-success
+  color: $maingreen !important
+  border-color: $maingreen !important
+
+  &:hover, &:active
+    background-color: $secondarygreen !important
+    border-color: $secondarygreen !important
+    color: $mainwhite !important
+
+/////Dropdowns
 // Dropdown styling
 .custom-select:focus
   border-color: $maingray !important
