@@ -36,8 +36,9 @@
                                     <input type="text" id="vocab_id_input" class="form-control" placeholder="..."
                                            aria-label="...">
                                     <div class="input-group-append">
-                                        <a class="btn btn-primary action-btn" title="get entry"
-                                           id="vocabEntryGetBtn">get</a>
+                                        <button class="btn btn-primary action-btn" title="get entry" type="button"
+                                                id="vocabEntryGetBtn">get
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -51,18 +52,18 @@
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="kanjiNew">New kanji</label>
-                                    <input type="password" class="form-control" id="kanjiNew">
+                                    <input type="text" class="form-control" id="kanjiNew">
                                 </div>
                             </div>
 
                             <div class="form-row">
                                 <div class="form-group col-md-6">
-                                    <label for="hiraganaOld">Old hiragana</label>
-                                    <input type="text" class="form-control" id="hiraganaOld" readonly>
+                                    <label for="kanaOld">Old kana</label>
+                                    <input type="text" class="form-control" id="kanaOld" readonly>
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label for="hiraganaNew">New hiragana</label>
-                                    <input type="password" class="form-control" id="hiraganaNew">
+                                    <label for="kanaNew">New kana</label>
+                                    <input type="text" class="form-control" id="kanaNew">
                                 </div>
                             </div>
 
@@ -73,7 +74,7 @@
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="meaningNew">New meaning</label>
-                                    <input type="password" class="form-control" id="meaningNew">
+                                    <input type="text" class="form-control" id="meaningNew">
                                 </div>
                             </div>
 
@@ -84,7 +85,7 @@
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="jlptNew">New JLPT level</label>
-                                    <input type="password" class="form-control" id="jlptNew">
+                                    <input type="text" class="form-control" id="jlptNew">
                                 </div>
                             </div>
 
@@ -92,22 +93,22 @@
 
                             <div class="form-row">
                                 <div class="form-group col-3">
-                                    <button class="btn btn-primary action-btn-gray" title="clear fields"
+                                    <button class="btn btn-primary action-btn-gray" title="clear fields" type="button"
                                             id="vocabClearBtn">clear
                                     </button>
                                 </div>
                                 <div class="form-group col-3">
-                                    <button class="btn btn-primary action-btn-red" title="delete entry"
+                                    <button class="btn btn-primary action-btn-red" title="delete entry" type="button"
                                             id="vocabDeleteBtn">delete
                                     </button>
                                 </div>
                                 <div class="form-group col-3">
-                                    <button class="btn btn-outline-success" title="update entry"
+                                    <button class="btn btn-outline-success" title="update entry" type="button"
                                             id="vocabUpdateBtn">update
                                     </button>
                                 </div>
                                 <div class="form-group col-3">
-                                    <button class="btn btn-primary action-btn-green" title="add new entry"
+                                    <button class="btn btn-primary action-btn-green" title="add new entry" type="button"
                                             id="vocabAddBtn">add
                                     </button>
                                 </div>
@@ -145,11 +146,23 @@
                 url: requestUrl,
                 success: function (result) {
                     $('#kanjiOld').val(result.kanji);
-                    $('#hiraganaOld').val(result.hiragana);
+                    $('#kanaOld').val(result.hiragana);
                     $('#meaningOld').val(result.english);
                     $('#jlptOld').val(result.jlpt_level);
                 }
             });
+        });
+
+        $('#vocabClearBtn').click(function () {
+            $('#vocab_id_input').val("");
+            $('#kanjiOld').val("");
+            $('#kanaOld').val("");
+            $('#meaningOld').val("");
+            $('#jlptOld').val("");
+            $('#kanjiNew').val("");
+            $('#kanaNew').val("");
+            $('#meaningNew').val("");
+            $('#jlptNew').val("");
         })
     </script>
 {% endblock %}
