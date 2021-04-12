@@ -3,14 +3,13 @@
 // This sass file contains button styling for buttons used in multiple places
 
 // Remove box-shadow from every button
-button:hover:focus, button:active:focus, button:focus
+a, button, button:hover:focus, button:active:focus, button:focus
   box-shadow: none !important
 
-// Generic button that does something on click
+// Generic button. Orange. Use this if you have no reason to use any other
 .action-btn, .action-btn:focus,
 .dropdown-toggle, .dropdown-toggle:focus
   border-color: $mainorange !important
-  box-shadow: none !important
   background-color: $mainorange !important
   color: $mainwhite !important
 
@@ -18,10 +17,19 @@ button:hover:focus, button:active:focus, button:focus
     background-color: $secondaryorange !important
     border-color: $secondaryorange !important
 
-// Same as generic button, but for dark backgrounds
-.action-btn-dark, .action-btn-dark:focus
+// Generic outline button. Orange.
+.btn-outline-primary
+  color: $mainorange !important
+  border-color: $mainorange !important
+
+  &:hover, &:active
+    background-color: $secondaryorange !important
+    border-color: $secondaryorange !important
+    color: $mainwhite !important
+
+// Generic button. Green.
+.action-btn-green, .action-btn-green:focus
   border-color: $maingreen !important
-  box-shadow: none !important
   background-color: $maingreen !important
   color: $mainwhite !important
 
@@ -29,10 +37,9 @@ button:hover:focus, button:active:focus, button:focus
     background-color: $secondarygreen !important
     border-color: $secondarygreen !important
 
-// Same as generic button, but action disabled
+// Generic button. Action disabled.
 .action-btn.disabled, .action-btn.disabled:focus
   border-color: $maingray !important
-  box-shadow: none !important
   background-color: $maingray !important
   color: $mainwhite !important
 
