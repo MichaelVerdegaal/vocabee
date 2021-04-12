@@ -47,7 +47,7 @@
 
                             <div class="form-row">
                                 <div class="form-group col-md-6">
-                                    <label for="kanjiOld">Old kanji</label>
+                                    <label for="kanjiOld">Current kanji</label>
                                     <input type="text" class="form-control" id="kanjiOld" readonly>
                                 </div>
                                 <div class="form-group col-md-6">
@@ -58,7 +58,7 @@
 
                             <div class="form-row">
                                 <div class="form-group col-md-6">
-                                    <label for="kanaOld">Old kana</label>
+                                    <label for="kanaOld">Current kana</label>
                                     <input type="text" class="form-control" id="kanaOld" readonly>
                                 </div>
                                 <div class="form-group col-md-6">
@@ -69,7 +69,7 @@
 
                             <div class="form-row">
                                 <div class="form-group col-md-6">
-                                    <label for="meaningOld">Old meaning</label>
+                                    <label for="meaningOld">Current meaning</label>
                                     <input type="text" class="form-control" id="meaningOld" readonly>
                                 </div>
                                 <div class="form-group col-md-6">
@@ -80,7 +80,7 @@
 
                             <div class="form-row">
                                 <div class="form-group col-md-6">
-                                    <label for="jlptOld">Old JLPT level</label>
+                                    <label for="jlptOld">Current JLPT level</label>
                                     <input type="text" class="form-control" id="jlptOld" readonly>
                                 </div>
                                 <div class="form-group col-md-6">
@@ -138,17 +138,22 @@
 
     <script>
         $('#vocabEntryGetBtn').click(function () {
-            let urlBase = "{{ url_for('home.ajax_vocabulary_entry', vocab_id=5) }}";
+            let urlBase = "{{ url_for('home.ajax_vocabulary_entry_get', vocab_id=5) }}";
             let vocabID = $('#vocab_id_input').val();
             let requestUrl = urlBase.slice(0, -1) + vocabID;
 
             $.ajax({
                 url: requestUrl,
+                type: "GET",
                 success: function (result) {
                     $('#kanjiOld').val(result.kanji);
                     $('#kanaOld').val(result.hiragana);
                     $('#meaningOld').val(result.english);
                     $('#jlptOld').val(result.jlpt_level);
+                    $('#kanjiNew').val(result.kanji);
+                    $('#kanaNew').val(result.hiragana);
+                    $('#meaningNew').val(result.english);
+                    $('#jlptNew').val(result.jlpt_level);
                 }
             });
         });
@@ -163,6 +168,29 @@
             $('#kanaNew').val("");
             $('#meaningNew').val("");
             $('#jlptNew').val("");
+        })
+
+        $('#vocabDeleteBtn').click(function () {
+
+        })
+
+        $('#vocabUpdateBtn').click(function () {
+            let urlBase = "{{ url_for('home.ajax_vocabulary_entry_update') }}";
+            let vocabID = $('#vocab_id_input').val();
+            let kanji = $('#kanjiNew').val();
+            let kana = $('#kanaNew').val();
+            let meaning = $('#meaningNew').val();
+            let jlpt_level = $('#jlptNew').val();
+
+            $.ajax({
+                url: urlBase,
+                type: "POST",
+                data: {id: vocabID, kanji: kanji, kana: kana, meaning: meaning, jlpt_level: jlpt_level},
+            });
+        })
+
+        $('#vocabAddBtn').click(function () {
+
         })
     </script>
 {% endblock %}

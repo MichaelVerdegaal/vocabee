@@ -1,5 +1,5 @@
 from vocabee import cache
-from vocabee.home.models import Vocabulary
+from vocabee.home.models import Vocabulary, db
 
 
 @cache.memoize(300)
@@ -23,3 +23,18 @@ def get_vocab_by_id(vocab_id):
     entry = Vocabulary.query.filter_by(id=vocab_id).one_or_none()
     return entry
 
+
+def update_vocab(vocab_id, kanji, kana, meaning, jlpt_level):
+    """
+    Updates a vocabulary entry
+    :param vocab_id: vocabulary entry
+    :param kanji: kanji field
+    :param kana: kana field
+    :param meaning: meaning field
+    :param jlpt_level: jlpt_level field
+    """
+    Vocabulary.query.filter_by(id=vocab_id).update(dict(kanji=kanji,
+                                                        hiragana=kana,
+                                                        english=meaning,
+                                                        jlpt_level=jlpt_level))
+    db.session.commit()

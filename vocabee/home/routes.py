@@ -7,7 +7,7 @@ from jinja2 import TemplateNotFound
 from vocabee import cache
 
 from vocabee.util.anki_util import create_deck_by_level
-from vocabee.util.queries import get_vocab_by_level, get_vocab_by_id
+from vocabee.util.queries import get_vocab_by_level, get_vocab_by_id, update_vocab
 from vocabee.util.vocabulary_util import process_vocabulary
 
 home_bp = Blueprint('home',
@@ -120,8 +120,8 @@ def ajax_vocabulary_full(vocab_level):
         "Faulty vocabulary level"
 
 
-@home_bp.route('/vocab/source/entry/<int:vocab_id>')
-def ajax_vocabulary_entry(vocab_id):
+@home_bp.route('/vocab/source/entry/get/<int:vocab_id>')
+def ajax_vocabulary_entry_get(vocab_id):
     """
     AJAX endpoint to retrieve vocabulary
     :param vocab_id: vocabulary id
@@ -129,6 +129,18 @@ def ajax_vocabulary_entry(vocab_id):
     """
     entry = get_vocab_by_id(vocab_id)
     return entry.to_dict() if entry else ""
+
+
+@home_bp.route('/vocab/source/entry/update', methods=['POST'])
+def ajax_vocabulary_entry_update():
+    """
+    AJAX endpoint to update a vocabulary entry
+    :return: vocabulary entry in JSON
+    """
+    data = dict(request.form)
+    update_vocab(data['id'], data['kanji'], data['kana'], data['meaning'], data['jlpt_level'])
+    print(f"Updated vocabulary entry {data['id']}")
+    return {'status': 'success'}
 
 
 @home_bp.route('/vocab/anki/<int:vocab_level>')
