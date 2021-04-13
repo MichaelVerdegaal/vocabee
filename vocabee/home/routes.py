@@ -4,10 +4,10 @@ from pathlib import Path
 import sass
 from flask import Blueprint, render_template, abort, send_from_directory, request, Response
 from jinja2 import TemplateNotFound
-from vocabee import cache
 
+from vocabee import cache
 from vocabee.util.anki_util import create_deck_by_level
-from vocabee.util.queries import get_vocab_by_level, get_vocab_by_id, update_vocab
+from vocabee.util.queries import get_vocab_by_level, get_vocab_by_id, update_vocab, add_vocab, delete_vocab
 from vocabee.util.vocabulary_util import process_vocabulary
 
 home_bp = Blueprint('home',
@@ -135,11 +135,35 @@ def ajax_vocabulary_entry_get(vocab_id):
 def ajax_vocabulary_entry_update():
     """
     AJAX endpoint to update a vocabulary entry
-    :return: vocabulary entry in JSON
+    :return: status
     """
     data = dict(request.form)
     update_vocab(data['id'], data['kanji'], data['kana'], data['meaning'], data['jlpt_level'])
     print(f"Updated vocabulary entry {data['id']}")
+    return {'status': 'success'}
+
+
+@home_bp.route('/vocab/source/entry/add', methods=['POST'])
+def ajax_vocab_entry_add():
+    """
+    AJAX endpoint to add a vocabulary entry
+    :return: status
+    """
+    data = dict(request.form)
+    add_vocab(data['kanji'], data['kana'], data['meaning'], data['jlpt_level'])
+    print("Added new vocabulary entry")
+    return {'status': 'success'}
+
+
+@home_bp.route('/vocab/source/entry/delete', methods=['POST'])
+def ajax_vocab_entry_delete():
+    """
+    AJAX endpoint to add a vocabulary entry
+    :return: status
+    """
+    data = dict(request.form)
+    delete_vocab(data['id'])
+    print(f"Deleted vocabulary entry {data['id']}")
     return {'status': 'success'}
 
 

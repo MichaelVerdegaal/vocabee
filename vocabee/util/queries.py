@@ -38,3 +38,28 @@ def update_vocab(vocab_id, kanji, kana, meaning, jlpt_level):
                                                         english=meaning,
                                                         jlpt_level=jlpt_level))
     db.session.commit()
+
+
+def add_vocab(kanji, kana, meaning, jlpt_level):
+    """
+    Adds a vocabulary entry
+    :param kanji: kanji field
+    :param kana: kana field
+    :param meaning: meaning field
+    :param jlpt_level: jlpt_level field
+    """
+    entry = Vocabulary(kanji=kanji,
+                       hiragana=kana,
+                       english=meaning,
+                       jlpt_level=jlpt_level)
+    db.session.add(entry)
+    db.session.commit()
+
+
+def delete_vocab(vocab_id):
+    """
+    Deletes a vocabulary entry
+    :param vocab_id: vocabulary entry
+    """
+    Vocabulary.query.filter_by(id=vocab_id).delete()
+    db.session.commit()
