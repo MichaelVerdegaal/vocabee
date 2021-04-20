@@ -28,7 +28,7 @@ def home():
     :return: Webpage
     """
     try:
-        return render_template("home.html")
+        return render_template("home/home.html")
     except TemplateNotFound:
         abort(404)
 
@@ -41,7 +41,7 @@ def vocab_index():
     :return: Webpage
     """
     try:
-        return render_template("vocab_index.html")
+        return render_template("vocabulary/vocab_index.html")
     except TemplateNotFound:
         abort(404)
 
@@ -56,12 +56,12 @@ def vocab(vocab_level):
     """
     if 0 < vocab_level < 6:
         try:
-            return render_template("vocab.html", level=vocab_level)
+            return render_template("vocabulary/vocab.html", level=vocab_level)
         except TemplateNotFound:
             abort(404)
     else:
         try:
-            return render_template("vocab_index.html")
+            return render_template("vocabulary/vocab_index.html")
         except TemplateNotFound:
             abort(404)
 
@@ -74,7 +74,7 @@ def deck():
     :return: Webpage
     """
     try:
-        return render_template("deck.html")
+        return render_template("vocabulary/deck.html")
     except TemplateNotFound:
         abort(404)
 
@@ -87,7 +87,7 @@ def about():
     :return: Webpage
     """
     try:
-        return render_template("about.html")
+        return render_template("home/about.html")
     except TemplateNotFound:
         abort(404)
 
@@ -100,7 +100,7 @@ def editor():
     :return: Webpage
     """
     try:
-        return render_template("editor.html")
+        return render_template("admin/editor.html")
     except TemplateNotFound:
         abort(404)
 
