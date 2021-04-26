@@ -3,7 +3,7 @@ from jinja2 import TemplateNotFound
 
 from vocabee import cache
 
-admin_bp = Blueprint('admin', __name__)
+admin_bp = Blueprint('admin', __name__, url_prefix='/admin')
 
 
 @admin_bp.route('/editor')

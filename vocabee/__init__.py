@@ -7,7 +7,7 @@ from flask_caching import Cache
 from flask_sqlalchemy import SQLAlchemy
 from flask_sqlalchemy_caching import CachingQuery
 
-project_folder = os.path.expanduser('~/vocabee')  # adjust as appropriate
+project_folder = os.path.expanduser('~/vocabee')
 load_dotenv(os.path.join(project_folder, '.env'))
 
 db = SQLAlchemy(query_class=CachingQuery)
