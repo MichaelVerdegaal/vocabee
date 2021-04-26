@@ -83,9 +83,10 @@
     <script type="text/javascript">
         // Initialize vocabulary table
         let level = {{ level }};
+        let vocabEndpoint = "{{ url_for('vocabulary.ajax_vocabulary_full', vocab_level=5) }}";
 
         $(document).ready(function () {
-            createVocabTable(level);
+            createVocabTable(vocabEndpoint, level);
             $('#vocab-table').DataTable.ext.pager.numbers_length = 3;
         });
 

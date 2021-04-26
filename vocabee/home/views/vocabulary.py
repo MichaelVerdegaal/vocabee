@@ -4,15 +4,15 @@ from pathlib import Path
 from flask import Blueprint, render_template, abort, request, Response
 from jinja2 import TemplateNotFound
 
-from vocabee import cache, project_folder
+from vocabee import cache
 from vocabee.util.anki_util import create_deck_by_level
 from vocabee.util.queries import get_vocab_by_level, get_vocab_by_id, update_vocab, add_vocab, delete_vocab
 from vocabee.util.vocabulary_util import process_vocabulary
 
-vocabulary_bp = Blueprint('vocabulary', __name__)
+vocabulary_bp = Blueprint('vocabulary', __name__, url_prefix='/vocabulary')
 
 
-@vocabulary_bp.route('/vocab')
+@vocabulary_bp.route('/index')
 @cache.cached(timeout=30)
 def vocab_index():
     """
@@ -25,9 +25,9 @@ def vocab_index():
         abort(404)
 
 
-@vocabulary_bp.route('/vocab/<int:vocab_level>')
+@vocabulary_bp.route('/browser/<int:vocab_level>')
 @cache.cached(timeout=60)
-def vocab(vocab_level):
+def vocab_browser(vocab_level):
     """
     Renders the vocabulary level datatables page
     :param vocab_level: Valid JLPT vocabulary level (1-5)
@@ -35,7 +35,7 @@ def vocab(vocab_level):
     """
     if 0 < vocab_level < 6:
         try:
-            return render_template("vocabulary/vocab.html", level=vocab_level)
+            return render_template("vocabulary/browser.html", level=vocab_level)
         except TemplateNotFound:
             abort(404)
     else:

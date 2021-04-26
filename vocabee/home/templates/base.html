@@ -46,12 +46,11 @@
 <body>
 
 <!--start navbar-->
-<!-- TODO make these endpoints dynamic? -->
 {% set navigation_bar = [
-    ('/', 'home', 'Home'),
-    ('/vocab', 'vocab', 'Vocabulary'),
-    ('/deck', 'deck', 'Flashcards'),
-    ('/about', 'about', 'About')
+    (url_for('home.home'), 'home', 'Home'),
+    (url_for('vocabulary.vocab_index'), 'vocab', 'Vocabulary'),
+    (url_for('vocabulary.deck'), 'deck', 'Flashcards'),
+    (url_for('home.about'), 'about', 'About')
     ] -%}
 
 {% set active_page = active_page|default('index') -%}

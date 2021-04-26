@@ -1,11 +1,12 @@
 /**
  * Generate and fill a datatable with vocabulary data
  *
+ * @param {string} vocabEndpoint - Endpoint to send AJAX request to
  * @param {string} level - JLPT level from 1-5
  *
  */
-function createVocabTable(level) {
-    let endpoint = "/vocab/source/" + level;
+function createVocabTable(vocabEndpoint, level) {
+    let endpoint = vocabEndpoint.slice(0, -1) + level;
 
     let example_button = document.createElement("button");
     example_button.type = "button";

@@ -31,7 +31,7 @@
                             {% elif i + 1 == 1 %}
                                 <p class="card-text">Near-native</p>
                             {% endif %}
-                            <a href="{{ url_for('vocabulary.vocab', vocab_level=i + 1) }}" class="btn btn-primary action-btn"
+                            <a href="{{ url_for('vocabulary.vocab_browser', vocab_level=i + 1) }}" class="btn btn-primary action-btn"
                                title="JLPT N{{ i + 1 }} vocabulary">Go</a>
                         </div>
                     </div>
