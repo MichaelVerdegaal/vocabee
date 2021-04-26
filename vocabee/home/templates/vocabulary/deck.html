@@ -4,7 +4,7 @@
 {% block container %}
     <title>Anki decks - VocaBee</title>
     <!--Stylesheets -->
-    <link href="{{ url_for('home.static', filename='css/components/cards.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/components/cards.css') }}" rel="stylesheet">
 
     <div class="container-fluid text-container">
         <h1>VocaBee flashcard decks</h1>
@@ -51,7 +51,7 @@
 
     <script>
         // Set download url (href) based on the dropdown selection
-        let urlBase = "{{ url_for('home.get_anki_deck', vocab_level=5) }}";
+        let urlBase = "{{ url_for('vocabulary.get_anki_deck', vocab_level=5) }}";
         let downloadBtn = $("#deckDownloadBtn")[0];
         downloadBtn.href = urlBase;
 

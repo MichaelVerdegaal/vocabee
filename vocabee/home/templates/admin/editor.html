@@ -3,7 +3,7 @@
 {% block container %}
     <title>Anki decks - VocaBee</title>
     <!--Stylesheets -->
-    <link href="{{ url_for('home.static', filename='css/components/cards.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/components/cards.css') }}" rel="stylesheet">
 
     <div class="container-fluid text-container">
         <h1>Editor</h1>
@@ -138,7 +138,7 @@
 
     <script>
         $('#vocabEntryGetBtn').click(function () {
-            let urlBase = "{{ url_for('home.ajax_vocabulary_entry_get', vocab_id=5) }}";
+            let urlBase = "{{ url_for('vocabulary.ajax_vocabulary_entry_get', vocab_id=5) }}";
             let vocabID = $('#vocab_id_input').val();
             let requestUrl = urlBase.slice(0, -1) + vocabID;
 
@@ -177,7 +177,7 @@
         $('#vocabDeleteBtn').click(function () {
             let c = confirm("Are you sure you want to delete this entry?")
             if (c === true) {
-                let urlBase = "{{ url_for('home.ajax_vocab_entry_delete') }}";
+                let urlBase = "{{ url_for('vocabulary.ajax_vocab_entry_delete') }}";
                 let vocabID = $('#vocab_id_input').val();
 
                 $.ajax({
@@ -191,7 +191,7 @@
         $('#vocabUpdateBtn').click(function () {
             let c = confirm("Are you sure you want to update this entry?")
             if (c === true) {
-                let urlBase = "{{ url_for('home.ajax_vocabulary_entry_update') }}";
+                let urlBase = "{{ url_for('vocabulary.ajax_vocabulary_entry_update') }}";
                 let vocabID = $('#vocab_id_input').val();
                 let kanji = $('#kanjiNew').val();
                 let kana = $('#kanaNew').val();
@@ -209,7 +209,7 @@
         $('#vocabAddBtn').click(function () {
             let c = confirm("Are you sure you want to add this entry?")
             if (c === true) {
-                let urlBase = "{{ url_for('home.ajax_vocab_entry_add') }}";
+                let urlBase = "{{ url_for('vocabulary.ajax_vocab_entry_add') }}";
                 let kanji = $('#kanjiNew').val();
                 let kana = $('#kanaNew').val();
                 let meaning = $('#meaningNew').val();

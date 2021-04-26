@@ -4,18 +4,18 @@
 {% block container %}
     <title>N{{ level }} vocabulary - VocaBee</title>
     <!--Stylesheets -->
-    <link href="{{ url_for('home.static', filename='css/pages/vocab.css') }}" rel="stylesheet">
-    <script src="{{ url_for('home.static', filename='js/tables.js') }}"></script>
+    <link href="{{ url_for('static', filename='css/pages/vocab.css') }}" rel="stylesheet">
+    <script src="{{ url_for('static', filename='js/tables.js') }}"></script>
     <!--Ref: https://datatables.net/ -->
     <!--Ref: Option 1 - Bootstrap / Option 2 DataTables / Option 3 Responsive) -->
     <link rel="stylesheet" type="text/css"
           href="https://cdn.datatables.net/v/bs4/dt-1.10.20/r-2.2.3/datatables.min.css"/>
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.20/r-2.2.3/datatables.min.js"></script>
-    <script src="{{ url_for('home.static', filename='js/full_numbers_no_ellipses.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/full_numbers_no_ellipses.js') }}"></script>
 
 
     <div class="container-fluid text-container">
-        <a href="{{ url_for('home.vocab_index') }}" title="Go back">
+        <a href="{{ url_for('vocabulary.vocab_index') }}" title="Go back">
             <i class="float-left material-icons md-30" id="back-button">arrow_back</i>
         </a>
         <p class="smalltext">Back to vocabulary page</p>
@@ -51,7 +51,7 @@
                     comprehend conversations spoken at natural speed about a wide variety of topics.</p>
             {% endif %}
             <p>Want to practice with this vocabulary? Download the
-                <a href="{{ url_for('home.deck')}}" title="Download anki deck" download>anki deck</a> here!
+                <a href="{{ url_for('vocabulary.deck')}}" title="Download anki deck" download>anki deck</a> here!
             </p>
         </div>
     </div>
