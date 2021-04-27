@@ -6,5 +6,5 @@ miscellaneous_bp = Blueprint('miscellaneous', __name__, url_prefix='/misc', stat
 @miscellaneous_bp.route('/robots.txt')
 @miscellaneous_bp.route('/sitemap.xml')
 def static_from_root():
-    print(miscellaneous_bp.static_folder, request.path[6:])
+    # TODO add constants for filepath
     return send_from_directory(miscellaneous_bp.static_folder, request.path[6:])

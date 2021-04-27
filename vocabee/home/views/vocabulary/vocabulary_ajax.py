@@ -83,7 +83,6 @@ def vocabulary_download_deck(vocab_level):
     # TODO make a proper constant for the static folder
     project_root = Path(vocabulary_ajax_bp.root_path).parents[3]
     filename = f'vocabee{vocab_level}.apkg'
-    print(project_folder, project_root)
     path = os.path.join(project_root, filename)
     create_deck_by_level(vocab, vocab_level, filename)
 
