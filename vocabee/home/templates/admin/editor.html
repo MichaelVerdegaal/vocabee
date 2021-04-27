@@ -85,7 +85,13 @@
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="jlptNew">New JLPT level</label>
-                                    <input type="text" class="form-control" id="jlptNew">
+                                    <select class="custom-select" id="jlptNew">
+                                        <option value="N5">N5</option>
+                                        <option value="N4">N4</option>
+                                        <option value="N3">N3</option>
+                                        <option value="N2">N2</option>
+                                        <option value="N1">N1</option>
+                                    </select>
                                 </div>
                             </div>
 
@@ -137,10 +143,23 @@
     </div>
 
     <script>
+        function clearFields() {
+            $('#vocab_id_input').val("");
+            $('#kanjiOld').val("");
+            $('#kanaOld').val("");
+            $('#meaningOld').val("");
+            $('#jlptOld').val("");
+            $('#kanjiNew').val("");
+            $('#kanaNew').val("");
+            $('#meaningNew').val("");
+        }
+
+
         $('#vocabEntryGetBtn').click(function () {
             let urlBase = "{{ url_for('vocabulary_ajax.vocabulary_entry_get', vocab_id=5) }}";
             let vocabID = $('#vocab_id_input').val();
             let requestUrl = urlBase.slice(0, -1) + vocabID;
+            clearFields();
 
             $.ajax({
                 url: requestUrl,
@@ -149,6 +168,7 @@
                     if (result === "") {
                         alert("Entry not found");
                     } else {
+                        $('#vocab_id_input').val(vocabID);
                         $('#kanjiOld').val(result.kanji);
                         $('#kanaOld').val(result.hiragana);
                         $('#meaningOld').val(result.english);
@@ -163,15 +183,7 @@
         });
 
         $('#vocabClearBtn').click(function () {
-            $('#vocab_id_input').val("");
-            $('#kanjiOld').val("");
-            $('#kanaOld').val("");
-            $('#meaningOld').val("");
-            $('#jlptOld').val("");
-            $('#kanjiNew').val("");
-            $('#kanaNew').val("");
-            $('#meaningNew').val("");
-            $('#jlptNew').val("");
+            clearFields();
         });
 
         $('#vocabDeleteBtn').click(function () {
@@ -185,6 +197,9 @@
                     type: "POST",
                     data: {id: vocabID},
                 });
+
+                clearFields();
+                alert("Entry " + vocabID + " deleted");
             }
         });
 
@@ -197,12 +212,15 @@
                 let kana = $('#kanaNew').val();
                 let meaning = $('#meaningNew').val();
                 let jlpt_level = $('#jlptNew').val();
+                console.log(jlpt_level);
 
                 $.ajax({
                     url: urlBase,
                     type: "POST",
                     data: {id: vocabID, kanji: kanji, kana: kana, meaning: meaning, jlpt_level: jlpt_level},
                 });
+
+                alert("Entry " + vocabID + " updated");
             }
         });
 
@@ -220,6 +238,8 @@
                     type: "POST",
                     data: {kanji: kanji, kana: kana, meaning: meaning, jlpt_level: jlpt_level},
                 });
+
+                alert("Entry " + 0 + " updated");
             }
         });
     </script>

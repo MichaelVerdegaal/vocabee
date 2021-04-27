@@ -13,7 +13,6 @@ def get_vocab_by_level(jlpt_level):
     return vocabulary
 
 
-@cache.memoize(60)
 def get_vocab_by_id(vocab_id):
     """
     Fetches vocabulary entry by id
