@@ -9,6 +9,7 @@ from flask_sqlalchemy_caching import CachingQuery
 
 project_folder = os.path.expanduser('~/vocabee')
 load_dotenv(os.path.join(project_folder, '.env'))
+# TODO make a constant for the static folder?
 
 db = SQLAlchemy(query_class=CachingQuery)
 cache = Cache(config={'CACHE_TYPE': 'simple'})
@@ -23,11 +24,16 @@ def create_app():
 
     with app.app_context():
         from .home import models
-        from .home.views import home, vocabulary, admin, miscellaneous
+        from .home.views import home, admin, miscellaneous
+        from .home.views.vocabulary import vocabulary, vocabulary_ajax
 
         app.register_blueprint(home.home_bp)
+
         app.register_blueprint(vocabulary.vocabulary_bp)
+        app.register_blueprint(vocabulary_ajax.vocabulary_ajax_bp)
+
         app.register_blueprint(admin.admin_bp)
+
         app.register_blueprint(miscellaneous.miscellaneous_bp)
 
         return app

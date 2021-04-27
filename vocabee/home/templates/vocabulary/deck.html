@@ -51,7 +51,7 @@
 
     <script>
         // Set download url (href) based on the dropdown selection
-        let urlBase = "{{ url_for('vocabulary.get_anki_deck', vocab_level=5) }}";
+        let urlBase = "{{ url_for('vocabulary_ajax.vocabulary_download_deck', vocab_level=5) }}";
         let downloadBtn = $("#deckDownloadBtn")[0];
         downloadBtn.href = urlBase;
 

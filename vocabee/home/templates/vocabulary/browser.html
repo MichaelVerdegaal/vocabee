@@ -83,7 +83,7 @@
     <script type="text/javascript">
         // Initialize vocabulary table
         let level = {{ level }};
-        let vocabEndpoint = "{{ url_for('vocabulary.ajax_vocabulary_full', vocab_level=5) }}";
+        let vocabEndpoint = "{{ url_for('vocabulary_ajax.vocabulary_full_get', vocab_level=5) }}";
 
         $(document).ready(function () {
             createVocabTable(vocabEndpoint, level);
