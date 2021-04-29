@@ -44,7 +44,7 @@ def vocabulary_entry_update():
     data = dict(request.form)
     update_vocab(data['id'], data['kanji'], data['kana'], data['meaning'], data['jlpt_level'])
     print(f"Updated vocabulary entry {data['id']}")
-    return {'status': 'success'}
+    return {'status': 'success'}, 200
 
 
 @vocabulary_ajax_bp.route('/source/entry/add', methods=['POST'])
@@ -56,7 +56,7 @@ def vocabulary_entry_add():
     data = dict(request.form)
     add_vocab(data['kanji'], data['kana'], data['meaning'], data['jlpt_level'])
     print("Added new vocabulary entry")
-    return {'status': 'success'}
+    return {'status': 'success'}, 200
 
 
 @vocabulary_ajax_bp.route('/source/entry/delete', methods=['POST'])
@@ -68,7 +68,7 @@ def vocabulary_entry_delete():
     data = dict(request.form)
     delete_vocab(data['id'])
     print(f"Deleted vocabulary entry {data['id']}")
-    return {'status': 'success'}
+    return {'status': 'success'}, 200
 
 
 @vocabulary_ajax_bp.route('/source/anki/<int:vocab_level>')
@@ -78,7 +78,6 @@ def vocabulary_download_deck(vocab_level):
     :param vocab_level: Valid JLPT vocabulary level (1-5)
     :return: downloaded file
     """
-
     vocab = get_vocab_by_level(vocab_level)
     # TODO make a proper constant for the static folder
     project_root = Path(vocabulary_ajax_bp.root_path).parents[3]
@@ -90,7 +89,5 @@ def vocabulary_download_deck(vocab_level):
     with open(path, 'rb') as f:
         data = f.readlines()
     os.remove(path)
-    return Response(data, headers={
-        'Content-Type': 'application/octet-stream',
-        'Content-Disposition': 'attachment; filename=%s;' % filename
-    })
+    return Response(data, headers={'Content-Type': 'application/octet-stream',
+                                   f'Content-Disposition': 'attachment; filename={filename};'}), 200
