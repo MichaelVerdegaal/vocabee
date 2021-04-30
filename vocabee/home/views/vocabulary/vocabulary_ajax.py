@@ -6,6 +6,7 @@ from flask import Blueprint, request, Response
 from vocabee.util.anki_util import create_deck_by_level
 from vocabee.util.queries import get_vocab_by_level, get_vocab_by_id, update_vocab, add_vocab, delete_vocab
 from vocabee.util.vocabulary_util import process_vocabulary
+from vocabee.util.view_util import create_status
 
 vocabulary_ajax_bp = Blueprint('vocabulary_ajax', __name__, url_prefix='/vocabulary/ajax')
 
@@ -18,21 +19,28 @@ def vocabulary_full_get(vocab_level):
     :return: vocabulary in JSON
     """
     if 0 < vocab_level < 6:
-        vocab = process_vocabulary(get_vocab_by_level(vocab_level))
-        return vocab
+        status, vocab = get_vocab_by_level(vocab_level)
+        if status['code'] == 200:
+            vocab = process_vocabulary(vocab)
+            return vocab, 200
+        else:
+            return status, 500
     else:
-        "Faulty vocabulary level"
+        return create_status(400, "Faulty vocabulary level"), 400
 
 
 @vocabulary_ajax_bp.route('/source/entry/get/<int:vocab_id>')
 def vocabulary_entry_get(vocab_id):
-    """/vocab
+    """
     AJAX endpoint to retrieve vocabulary
     :param vocab_id: vocabulary id
     :return: vocabulary entry in JSON
     """
-    entry = get_vocab_by_id(vocab_id)
-    return entry.to_dict() if entry else ""
+    status, entry = get_vocab_by_id(vocab_id)
+    if entry:
+        return entry.to_dict(), 200
+    else:
+        return status, 500
 
 
 @vocabulary_ajax_bp.route('/source/entry/update', methods=['POST'])
@@ -42,9 +50,11 @@ def vocabulary_entry_update():
     :return: status
     """
     data = dict(request.form)
-    update_vocab(data['id'], data['kanji'], data['kana'], data['meaning'], data['jlpt_level'])
-    print(f"Updated vocabulary entry {data['id']}")
-    return {'status': 'success'}, 200
+    status = update_vocab(data['id'], data['kanji'], data['kana'], data['meaning'], data['jlpt_level'])
+    if status['code'] == 200:
+        return status, 200
+    else:
+        return status, 500
 
 
 @vocabulary_ajax_bp.route('/source/entry/add', methods=['POST'])
@@ -54,9 +64,11 @@ def vocabulary_entry_add():
     :return: status
     """
     data = dict(request.form)
-    add_vocab(data['kanji'], data['kana'], data['meaning'], data['jlpt_level'])
-    print("Added new vocabulary entry")
-    return {'status': 'success'}, 200
+    status = add_vocab(data['kanji'], data['kana'], data['meaning'], data['jlpt_level'])
+    if status['code'] == 200:
+        return status, 200
+    else:
+        return status, 500
 
 
 @vocabulary_ajax_bp.route('/source/entry/delete', methods=['POST'])
@@ -66,9 +78,11 @@ def vocabulary_entry_delete():
     :return: status
     """
     data = dict(request.form)
-    delete_vocab(data['id'])
-    print(f"Deleted vocabulary entry {data['id']}")
-    return {'status': 'success'}, 200
+    status = delete_vocab(data['id'])
+    if status['code'] == 200:
+        return status, 200
+    else:
+        return status, 500
 
 
 @vocabulary_ajax_bp.route('/source/anki/<int:vocab_level>')
@@ -78,16 +92,19 @@ def vocabulary_download_deck(vocab_level):
     :param vocab_level: Valid JLPT vocabulary level (1-5)
     :return: downloaded file
     """
-    vocab = get_vocab_by_level(vocab_level)
-    # TODO make a proper constant for the static folder
-    project_root = Path(vocabulary_ajax_bp.root_path).parents[3]
-    filename = f'vocabee{vocab_level}.apkg'
-    path = os.path.join(project_root, filename)
-    create_deck_by_level(vocab, vocab_level, filename)
+    status, vocab = get_vocab_by_level(vocab_level)
+    if status['code'] == 200:
+        # TODO make a proper constant for the static folder
+        project_root = Path(vocabulary_ajax_bp.root_path).parents[3]
+        filename = f'vocabee{vocab_level}.apkg'
+        path = os.path.join(project_root, filename)
+        create_deck_by_level(vocab, vocab_level, filename)
 
-    # Ref: https://stackoverflow.com/a/57998006/7174982
-    with open(path, 'rb') as f:
-        data = f.readlines()
-    os.remove(path)
-    return Response(data, headers={'Content-Type': 'application/octet-stream',
-                                   f'Content-Disposition': 'attachment; filename={filename};'}), 200
+        # Ref: https://stackoverflow.com/a/57998006/7174982
+        with open(path, 'rb') as f:
+            data = f.readlines()
+        os.remove(path)
+        return Response(data, headers={'Content-Type': 'application/octet-stream',
+                                       f'Content-Disposition': 'attachment; filename={filename};'}), 200
+    else:
+        return status, 500
