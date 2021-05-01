@@ -5,8 +5,8 @@ from flask import Blueprint, request, Response
 
 from vocabee.util.anki_util import create_deck_by_level
 from vocabee.util.queries import get_vocab_by_level, get_vocab_by_id, update_vocab, add_vocab, delete_vocab
-from vocabee.util.vocabulary_util import process_vocabulary
 from vocabee.util.view_util import create_status
+from vocabee.util.vocabulary_util import process_vocabulary
 
 vocabulary_ajax_bp = Blueprint('vocabulary_ajax', __name__, url_prefix='/vocabulary/ajax')
 

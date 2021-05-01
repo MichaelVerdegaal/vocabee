@@ -4,6 +4,7 @@
     <title>Anki decks - VocaBee</title>
     <!--Stylesheets -->
     <link href="{{ url_for('static', filename='css/components/cards.css') }}" rel="stylesheet">
+    <script src="{{ url_for('static', filename='js/admin_editor.js') }}"></script>
 
     <div class="container-fluid text-container">
         <h1>Editor</h1>
@@ -142,44 +143,10 @@
         </div>
     </div>
 
-    <script>
-        function clearFields() {
-            $('#vocab_id_input').val("");
-            $('#kanjiOld').val("");
-            $('#kanaOld').val("");
-            $('#meaningOld').val("");
-            $('#jlptOld').val("");
-            $('#kanjiNew').val("");
-            $('#kanaNew').val("");
-            $('#meaningNew').val("");
-        }
-
-
+    <script type="text/javascript">
         $('#vocabEntryGetBtn').click(function () {
             let urlBase = "{{ url_for('vocabulary_ajax.vocabulary_entry_get', vocab_id=5) }}";
-            let vocabID = $('#vocab_id_input').val();
-            let requestUrl = urlBase.slice(0, -1) + vocabID;
-            clearFields();
-
-            $.ajax({
-                url: requestUrl,
-                type: "GET",
-                success: function (result) {
-                    if (result === "") {
-                        alert("Entry not found");
-                    } else {
-                        $('#vocab_id_input').val(vocabID);
-                        $('#kanjiOld').val(result.kanji);
-                        $('#kanaOld').val(result.hiragana);
-                        $('#meaningOld').val(result.english);
-                        $('#jlptOld').val(result.jlpt_level);
-                        $('#kanjiNew').val(result.kanji);
-                        $('#kanaNew').val(result.hiragana);
-                        $('#meaningNew').val(result.english);
-                        $('#jlptNew').val(result.jlpt_level);
-                    }
-                }
-            });
+            vocabEntryGet(urlBase);
         });
 
         $('#vocabClearBtn').click(function () {
@@ -187,60 +154,20 @@
         });
 
         $('#vocabDeleteBtn').click(function () {
-            let c = confirm("Are you sure you want to delete this entry?")
-            if (c === true) {
-                let urlBase = "{{ url_for('vocabulary_ajax.vocabulary_entry_delete') }}";
-                let vocabID = $('#vocab_id_input').val();
-
-                $.ajax({
-                    url: urlBase,
-                    type: "POST",
-                    data: {id: vocabID},
-                });
-
-                clearFields();
-                alert("Entry " + vocabID + " deleted");
-            }
+            let urlBase = "{{ url_for('vocabulary_ajax.vocabulary_entry_delete') }}";
+            vocabEntryDelete(urlBase);
         });
 
         $('#vocabUpdateBtn').click(function () {
-            let c = confirm("Are you sure you want to update this entry?")
-            if (c === true) {
-                let urlBase = "{{ url_for('vocabulary_ajax.vocabulary_entry_update') }}";
-                let vocabID = $('#vocab_id_input').val();
-                let kanji = $('#kanjiNew').val();
-                let kana = $('#kanaNew').val();
-                let meaning = $('#meaningNew').val();
-                let jlpt_level = $('#jlptNew').val();
-                console.log(jlpt_level);
-
-                $.ajax({
-                    url: urlBase,
-                    type: "POST",
-                    data: {id: vocabID, kanji: kanji, kana: kana, meaning: meaning, jlpt_level: jlpt_level},
-                });
-
-                alert("Entry " + vocabID + " updated");
-            }
+            let urlBase = "{{ url_for('vocabulary_ajax.vocabulary_entry_update') }}";
+            vocabEntryUpdate(urlBase);
         });
 
         $('#vocabAddBtn').click(function () {
-            let c = confirm("Are you sure you want to add this entry?")
-            if (c === true) {
-                let urlBase = "{{ url_for('vocabulary_ajax.vocabulary_entry_add') }}";
-                let kanji = $('#kanjiNew').val();
-                let kana = $('#kanaNew').val();
-                let meaning = $('#meaningNew').val();
-                let jlpt_level = $('#jlptNew').val();
-
-                $.ajax({
-                    url: urlBase,
-                    type: "POST",
-                    data: {kanji: kanji, kana: kana, meaning: meaning, jlpt_level: jlpt_level},
-                });
-
-                alert("Entry " + 0 + " updated");
-            }
+            let urlBase = "{{ url_for('vocabulary_ajax.vocabulary_entry_add') }}";
+            vocabEntryAdd(urlBase);
         });
+
     </script>
+
 {% endblock %}
