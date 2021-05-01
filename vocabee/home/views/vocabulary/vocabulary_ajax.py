@@ -40,7 +40,7 @@ def vocabulary_entry_get(vocab_id):
     if entry:
         return entry.to_dict(), 200
     else:
-        return status, 500
+        return status, status['code']
 
 
 @vocabulary_ajax_bp.route('/source/entry/update', methods=['POST'])
@@ -49,7 +49,8 @@ def vocabulary_entry_update():
     AJAX endpoint to update a vocabulary entry
     :return: status
     """
-    data = dict(request.form)
+    # TODO this function breaks if data is emppty, due to dict accessing empty values
+    data = request.json
     status = update_vocab(data['id'], data['kanji'], data['kana'], data['meaning'], data['jlpt_level'])
     if status['code'] == 200:
         return status, 200
@@ -63,7 +64,8 @@ def vocabulary_entry_add():
     AJAX endpoint to add a vocabulary entry
     :return: status
     """
-    data = dict(request.form)
+    # TODO this function breaks if data is emppty, due to dict accessing empty values
+    data = request.json
     status = add_vocab(data['kanji'], data['kana'], data['meaning'], data['jlpt_level'])
     if status['code'] == 200:
         return status, 200
@@ -77,7 +79,8 @@ def vocabulary_entry_delete():
     AJAX endpoint to add a vocabulary entry
     :return: status
     """
-    data = dict(request.form)
+    # TODO this function breaks if data is emppty, due to dict accessing empty values
+    data = request.json
     status = delete_vocab(data['id'])
     if status['code'] == 200:
         return status, 200

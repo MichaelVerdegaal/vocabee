@@ -10,7 +10,7 @@ def create_status(code=200, description=None):
     if description:
         status['description'] = description
     else:
-        if code is 200:
+        if code == 200:
             status['description'] = "Request was successful"
         else:
             status['description'] = "Request threw an error, but the error was not specified"

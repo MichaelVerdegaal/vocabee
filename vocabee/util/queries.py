@@ -27,7 +27,10 @@ def get_vocab_by_id(vocab_id):
     """
     try:
         entry = Vocabulary.query.filter_by(id=vocab_id).one_or_none()
-        return create_status(), entry
+        if entry:
+            return create_status(), entry
+        else:
+            return create_status(404), None
     except SQLAlchemyError as e:
         return create_status(500, str(e)), None
 
@@ -67,9 +70,9 @@ def add_vocab(kanji, kana, meaning, jlpt_level):
                            jlpt_level=jlpt_level)
         db.session.add(entry)
         db.session.commit()
-        return create_status(), None
+        return create_status()
     except SQLAlchemyError as e:
-        return create_status(500, str(e)), None
+        return create_status(500, str(e))
 
 
 def delete_vocab(vocab_id):
@@ -80,6 +83,6 @@ def delete_vocab(vocab_id):
     try:
         Vocabulary.query.filter_by(id=vocab_id).delete()
         db.session.commit()
-        return create_status(), 200
+        return create_status()
     except SQLAlchemyError as e:
-        return create_status(500, str(e)), None
+        return create_status(500, str(e))
