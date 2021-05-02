@@ -99,6 +99,7 @@ def vocabulary_download_deck(vocab_level):
     :return: downloaded file
     """
     status, vocab = get_vocab_by_level(vocab_level)
+    print(status)
     if status['code'] == 200:
         # TODO make a proper constant for the static folder
         project_root = Path(vocabulary_ajax_bp.root_path).parents[3]
@@ -111,6 +112,6 @@ def vocabulary_download_deck(vocab_level):
             data = f.readlines()
         os.remove(path)
         return Response(data, headers={'Content-Type': 'application/octet-stream',
-                                       f'Content-Disposition': 'attachment; filename={filename};'}), 200
+                                       'Content-Disposition': f'attachment; filename={filename};'}), 200
     else:
         return status, 500
