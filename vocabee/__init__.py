@@ -32,7 +32,7 @@ def create_app():
         app.register_blueprint(vocabulary.vocabulary_bp)
         app.register_blueprint(vocabulary_ajax.vocabulary_ajax_bp)
 
-        app.register_blueprint(admin.admin_bp)
+        # app.register_blueprint(admin.admin_bp)
 
         app.register_blueprint(miscellaneous.miscellaneous_bp)
 
