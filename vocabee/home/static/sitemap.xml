@@ -1,48 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-    <url>
-        <loc>https://www.vocabee.xyz/</loc>
-        <lastmod>2020-10-11T13:49:14+01:00</lastmod>
-        <priority>1.0</priority>
-    </url>
-    <url>
-        <loc>https://www.vocabee.xyz/vocab</loc>
-        <lastmod>2020-10-11T13:49:15+01:00</lastmod>
-        <priority>1.0</priority>
-    </url>
-    <url>
-        <loc>https://www.vocabee.xyz/deck</loc>
-        <lastmod>2020-10-11T13:49:17+01:00</lastmod>
-        <priority>1.0</priority>
-    </url>
-    <url>
-        <loc>https://www.vocabee.xyz/vocab/5</loc>
-        <lastmod>2020-10-11T13:49:17+01:00</lastmod>
-        <priority>0.8</priority>
-    </url>
-    <url>
-        <loc>https://www.vocabee.xyz/vocab/4</loc>
-        <lastmod>2020-10-11T13:49:17+01:00</lastmod>
-        <priority>0.8</priority>
-    </url>
-    <url>
-        <loc>https://www.vocabee.xyz/vocab/3</loc>
-        <lastmod>2020-10-11T13:49:18+01:00</lastmod>
-        <priority>0.8</priority>
-    </url>
-    <url>
-        <loc>https://www.vocabee.xyz/vocab/2</loc>
-        <lastmod>2020-10-11T13:49:18+01:00</lastmod>
-        <priority>0.8</priority>
-    </url>
-    <url>
-        <loc>https://www.vocabee.xyz/vocab/1</loc>
-        <lastmod>2020-10-11T13:49:18+01:00</lastmod>
-        <priority>0.8</priority>
-    </url>
-    <url>
-        <loc>https://www.vocabee.xyz/about</loc>
-        <lastmod>2020-11-29T19:50:18+01:00</lastmod>
-        <priority>0.8</priority>
-    </url>
+		<!--	created with www.mysitemapgenerator.com	-->
+		<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<url>
+	<loc>https://www.vocabee.xyz/</loc>
+	<lastmod>2021-05-02T16:35:23+01:00</lastmod>
+	<priority>1.0</priority>
+</url>
+<url>
+	<loc>https://www.vocabee.xyz/vocabulary/index</loc>
+	<lastmod>2021-05-02T16:35:23+01:00</lastmod>
+	<priority>0.8</priority>
+</url>
+<url>
+	<loc>https://www.vocabee.xyz/vocabulary/deck</loc>
+	<lastmod>2021-05-02T16:35:26+01:00</lastmod>
+	<priority>0.8</priority>
+</url>
+<url>
+	<loc>https://www.vocabee.xyz/about</loc>
+	<lastmod>2021-05-02T16:35:26+01:00</lastmod>
+	<priority>1.0</priority>
+</url>
+<url>
+	<loc>https://www.vocabee.xyz/vocabulary/browser/5</loc>
+	<lastmod>2021-05-02T16:35:26+01:00</lastmod>
+	<priority>0.6</priority>
+</url>
+<url>
+	<loc>https://www.vocabee.xyz/vocabulary/browser/4</loc>
+	<lastmod>2021-05-02T16:35:26+01:00</lastmod>
+	<priority>0.6</priority>
+</url>
+<url>
+	<loc>https://www.vocabee.xyz/vocabulary/browser/3</loc>
+	<lastmod>2021-05-02T16:35:27+01:00</lastmod>
+	<priority>0.6</priority>
+</url>
+<url>
+	<loc>https://www.vocabee.xyz/vocabulary/browser/2</loc>
+	<lastmod>2021-05-02T16:35:27+01:00</lastmod>
+	<priority>0.6</priority>
+</url>
+<url>
+	<loc>https://www.vocabee.xyz/vocabulary/browser/1</loc>
+	<lastmod>2021-05-02T16:35:27+01:00</lastmod>
+	<priority>0.6</priority>
+</url>
 </urlset>
