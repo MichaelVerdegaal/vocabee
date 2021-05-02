@@ -70,7 +70,7 @@ def add_vocab(kanji, kana, meaning, jlpt_level):
                            jlpt_level=jlpt_level)
         db.session.add(entry)
         db.session.commit()
-        return create_status()
+        return create_status(vocab_id=entry.id)
     except SQLAlchemyError as e:
         return create_status(500, str(e))
 

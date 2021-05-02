@@ -98,8 +98,10 @@ function vocabEntryAdd(urlBase) {
         postRequest(urlBase, {kanji: kanji, kana: kana, meaning: meaning, jlpt_level: jlpt_level})
             .then(isOk)
             .then(response => {
-                alert("Entry " + " added");
+                let vocabID = response.body.vocab_id;
+                alert("Entry " + vocabID + " added");
                 clearFields();
+                $('#vocab_id_input').val(vocabID);
             })
             .catch(error => {
                 console.log(error);
