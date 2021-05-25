@@ -26,13 +26,15 @@ def create_app():
         from .home import models
         from .home.views import home, admin, miscellaneous
         from .home.views.vocabulary import vocabulary, vocabulary_ajax
+        from .home.views.example import example_ajax
 
         app.register_blueprint(home.home_bp)
 
         app.register_blueprint(vocabulary.vocabulary_bp)
         app.register_blueprint(vocabulary_ajax.vocabulary_ajax_bp)
+        app.register_blueprint(example_ajax.example_ajax_bp)
 
-        # app.register_blueprint(admin.admin_bp)
+        app.register_blueprint(admin.admin_bp)
 
         app.register_blueprint(miscellaneous.miscellaneous_bp)
 

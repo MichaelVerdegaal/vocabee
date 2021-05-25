@@ -3,16 +3,22 @@
 {% block container %}
     <title>Anki decks - VocaBee</title>
     <!--Stylesheets -->
+    <link href="{{ url_for('static', filename='css/pages/vocab.css') }}" rel="stylesheet">
     <link href="{{ url_for('static', filename='css/components/cards.css') }}" rel="stylesheet">
     <script src="{{ url_for('static', filename='js/admin_editor.js') }}"></script>
+    <!--Ref: https://datatables.net/ -->
+    <!--Ref: Option 1 - Bootstrap / Option 2 DataTables / Option 3 Responsive) -->
+    <link rel="stylesheet" type="text/css"
+          href="https://cdn.datatables.net/v/bs4/dt-1.10.20/r-2.2.3/datatables.min.css"/>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.20/r-2.2.3/datatables.min.js"></script>
+    <script src="{{ url_for('static', filename='js/full_numbers_no_ellipses.js') }}"></script>
 
     <div class="container-fluid text-container">
         <h1>Editor</h1>
         <p>
             Large chance you're not supposed to be here. If you entered this page unwillingly, please go back to <a
                 href="{{ url_for('home.home') }}">the other pages</a> . If you entered it willingly, but are nice enough
-            to not touch it, please leave a direct message on any of the VocaBee social media to let me know how you
-            did it!
+            to not touch it, please leave a direct message on any of the social media to let me know how you did it!
         </p>
     </div>
 
@@ -131,15 +137,109 @@
                 <div class="card text-center">
                     <div class="card-header">
                         <h5 class="card-title">Example editor</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">To update an entry, retrieve it, enter new values and
-                            click the save button. To create an entry, clear the fields, enter new values and click the
-                            add button. To remove an entry, retrieve it and click the remove button.</h6>
+                        <h6 class="card-subtitle mb-2 text-muted">To update an entry, select it in the scroll list, and
+                            then follow the same steps as the vocabulary editor.</h6>
                     </div>
                     <div class="card-body">
+
+                        <form>
+                            <div class="form-row">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="example-id-prepend">ID</span>
+                                    </div>
+                                    <input type="text" id="example_id_input" class="form-control" placeholder="..."
+                                           aria-label="...">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-primary action-btn" title="get entry" type="button"
+                                                id="exampleEntryGetBtn">get
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <hr>
+
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="sentenceJPOld">Current sentence JP</label>
+                                    <input type="text" class="form-control" id="sentenceJPOld" readonly>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="sentenceJPNew">New sentence JP</label>
+                                    <input type="text" class="form-control" id="sentenceJPNew">
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="sentenceENOld">Current sentence EN</label>
+                                    <input type="text" class="form-control" id="sentenceENOld" readonly>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="sentenceENNew">New sentence EN</label>
+                                    <input type="text" class="form-control" id="sentenceENNew">
+                                </div>
+                            </div>
+
+                            <br>
+                            <div id="exampleContainer" class="overflow-scroll">
+                                <button type="button" class="btn btn-outline-primary example-select"
+                                        title="Show examples" id="showExampleBtn">Show examples
+                                </button>
+                            </div>
+
+                            <hr>
+                            <div class="form-row">
+                                <div class="form-group col-3">
+                                    <button class="btn btn-primary action-btn-gray" title="clear fields" type="button"
+                                            id="exampleClearBtn">clear
+                                    </button>
+                                </div>
+                                <div class="form-group col-3">
+                                    <button class="btn btn-primary action-btn-red" title="delete entry" type="button"
+                                            id="exampleDeleteBtn">delete
+                                    </button>
+                                </div>
+                                <div class="form-group col-3">
+                                    <button class="btn btn-outline-success" title="update entry" type="button"
+                                            id="exampleUpdateBtn">update
+                                    </button>
+                                </div>
+                                <div class="form-group col-3">
+                                    <button class="btn btn-primary action-btn-green" title="add new entry" type="button"
+                                            id="exampleAddBtn">add
+                                    </button>
+                                </div>
+                            </div>
+
+
+                        </form>
+
                     </div>
                 </div>
             </div>
 
+        </div>
+    </div>
+
+    <div class="modal fade modal-fullscreen" id="vocab-modal" tabindex="-1" role="dialog"
+         aria-labelledby="modalLargeLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalLargeLabel">Examples</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="vocab-modal-body">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -150,7 +250,7 @@
         });
 
         $('#vocabClearBtn').click(function () {
-            clearFields();
+            clearVocabFields();
         });
 
         $('#vocabDeleteBtn').click(function () {
@@ -167,6 +267,32 @@
             let urlBase = "{{ url_for('vocabulary_ajax.vocabulary_entry_add') }}";
             vocabEntryAdd(urlBase);
         });
+
+        $('#showExampleBtn').click(function () {
+            showExampleOnClick();
+            $('#vocab-modal').modal('show');
+        })
+
+        $('#exampleEntryGetBtn').click(function () {
+            let urlBase = "{{ url_for('example_ajax.example_entry_get', example_id=1) }}";
+            exampleEntryGet(urlBase);
+        });
+
+        $('#exampleClearBtn').click(function () {
+            clearExampleFields();
+        })
+
+        $('#exampleDeleteBtn').click(function () {
+
+        })
+
+        $('#exampleUpdateBtn').click(function () {
+
+        })
+
+        $('#exampleAddBtn').click(function () {
+
+        })
 
     </script>
 

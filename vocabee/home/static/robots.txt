@@ -1,4 +1,5 @@
 User-agent: *
 Disallow: /admin/
-Disallow: /vocabulary/ajax/
+Disallow: /vocabulary/ajax
+Disallow: /example/ajax/
 Sitemap: https://vocabee.xyz/sitemap.xml
