@@ -1,6 +1,7 @@
 const isOk = response => response.ok ? response.json() : Promise.reject(new Error('Failed the request'))
 
 function postRequest(url, data) {
+    console.log
     return fetch(url, {
         credentials: 'same-origin',
         method: 'POST',
@@ -113,6 +114,7 @@ function vocabEntryAdd(urlBase) {
                 alert("Entry " + vocabID + " added");
                 clearVocabFields();
                 $('#vocab_id_input').val(vocabID);
+                $('#vocabEntryGetBtn').click();
             })
             .catch(error => {
                 console.log(error);
@@ -141,6 +143,29 @@ function exampleEntryGet(urlBase) {
         })
 }
 
+function exampleEntryAdd(urlBase) {
+    let c = confirm("Are you sure you want to add this entry?")
+    if (c === true) {
+        let sentence_jp = $('#sentenceJPNew').val();
+        let sentence_en = $('#sentenceENNew').val();
+        let vocab_id = $('#vocab_id_input').val();
+
+        postRequest(urlBase, {sentence_jp: sentence_jp, sentence_en: sentence_en, vocab_id: vocab_id})
+            .then(isOk)
+            .then(response => {
+                let exampleID = response.body.example_id;
+                alert("Entry " + exampleID + " added");
+                clearExampleFields();
+                $('#example_id_input').val(exampleID);
+                $('#vocabEntryGetBtn').click();
+                $('#exampleEntryGetBtn').click();
+            })
+            .catch(error => {
+                console.log(error);
+                alert("Entry couldn't be added");
+            })
+    }
+}
 
 function createExampleTable(examples) {
     let example_button = document.createElement("button");

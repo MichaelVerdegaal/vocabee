@@ -283,15 +283,18 @@
         })
 
         $('#exampleDeleteBtn').click(function () {
+            let urlBase = "{{ url_for('example_ajax.example_entry_delete', example_id=1) }}";
 
         })
 
         $('#exampleUpdateBtn').click(function () {
+            let urlBase = "{{ url_for('example_ajax.example_entry_update', example_id=1) }}";
 
         })
 
         $('#exampleAddBtn').click(function () {
-
+            let urlBase = "{{ url_for('example_ajax.example_entry_add', example_id=1) }}";
+            exampleEntryAdd(urlBase);
         })
 
     </script>
