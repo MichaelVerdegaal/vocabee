@@ -1,7 +1,4 @@
-from vocabee.home.models import Example, Vocabulary
-import json
-
-
+# TODO: can this be optimized? (maybe numpy, something else?)
 def process_vocabulary(vocabulary):
     """
     Processes vocabulary entries so they can be used for the tables
