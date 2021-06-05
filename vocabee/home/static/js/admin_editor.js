@@ -132,6 +132,8 @@ function exampleEntryGet(urlBase) {
             $('#example_id_input').val(exampleID);
             $('#sentenceJPOld').val(data.sentence_jp);
             $('#sentenceENOld').val(data.sentence_en);
+            $('#sentenceJPNew').val(data.sentence_jp);
+            $('#sentenceENNew').val(data.sentence_en);
         })
         .catch(error => {
             console.log(error);
@@ -200,7 +202,17 @@ function fillExampleModal(vocab_id, kanji, hiragana, examples) {
 
     // Init onclick
     $('.example-select').click(function () {
-        console.log('No')
+        // Get data from all rows, including hidden ones. Ref: https://stackoverflow.com/a/38515622
+        let current_row = $(this).parents('tr');
+        if (current_row.hasClass('child')) {
+            current_row = current_row.prev();
+        }
+        let row_data = $('#example-table').DataTable().row(current_row).data();
+
+        let example_id = row_data[0];
+        $('#example_id_input').val(example_id);
+        $('#vocab-modal').modal('hide');
+        $('#exampleEntryGetBtn').click();
     });
 }
 
