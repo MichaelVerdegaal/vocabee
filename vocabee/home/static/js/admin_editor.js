@@ -21,6 +21,7 @@ function clearVocabFields() {
     $('#kanjiNew').val("");
     $('#kanaNew').val("");
     $('#meaningNew').val("");
+    clearExampleFields()
 }
 
 function clearExampleFields() {
@@ -146,12 +147,12 @@ function exampleEntryGet(urlBase) {
 function exampleEntryDelete(urlBase) {
     let c = confirm("Are you sure you want to delete this entry?")
     if (c === true) {
-        let exampleID = $('#example_id_input').val();
+        let example_id = $('#example_id_input').val();
 
-        postRequest(urlBase, {id: exampleID})
+        postRequest(urlBase, {id: example_id})
             .then(isOk)
             .then(response => {
-                alert("Entry " + exampleID + " deleted");
+                alert("Entry " + example_id + " deleted");
                 clearExampleFields();
                 $('#vocabEntryGetBtn').click();
             })
@@ -163,7 +164,24 @@ function exampleEntryDelete(urlBase) {
 }
 
 function exampleEntryUpdate(urlBase) {
-    console.log("hi updat")
+    let c = confirm("Are you sure you want to update this entry?")
+    if (c === true) {
+        let example_id = $('#example_id_input').val();
+        let sentence_jp = $('#sentenceJPNew').val();
+        let sentence_en = $('#sentenceENNew').val();
+
+        postRequest(urlBase, {sentence_jp: sentence_jp, sentence_en: sentence_en, id: example_id})
+            .then(isOk)
+            .then(response => {
+                alert("Entry " + example_id + " updated");
+                $('#vocabEntryGetBtn').click();
+                $('#exampleEntryGetBtn').click();
+            })
+            .catch(error => {
+                console.log(error);
+                alert("Entry couldn't be updated");
+            })
+    }
 }
 
 function exampleEntryAdd(urlBase) {
@@ -179,8 +197,8 @@ function exampleEntryAdd(urlBase) {
                 let exampleID = response.body.example_id;
                 alert("Entry " + exampleID + " added");
                 clearExampleFields();
-                $('#example_id_input').val(exampleID);
                 $('#vocabEntryGetBtn').click();
+                $('#example_id_input').val(exampleID);
                 $('#exampleEntryGetBtn').click();
             })
             .catch(error => {
