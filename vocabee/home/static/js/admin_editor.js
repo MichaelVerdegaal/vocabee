@@ -143,6 +143,29 @@ function exampleEntryGet(urlBase) {
         })
 }
 
+function exampleEntryDelete(urlBase) {
+    let c = confirm("Are you sure you want to delete this entry?")
+    if (c === true) {
+        let exampleID = $('#example_id_input').val();
+
+        postRequest(urlBase, {id: exampleID})
+            .then(isOk)
+            .then(response => {
+                alert("Entry " + exampleID + " deleted");
+                clearExampleFields();
+                $('#vocabEntryGetBtn').click();
+            })
+            .catch(error => {
+                console.log(error);
+                alert("Entry couldn't be deleted");
+            })
+    }
+}
+
+function exampleEntryUpdate(urlBase) {
+    console.log("hi updat")
+}
+
 function exampleEntryAdd(urlBase) {
     let c = confirm("Are you sure you want to add this entry?")
     if (c === true) {

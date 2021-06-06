@@ -284,12 +284,12 @@
 
         $('#exampleDeleteBtn').click(function () {
             let urlBase = "{{ url_for('example_ajax.example_entry_delete', example_id=1) }}";
-
+            exampleEntryDelete(urlBase);
         })
 
         $('#exampleUpdateBtn').click(function () {
             let urlBase = "{{ url_for('example_ajax.example_entry_update', example_id=1) }}";
-
+            exampleEntryUpdate(urlBase);
         })
 
         $('#exampleAddBtn').click(function () {
