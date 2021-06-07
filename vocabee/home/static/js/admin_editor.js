@@ -280,7 +280,7 @@ function createExampleTable(examples) {
     });
 }
 
-function fillExampleModal(vocab_id, kanji, hiragana, examples) {
+function fillExampleModal(vocab_id, kanji, kana, examples) {
     /**
      * Fills the example modal
      * @param {String} vocab_id - vocabulary id
@@ -308,7 +308,7 @@ function fillExampleModal(vocab_id, kanji, hiragana, examples) {
     // Set modal title
     let modal_title = document.getElementById("modalLargeLabel");
     if (typeof kanji !== 'undefined') {
-        modal_title.textContent = `Showing examples for ${kanji}/${hiragana}`;
+        modal_title.textContent = `Showing examples for ${kanji}/${kana}`;
     } else {
         modal_title.textContent = `Showing examples for ${hiragana}`;
     }
