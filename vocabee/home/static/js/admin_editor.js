@@ -1,7 +1,9 @@
 const isOk = response => response.ok ? response.json() : Promise.reject(new Error('Failed the request'))
 
 function postRequest(url, data) {
-    console.log
+    /**
+     * Helper function to send a post request.
+     */
     return fetch(url, {
         credentials: 'same-origin',
         method: 'POST',
@@ -13,6 +15,9 @@ function postRequest(url, data) {
 
 
 function clearVocabFields() {
+    /**
+     * Clears the input vields from the vocabulary editor
+     */
     $('#vocab_id_input').val("");
     $('#kanjiOld').val("");
     $('#kanaOld').val("");
@@ -21,10 +26,12 @@ function clearVocabFields() {
     $('#kanjiNew').val("");
     $('#kanaNew').val("");
     $('#meaningNew').val("");
-    clearExampleFields()
 }
 
 function clearExampleFields() {
+    /**
+     * Clears the input fields from the example editor
+     */
     $('#example_id_input').val("")
     $('#sentenceJPOld').val("");
     $('#sentenceJPNew').val("");
@@ -32,8 +39,11 @@ function clearExampleFields() {
     $('#sentenceENNew').val("");
 }
 
-
 function vocabEntryGet(urlBase) {
+    /**
+     * Retrieves a vocabulary entry
+     * @param {String} urlBase - endpoint to send request to
+     */
     let vocabID = $('#vocab_id_input').val();
     let requestUrl = urlBase.slice(0, -1) + vocabID;
     clearVocabFields();
@@ -59,8 +69,11 @@ function vocabEntryGet(urlBase) {
         })
 }
 
-
 function vocabEntryDelete(urlBase) {
+    /**
+     * Deletes a vocabulary entry
+     * @param {String} urlBase - endpoint to send request to
+     */
     let c = confirm("Are you sure you want to delete this entry?")
     if (c === true) {
         let vocabID = $('#vocab_id_input').val();
@@ -79,6 +92,10 @@ function vocabEntryDelete(urlBase) {
 }
 
 function vocabEntryUpdate(urlBase) {
+    /**
+     * Updates a vocabulary entry
+     * @param {String} urlBase - endpoint to send request to
+     */
     let c = confirm("Are you sure you want to update this entry?")
     if (c === true) {
         let vocabID = $('#vocab_id_input').val();
@@ -101,6 +118,10 @@ function vocabEntryUpdate(urlBase) {
 }
 
 function vocabEntryAdd(urlBase) {
+    /**
+     * Adds a vocabulary entry
+     * @param {String} urlBase - endpoint to send request to
+     */
     let c = confirm("Are you sure you want to add this entry?")
     if (c === true) {
         let kanji = $('#kanjiNew').val();
@@ -125,6 +146,10 @@ function vocabEntryAdd(urlBase) {
 }
 
 function exampleEntryGet(urlBase) {
+    /**
+     * Retrieves an example entry
+     * @param {String} urlBase - endpoint to send request to
+     */
     let exampleID = $('#example_id_input').val();
     let requestUrl = urlBase.slice(0, -1) + exampleID;
     clearExampleFields();
@@ -145,6 +170,10 @@ function exampleEntryGet(urlBase) {
 }
 
 function exampleEntryDelete(urlBase) {
+    /**
+     * Deletes an example entry
+     * @param {String} urlBase - endpoint to send request to
+     */
     let c = confirm("Are you sure you want to delete this entry?")
     if (c === true) {
         let example_id = $('#example_id_input').val();
@@ -164,6 +193,10 @@ function exampleEntryDelete(urlBase) {
 }
 
 function exampleEntryUpdate(urlBase) {
+    /**
+     * Updates an example entry
+     * @param {String} urlBase - endpoint to send request to
+     */
     let c = confirm("Are you sure you want to update this entry?")
     if (c === true) {
         let example_id = $('#example_id_input').val();
@@ -185,6 +218,10 @@ function exampleEntryUpdate(urlBase) {
 }
 
 function exampleEntryAdd(urlBase) {
+    /**
+     * Adds an example entry
+     * @param {String} urlBase - endpoint to send request to
+     */
     let c = confirm("Are you sure you want to add this entry?")
     if (c === true) {
         let sentence_jp = $('#sentenceJPNew').val();
@@ -209,6 +246,10 @@ function exampleEntryAdd(urlBase) {
 }
 
 function createExampleTable(examples) {
+    /**
+     * Creates an example datatable
+     * @param {Array} examples - array of example sentences
+     */
     let example_button = document.createElement("button");
     example_button.type = "button";
     example_button.title = "Select example";
@@ -239,8 +280,14 @@ function createExampleTable(examples) {
     });
 }
 
-
 function fillExampleModal(vocab_id, kanji, hiragana, examples) {
+    /**
+     * Fills the example modal
+     * @param {String} vocab_id - vocabulary id
+     * @param {String} kanji - kanji item
+     * @param {String} kana - kana item
+     * @param {Array} exanokes - array of example sentences
+     */
     let modal_content = document.getElementById("vocab-modal-body");
     modal_content.innerHTML = '';
 
@@ -283,6 +330,9 @@ function fillExampleModal(vocab_id, kanji, hiragana, examples) {
 }
 
 function showExampleOnClick() {
+    /**
+     * Shows the example datatable and fills it on button click
+     */
     let vocabID = $('#vocab_id_input').val();
     let kanji = $('#kanjiOld').val();
     let kana = $('#kanaOld').val();
