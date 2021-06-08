@@ -245,40 +245,6 @@ function exampleEntryAdd(urlBase) {
     }
 }
 
-function createExampleTable(examples) {
-    /**
-     * Creates an example datatable
-     * @param {Array} examples - array of example sentences
-     */
-    let example_button = crel('button', {
-        'type': 'button',
-        'title': 'Select example',
-        'id': 'selectExampleBtn',
-        'class': 'btn btn-outline-primary example-select',
-    }, 'select')
-
-
-    $("#example-table").DataTable({
-        data: examples,
-        columns: [
-            {title: "ID"},
-            {title: "English"},
-            {title: "Japanese"},
-            {
-                data: null,
-                "defaultContent": example_button.outerHTML
-            }
-
-        ],
-        paging: false,
-        bSortClasses: false,
-        deferRender: true,
-        responsive: false,
-        oLanguage: {
-            "sEmptyTable": "No examples available for this entry..."
-        },
-    });
-}
 
 function fillExampleModal(vocab_id, kanji, kana, examples) {
     /**
@@ -297,7 +263,19 @@ function fillExampleModal(vocab_id, kanji, kana, examples) {
     exampleTableContainer.appendChild(exampleTable);
     modal_content.appendChild(exampleTableContainer);
 
-    createExampleTable(examples);
+    let example_button = crel('button', {
+        'type': 'button',
+        'title': 'Select example',
+        'id': 'selectExampleBtn',
+        'class': 'btn btn-outline-primary example-select',
+    }, 'select')
+    let example_columns = [
+        {title: "ID"},
+        {title: "English"},
+        {title: "Japanese"},
+        {data: null,"defaultContent": example_button.outerHTML}
+    ];
+    createExampleTable(examples, example_columns);
 
     // Set modal title
     let modal_title = document.getElementById("modalLargeLabel");
