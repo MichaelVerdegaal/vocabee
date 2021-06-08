@@ -103,10 +103,10 @@ function createExampleTable(examples) {
  *
  * @param {string} vocab_id - ID of vocabulary entry related to examples
  * @param {String} kanji - Example kanji
- * @param {String} hiragana - Example hiragana
+ * @param {String} kana - Example kana
  * @param {Array} examples - List of example sentences
  */
-function fillExampleModal(vocab_id, kanji, hiragana, examples) {
+function fillExampleModal(vocab_id, kanji, kana, examples) {
     let modal_content = document.getElementById("vocab-modal-body");
     modal_content.innerHTML = '';
 
@@ -133,7 +133,7 @@ function exampleOnClick(row_data) {
     let vocab_id = row_data[0];
     // Ref: https://stackoverflow.com/questions/7864723#7864740
     let kanji = row_data[1].split(/<a[^>]*>([\s\S]*?)<\/a>/)[1];
-    let hiragana = row_data[2].split(/<a[^>]*>([\s\S]*?)<\/a>/)[1];
+    let kana = row_data[2].split(/<a[^>]*>([\s\S]*?)<\/a>/)[1];
     let examples = row_data[4]
-    fillExampleModal(vocab_id, kanji, hiragana, examples);
+    fillExampleModal(vocab_id, kanji, kana, examples);
 }
