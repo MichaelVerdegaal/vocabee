@@ -8,11 +8,13 @@
 function createVocabTable(vocabEndpoint, level) {
     let endpoint = vocabEndpoint.slice(0, -1) + level;
 
-    let example_button = document.createElement("button");
-    example_button.type = "button";
-    example_button.title = "Show examples";
-    example_button.innerText = "show";
-    example_button.className = "btn btn-outline-primary example-select";
+    let example_button = crel('button', {
+        'type': 'button',
+        'title': 'Show examples',
+        'id': 'selectExampleBtn',
+        'class': 'btn btn-outline-primary example-select',
+    }, 'show')
+
 
     $("#vocab-table").DataTable({
         ajax: {
@@ -76,7 +78,7 @@ function createVocabTable(vocabEndpoint, level) {
 /**
  * Generate and fill a datatable with example data
  *
-* @param {Array} examples - List of example sentences
+ * @param {Array} examples - List of example sentences
  */
 function createExampleTable(examples) {
     $("#example-table").DataTable({
@@ -108,27 +110,17 @@ function fillExampleModal(vocab_id, kanji, hiragana, examples) {
     let modal_content = document.getElementById("vocab-modal-body");
     modal_content.innerHTML = '';
 
-    let exampleTableContainer = document.createElement("div");
-    exampleTableContainer.className = "container-fluid";
-    exampleTableContainer.id = "example-table-container";
-
-    let exampleTable = document.createElement("table");
-    exampleTable.className = "table table-striped table-hover";
-    exampleTable.id = "example-table";
+    let exampleTableContainer = crel('div', {'id': 'example-table-container', 'class': 'container-fluid'})
+    let exampleTable = crel('table', {'id': 'example-table', 'class': 'table table-striped table-hover'});
 
     exampleTableContainer.appendChild(exampleTable);
-    exampleTableContainer.appendChild(document.createElement("th"));
     modal_content.appendChild(exampleTableContainer);
 
     createExampleTable(examples);
 
     // Set modal title
     let modal_title = document.getElementById("modalLargeLabel");
-    if (typeof kanji !== 'undefined') {
-        modal_title.textContent = `Showing examples for ${kanji}/${hiragana}`;
-    } else {
-        modal_title.textContent = `Showing examples for ${hiragana}`;
-    }
+    modal_title.textContent = kanji !== '' ? `Showing examples for ${kanji}/${kana}` : `Showing examples for ${kana}`;
 }
 
 /**
