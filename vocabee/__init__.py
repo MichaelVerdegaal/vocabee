@@ -6,6 +6,7 @@ from flask import Flask
 from flask_caching import Cache
 from flask_sqlalchemy import SQLAlchemy
 from flask_sqlalchemy_caching import CachingQuery
+from flask_minify import minify
 
 project_folder = os.path.expanduser('~/vocabee')
 load_dotenv(os.path.join(project_folder, '.env'))
@@ -18,6 +19,7 @@ sass.compile(dirname=('vocabee/home/static/sass', 'vocabee/home/static/css/'), o
 
 def create_app():
     app = Flask(__name__, template_folder='home/templates/', static_folder='home/static/')
+    minify(app=app, html=True, js=True, cssless=False)
     cache.init_app(app)
     app.config.from_pyfile('config.py')
     db.init_app(app)
