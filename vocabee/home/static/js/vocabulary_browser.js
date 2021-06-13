@@ -7,7 +7,7 @@
  * @param {Array} examples - List of example sentences
  */
 function fillExampleModal(vocab_id, kanji, kana, examples) {
-    let modal_content = document.getElementById("vocab-modal-body");
+    let modal_content = document.querySelector('#vocab-modal-body');
     modal_content.innerHTML = '';
 
     let exampleTableContainer = crel('div', {'id': 'example-table-container', 'class': 'container-fluid'})
@@ -19,7 +19,7 @@ function fillExampleModal(vocab_id, kanji, kana, examples) {
     createExampleTable(examples, [{title: "ID"}, {title: "Japanese"}, {title: "English"}]);
 
     // Set modal title
-    let modal_title = document.getElementById("modalLargeLabel");
+    let modal_title = document.querySelector('#modalLargeLabel');
     modal_title.textContent = kanji !== '' ? `Showing examples for ${kanji}/${kana}` : `Showing examples for ${kana}`;
 }
 

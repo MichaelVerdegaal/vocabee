@@ -1,3 +1,5 @@
+// TODO: make id naming convention more consistent in this and the html file
+
 const isOk = response => response.ok ? response.json() : Promise.reject(new Error('Failed the request'))
 
 function postRequest(url, data) {
@@ -13,30 +15,29 @@ function postRequest(url, data) {
     })
 }
 
-
 function clearVocabFields() {
     /**
      * Clears the input vields from the vocabulary editor
      */
-    $('#vocab_id_input').val("");
-    $('#kanjiOld').val("");
-    $('#kanaOld').val("");
-    $('#meaningOld').val("");
-    $('#jlptOld').val("");
-    $('#kanjiNew').val("");
-    $('#kanaNew').val("");
-    $('#meaningNew').val("");
+    document.querySelector('#vocab_id_input').value = '';
+    document.querySelector('#kanjiOld').value = '';
+    document.querySelector('#kanaOld').value = '';
+    document.querySelector('#meaningOld').value = '';
+    document.querySelector('#jlptOld').value = '';
+    document.querySelector('#kanjiNew').value = '';
+    document.querySelector('#kanaNew').value = '';
+    document.querySelector('#meaningNew').value = '';
 }
 
 function clearExampleFields() {
     /**
      * Clears the input fields from the example editor
      */
-    $('#example_id_input').val("")
-    $('#sentenceJPOld').val("");
-    $('#sentenceJPNew').val("");
-    $('#sentenceENOld').val("");
-    $('#sentenceENNew').val("");
+    document.querySelector('#example_id_input').value = '';
+    document.querySelector('#sentenceJPOld').value = '';
+    document.querySelector('#sentenceJPNew').value = '';
+    document.querySelector('#sentenceENOld').value = '';
+    document.querySelector('#sentenceENNew').value = '';
 }
 
 function vocabEntryGet(urlBase) {
@@ -44,24 +45,24 @@ function vocabEntryGet(urlBase) {
      * Retrieves a vocabulary entry
      * @param {String} urlBase - endpoint to send request to
      */
-    let vocabID = $('#vocab_id_input').val();
+    let vocabID = document.querySelector('#vocab_id_input').value;
     let requestUrl = urlBase.slice(0, -1) + vocabID;
     clearVocabFields();
 
     fetch(requestUrl)
         .then(isOk)
         .then(data => {
-            $('#vocab_id_input').val(vocabID);
-            $('#kanjiOld').val(data.kanji);
-            $('#kanaOld').val(data.hiragana);
-            $('#meaningOld').val(data.english);
-            $('#jlptOld').val(data.jlpt_level);
-            $('#kanjiNew').val(data.kanji);
-            $('#kanaNew').val(data.hiragana);
-            $('#meaningNew').val(data.english);
-            $('#jlptNew').val(data.jlpt_level);
-            let examples = data.examples;
-            localStorage['examples'] = JSON.stringify(examples);
+            document.querySelector('#vocab_id_input').value = vocabID;
+            document.querySelector('#kanjiOld').value = data.kanji;
+            document.querySelector('#kanaOld').value = data.hiragana;
+            document.querySelector('#meaningOld').value = data.english;
+            document.querySelector('#jlptOld').value = data.jlpt_level;
+            document.querySelector('#kanjiNew').value = data.kanji;
+            document.querySelector('#kanaNew').value = data.hiragana;
+            document.querySelector('#meaningNew').value = data.english;
+            document.querySelector('#jlptNew').value = data.jlpt_level;
+
+            localStorage['examples'] = JSON.stringify(data.examples);
         })
         .catch(error => {
             console.log(error);
@@ -76,7 +77,7 @@ function vocabEntryDelete(urlBase) {
      */
     let c = confirm("Are you sure you want to delete this entry?")
     if (c === true) {
-        let vocabID = $('#vocab_id_input').val();
+        let vocabID = document.querySelector('#vocab_id_input').value;
 
         postRequest(urlBase, {id: vocabID})
             .then(isOk)
@@ -98,17 +99,20 @@ function vocabEntryUpdate(urlBase) {
      */
     let c = confirm("Are you sure you want to update this entry?")
     if (c === true) {
-        let vocabID = $('#vocab_id_input').val();
-        let kanji = $('#kanjiNew').val();
-        let kana = $('#kanaNew').val();
-        let meaning = $('#meaningNew').val();
-        let jlpt_level = $('#jlptNew').val();
 
-        postRequest(urlBase, {id: vocabID, kanji: kanji, kana: kana, meaning: meaning, jlpt_level: jlpt_level})
+        let vocabID = document.querySelector('#vocab_id_input').value;
+        let kanji = document.querySelector('#kanjiNew').value;
+        let kana = document.querySelector('#kanaNew').value;
+        let meaning = document.querySelector('#meaningNew').value;
+        let jlptLevel = document.querySelector('#jlptNew').value
+
+        postRequest(urlBase, {id: vocabID, kanji: kanji, kana: kana, meaning: meaning, jlpt_level: jlptLevel})
             .then(isOk)
             .then(response => {
                 alert("Entry " + vocabID + " updated");
                 clearVocabFields();
+                document.querySelector('#vocab_id_input').value = vocabID
+                document.querySelector('#vocabEntryGetBtn').click();
             })
             .catch(error => {
                 console.log(error);
@@ -124,19 +128,19 @@ function vocabEntryAdd(urlBase) {
      */
     let c = confirm("Are you sure you want to add this entry?")
     if (c === true) {
-        let kanji = $('#kanjiNew').val();
-        let kana = $('#kanaNew').val();
-        let meaning = $('#meaningNew').val();
-        let jlpt_level = $('#jlptNew').val();
+        let kanji = document.querySelector('#kanjiNew').value;
+        let kana = document.querySelector('#kanaNew').value;
+        let meaning = document.querySelector('#meaningNew').value;
+        let jlptLevel = document.querySelector('#jlptNew').value
 
-        postRequest(urlBase, {kanji: kanji, kana: kana, meaning: meaning, jlpt_level: jlpt_level})
+        postRequest(urlBase, {kanji: kanji, kana: kana, meaning: meaning, jlpt_level: jlptLevel})
             .then(isOk)
             .then(response => {
                 let vocabID = response.body.vocab_id;
                 alert("Entry " + vocabID + " added");
                 clearVocabFields();
-                $('#vocab_id_input').val(vocabID);
-                $('#vocabEntryGetBtn').click();
+                document.querySelector('#vocab_id_input').value = vocabID
+                document.querySelector('#vocabEntryGetBtn').click();
             })
             .catch(error => {
                 console.log(error);
@@ -150,18 +154,19 @@ function exampleEntryGet(urlBase) {
      * Retrieves an example entry
      * @param {String} urlBase - endpoint to send request to
      */
-    let exampleID = $('#example_id_input').val();
+    let exampleID = document.querySelector('#example_id_input').value;
     let requestUrl = urlBase.slice(0, -1) + exampleID;
     clearExampleFields();
 
     fetch(requestUrl)
         .then(isOk)
         .then(data => {
-            $('#example_id_input').val(exampleID);
-            $('#sentenceJPOld').val(data.sentence_jp);
-            $('#sentenceENOld').val(data.sentence_en);
-            $('#sentenceJPNew').val(data.sentence_jp);
-            $('#sentenceENNew').val(data.sentence_en);
+            document.querySelector('#example_id_input').value = exampleID;
+            document.querySelector('#sentenceJPOld').value = data.sentence_jp;
+            document.querySelector('#sentenceENOld').value = data.sentence_en;
+            document.querySelector('#sentenceJPNew').value = data.sentence_jp;
+            document.querySelector('#sentenceENNew').value = data.sentence_en;
+
         })
         .catch(error => {
             console.log(error);
@@ -176,14 +181,14 @@ function exampleEntryDelete(urlBase) {
      */
     let c = confirm("Are you sure you want to delete this entry?")
     if (c === true) {
-        let example_id = $('#example_id_input').val();
+        let exampleID = document.querySelector('#example_id_input').value;
 
-        postRequest(urlBase, {id: example_id})
+        postRequest(urlBase, {id: exampleID})
             .then(isOk)
             .then(response => {
-                alert("Entry " + example_id + " deleted");
+                alert("Entry " + exampleID + " deleted");
                 clearExampleFields();
-                $('#vocabEntryGetBtn').click();
+                document.querySelector('#vocabEntryGetBtn').click()
             })
             .catch(error => {
                 console.log(error);
@@ -199,16 +204,16 @@ function exampleEntryUpdate(urlBase) {
      */
     let c = confirm("Are you sure you want to update this entry?")
     if (c === true) {
-        let example_id = $('#example_id_input').val();
-        let sentence_jp = $('#sentenceJPNew').val();
-        let sentence_en = $('#sentenceENNew').val();
+        let exampleID = document.querySelector('#example_id_input').value;
+        let sentenceJP = document.querySelector('#sentenceJPNew').value;
+        let sentenceEN = document.querySelector('#sentenceENNew').value;
 
-        postRequest(urlBase, {sentence_jp: sentence_jp, sentence_en: sentence_en, id: example_id})
+        postRequest(urlBase, {sentence_jp: sentenceJP, sentence_en: sentenceEN, id: exampleID})
             .then(isOk)
             .then(response => {
-                alert("Entry " + example_id + " updated");
-                $('#vocabEntryGetBtn').click();
-                $('#exampleEntryGetBtn').click();
+                alert("Entry " + exampleID + " updated");
+                document.querySelector('#vocabEntryGetBtn').click();
+                document.querySelector('#exampleEntryGetBtn').click();
             })
             .catch(error => {
                 console.log(error);
@@ -224,19 +229,19 @@ function exampleEntryAdd(urlBase) {
      */
     let c = confirm("Are you sure you want to add this entry?")
     if (c === true) {
-        let sentence_jp = $('#sentenceJPNew').val();
-        let sentence_en = $('#sentenceENNew').val();
-        let vocab_id = $('#vocab_id_input').val();
+        let sentenceJP = document.querySelector('#sentenceJPNew').value;
+        let sentenceEN = document.querySelector('#sentenceENNew').value;
+        let vocabID = document.querySelector('#vocab_id_input').value;
 
-        postRequest(urlBase, {sentence_jp: sentence_jp, sentence_en: sentence_en, vocab_id: vocab_id})
+        postRequest(urlBase, {sentence_jp: sentenceJP, sentence_en: sentenceEN, vocab_id: vocabID})
             .then(isOk)
             .then(response => {
                 let exampleID = response.body.example_id;
                 alert("Entry " + exampleID + " added");
                 clearExampleFields();
-                $('#vocabEntryGetBtn').click();
-                $('#example_id_input').val(exampleID);
-                $('#exampleEntryGetBtn').click();
+                document.querySelector('#vocabEntryGetBtn').click();
+                document.querySelector('#example_id_input').value = exampleID;
+                document.querySelector('#exampleEntryGetBtn').click();
             })
             .catch(error => {
                 console.log(error);
@@ -244,7 +249,6 @@ function exampleEntryAdd(urlBase) {
             })
     }
 }
-
 
 function fillExampleModal(vocab_id, kanji, kana, examples) {
     /**
@@ -254,7 +258,7 @@ function fillExampleModal(vocab_id, kanji, kana, examples) {
      * @param {String} kana - kana item
      * @param {Array} exanokes - array of example sentences
      */
-    let modal_content = document.getElementById("vocab-modal-body");
+    let modal_content = document.querySelector("#vocab-modal-body");
     modal_content.innerHTML = '';
 
     let exampleTableContainer = crel('div', {'id': 'example-table-container', 'class': 'container-fluid'})
@@ -273,16 +277,17 @@ function fillExampleModal(vocab_id, kanji, kana, examples) {
         {title: "ID"},
         {title: "English"},
         {title: "Japanese"},
-        {data: null,"defaultContent": example_button.outerHTML}
+        {data: null, "defaultContent": example_button.outerHTML}
     ];
     createExampleTable(examples, example_columns);
 
     // Set modal title
-    let modal_title = document.getElementById("modalLargeLabel");
+    let modal_title = document.querySelector("#modalLargeLabel");
     modal_title.textContent = kanji !== '' ? `Showing examples for ${kanji}/${kana}` : `Showing examples for ${kana}`;
 
     // Init onclick
-    $('.example-select').click(function () {
+    let exampleBtns = document.querySelectorAll('.example-select');
+    [...exampleBtns].map(btn => btn.addEventListener("click", function () {
         // Get data from all rows, including hidden ones. Ref: https://stackoverflow.com/a/38515622
         let current_row = $(this).parents('tr');
         if (current_row.hasClass('child')) {
@@ -290,20 +295,19 @@ function fillExampleModal(vocab_id, kanji, kana, examples) {
         }
         let row_data = $('#example-table').DataTable().row(current_row).data();
 
-        let example_id = row_data[0];
-        $('#example_id_input').val(example_id);
+        document.querySelector('#example_id_input').value = row_data[0];
         $('#vocab-modal').modal('hide');
-        $('#exampleEntryGetBtn').click();
-    });
+        document.querySelector('#exampleEntryGetBtn').click();
+    }));
 }
 
 function showExampleOnClick() {
     /**
      * Shows the example datatable and fills it on button click
      */
-    let vocabID = $('#vocab_id_input').val();
-    let kanji = $('#kanjiOld').val();
-    let kana = $('#kanaOld').val();
+    let vocabID = document.querySelector('#vocab_id_input').value;
+    let kanji = document.querySelector('#kanjiNew').value;
+    let kana = document.querySelector('#kanaNew').value;
 
     let examples = JSON.parse(localStorage['examples']);
     examples.forEach(function (v) {
