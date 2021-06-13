@@ -1,6 +1,6 @@
-// TODO: make id naming convention more consistent in this and the html file
+// TODO: make id naming convention more consistent in this and the html file (example_id --> exampleID)
 
-const isOk = response => response.ok ? response.json() : Promise.reject(new Error('Failed the request'))
+const isOk = response => response.ok ? response.json() : Promise.reject(new Error('Failed the request'));
 
 function postRequest(url, data) {
     /**
@@ -12,7 +12,7 @@ function postRequest(url, data) {
         mode: 'cors',
         body: JSON.stringify(data),
         headers: {'Content-Type': 'application/json'},
-    })
+    });
 }
 
 function clearVocabFields() {
@@ -62,12 +62,12 @@ function vocabEntryGet(urlBase) {
             document.querySelector('#meaningNew').value = data.english;
             document.querySelector('#jlptNew').value = data.jlpt_level;
 
-            localStorage['examples'] = JSON.stringify(data.examples);
+            localStorage.examples = JSON.stringify(data.examples);
         })
         .catch(error => {
             console.log(error);
             alert("Entry not found");
-        })
+        });
 }
 
 function vocabEntryDelete(urlBase) {
@@ -75,7 +75,7 @@ function vocabEntryDelete(urlBase) {
      * Deletes a vocabulary entry
      * @param {String} urlBase - endpoint to send request to
      */
-    let c = confirm("Are you sure you want to delete this entry?")
+    let c = confirm("Are you sure you want to delete this entry?");
     if (c === true) {
         let vocabID = document.querySelector('#vocab_id_input').value;
 
@@ -88,7 +88,7 @@ function vocabEntryDelete(urlBase) {
             .catch(error => {
                 console.log(error);
                 alert("Entry couldn't be deleted");
-            })
+            });
     }
 }
 
@@ -97,27 +97,27 @@ function vocabEntryUpdate(urlBase) {
      * Updates a vocabulary entry
      * @param {String} urlBase - endpoint to send request to
      */
-    let c = confirm("Are you sure you want to update this entry?")
+    let c = confirm("Are you sure you want to update this entry?");
     if (c === true) {
 
         let vocabID = document.querySelector('#vocab_id_input').value;
         let kanji = document.querySelector('#kanjiNew').value;
         let kana = document.querySelector('#kanaNew').value;
         let meaning = document.querySelector('#meaningNew').value;
-        let jlptLevel = document.querySelector('#jlptNew').value
+        let jlptLevel = document.querySelector('#jlptNew').value;
 
         postRequest(urlBase, {id: vocabID, kanji: kanji, kana: kana, meaning: meaning, jlpt_level: jlptLevel})
             .then(isOk)
             .then(response => {
                 alert("Entry " + vocabID + " updated");
                 clearVocabFields();
-                document.querySelector('#vocab_id_input').value = vocabID
+                document.querySelector('#vocab_id_input').value = vocabID;
                 document.querySelector('#vocabEntryGetBtn').click();
             })
             .catch(error => {
                 console.log(error);
                 alert("Entry couldn't be updated");
-            })
+            });
     }
 }
 
@@ -126,12 +126,12 @@ function vocabEntryAdd(urlBase) {
      * Adds a vocabulary entry
      * @param {String} urlBase - endpoint to send request to
      */
-    let c = confirm("Are you sure you want to add this entry?")
+    let c = confirm("Are you sure you want to add this entry?");
     if (c === true) {
         let kanji = document.querySelector('#kanjiNew').value;
         let kana = document.querySelector('#kanaNew').value;
         let meaning = document.querySelector('#meaningNew').value;
-        let jlptLevel = document.querySelector('#jlptNew').value
+        let jlptLevel = document.querySelector('#jlptNew').value;
 
         postRequest(urlBase, {kanji: kanji, kana: kana, meaning: meaning, jlpt_level: jlptLevel})
             .then(isOk)
@@ -139,13 +139,13 @@ function vocabEntryAdd(urlBase) {
                 let vocabID = response.body.vocab_id;
                 alert("Entry " + vocabID + " added");
                 clearVocabFields();
-                document.querySelector('#vocab_id_input').value = vocabID
+                document.querySelector('#vocab_id_input').value = vocabID;
                 document.querySelector('#vocabEntryGetBtn').click();
             })
             .catch(error => {
                 console.log(error);
                 alert("Entry couldn't be added");
-            })
+            });
     }
 }
 
@@ -171,7 +171,7 @@ function exampleEntryGet(urlBase) {
         .catch(error => {
             console.log(error);
             alert("Entry not found");
-        })
+        });
 }
 
 function exampleEntryDelete(urlBase) {
@@ -179,7 +179,7 @@ function exampleEntryDelete(urlBase) {
      * Deletes an example entry
      * @param {String} urlBase - endpoint to send request to
      */
-    let c = confirm("Are you sure you want to delete this entry?")
+    let c = confirm("Are you sure you want to delete this entry?");
     if (c === true) {
         let exampleID = document.querySelector('#example_id_input').value;
 
@@ -188,12 +188,12 @@ function exampleEntryDelete(urlBase) {
             .then(response => {
                 alert("Entry " + exampleID + " deleted");
                 clearExampleFields();
-                document.querySelector('#vocabEntryGetBtn').click()
+                document.querySelector('#vocabEntryGetBtn').click();
             })
             .catch(error => {
                 console.log(error);
                 alert("Entry couldn't be deleted");
-            })
+            });
     }
 }
 
@@ -202,7 +202,7 @@ function exampleEntryUpdate(urlBase) {
      * Updates an example entry
      * @param {String} urlBase - endpoint to send request to
      */
-    let c = confirm("Are you sure you want to update this entry?")
+    let c = confirm("Are you sure you want to update this entry?");
     if (c === true) {
         let exampleID = document.querySelector('#example_id_input').value;
         let sentenceJP = document.querySelector('#sentenceJPNew').value;
@@ -218,7 +218,7 @@ function exampleEntryUpdate(urlBase) {
             .catch(error => {
                 console.log(error);
                 alert("Entry couldn't be updated");
-            })
+            });
     }
 }
 
@@ -227,7 +227,7 @@ function exampleEntryAdd(urlBase) {
      * Adds an example entry
      * @param {String} urlBase - endpoint to send request to
      */
-    let c = confirm("Are you sure you want to add this entry?")
+    let c = confirm("Are you sure you want to add this entry?");
     if (c === true) {
         let sentenceJP = document.querySelector('#sentenceJPNew').value;
         let sentenceEN = document.querySelector('#sentenceENNew').value;
@@ -246,7 +246,7 @@ function exampleEntryAdd(urlBase) {
             .catch(error => {
                 console.log(error);
                 alert("Entry couldn't be added");
-            })
+            });
     }
 }
 
@@ -261,7 +261,7 @@ function fillExampleModal(vocab_id, kanji, kana, examples) {
     let modal_content = document.querySelector("#vocab-modal-body");
     modal_content.innerHTML = '';
 
-    let exampleTableContainer = crel('div', {'id': 'example-table-container', 'class': 'container-fluid'})
+    let exampleTableContainer = crel('div', {'id': 'example-table-container', 'class': 'container-fluid'});
     let exampleTable = crel('table', {'id': 'example-table', 'class': 'table table-striped table-hover'});
 
     exampleTableContainer.appendChild(exampleTable);
@@ -272,7 +272,7 @@ function fillExampleModal(vocab_id, kanji, kana, examples) {
         'title': 'Select example',
         'id': 'selectExampleBtn',
         'class': 'btn btn-outline-primary example-select',
-    }, 'select')
+    }, 'select');
     let example_columns = [
         {title: "ID"},
         {title: "English"},
@@ -309,9 +309,9 @@ function showExampleOnClick() {
     let kanji = document.querySelector('#kanjiNew').value;
     let kana = document.querySelector('#kanaNew').value;
 
-    let examples = JSON.parse(localStorage['examples']);
+    let examples = JSON.parse(localStorage.examples);
     examples.forEach(function (v) {
-        delete v.vocab_id
+        delete v.vocab_id;
     });
     examples = examples.map(Object.values);
 

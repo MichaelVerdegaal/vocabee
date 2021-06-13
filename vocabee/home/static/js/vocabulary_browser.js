@@ -10,7 +10,7 @@ function fillExampleModal(vocab_id, kanji, kana, examples) {
     let modal_content = document.querySelector('#vocab-modal-body');
     modal_content.innerHTML = '';
 
-    let exampleTableContainer = crel('div', {'id': 'example-table-container', 'class': 'container-fluid'})
+    let exampleTableContainer = crel('div', {'id': 'example-table-container', 'class': 'container-fluid'});
     let exampleTable = crel('table', {'id': 'example-table', 'class': 'table table-striped table-hover'});
 
     exampleTableContainer.appendChild(exampleTable);
@@ -34,6 +34,6 @@ function exampleOnClick(row_data) {
     // Ref: https://stackoverflow.com/questions/7864723#7864740
     let kanji = row_data[1].split(/<a[^>]*>([\s\S]*?)<\/a>/)[1];
     let kana = row_data[2].split(/<a[^>]*>([\s\S]*?)<\/a>/)[1];
-    let examples = row_data[4]
+    let examples = row_data[4];
     fillExampleModal(vocab_id, kanji, kana, examples);
 }

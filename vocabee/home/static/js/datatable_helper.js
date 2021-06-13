@@ -13,7 +13,7 @@ function createVocabTable(vocabEndpoint, level) {
         'title': 'Show examples',
         'id': 'selectExampleBtn',
         'class': 'btn btn-outline-primary example-select',
-    }, 'show')
+    }, 'show');
 
 
     $("#vocab-table").DataTable({
