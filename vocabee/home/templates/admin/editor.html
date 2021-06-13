@@ -5,14 +5,14 @@
     <!--Stylesheets -->
     <link href="{{ url_for('static', filename='css/pages/vocab.css') }}" rel="stylesheet">
     <link href="{{ url_for('static', filename='css/components/cards.css') }}" rel="stylesheet">
-    <script src="{{ url_for('static', filename='js/datatable_helper.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/admin_editor.js') }}"></script>
+    <script async src="{{ url_for('static', filename='js/datatable_helper.js') }}"></script>
+    <script async src="{{ url_for('static', filename='js/admin_editor.js') }}"></script>
     <!--Ref: https://datatables.net/ -->
     <!--Ref: Option 1 - Bootstrap / Option 2 DataTables / Option 3 Responsive) -->
     <link rel="stylesheet" type="text/css"
           href="https://cdn.datatables.net/v/bs4/dt-1.10.20/r-2.2.3/datatables.min.css"/>
-    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.20/r-2.2.3/datatables.min.js"></script>
-    <script src="{{ url_for('static', filename='js/full_numbers_no_ellipses.js') }}"></script>
+    <script async type="text/javascript"
+            src="https://cdn.datatables.net/v/bs4/dt-1.10.20/r-2.2.3/datatables.min.js"></script>
 
     <div class="container-fluid text-container">
         <h1>Editor</h1>
@@ -139,8 +139,8 @@
                     <div class="card-header">
                         <h5 class="card-title">Example editor</h5>
                         <h6 class="card-subtitle mb-2 text-muted">To update an entry, select it by opening the
-                        datatable via the show example button, or by manually inputting the id. The rest is the same
-                        as the vocabulary editor.</h6>
+                            datatable via the show example button, or by manually inputting the id. The rest is the same
+                            as the vocabulary editor.</h6>
                     </div>
                     <div class="card-body">
 
