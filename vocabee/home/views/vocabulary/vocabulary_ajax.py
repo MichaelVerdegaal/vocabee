@@ -11,7 +11,6 @@ from vocabee.util.vocabulary_util import process_vocabulary
 vocabulary_ajax_bp = Blueprint('vocabulary_ajax', __name__, url_prefix='/vocabulary/ajax')
 
 
-# TODO: this needs caching
 @vocabulary_ajax_bp.route('/source/<int:vocab_level>')
 def vocabulary_full_get(vocab_level):
     """
