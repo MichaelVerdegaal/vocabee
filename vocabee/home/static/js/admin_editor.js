@@ -19,7 +19,7 @@ function clearVocabFields() {
     /**
      * Clears the input vields from the vocabulary editor
      */
-    document.querySelector('#vocab_id_input').value = '';
+    document.querySelector('#vocabIDInput').value = '';
     document.querySelector('#kanjiOld').value = '';
     document.querySelector('#kanaOld').value = '';
     document.querySelector('#meaningOld').value = '';
@@ -33,7 +33,7 @@ function clearExampleFields() {
     /**
      * Clears the input fields from the example editor
      */
-    document.querySelector('#example_id_input').value = '';
+    document.querySelector('#exampleIDInput').value = '';
     document.querySelector('#sentenceJPOld').value = '';
     document.querySelector('#sentenceJPNew').value = '';
     document.querySelector('#sentenceENOld').value = '';
@@ -45,14 +45,14 @@ function vocabEntryGet(urlBase) {
      * Retrieves a vocabulary entry
      * @param {String} urlBase - endpoint to send request to
      */
-    let vocabID = document.querySelector('#vocab_id_input').value;
+    let vocabID = document.querySelector('#vocabIDInput').value;
     let requestUrl = urlBase.slice(0, -1) + vocabID;
     clearVocabFields();
 
     fetch(requestUrl)
         .then(isOk)
         .then(data => {
-            document.querySelector('#vocab_id_input').value = vocabID;
+            document.querySelector('#vocabIDInput').value = vocabID;
             document.querySelector('#kanjiOld').value = data.kanji;
             document.querySelector('#kanaOld').value = data.hiragana;
             document.querySelector('#meaningOld').value = data.english;
@@ -77,7 +77,7 @@ function vocabEntryDelete(urlBase) {
      */
     let c = confirm("Are you sure you want to delete this entry?");
     if (c === true) {
-        let vocabID = document.querySelector('#vocab_id_input').value;
+        let vocabID = document.querySelector('#vocabIDInput').value;
 
         postRequest(urlBase, {id: vocabID})
             .then(isOk)
@@ -100,7 +100,7 @@ function vocabEntryUpdate(urlBase) {
     let c = confirm("Are you sure you want to update this entry?");
     if (c === true) {
 
-        let vocabID = document.querySelector('#vocab_id_input').value;
+        let vocabID = document.querySelector('#vocabIDInput').value;
         let kanji = document.querySelector('#kanjiNew').value;
         let kana = document.querySelector('#kanaNew').value;
         let meaning = document.querySelector('#meaningNew').value;
@@ -111,7 +111,7 @@ function vocabEntryUpdate(urlBase) {
             .then(response => {
                 alert("Entry " + vocabID + " updated");
                 clearVocabFields();
-                document.querySelector('#vocab_id_input').value = vocabID;
+                document.querySelector('#vocabIDInput').value = vocabID;
                 document.querySelector('#vocabEntryGetBtn').click();
             })
             .catch(error => {
@@ -139,7 +139,7 @@ function vocabEntryAdd(urlBase) {
                 let vocabID = response.body.vocab_id;
                 alert("Entry " + vocabID + " added");
                 clearVocabFields();
-                document.querySelector('#vocab_id_input').value = vocabID;
+                document.querySelector('#vocabIDInput').value = vocabID;
                 document.querySelector('#vocabEntryGetBtn').click();
             })
             .catch(error => {
@@ -154,14 +154,14 @@ function exampleEntryGet(urlBase) {
      * Retrieves an example entry
      * @param {String} urlBase - endpoint to send request to
      */
-    let exampleID = document.querySelector('#example_id_input').value;
+    let exampleID = document.querySelector('#exampleIDInput').value;
     let requestUrl = urlBase.slice(0, -1) + exampleID;
     clearExampleFields();
 
     fetch(requestUrl)
         .then(isOk)
         .then(data => {
-            document.querySelector('#example_id_input').value = exampleID;
+            document.querySelector('#exampleIDInput').value = exampleID;
             document.querySelector('#sentenceJPOld').value = data.sentence_jp;
             document.querySelector('#sentenceENOld').value = data.sentence_en;
             document.querySelector('#sentenceJPNew').value = data.sentence_jp;
@@ -181,7 +181,7 @@ function exampleEntryDelete(urlBase) {
      */
     let c = confirm("Are you sure you want to delete this entry?");
     if (c === true) {
-        let exampleID = document.querySelector('#example_id_input').value;
+        let exampleID = document.querySelector('#exampleIDInput').value;
 
         postRequest(urlBase, {id: exampleID})
             .then(isOk)
@@ -204,7 +204,7 @@ function exampleEntryUpdate(urlBase) {
      */
     let c = confirm("Are you sure you want to update this entry?");
     if (c === true) {
-        let exampleID = document.querySelector('#example_id_input').value;
+        let exampleID = document.querySelector('#exampleIDInput').value;
         let sentenceJP = document.querySelector('#sentenceJPNew').value;
         let sentenceEN = document.querySelector('#sentenceENNew').value;
 
@@ -231,7 +231,7 @@ function exampleEntryAdd(urlBase) {
     if (c === true) {
         let sentenceJP = document.querySelector('#sentenceJPNew').value;
         let sentenceEN = document.querySelector('#sentenceENNew').value;
-        let vocabID = document.querySelector('#vocab_id_input').value;
+        let vocabID = document.querySelector('#vocabIDInput').value;
 
         postRequest(urlBase, {sentence_jp: sentenceJP, sentence_en: sentenceEN, vocab_id: vocabID})
             .then(isOk)
@@ -240,7 +240,7 @@ function exampleEntryAdd(urlBase) {
                 alert("Entry " + exampleID + " added");
                 clearExampleFields();
                 document.querySelector('#vocabEntryGetBtn').click();
-                document.querySelector('#example_id_input').value = exampleID;
+                document.querySelector('#exampleIDInput').value = exampleID;
                 document.querySelector('#exampleEntryGetBtn').click();
             })
             .catch(error => {
@@ -258,7 +258,7 @@ function fillExampleModal(vocab_id, kanji, kana, examples) {
      * @param {String} kana - kana item
      * @param {Array} exanokes - array of example sentences
      */
-    let modal_content = document.querySelector("#vocab-modal-body");
+    let modal_content = document.querySelector("#example-modal-body");
     modal_content.innerHTML = '';
 
     let exampleTableContainer = crel('div', {'id': 'example-table-container', 'class': 'container-fluid'});
@@ -271,7 +271,7 @@ function fillExampleModal(vocab_id, kanji, kana, examples) {
         'type': 'button',
         'title': 'Select example',
         'id': 'selectExampleBtn',
-        'class': 'btn btn-outline-primary example-select',
+        'class': 'btn btn-outline-primary exampleSelect',
     }, 'select');
     let example_columns = [
         {title: "ID"},
@@ -286,7 +286,7 @@ function fillExampleModal(vocab_id, kanji, kana, examples) {
     modal_title.textContent = kanji !== '' ? `Showing examples for ${kanji}/${kana}` : `Showing examples for ${kana}`;
 
     // Init onclick
-    let exampleBtns = document.querySelectorAll('.example-select');
+    let exampleBtns = document.querySelectorAll('.exampleSelect');
     [...exampleBtns].map(btn => btn.addEventListener("click", function () {
         // Get data from all rows, including hidden ones. Ref: https://stackoverflow.com/a/38515622
         let current_row = $(this).parents('tr');
@@ -295,7 +295,7 @@ function fillExampleModal(vocab_id, kanji, kana, examples) {
         }
         let row_data = $('#example-table').DataTable().row(current_row).data();
 
-        document.querySelector('#example_id_input').value = row_data[0];
+        document.querySelector('#exampleIDInput').value = row_data[0];
         $('#vocab-modal').modal('hide');
         document.querySelector('#exampleEntryGetBtn').click();
     }));
@@ -305,7 +305,7 @@ function showExampleOnClick() {
     /**
      * Shows the example datatable and fills it on button click
      */
-    let vocabID = document.querySelector('#vocab_id_input').value;
+    let vocabID = document.querySelector('#vocabIDInput').value;
     let kanji = document.querySelector('#kanjiNew').value;
     let kana = document.querySelector('#kanaNew').value;
 
