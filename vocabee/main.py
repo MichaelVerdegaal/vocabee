@@ -2,8 +2,10 @@ import os
 
 import werkzeug.exceptions
 from flask import render_template
+from flask import send_from_directory, request
 
 from vocabee import create_app
+from vocabee.config import STATIC_FOLDER
 
 app = create_app()
 
@@ -26,3 +28,9 @@ def handle_not_found_request(e):
 @app.errorhandler(werkzeug.exceptions.InternalServerError)
 def handle_server_error_request(e):
     return render_template("exceptions/500.html"), 500
+
+
+@app.route('/robots.txt')
+@app.route('/sitemap.xml')
+def static_from_root():
+    return send_from_directory(STATIC_FOLDER, request.path[1:])

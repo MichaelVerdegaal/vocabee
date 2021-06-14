@@ -27,7 +27,7 @@ def create_app():
 
     with app.app_context():
         from .home import models
-        from .home.views import home, admin, miscellaneous
+        from .home.views import home, admin
         from .home.views.vocabulary import vocabulary, vocabulary_ajax
         from .home.views.example import example_ajax
 
@@ -38,7 +38,5 @@ def create_app():
         app.register_blueprint(example_ajax.example_ajax_bp)
 
         app.register_blueprint(admin.admin_bp)
-
-        app.register_blueprint(miscellaneous.miscellaneous_bp)
 
         return app
