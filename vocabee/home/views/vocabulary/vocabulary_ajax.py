@@ -1,8 +1,8 @@
 import os
-from pathlib import Path
 
 from flask import Blueprint, request, Response
 
+from vocabee.config import PROJECT_FOLDER
 from vocabee.util.anki_util import create_deck_by_level
 from vocabee.util.queries import get_vocab_by_level, get_vocab_by_id, update_vocab, add_vocab, delete_vocab
 from vocabee.util.view_util import create_status
@@ -100,18 +100,15 @@ def vocabulary_download_deck(vocab_level):
     :return: downloaded file
     """
     status, vocab = get_vocab_by_level(vocab_level)
-    print(status)
     if status['code'] == 200:
-        # TODO make a proper constant for the static folder
-        project_root = Path(vocabulary_ajax_bp.root_path).parents[3]
         filename = f'vocabee{vocab_level}.apkg'
-        path = os.path.join(project_root, filename)
+        deck_path = os.path.join(PROJECT_FOLDER, filename)
         create_deck_by_level(vocab, vocab_level, filename)
 
         # Ref: https://stackoverflow.com/a/57998006/7174982
-        with open(path, 'rb') as f:
+        with open(deck_path, 'rb') as f:
             data = f.readlines()
-        os.remove(path)
+        os.remove(deck_path)
         return Response(data, headers={'Content-Type': 'application/octet-stream',
                                        'Content-Disposition': f'attachment; filename={filename};'}), 200
     else:

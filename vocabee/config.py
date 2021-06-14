@@ -1,5 +1,10 @@
 import os
 
+# Project
+PROJECT_FOLDER = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+APP_FOLDER = os.path.join(PROJECT_FOLDER, 'vocabee')
+STATIC_FOLDER = os.path.join(APP_FOLDER, 'home/static')
+
 # Flask
 DEBUG = False
 

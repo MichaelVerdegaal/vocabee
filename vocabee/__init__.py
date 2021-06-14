@@ -4,17 +4,18 @@ import sass
 from dotenv import load_dotenv
 from flask import Flask
 from flask_caching import Cache
+from flask_minify import minify
 from flask_sqlalchemy import SQLAlchemy
 from flask_sqlalchemy_caching import CachingQuery
-from flask_minify import minify
 
-project_folder = os.path.expanduser('~/vocabee')
-load_dotenv(os.path.join(project_folder, '.env'))
-# TODO make a constant for the static folder?
+from vocabee.config import PROJECT_FOLDER, APP_FOLDER, STATIC_FOLDER
+
+load_dotenv(os.path.join(PROJECT_FOLDER, '.env'))
 
 db = SQLAlchemy(query_class=CachingQuery)
 cache = Cache(config={'CACHE_TYPE': 'simple'})
-sass.compile(dirname=('vocabee/home/static/sass', 'vocabee/home/static/css/'), output_style='compressed')
+sass.compile(dirname=(os.path.join(STATIC_FOLDER, 'sass'), os.path.join(STATIC_FOLDER, 'css')),
+             output_style='compressed')
 
 
 def create_app():
