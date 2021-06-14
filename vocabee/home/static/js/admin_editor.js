@@ -1,5 +1,3 @@
-// TODO: make id naming convention more consistent in this and the html file (example_id --> exampleID)
-
 const isOk = response => response.ok ? response.json() : Promise.reject(new Error('Failed the request'));
 
 function postRequest(url, data) {
