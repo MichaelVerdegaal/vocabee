@@ -16,7 +16,10 @@ function fillExampleModal(vocab_id, kanji, kana, examples) {
     exampleTableContainer.appendChild(exampleTable);
     modal_content.appendChild(exampleTableContainer);
 
-    createExampleTable(examples, [{title: "ID"}, {title: "Japanese"}, {title: "English"}]);
+    createExampleTable(examples, [
+        {"title": "ID", "data": "id"},
+        {"title": "Japanese", "data": "sentence_jp"},
+        {"title": "English", "data": "sentence_en"}]);
 
     // Set modal title
     let modal_title = document.querySelector('#modalLargeLabel');
@@ -30,10 +33,10 @@ function fillExampleModal(vocab_id, kanji, kana, examples) {
  *
  */
 function exampleOnClick(row_data) {
-    let vocab_id = row_data[0];
+    let vocab_id = row_data.id;
     // Ref: https://stackoverflow.com/questions/7864723#7864740
-    let kanji = row_data[1].split(/<a[^>]*>([\s\S]*?)<\/a>/)[1];
-    let kana = row_data[2].split(/<a[^>]*>([\s\S]*?)<\/a>/)[1];
-    let examples = row_data[4];
+    let kanji = row_data.kanji.split(/<a[^>]*>([\s\S]*?)<\/a>/)[1];
+    let kana = row_data.hiragana.split(/<a[^>]*>([\s\S]*?)<\/a>/)[1];
+    let examples = row_data.examples;
     fillExampleModal(vocab_id, kanji, kana, examples);
 }

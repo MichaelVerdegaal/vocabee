@@ -24,12 +24,13 @@ function createVocabTable(vocabEndpoint, level) {
             contentType: "application/json; charset=utf-8",
         },
         columns: [
-            {title: "ID"},
-            {title: "Kanji"},
-            {title: "Hiragana"},
-            {title: "English"},
+            {title: "ID", "data": "id"},
+            {title: "Kanji", "data": "kanji"},
+            {title: "Hiragana", "data": "hiragana"},
+            {title: "English", "data": "english"},
             {
                 title: "example_data",
+                data: "examples",
                 orderable: false,
                 searchable: false,
                 visible: false

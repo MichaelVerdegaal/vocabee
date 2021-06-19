@@ -11,11 +11,7 @@ def process_vocabulary(vocabulary):
             e := row.kanji) else ""
         row.hiragana = f'<a href="https://jisho.org/search/{row.hiragana}" target="_blank" rel="noopener">{row.hiragana}</a>'
         row.english = e if (e := row.english) else ''
-
-        entry = [row.id, row.kanji, row.hiragana, row.english, [[e.id,
-                                                                 e.sentence_jp,
-                                                                 e.sentence_en] for e in row.examples]]
-        return entry
+        return row.to_dict()
 
     vocab_dict = {'entries': [process_entry(e) for e in vocabulary]}
     return vocab_dict
