@@ -46,11 +46,11 @@ def get_vocab_range(jlpt_level, table_start, table_length):
                         kanji,
                         hiragana,
                         english
-                FROM   vocabulary) AS c
+                FROM   vocabulary WHERE jlpt_level = :level) AS c
         LIMIT  :tstart, :tlen;
         """)
         db.session.execute(text("SET @row_number = 0;"))
-        vocabulary = db.session.execute(query, {'tstart': table_start, 'tlen': table_length})
+        vocabulary = db.session.execute(query, {'level': f"N{jlpt_level}", 'tstart': table_start, 'tlen': table_length})
         voc_list = [dict(i) for i in vocabulary]
         return create_status(), voc_list
     except SQLAlchemyError as e:

@@ -22,12 +22,12 @@ def vocabulary_full_get(vocab_level):
     table_draw = int(table_params.get('draw'))
     table_start = int(table_params.get('start'))
     table_length = int(table_params.get('length'))
-    print(f"{table_draw=}, {table_start=}, {table_length=}")
 
     if 0 < vocab_level < 6:
         status, vocab = get_vocab_range(vocab_level, table_start, table_length)
         if status['code'] == 200:
             vocab = process_vocabulary(vocab)
+            vocab['draw'] = table_draw
             return vocab, 200
         else:
             return status, 500
