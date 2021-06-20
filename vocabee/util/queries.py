@@ -1,6 +1,8 @@
+from sqlalchemy.exc import SQLAlchemyError
+from sqlalchemy.sql import text
+
 from vocabee import cache
 from vocabee.home.models import Vocabulary, Example, db
-from sqlalchemy.exc import SQLAlchemyError
 from vocabee.util.view_util import create_status
 
 
@@ -15,6 +17,44 @@ def get_vocab_by_level(jlpt_level):
         vocabulary = Vocabulary.query.filter_by(jlpt_level=f"N{jlpt_level}").all()
         return create_status(), vocabulary
     except SQLAlchemyError as e:
+        return create_status(500, str(e)), None
+
+
+@cache.memoize(300)
+def get_vocab_range(jlpt_level, table_start, table_length):
+    """
+    Fetches vocabulary entries by JLPT level
+    :param jlpt_level: Vocabulary level
+    :return: Queryset
+    """
+    try:
+        # TODO: switch to the window function once we're at MySQL 8. This is what i originally planned to use,
+        #  but Pythonanywhere is still stuck on 5.7
+        # # Ref: https://stackoverflow.com/questions/38160213/filter-by-row-number-in-sqlalchemy
+        # row_number_column = func.row_number().over(partition_by=Vocabulary.id,
+        #                                            order_by=Vocabulary.id).label('row_number')
+        # vocabulary = Vocabulary.query
+        # vocabulary = vocabulary.filter_by(jlpt_level=f"N{jlpt_level}")
+        # vocabulary = vocabulary.add_column(row_number_column)
+        # vocabulary = vocabulary.filter(row_number_column == table_start)
+        # vocabulary = vocabulary.limit(table_length)
+        # vocabulary = vocabulary.all()
+        query = text("""
+        SELECT c.*
+        FROM   (SELECT ( @row_number := @row_number + 1 ) AS row_num,
+                        id,
+                        kanji,
+                        hiragana,
+                        english
+                FROM   vocabulary) AS c
+        LIMIT  :tstart, :tlen;
+        """)
+        db.session.execute(text("SET @row_number = 0;"))
+        vocabulary = db.session.execute(query, {'tstart': table_start, 'tlen': table_length})
+        voc_list = [dict(i) for i in vocabulary]
+        return create_status(), voc_list
+    except SQLAlchemyError as e:
+        print(e)
         return create_status(500, str(e)), None
 
 

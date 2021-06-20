@@ -17,6 +17,8 @@ function createVocabTable(vocabEndpoint, level) {
 
 
     $("#vocab-table").DataTable({
+        processing: true,
+        serverSide: true,
         ajax: {
             url: endpoint,
             dataType: "json",
