@@ -4,7 +4,8 @@ from flask import Blueprint, request, Response
 
 from vocabee.config import PROJECT_FOLDER
 from vocabee.util.anki_util import create_deck_by_level
-from vocabee.util.queries import get_vocab_by_level, get_vocab_by_id, update_vocab, add_vocab, delete_vocab
+from vocabee.util.queries import (get_vocab_by_level, get_vocab_by_id, update_vocab, add_vocab, delete_vocab,
+                                  get_vocab_by_level_no_examples)
 from vocabee.util.view_util import create_status
 from vocabee.util.vocabulary_util import process_vocabulary
 
@@ -19,7 +20,7 @@ def vocabulary_full_get(vocab_level):
     :return: vocabulary in JSON
     """
     if 0 < vocab_level < 6:
-        status, vocab = get_vocab_by_level(vocab_level)
+        status, vocab = get_vocab_by_level_no_examples(vocab_level)
         if status['code'] == 200:
             vocab = process_vocabulary(vocab)
             return vocab, 200

@@ -7,11 +7,12 @@ def process_vocabulary(vocabulary):
 
     def process_entry(row):
         # Add clickable Jisho links
-        row.kanji = f'<a href="https://jisho.org/search/{e}" target="_blank" rel="noopener">{e}</a>' if (
-            e := row.kanji) else ""
-        row.hiragana = f'<a href="https://jisho.org/search/{row.hiragana}" target="_blank" rel="noopener">{row.hiragana}</a>'
-        row.english = e if (e := row.english) else ''
-        return row.to_dict()
+        row = dict(row)
+        row['kanji'] = f'<a href="https://jisho.org/search/{e}" target="_blank" rel="noopener">{e}</a>' if (
+            e := row['kanji']) else ""
+        row['hiragana'] = f'<a href="https://jisho.org/search/{row["hiragana"]}" target="_blank" rel="noopener">{row["hiragana"]}</a>'
+        row['english'] = row.get('english', '')
+        return row
 
     vocab_dict = {'entries': [process_entry(e) for e in vocabulary]}
     return vocab_dict
