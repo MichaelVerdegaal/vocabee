@@ -3,12 +3,12 @@ const isOk = response => response.ok ? response.json() : Promise.reject(new Erro
 /**
  * Fill a bootstrap modal with a datatable
  *
- * @param {string} vocab_id - ID of vocabulary entry related to examples
+ * @param {string} vocabulary_id - ID of vocabulary entry related to examples
  * @param {String} kanji - Example kanji
  * @param {String} kana - Example kana
  * @param {Array} examples - List of example sentences
  */
-function fillExampleModal(vocab_id, kanji, kana, examples) {
+function fillExampleModal(vocabulary_id, kanji, kana, examples) {
     let modal_content = document.querySelector('#vocab-modal-body');
     modal_content.innerHTML = '';
 

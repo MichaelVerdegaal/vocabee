@@ -4,40 +4,40 @@ from flask import Blueprint, request, Response
 
 from vocabee.config import PROJECT_FOLDER
 from vocabee.util.anki_util import create_deck_by_level
-from vocabee.util.queries import (get_vocab_by_level, get_vocab_by_id, update_vocab, add_vocab, delete_vocab,
-                                  get_vocab_by_level_no_examples)
+from vocabee.util.queries import (get_vocabulary_by_level, get_vocabulary_by_id, update_vocab, add_vocab, delete_vocab,
+                                  get_vocabulary_by_level_no_examples)
 from vocabee.util.view_util import create_status
 from vocabee.util.vocabulary_util import process_vocabulary
 
 vocabulary_ajax_bp = Blueprint('vocabulary_ajax', __name__, url_prefix='/vocabulary/ajax')
 
 
-@vocabulary_ajax_bp.route('/source/<int:vocab_level>')
-def vocabulary_full_get(vocab_level):
+@vocabulary_ajax_bp.route('/source/<int:vocabulary_level>')
+def vocabulary_full_get(vocabulary_level):
     """
     AJAX endpoint to retrieve vocabulary
-    :param vocab_level: Valid JLPT vocabulary level (1-5)
+    :param vocabulary_level: Valid JLPT vocabulary level (1-5)
     :return: vocabulary in JSON
     """
-    if 0 < vocab_level < 6:
-        status, vocab = get_vocab_by_level_no_examples(vocab_level)
+    if 0 < vocabulary_level < 6:
+        status, vocabulary = get_vocabulary_by_level_no_examples(vocabulary_level)
         if status['code'] == 200:
-            vocab = process_vocabulary(vocab)
-            return vocab, 200
+            vocabulary = process_vocabulary(vocabulary)
+            return vocabulary, 200
         else:
             return status, 500
     else:
         return create_status(400, "Faulty vocabulary level"), 400
 
 
-@vocabulary_ajax_bp.route('/source/entry/get/<int:vocab_id>')
-def vocabulary_entry_get(vocab_id):
+@vocabulary_ajax_bp.route('/source/entry/get/<int:vocabulary_id>')
+def vocabulary_entry_get(vocabulary_id):
     """
     AJAX endpoint to retrieve vocabulary
-    :param vocab_id: vocabulary id
+    :param vocabulary_id: vocabulary id
     :return: vocabulary entry in JSON
     """
-    status, entry = get_vocab_by_id(vocab_id)
+    status, entry = get_vocabulary_by_id(vocabulary_id)
     if entry:
         return entry.to_dict(), 200
     else:
@@ -92,18 +92,18 @@ def vocabulary_entry_delete():
         return status, 500
 
 
-@vocabulary_ajax_bp.route('/source/anki/<int:vocab_level>')
-def vocabulary_download_deck(vocab_level):
+@vocabulary_ajax_bp.route('/source/anki/<int:vocabulary_level>')
+def vocabulary_download_deck(vocabulary_level):
     """
     Creates download response for generated anki decks
-    :param vocab_level: Valid JLPT vocabulary level (1-5)
+    :param vocabulary_level: Valid JLPT vocabulary level (1-5)
     :return: downloaded file
     """
-    status, vocab = get_vocab_by_level(vocab_level)
+    status, vocab = get_vocabulary_by_level(vocabulary_level)
     if status['code'] == 200:
-        filename = f'vocabee{vocab_level}.apkg'
+        filename = f'vocabee{vocabulary_level}.apkg'
         deck_path = os.path.join(PROJECT_FOLDER, filename)
-        create_deck_by_level(vocab, vocab_level, filename)
+        create_deck_by_level(vocab, vocabulary_level, filename)
 
         # Ref: https://stackoverflow.com/a/57998006/7174982
         with open(deck_path, 'rb') as f:

@@ -14,5 +14,5 @@ def process_vocabulary(vocabulary):
         row['english'] = row.get('english', '')
         return row
 
-    vocab_dict = {'entries': [process_entry(e) for e in vocabulary]}
-    return vocab_dict
+    vocabulary_dict = {'entries': [process_entry(e) for e in vocabulary]}
+    return vocabulary_dict

@@ -247,7 +247,7 @@
 
     <script type="text/javascript">
         $('#vocabEntryGetBtn').click(function () {
-            let urlBase = "{{ url_for('vocabulary_ajax.vocabulary_entry_get', vocab_id=5) }}";
+            let urlBase = "{{ url_for('vocabulary_ajax.vocabulary_entry_get', vocabulary_id=5) }}";
             vocabEntryGet(urlBase);
         });
 

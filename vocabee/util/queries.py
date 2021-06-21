@@ -5,7 +5,7 @@ from vocabee.util.view_util import create_status
 
 
 @cache.memoize(300)
-def get_vocab_by_level(jlpt_level):
+def get_vocabulary_by_level(jlpt_level):
     """
     Fetches vocabulary entries by JLPT level
     :param jlpt_level: Vocabulary level
@@ -19,7 +19,7 @@ def get_vocab_by_level(jlpt_level):
 
 
 @cache.memoize(300)
-def get_vocab_by_level_no_examples(jlpt_level):
+def get_vocabulary_by_level_no_examples(jlpt_level):
     """
     Fetches vocabulary entries by JLPT level, but only includes necessary columns to increase performance
     :param jlpt_level: Vocabulary level
@@ -36,7 +36,7 @@ def get_vocab_by_level_no_examples(jlpt_level):
 
 
 @cache.memoize(5)
-def get_vocab_by_id(vocab_id):
+def get_vocabulary_by_id(vocab_id):
     """
     Fetches vocabulary entry by id
     :param vocab_id: Vocabulary ID
