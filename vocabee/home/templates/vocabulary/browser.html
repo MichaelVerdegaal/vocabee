@@ -92,13 +92,14 @@
         });
 
         $("#vocab-table").on('click', '.example-select', function () {
+            let urlBase = "{{ url_for('example_ajax.examples_get_by_vocabulary_id', vocabulary_id=1) }}";
             // Get data from all rows, including hidden ones. Ref: https://stackoverflow.com/a/38515622
             let current_row = $(this).parents('tr');
             if (current_row.hasClass('child')) {
                 current_row = current_row.prev();
             }
             let row_data = $('#vocab-table').DataTable().row(current_row).data();
-            exampleOnClick(row_data);
+            exampleOnClick(row_data, urlBase);
             $('#vocab-modal').modal('show');
         });
     </script>

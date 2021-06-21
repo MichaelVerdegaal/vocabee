@@ -104,6 +104,22 @@ def get_example_by_id(example_id):
         return create_status(500, str(e)), None
 
 
+def get_examples_by_vocabulary_id(vocabulary_id):
+    """
+    Fetches multiple examples by vocabulary id
+    :param vocabulary_id: vocabulary id
+    :return: Queryset
+    """
+    try:
+        examples = Example.query.filter_by(vocab_id=vocabulary_id).all()
+        if examples:
+            return create_status(), examples
+        else:
+            return create_status(404), None
+    except SQLAlchemyError as e:
+        return create_status(500, str(e)), None
+
+
 def update_example(example_id, sentence_jp, sentence_en):
     """
     Updates an example entry
