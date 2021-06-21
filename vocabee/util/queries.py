@@ -18,6 +18,19 @@ def get_vocab_by_level(jlpt_level):
         return create_status(500, str(e)), None
 
 
+# @cache.memoize(300)
+# def get_vocab_by_level_no_examples(jlpt_level):
+#     """
+#     Fetches vocabulary entries by JLPT level
+#     :param jlpt_level: Vocabulary level
+#     :return: Queryset
+#     """
+#     try:
+#         vocabulary = Vocabulary.query.filter_by(jlpt_level=f"N{jlpt_level}").with_entities().all()
+#         return create_status(), vocabulary
+#     except SQLAlchemyError as e:
+#         return create_status(500, str(e)), None
+
 @cache.memoize(5)
 def get_vocab_by_id(vocab_id):
     """

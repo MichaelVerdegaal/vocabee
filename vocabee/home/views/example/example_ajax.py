@@ -29,8 +29,8 @@ def examples_get_by_vocabulary_id(vocabulary_id):
     :return: example entry in JSON
     """
     status, entries = get_examples_by_vocabulary_id(vocabulary_id)
-    entries = {"entries": [e.to_dict() for e in entries]}
     if entries:
+        entries = {"entries": [e.to_dict() for e in entries]}
         return entries, 200
     else:
         return status, status['code']

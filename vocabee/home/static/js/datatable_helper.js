@@ -29,13 +29,6 @@ function createVocabTable(vocabEndpoint, level) {
             {title: "Hiragana", "data": "hiragana"},
             {title: "English", "data": "english"},
             {
-                title: "example_data",
-                data: "examples",
-                orderable: false,
-                searchable: false,
-                visible: false
-            },
-            {
                 title: "Examples",
                 class: "example-column",
                 orderable: false,
@@ -54,8 +47,7 @@ function createVocabTable(vocabEndpoint, level) {
             {width: '10%', targets: 1},
             {width: '10%', targets: 2},
             {width: '50%', targets: 3},
-            {width: '0%', targets: 3},
-            {width: '5%', targets: 5},
+            {width: '5%', targets: 4},
         ],
         pageLength: 10,
         lengthMenu: [[10, 25, 50], [10, 25, 50]],

@@ -37,7 +37,7 @@ class Vocabulary(model, SerializerMixin):
     hiragana = column(string(300), nullable=False)
     english = column(string(300), nullable=False)
     jlpt_level = column(string(5), nullable=False)
-    examples = relationship("Example", backref="vocabulary", lazy="joined")
+    examples = relationship("Example", backref="vocabulary", lazy="dynamic")
 
 
 @tostr
