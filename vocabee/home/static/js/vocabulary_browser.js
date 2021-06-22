@@ -3,12 +3,11 @@ const isOk = response => response.ok ? response.json() : Promise.reject(new Erro
 /**
  * Fill a bootstrap modal with a datatable
  *
- * @param {string} vocabulary_id - ID of vocabulary entry related to examples
  * @param {String} kanji - Example kanji
  * @param {String} kana - Example kana
  * @param {Array} examples - List of example sentences
  */
-function fillExampleModal(vocabulary_id, kanji, kana, examples) {
+function fillExampleModal(kanji, kana, examples) {
     let modal_content = document.querySelector('#vocab-modal-body');
     modal_content.innerHTML = '';
 
@@ -35,8 +34,8 @@ function fillExampleModal(vocabulary_id, kanji, kana, examples) {
  * @param {String} urlBase - Endpoint url to send request to
  */
 function exampleOnClick(row_data, urlBase) {
-    let vocab_id = row_data.id;
-    let requestUrl = urlBase.slice(0, -1) + vocab_id;
+    let vocabulary_id = row_data.id;
+    let requestUrl = urlBase.slice(0, -1) + vocabulary_id;
     // Ref: https://stackoverflow.com/questions/7864723#7864740
     let kanji = row_data.kanji.split(/<a[^>]*>([\s\S]*?)<\/a>/)[1];
     let kana = row_data.hiragana.split(/<a[^>]*>([\s\S]*?)<\/a>/)[1];
@@ -44,10 +43,10 @@ function exampleOnClick(row_data, urlBase) {
     fetch(requestUrl)
         .then(isOk)
         .then(data => {
-            fillExampleModal(vocab_id, kanji, kana, data.entries);
+            fillExampleModal(kanji, kana, data.entries);
         })
         .catch(error => {
             console.log(error);
-            fillExampleModal(vocab_id, kanji, kana, []);
+            fillExampleModal(kanji, kana, []);
         });
 }

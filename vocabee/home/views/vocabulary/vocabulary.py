@@ -8,33 +8,33 @@ vocabulary_bp = Blueprint('vocabulary', __name__, url_prefix='/vocabulary')
 
 @vocabulary_bp.route('/index')
 @cache.cached(timeout=30)
-def vocab_index():
+def vocabulary_index():
     """
     Renders the vocabulary level index page
     :return: Webpage
     """
     try:
-        return render_template("vocabulary/vocab_index.html")
+        return render_template("vocabulary/vocabulary_index.html")
     except TemplateNotFound:
         abort(404)
 
 
-@vocabulary_bp.route('/browser/<int:vocab_level>')
+@vocabulary_bp.route('/browser/<int:vocabulary_level>')
 @cache.cached(timeout=60)
-def vocab_browser(vocab_level):
+def vocabulary_browser(vocabulary_level):
     """
     Renders the vocabulary level datatables page
-    :param vocab_level: Valid JLPT vocabulary level (1-5)
+    :param vocabulary_level: Valid JLPT vocabulary level (1-5)
     :return: Webpage
     """
-    if 0 < vocab_level < 6:
+    if 0 < vocabulary_level < 6:
         try:
-            return render_template("vocabulary/browser.html", level=vocab_level)
+            return render_template("vocabulary/vocabulary_browser.html", level=vocabulary_level)
         except TemplateNotFound:
             abort(404)
     else:
         try:
-            return render_template("vocabulary/vocab_index.html")
+            return render_template("vocabulary/vocabulary_index.html")
         except TemplateNotFound:
             abort(404)
 

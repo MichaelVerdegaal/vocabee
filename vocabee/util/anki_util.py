@@ -70,13 +70,13 @@ def create_deck(level):
     return my_deck
 
 
-def fill_deck(vocab_list, deck):
+def fill_deck(vocabulary_list, deck):
     """
     Creates a notelist and add it to the deck
-    :param vocab_list: vocabulary list
+    :param vocabulary_list: vocabulary list
     :param deck: anki deck
     """
-    notelist = [create_note(v.examples, v.hiragana, v.kanji, v.english) for v in vocab_list]
+    notelist = [create_note(v.examples, v.hiragana, v.kanji, v.english) for v in vocabulary_list]
     deck.notes = notelist
 
 

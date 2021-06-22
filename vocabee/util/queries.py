@@ -36,14 +36,14 @@ def get_vocabulary_by_level_no_examples(jlpt_level):
 
 
 @cache.memoize(5)
-def get_vocabulary_by_id(vocab_id):
+def get_vocabulary_by_id(vocabulary_id):
     """
     Fetches vocabulary entry by id
-    :param vocab_id: Vocabulary ID
+    :param vocabulary_id: Vocabulary ID
     :return: Queryset
     """
     try:
-        entry = Vocabulary.query.filter_by(id=vocab_id).one_or_none()
+        entry = Vocabulary.query.filter_by(id=vocabulary_id).one_or_none()
         if entry:
             return create_status(), entry
         else:
@@ -52,20 +52,20 @@ def get_vocabulary_by_id(vocab_id):
         return create_status(500, str(e)), None
 
 
-def update_vocab(vocab_id, kanji, kana, meaning, jlpt_level):
+def update_vocab(vocabulary_id, kanji, kana, meaning, jlpt_level):
     """
     Updates a vocabulary entry
-    :param vocab_id: vocabulary entry
+    :param vocabulary_id: vocabulary id
     :param kanji: kanji field
     :param kana: kana field
     :param meaning: meaning field
     :param jlpt_level: jlpt_level field
     """
     try:
-        Vocabulary.query.filter_by(id=vocab_id).update(dict(kanji=kanji,
-                                                            hiragana=kana,
-                                                            english=meaning,
-                                                            jlpt_level=jlpt_level))
+        Vocabulary.query.filter_by(id=vocabulary_id).update(dict(kanji=kanji,
+                                                                 hiragana=kana,
+                                                                 english=meaning,
+                                                                 jlpt_level=jlpt_level))
         db.session.commit()
         return create_status()
     except SQLAlchemyError as e:
@@ -87,18 +87,18 @@ def add_vocab(kanji, kana, meaning, jlpt_level):
                            jlpt_level=jlpt_level)
         db.session.add(entry)
         db.session.commit()
-        return create_status(vocab_id=entry.id)
+        return create_status(vocabulary_id=entry.id)
     except SQLAlchemyError as e:
         return create_status(500, str(e))
 
 
-def delete_vocab(vocab_id):
+def delete_vocab(vocabulary_id):
     """
     Deletes a vocabulary entry
-    :param vocab_id: vocabulary entry
+    :param vocabulary_id: vocabulary entry
     """
     try:
-        Vocabulary.query.filter_by(id=vocab_id).delete()
+        Vocabulary.query.filter_by(id=vocabulary_id).delete()
         db.session.commit()
         return create_status()
     except SQLAlchemyError as e:
@@ -152,15 +152,15 @@ def update_example(example_id, sentence_jp, sentence_en):
         return create_status(500, str(e))
 
 
-def add_example(sentence_jp, sentence_en, vocab_id):
+def add_example(sentence_jp, sentence_en, vocabulary_id):
     """
     Adds an example entry
     :param sentence_jp: japanese sentence
     :param sentence_en: english sentence
-    :param vocab_id: Vocabulary ID
+    :param vocabulary_id: Vocabulary ID
     """
     try:
-        entry = Example(sentence_en=sentence_en, sentence_jp=sentence_jp, vocab_id=vocab_id)
+        entry = Example(sentence_en=sentence_en, sentence_jp=sentence_jp, vocab_id=vocabulary_id)
         db.session.add(entry)
         db.session.commit()
         return create_status(example_id=entry.id)

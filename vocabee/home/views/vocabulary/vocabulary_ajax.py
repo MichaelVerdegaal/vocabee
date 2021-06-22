@@ -99,11 +99,11 @@ def vocabulary_download_deck(vocabulary_level):
     :param vocabulary_level: Valid JLPT vocabulary level (1-5)
     :return: downloaded file
     """
-    status, vocab = get_vocabulary_by_level(vocabulary_level)
+    status, vocabulary = get_vocabulary_by_level(vocabulary_level)
     if status['code'] == 200:
         filename = f'vocabee{vocabulary_level}.apkg'
         deck_path = os.path.join(PROJECT_FOLDER, filename)
-        create_deck_by_level(vocab, vocabulary_level, filename)
+        create_deck_by_level(vocabulary, vocabulary_level, filename)
 
         # Ref: https://stackoverflow.com/a/57998006/7174982
         with open(deck_path, 'rb') as f:

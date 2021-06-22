@@ -134,10 +134,10 @@ function vocabEntryAdd(urlBase) {
         postRequest(urlBase, {kanji: kanji, kana: kana, meaning: meaning, jlpt_level: jlptLevel})
             .then(isOk)
             .then(response => {
-                let vocabID = response.body.vocab_id;
-                alert("Entry " + vocabID + " added");
+                let vocabularyID = response.body.vocab_id;
+                alert("Entry " + vocabularyID + " added");
                 clearVocabFields();
-                document.querySelector('#vocabIDInput').value = vocabID;
+                document.querySelector('#vocabIDInput').value = vocabularyID;
                 document.querySelector('#vocabEntryGetBtn').click();
             })
             .catch(error => {
@@ -248,10 +248,9 @@ function exampleEntryAdd(urlBase) {
     }
 }
 
-function fillExampleModal(vocab_id, kanji, kana, examples) {
+function fillExampleModal(kanji, kana, examples) {
     /**
      * Fills the example modal
-     * @param {String} vocab_id - vocabulary id
      * @param {String} kanji - kanji item
      * @param {String} kana - kana item
      * @param {Array} exanokes - array of example sentences
@@ -303,7 +302,6 @@ function showExampleOnClick() {
     /**
      * Shows the example datatable and fills it on button click
      */
-    let vocabID = document.querySelector('#vocabIDInput').value;
     let kanji = document.querySelector('#kanjiNew').value;
     let kana = document.querySelector('#kanaNew').value;
 
@@ -313,6 +311,6 @@ function showExampleOnClick() {
     });
     examples = examples.map(Object.values);
 
-    fillExampleModal(vocabID, kanji, kana, examples);
+    fillExampleModal(kanji, kana, examples);
 }
 
