@@ -26,7 +26,7 @@ function createVocabTable(vocabEndpoint, level) {
         columns: [
             {title: "ID", "data": "id"},
             {title: "Kanji", "data": "kanji"},
-            {title: "Hiragana", "data": "hiragana"},
+            {title: "Kana", "data": "hiragana"},
             {title: "English", "data": "english"},
             {
                 title: "Examples",
