@@ -15,7 +15,7 @@ def get_vocabulary_by_level(jlpt_level):
         vocabulary = Vocabulary.query.filter_by(jlpt_level=f"N{jlpt_level}").all()
         return create_status(), vocabulary
     except SQLAlchemyError as e:
-        return create_status(500, str(e)), None
+        return create_status(500, repr(e)), None
 
 
 @cache.memoize(300)
@@ -32,7 +32,7 @@ def get_vocabulary_by_level_no_examples(jlpt_level):
                                                                                            Vocabulary.english).all()
         return create_status(), vocabulary
     except SQLAlchemyError as e:
-        return create_status(500, str(e)), None
+        return create_status(500, repr(e)), None
 
 
 @cache.memoize(5)
@@ -49,7 +49,7 @@ def get_vocabulary_by_id(vocabulary_id):
         else:
             return create_status(404), None
     except SQLAlchemyError as e:
-        return create_status(500, str(e)), None
+        return create_status(500, repr(e)), None
 
 
 def update_vocab(vocabulary_id, kanji, kana, meaning, jlpt_level):
@@ -69,7 +69,7 @@ def update_vocab(vocabulary_id, kanji, kana, meaning, jlpt_level):
         db.session.commit()
         return create_status()
     except SQLAlchemyError as e:
-        return create_status(500, str(e))
+        return create_status(500, repr(e))
 
 
 def add_vocab(kanji, kana, meaning, jlpt_level):
@@ -89,7 +89,7 @@ def add_vocab(kanji, kana, meaning, jlpt_level):
         db.session.commit()
         return create_status(vocabulary_id=entry.id)
     except SQLAlchemyError as e:
-        return create_status(500, str(e))
+        return create_status(500, repr(e))
 
 
 def delete_vocab(vocabulary_id):
@@ -102,7 +102,7 @@ def delete_vocab(vocabulary_id):
         db.session.commit()
         return create_status()
     except SQLAlchemyError as e:
-        return create_status(500, str(e))
+        return create_status(500, repr(e))
 
 
 def get_example_by_id(example_id):
@@ -118,7 +118,7 @@ def get_example_by_id(example_id):
         else:
             return create_status(404), None
     except SQLAlchemyError as e:
-        return create_status(500, str(e)), None
+        return create_status(500, repr(e)), None
 
 
 def get_examples_by_vocabulary_id(vocabulary_id):
@@ -134,7 +134,7 @@ def get_examples_by_vocabulary_id(vocabulary_id):
         else:
             return create_status(404), None
     except SQLAlchemyError as e:
-        return create_status(500, str(e)), None
+        return create_status(500, repr(e)), None
 
 
 def update_example(example_id, sentence_jp, sentence_en):
@@ -149,7 +149,7 @@ def update_example(example_id, sentence_jp, sentence_en):
         db.session.commit()
         return create_status()
     except SQLAlchemyError as e:
-        return create_status(500, str(e))
+        return create_status(500, repr(e))
 
 
 def add_example(sentence_jp, sentence_en, vocabulary_id):
@@ -165,7 +165,7 @@ def add_example(sentence_jp, sentence_en, vocabulary_id):
         db.session.commit()
         return create_status(example_id=entry.id)
     except SQLAlchemyError as e:
-        return create_status(500, str(e))
+        return create_status(500, repr(e))
 
 
 def delete_example(example_id):
@@ -178,4 +178,4 @@ def delete_example(example_id):
         db.session.commit()
         return create_status()
     except SQLAlchemyError as e:
-        return create_status(500, str(e))
+        return create_status(500, repr(e))

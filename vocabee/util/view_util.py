@@ -10,13 +10,13 @@ def create_status(code=200, description=None, **kwargs):
     status = {"code": code, 'body': {}}
     if description:
         status['description'] = description
-    if kwargs:
-        for k, v in kwargs.items():
-            status['body'][k] = v
     else:
         if code == 200:
             status['description'] = "Request was successful"
         else:
             status['description'] = "Request threw an error, but the error was not specified"
+    if kwargs:
+        for k, v in kwargs.items():
+            status['body'][k] = v
     return status
 
