@@ -38,7 +38,7 @@ function exampleOnClick(row_data, urlBase) {
     let requestUrl = urlBase.slice(0, -1) + vocabulary_id;
     // Ref: https://stackoverflow.com/questions/7864723#7864740
     let kanji = row_data.kanji.split(/<a[^>]*>([\s\S]*?)<\/a>/)[1];
-    let kana = row_data.hiragana.split(/<a[^>]*>([\s\S]*?)<\/a>/)[1];
+    let kana = row_data.kana.split(/<a[^>]*>([\s\S]*?)<\/a>/)[1];
 
     fetch(requestUrl)
         .then(isOk)

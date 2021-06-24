@@ -10,7 +10,7 @@ def process_vocabulary(vocabulary):
         row = dict(row)
         row['kanji'] = f'<a href="https://jisho.org/search/{e}" target="_blank" rel="noopener">{e}</a>' if (
             e := row['kanji']) else ""
-        row['hiragana'] = f'<a href="https://jisho.org/search/{row["hiragana"]}" target="_blank" rel="noopener">{row["hiragana"]}</a>'
+        row['kana'] = f'<a href="https://jisho.org/search/{row["kana"]}" target="_blank" rel="noopener">{row["kana"]}</a>'
         row['english'] = row.get('english', '')
         return row
 

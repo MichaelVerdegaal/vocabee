@@ -34,7 +34,7 @@ class Vocabulary(model, SerializerMixin):
 
     id = column(integer, primary_key=True)
     kanji = column(string(100), nullable=True)
-    hiragana = column(string(300), nullable=False)
+    kana = column(string(300), nullable=False)
     english = column(string(300), nullable=False)
     jlpt_level = column(string(5), nullable=False)
     examples = relationship("Example", backref="vocabulary", lazy="dynamic")

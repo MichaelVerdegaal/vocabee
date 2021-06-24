@@ -28,7 +28,7 @@ def get_vocabulary_by_level_no_examples(jlpt_level):
     try:
         vocabulary = Vocabulary.query.filter_by(jlpt_level=f"N{jlpt_level}").with_entities(Vocabulary.id,
                                                                                            Vocabulary.kanji,
-                                                                                           Vocabulary.hiragana,
+                                                                                           Vocabulary.kana,
                                                                                            Vocabulary.english).all()
         return create_status(), vocabulary
     except SQLAlchemyError as e:
@@ -63,7 +63,7 @@ def update_vocab(vocabulary_id, kanji, kana, meaning, jlpt_level):
     """
     try:
         Vocabulary.query.filter_by(id=vocabulary_id).update(dict(kanji=kanji,
-                                                                 hiragana=kana,
+                                                                 kana=kana,
                                                                  english=meaning,
                                                                  jlpt_level=jlpt_level))
         db.session.commit()
@@ -82,7 +82,7 @@ def add_vocab(kanji, kana, meaning, jlpt_level):
     """
     try:
         entry = Vocabulary(kanji=kanji,
-                           hiragana=kana,
+                           kana=kana,
                            english=meaning,
                            jlpt_level=jlpt_level)
         db.session.add(entry)

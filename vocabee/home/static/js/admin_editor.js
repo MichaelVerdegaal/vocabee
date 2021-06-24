@@ -52,11 +52,11 @@ function vocabEntryGet(urlBase) {
         .then(data => {
             document.querySelector('#vocabIDInput').value = vocabID;
             document.querySelector('#kanjiOld').value = data.kanji;
-            document.querySelector('#kanaOld').value = data.hiragana;
+            document.querySelector('#kanaOld').value = data.kana;
             document.querySelector('#meaningOld').value = data.english;
             document.querySelector('#jlptOld').value = data.jlpt_level;
             document.querySelector('#kanjiNew').value = data.kanji;
-            document.querySelector('#kanaNew').value = data.hiragana;
+            document.querySelector('#kanaNew').value = data.kana;
             document.querySelector('#meaningNew').value = data.english;
             document.querySelector('#jlptNew').value = data.jlpt_level;
 

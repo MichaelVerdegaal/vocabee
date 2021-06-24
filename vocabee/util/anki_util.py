@@ -7,7 +7,7 @@ vocabulary_model = genanki.Model(
     1963760736,
     'JP model',
     fields=[
-        {'name': 'Hiragana'},
+        {'name': 'Kana'},
         {'name': 'Kanji'},
         {'name': 'English'},
         {'name': 'Example'}
@@ -15,7 +15,7 @@ vocabulary_model = genanki.Model(
     templates=[
         {
             'name': 'Card',
-            'qfmt': '<h1>{{Hiragana}}{{Kanji}}</h1>',
+            'qfmt': '<h1>{{Kana}}{{Kanji}}</h1>',
             'afmt': '{{FrontSide}}<hr id="answer"><h2>{{English}}</h2> {{Example}}',
         },
     ],
@@ -34,11 +34,11 @@ def create_example_note_string(example_list):
     return note_string
 
 
-def create_note(example_list, hiragana, kanji, english):
+def create_note(example_list, kana, kanji, english):
     """
     Creates an anki note (card)
     :param example_list: list of example sentences
-    :param hiragana: hiragana text
+    :param kana: kana text
     :param kanji: kanji text
     :param english: english text
     :return: anki note
@@ -53,7 +53,7 @@ def create_note(example_list, hiragana, kanji, english):
         kanji = f"/{kanji}"
     else:
         kanji = ""
-    return genanki.Note(model=vocabulary_model, fields=[hiragana, kanji, english, example_string])
+    return genanki.Note(model=vocabulary_model, fields=[kana, kanji, english, example_string])
 
 
 def create_deck(level):
@@ -76,7 +76,7 @@ def fill_deck(vocabulary_list, deck):
     :param vocabulary_list: vocabulary list
     :param deck: anki deck
     """
-    notelist = [create_note(v.examples, v.hiragana, v.kanji, v.english) for v in vocabulary_list]
+    notelist = [create_note(v.examples, v.kana, v.kanji, v.english) for v in vocabulary_list]
     deck.notes = notelist
 
 
