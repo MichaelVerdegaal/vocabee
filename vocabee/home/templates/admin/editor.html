@@ -26,7 +26,7 @@
     <div class="container-fluid" id="deck-content-container">
         <div class="row">
 
-            <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+            <div class="col-xs-12 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
                 <div class="card text-center">
                     <div class="card-header">
                         <h5 class="card-title">Vocabulary editor</h5>
@@ -36,7 +36,7 @@
                     </div>
                     <div class="card-body">
                         <form>
-                            <div class="form-row">
+                            <div class="row">
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="vocabIDprepend">ID</span>
@@ -53,45 +53,45 @@
 
                             <hr>
 
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
+                            <div class="row">
+                                <div class="col-6">
                                     <label for="kanjiOld">Current kanji</label>
                                     <input type="text" class="form-control" id="kanjiOld" readonly>
                                 </div>
-                                <div class="form-group col-md-6">
+                                <div class="col-6">
                                     <label for="kanjiNew">New kanji</label>
                                     <input type="text" class="form-control" id="kanjiNew">
                                 </div>
                             </div>
 
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
+                            <div class="row">
+                                <div class="col-6">
                                     <label for="kanaOld">Current kana</label>
                                     <input type="text" class="form-control" id="kanaOld" readonly>
                                 </div>
-                                <div class="form-group col-md-6">
+                                <div class="col-6">
                                     <label for="kanaNew">New kana</label>
                                     <input type="text" class="form-control" id="kanaNew">
                                 </div>
                             </div>
 
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
+                            <div class="row">
+                                <div class="col-6">
                                     <label for="meaningOld">Current meaning</label>
                                     <input type="text" class="form-control" id="meaningOld" readonly>
                                 </div>
-                                <div class="form-group col-md-6">
+                                <div class="col-6">
                                     <label for="meaningNew">New meaning</label>
                                     <input type="text" class="form-control" id="meaningNew">
                                 </div>
                             </div>
 
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
+                            <div class="row">
+                                <div class="col-6">
                                     <label for="jlptOld">Current JLPT level</label>
                                     <input type="text" class="form-control" id="jlptOld" readonly>
                                 </div>
-                                <div class="form-group col-md-6">
+                                <div class="col-6">
                                     <label for="jlptNew">New JLPT level</label>
                                     <select class="form-select" id="jlptNew">
                                         <option value="N5">N5</option>
@@ -105,23 +105,23 @@
 
                             <hr>
 
-                            <div class="form-row">
-                                <div class="form-group col-3">
+                            <div class="row">
+                                <div class="col-xl col-lg">
                                     <button class="btn btn-primary action-btn-gray" title="clear fields" type="button"
                                             id="vocabClearBtn">clear
                                     </button>
                                 </div>
-                                <div class="form-group col-3">
+                                <div class="col-xl col-lg">
                                     <button class="btn btn-primary action-btn-red" title="delete entry" type="button"
                                             id="vocabDeleteBtn">delete
                                     </button>
                                 </div>
-                                <div class="form-group col-3">
+                                <div class="col-xl col-lg">
                                     <button class="btn btn-outline-success" title="update entry" type="button"
                                             id="vocabUpdateBtn">update
                                     </button>
                                 </div>
-                                <div class="form-group col-3">
+                                <div class="col-xl col-lg">
                                     <button class="btn btn-primary action-btn-green" title="add new entry" type="button"
                                             id="vocabAddBtn">add
                                     </button>
@@ -134,7 +134,7 @@
                 </div>
             </div>
 
-            <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+            <div class="col-xs-12 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
                 <div class="card text-center">
                     <div class="card-header">
                         <h5 class="card-title">Example editor</h5>
@@ -145,7 +145,7 @@
                     <div class="card-body">
 
                         <form>
-                            <div class="form-row">
+                            <div class="row">
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="exampleIDPrepend">ID</span>
@@ -162,53 +162,53 @@
 
                             <hr>
 
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
+                            <div class="row">
+                                <div class="col-6">
                                     <label for="sentenceJPOld">Current sentence JP</label>
                                     <input type="text" class="form-control" id="sentenceJPOld" readonly>
                                 </div>
-                                <div class="form-group col-md-6">
+                                <div class="col-6">
                                     <label for="sentenceJPNew">New sentence JP</label>
                                     <input type="text" class="form-control" id="sentenceJPNew">
                                 </div>
                             </div>
 
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
+                            <div class="row">
+                                <div class="col-6">
                                     <label for="sentenceENOld">Current sentence EN</label>
                                     <input type="text" class="form-control" id="sentenceENOld" readonly>
                                 </div>
-                                <div class="form-group col-md-6">
+                                <div class="col-6">
                                     <label for="sentenceENNew">New sentence EN</label>
                                     <input type="text" class="form-control" id="sentenceENNew">
                                 </div>
                             </div>
 
                             <br>
-                            <div id="exampleContainer" class="overflow-scroll">
+                            <div id="exampleContainer">
                                 <button type="button" class="btn btn-outline-primary example-select"
                                         title="Show examples" id="showExampleBtn">Show examples
                                 </button>
                             </div>
 
                             <hr>
-                            <div class="form-row">
-                                <div class="form-group col-3">
+                            <div class="row">
+                                <div class="col-xl col-lg">
                                     <button class="btn btn-primary action-btn-gray" title="clear fields" type="button"
                                             id="exampleClearBtn">clear
                                     </button>
                                 </div>
-                                <div class="form-group col-3">
+                                <div class="col-xl col-lg">
                                     <button class="btn btn-primary action-btn-red" title="delete entry" type="button"
                                             id="exampleDeleteBtn">delete
                                     </button>
                                 </div>
-                                <div class="form-group col-3">
+                                <div class="col-xl col-lg">
                                     <button class="btn btn-outline-success" title="update entry" type="button"
                                             id="exampleUpdateBtn">update
                                     </button>
                                 </div>
-                                <div class="form-group col-3">
+                                <div class="col-xl col-lg">
                                     <button class="btn btn-primary action-btn-green" title="add new entry" type="button"
                                             id="exampleAddBtn">add
                                     </button>
@@ -246,6 +246,7 @@
     </div>
 
     <script type="text/javascript">
+    // Convert these click events to vanilla
         $('#vocabEntryGetBtn').click(function () {
             let urlBase = "{{ url_for('vocabulary_ajax.vocabulary_entry_get', vocabulary_id=5) }}";
             vocabEntryGet(urlBase);
