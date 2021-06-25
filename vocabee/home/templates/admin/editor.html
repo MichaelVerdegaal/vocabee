@@ -43,11 +43,9 @@
                                     </div>
                                     <input type="text" id="vocabIDInput" class="form-control" placeholder="..."
                                            aria-label="...">
-                                    <div class="input-group-append">
-                                        <button class="btn btn-primary action-btn" title="get entry" type="button"
-                                                id="vocabEntryGetBtn">get
-                                        </button>
-                                    </div>
+                                    <button class="btn btn-primary action-btn" title="get entry" type="button"
+                                            id="vocabEntryGetBtn">get
+                                    </button>
                                 </div>
                             </div>
 
@@ -152,11 +150,9 @@
                                     </div>
                                     <input type="text" id="exampleIDInput" class="form-control" placeholder="..."
                                            aria-label="...">
-                                    <div class="input-group-append">
-                                        <button class="btn btn-primary action-btn" title="get entry" type="button"
-                                                id="exampleEntryGetBtn">get
-                                        </button>
-                                    </div>
+                                    <button class="btn btn-primary action-btn" title="get entry" type="button"
+                                            id="exampleEntryGetBtn">get
+                                    </button>
                                 </div>
                             </div>
 
@@ -246,7 +242,7 @@
     </div>
 
     <script type="text/javascript">
-    // Convert these click events to vanilla
+        // Convert these click events to vanilla
         $('#vocabEntryGetBtn').click(function () {
             let urlBase = "{{ url_for('vocabulary_ajax.vocabulary_entry_get', vocabulary_id=5) }}";
             vocabEntryGet(urlBase);
