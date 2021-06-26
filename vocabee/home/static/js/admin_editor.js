@@ -274,7 +274,7 @@ function fillExampleModal(kanji, kana, examples) {
         {title: "ID"},
         {title: "English"},
         {title: "Japanese"},
-        {data: null, "defaultContent": example_button.outerHTML}
+        {title: "Select", data: null, "defaultContent": example_button.outerHTML}
     ];
     createExampleTable(examples, example_columns);
 
