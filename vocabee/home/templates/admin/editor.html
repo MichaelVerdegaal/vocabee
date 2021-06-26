@@ -240,59 +240,58 @@
     </div>
 
     <script type="text/javascript">
-        // TODO Convert these click events to vanilla
-        $('#vocabEntryGetBtn').click(function () {
+        document.querySelector('#vocabEntryGetBtn').addEventListener("click", function () {
             let urlBase = "{{ url_for('vocabulary_ajax.vocabulary_entry_get', vocabulary_id=5) }}";
             vocabEntryGet(urlBase);
         });
 
-        $('#vocabClearBtn').click(function () {
+        document.querySelector('#vocabClearBtn').addEventListener("click", function () {
             clearVocabFields();
         });
 
-        $('#vocabDeleteBtn').click(function () {
+        document.querySelector('#vocabDeleteBtn').addEventListener("click", function () {
             let urlBase = "{{ url_for('vocabulary_ajax.vocabulary_entry_delete') }}";
             vocabEntryDelete(urlBase);
         });
 
-        $('#vocabUpdateBtn').click(function () {
+        document.querySelector('#vocabUpdateBtn').addEventListener("click", function () {
             let urlBase = "{{ url_for('vocabulary_ajax.vocabulary_entry_update') }}";
             vocabEntryUpdate(urlBase);
         });
 
-        $('#vocabAddBtn').click(function () {
+        document.querySelector('#vocabAddBtn').addEventListener("click", function () {
             let urlBase = "{{ url_for('vocabulary_ajax.vocabulary_entry_add') }}";
             vocabEntryAdd(urlBase);
         });
 
-        $('#showExampleBtn').click(function () {
+        document.querySelector('#showExampleBtn').addEventListener("click", function () {
             showExampleOnClick();
             $('#vocab-modal').modal('show');
-        })
+        });
 
-        $('#exampleEntryGetBtn').click(function () {
+        document.querySelector('#exampleEntryGetBtn').addEventListener("click", function () {
             let urlBase = "{{ url_for('example_ajax.example_entry_get', example_id=1) }}";
             exampleEntryGet(urlBase);
         });
 
-        $('#exampleClearBtn').click(function () {
+        document.querySelector('#exampleClearBtn').addEventListener("click", function () {
             clearExampleFields();
-        })
+        });
 
-        $('#exampleDeleteBtn').click(function () {
+        document.querySelector('#exampleDeleteBtn').addEventListener("click", function () {
             let urlBase = "{{ url_for('example_ajax.example_entry_delete', example_id=1) }}";
             exampleEntryDelete(urlBase);
-        })
+        });
 
-        $('#exampleUpdateBtn').click(function () {
+        document.querySelector('#exampleUpdateBtn').addEventListener("click", function () {
             let urlBase = "{{ url_for('example_ajax.example_entry_update', example_id=1) }}";
             exampleEntryUpdate(urlBase);
-        })
+        });
 
-        $('#exampleAddBtn').click(function () {
+        document.querySelector('#exampleAddBtn').addEventListener("click", function () {
             let urlBase = "{{ url_for('example_ajax.example_entry_add', example_id=1) }}";
             exampleEntryAdd(urlBase);
-        })
+        });
 
     </script>
 
