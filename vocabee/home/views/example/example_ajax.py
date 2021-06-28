@@ -61,7 +61,7 @@ def example_entry_add():
     data = request.json
     if not data:
         return create_status(400, "Data received is empty"), 400
-    status = add_example(data['sentence_jp'], data['sentence_en'], data['vocab_id'])
+    status = add_example(data['sentence_jp'], data['sentence_en'], data['vocabulary_id'])
     if status['code'] == 200:
         return status, 200
     else:

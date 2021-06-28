@@ -80,7 +80,7 @@ function vocabEntryDelete(urlBase) {
         postRequest(urlBase, {id: vocabID})
             .then(isOk)
             .then(response => {
-                alert("Entry " + vocabID + " deleted");
+                createAndShowToast("Entry " + vocabID + " deleted!");
                 clearVocabFields();
             })
             .catch(error => {
@@ -107,7 +107,7 @@ function vocabEntryUpdate(urlBase) {
         postRequest(urlBase, {id: vocabID, kanji: kanji, kana: kana, meaning: meaning, jlpt_level: jlptLevel})
             .then(isOk)
             .then(response => {
-                alert("Entry " + vocabID + " updated");
+                createAndShowToast("Entry " + vocabID + " updated!");
                 clearVocabFields();
                 document.querySelector('#vocabIDInput').value = vocabID;
                 document.querySelector('#vocabEntryGetBtn').click();
@@ -134,8 +134,9 @@ function vocabEntryAdd(urlBase) {
         postRequest(urlBase, {kanji: kanji, kana: kana, meaning: meaning, jlpt_level: jlptLevel})
             .then(isOk)
             .then(response => {
-                let vocabularyID = response.body.vocab_id;
-                alert("Entry " + vocabularyID + " added");
+                let vocabularyID = response.body.vocabulary_id;
+                console.log(vocabularyID);
+                createAndShowToast("Entry " + vocabularyID + " added!");
                 clearVocabFields();
                 document.querySelector('#vocabIDInput').value = vocabularyID;
                 document.querySelector('#vocabEntryGetBtn').click();
@@ -184,7 +185,7 @@ function exampleEntryDelete(urlBase) {
         postRequest(urlBase, {id: exampleID})
             .then(isOk)
             .then(response => {
-                alert("Entry " + exampleID + " deleted");
+                createAndShowToast("Example " + exampleID + " deleted!");
                 clearExampleFields();
                 document.querySelector('#vocabEntryGetBtn').click();
             })
@@ -209,7 +210,7 @@ function exampleEntryUpdate(urlBase) {
         postRequest(urlBase, {sentence_jp: sentenceJP, sentence_en: sentenceEN, id: exampleID})
             .then(isOk)
             .then(response => {
-                alert("Entry " + exampleID + " updated");
+                createAndShowToast("Example " + exampleID + " updated!");
                 document.querySelector('#vocabEntryGetBtn').click();
                 document.querySelector('#exampleEntryGetBtn').click();
             })
@@ -229,13 +230,13 @@ function exampleEntryAdd(urlBase) {
     if (c === true) {
         let sentenceJP = document.querySelector('#sentenceJPNew').value;
         let sentenceEN = document.querySelector('#sentenceENNew').value;
-        let vocabID = document.querySelector('#vocabIDInput').value;
+        let vocabularyID = document.querySelector('#vocabIDInput').value;
 
-        postRequest(urlBase, {sentence_jp: sentenceJP, sentence_en: sentenceEN, vocab_id: vocabID})
+        postRequest(urlBase, {sentence_jp: sentenceJP, sentence_en: sentenceEN, vocabulary_id: vocabularyID})
             .then(isOk)
             .then(response => {
                 let exampleID = response.body.example_id;
-                alert("Entry " + exampleID + " added");
+                createAndShowToast("Example " + exampleID + " added!");
                 clearExampleFields();
                 document.querySelector('#vocabEntryGetBtn').click();
                 document.querySelector('#exampleIDInput').value = exampleID;
