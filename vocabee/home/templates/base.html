@@ -24,10 +24,17 @@
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!--Custom stylesheets and scripts-->
     <script src="{{ url_for('static', filename='js/utilities.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/searching.js') }}"></script>
     <link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet">
     <!--Ref: https://code.jquery.com/ -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
             integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <!--Ref: https://datatables.net/ -->
+    <!--Ref: Option 1 - Bootstrap / Option 2 DataTables / Option 3 Responsive) -->
+    <link rel="stylesheet" type="text/css"
+          href="https://cdn.datatables.net/v/bs4/dt-1.10.20/r-2.2.3/datatables.min.css"/>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.20/r-2.2.3/datatables.min.js"></script>
+    <script src="{{ url_for('static', filename='js/full_numbers_no_ellipses.js') }}"></script>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id={{ GA_TRACKING_ID }}"></script>
     <script>
@@ -51,7 +58,7 @@
 {% set navigation_bar = [
     (url_for('home.home'), 'home', 'Home'),
     (url_for('vocabulary.vocabulary_index'), 'vocabulary', 'Vocabulary'),
-    (url_for('vocabulary.deck'), 'deck', 'Flashcards'),
+    (url_for('vocabulary.flashcards'), 'flashcards', 'Flashcards'),
     (url_for('home.about'), 'about', 'About')
     ] -%}
 
@@ -75,9 +82,36 @@
                 </li>
             {% endfor %}
         </ul>
+
+        <div class="form-row">
+            <div class="input-group input-group-sm">
+                <input class="form-control" id="entrySearchInput" placeholder="Search for vocabulary" type="text">
+                <button class="btn btn-primary action-btn" id="entrySearchBtn" title="Search entries">
+                    <span class='material-icons md-14'>search</span></button>
+            </div>
+        </div>
+
     </div>
 </nav>
 <!--end navbar-->
+
+<script>
+    let entrySearchBtn = document.querySelector('#entrySearchBtn')
+    let entrySearchBox = document.querySelector('#entrySearchInput')
+    let searchUrlBase = "{{ url_for('vocabulary_ajax.vocabulary_full_search', search_query='1') }}";
+    let searchResultUrlBase = "{{ url_for('vocabulary.search_results') }}";
+
+    entrySearchBtn.addEventListener('click', (e) => {
+        doSearchIfInput(searchUrlBase, searchResultUrlBase, entrySearchBox.value);
+    })
+
+    entrySearchBox.addEventListener('keydown', (e) => {
+        if (e.keyCode === 13) {
+            doSearchIfInput(searchUrlBase, searchResultUrlBase, entrySearchBox.value);
+        }
+    });
+</script>
+
 
 <div class="container-fluid" id="content-block-container">
     {% block container %}{% endblock %}

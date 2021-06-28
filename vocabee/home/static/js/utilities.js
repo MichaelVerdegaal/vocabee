@@ -1,3 +1,5 @@
+const isOk = response => response.ok ? response.json() : Promise.reject(new Error('Failed the request'));
+
 function createAndShowToast(message) {
     /**
      * Creates a toast, appends it to a toastContainer and shows it

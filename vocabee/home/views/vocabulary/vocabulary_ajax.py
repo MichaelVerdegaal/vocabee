@@ -5,15 +5,39 @@ from flask import Blueprint, request, Response
 from vocabee.config import PROJECT_FOLDER
 from vocabee.util.anki_util import create_deck_by_level
 from vocabee.util.queries import (get_vocabulary_by_level, get_vocabulary_by_id, update_vocab, add_vocab, delete_vocab,
-                                  get_vocabulary_by_level_no_examples)
+                                  get_vocabulary_by_level_no_examples, get_all_vocabulary_no_examples)
 from vocabee.util.view_util import create_status
-from vocabee.util.vocabulary_util import process_vocabulary
+from vocabee.util.vocabulary_util import process_vocabulary, search_vocabulary
+from time import perf_counter
+
 
 vocabulary_ajax_bp = Blueprint('vocabulary_ajax', __name__, url_prefix='/vocabulary/ajax')
 
 
+@vocabulary_ajax_bp.route('/source/search/<string:search_query>')
+def vocabulary_full_search(search_query):
+    """
+    AJAX endpoint to retrieve vocabulary
+    :return: vocabulary in JSON
+    """
+    status, vocabulary = get_all_vocabulary_no_examples()
+    if status['code'] == 200:
+        start_time = perf_counter()
+        vocabulary_dict = {'entries': [dict(row) for row in vocabulary]}
+        results = search_vocabulary(search_query, vocabulary_dict)
+        end_time = perf_counter()
+        search_time = f"{end_time - start_time:.5f}"
+        results['search_time'] = search_time
+        if (results['perfect_match_count'] + results['match_count']) == 0:
+            return create_status(404, "No matches found"), 404
+        else:
+            return results, 200
+    else:
+        return status, 500
+
+
 @vocabulary_ajax_bp.route('/source/<int:vocabulary_level>')
-def vocabulary_full_get(vocabulary_level):
+def vocabulary_full_get_by_level(vocabulary_level):
     """
     AJAX endpoint to retrieve vocabulary
     :param vocabulary_level: Valid JLPT vocabulary level (1-5)

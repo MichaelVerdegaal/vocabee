@@ -19,6 +19,23 @@ def get_vocabulary_by_level(jlpt_level):
 
 
 @cache.memoize(300)
+def get_all_vocabulary_no_examples():
+    """
+    Fetches vocabulary entries by JLPT level, but only includes necessary columns to increase performance
+    :return: Queryset
+    """
+    try:
+        vocabulary = Vocabulary.query.with_entities(Vocabulary.id,
+                                                    Vocabulary.kanji,
+                                                    Vocabulary.kana,
+                                                    Vocabulary.english,
+                                                    Vocabulary.jlpt_level).all()
+        return create_status(), vocabulary
+    except SQLAlchemyError as e:
+        return create_status(500, repr(e)), None
+
+
+@cache.memoize(300)
 def get_vocabulary_by_level_no_examples(jlpt_level):
     """
     Fetches vocabulary entries by JLPT level, but only includes necessary columns to increase performance

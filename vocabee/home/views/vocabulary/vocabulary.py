@@ -39,14 +39,27 @@ def vocabulary_browser(vocabulary_level):
             abort(404)
 
 
-@vocabulary_bp.route('/deck')
+@vocabulary_bp.route('/flashcards')
 @cache.cached(timeout=30)
-def deck():
+def flashcards():
     """
     Renders the Anki deck page
     :return: Webpage
     """
     try:
-        return render_template("vocabulary/deck.html")
+        return render_template("vocabulary/flashcards.html")
+    except TemplateNotFound:
+        abort(404)
+
+
+@vocabulary_bp.route('/searchresults')
+@cache.cached(timeout=30)
+def search_results():
+    """
+    Renders the search results page
+    :return: Webpage
+    """
+    try:
+        return render_template("vocabulary/search_results.html")
     except TemplateNotFound:
         abort(404)

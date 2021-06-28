@@ -1,5 +1,3 @@
-const isOk = response => response.ok ? response.json() : Promise.reject(new Error('Failed the request'));
-
 function postRequest(url, data) {
     /**
      * Helper function to send a post request.
@@ -260,7 +258,7 @@ function fillExampleModal(kanji, kana, examples) {
     modal_content.innerHTML = '';
 
     let exampleTableContainer = crel('div', {'id': 'example-table-container', 'class': 'container-fluid'});
-    let exampleTable = crel('table', {'id': 'example-table', 'class': 'table table-striped table-hover'});
+    let exampleTable = crel('table', {'id': 'example-table', 'class': 'table table-striped table-hover browser-table'});
 
     exampleTableContainer.appendChild(exampleTable);
     modal_content.appendChild(exampleTableContainer);
@@ -277,7 +275,7 @@ function fillExampleModal(kanji, kana, examples) {
         {title: "Japanese"},
         {title: "Select", data: null, "defaultContent": example_button.outerHTML}
     ];
-    createExampleTable(examples, example_columns);
+    createExampleTable(examples, "#example-table", example_columns);
 
     // Set modal title
     let modal_title = document.querySelector("#modalLargeLabel");

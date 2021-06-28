@@ -7,12 +7,6 @@
     <link href="{{ url_for('static', filename='css/components/cards.css') }}" rel="stylesheet">
     <script async src="{{ url_for('static', filename='js/datatable_helper.js') }}"></script>
     <script async src="{{ url_for('static', filename='js/admin_editor.js') }}"></script>
-    <!--Ref: https://datatables.net/ -->
-    <!--Ref: Option 1 - Bootstrap / Option 2 DataTables / Option 3 Responsive) -->
-    <link rel="stylesheet" type="text/css"
-          href="https://cdn.datatables.net/v/bs4/dt-1.10.20/r-2.2.3/datatables.min.css"/>
-    <script async type="text/javascript"
-            src="https://cdn.datatables.net/v/bs4/dt-1.10.20/r-2.2.3/datatables.min.js"></script>
 
     <div class="container-fluid text-container">
         <h1>Editor</h1>
@@ -227,7 +221,7 @@
         </div>
     </div>
 
-    <div class="modal fade modal-fullscreen" id="vocab-modal" tabindex="-1" role="dialog"
+    <div class="modal fade modal-fullscreen browser-modal" id="vocab-modal" tabindex="-1" role="dialog"
          aria-labelledby="modalLargeLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -246,55 +240,55 @@
     </div>
 
     <script type="text/javascript">
-        document.querySelector('#vocabEntryGetBtn').addEventListener("click", function () {
+        document.querySelector('#vocabEntryGetBtn').addEventListener("click", (e) => {
             let urlBase = "{{ url_for('vocabulary_ajax.vocabulary_entry_get', vocabulary_id=5) }}";
             vocabEntryGet(urlBase);
         });
 
-        document.querySelector('#vocabClearBtn').addEventListener("click", function () {
+        document.querySelector('#vocabClearBtn').addEventListener("click", (e) => {
             clearVocabFields();
         });
 
-        document.querySelector('#vocabDeleteBtn').addEventListener("click", function () {
+        document.querySelector('#vocabDeleteBtn').addEventListener("click", (e) => {
             let urlBase = "{{ url_for('vocabulary_ajax.vocabulary_entry_delete') }}";
             vocabEntryDelete(urlBase);
         });
 
-        document.querySelector('#vocabUpdateBtn').addEventListener("click", function () {
+        document.querySelector('#vocabUpdateBtn').addEventListener("click", (e) => {
             let urlBase = "{{ url_for('vocabulary_ajax.vocabulary_entry_update') }}";
             vocabEntryUpdate(urlBase);
         });
 
-        document.querySelector('#vocabAddBtn').addEventListener("click", function () {
+        document.querySelector('#vocabAddBtn').addEventListener("click", (e) => {
             let urlBase = "{{ url_for('vocabulary_ajax.vocabulary_entry_add') }}";
             vocabEntryAdd(urlBase);
         });
 
-        document.querySelector('#showExampleBtn').addEventListener("click", function () {
+        document.querySelector('#showExampleBtn').addEventListener("click", (e) => {
             showExampleOnClick();
             $('#vocab-modal').modal('show');
         });
 
-        document.querySelector('#exampleEntryGetBtn').addEventListener("click", function () {
+        document.querySelector('#exampleEntryGetBtn').addEventListener("click", (e) => {
             let urlBase = "{{ url_for('example_ajax.example_entry_get', example_id=1) }}";
             exampleEntryGet(urlBase);
         });
 
-        document.querySelector('#exampleClearBtn').addEventListener("click", function () {
+        document.querySelector('#exampleClearBtn').addEventListener("click", (e) => {
             clearExampleFields();
         });
 
-        document.querySelector('#exampleDeleteBtn').addEventListener("click", function () {
+        document.querySelector('#exampleDeleteBtn').addEventListener("click", (e) => {
             let urlBase = "{{ url_for('example_ajax.example_entry_delete', example_id=1) }}";
             exampleEntryDelete(urlBase);
         });
 
-        document.querySelector('#exampleUpdateBtn').addEventListener("click", function () {
+        document.querySelector('#exampleUpdateBtn').addEventListener("click", (e) => {
             let urlBase = "{{ url_for('example_ajax.example_entry_update', example_id=1) }}";
             exampleEntryUpdate(urlBase);
         });
 
-        document.querySelector('#exampleAddBtn').addEventListener("click", function () {
+        document.querySelector('#exampleAddBtn').addEventListener("click", (e) => {
             let urlBase = "{{ url_for('example_ajax.example_entry_add', example_id=1) }}";
             exampleEntryAdd(urlBase);
         });
