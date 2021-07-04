@@ -60,6 +60,7 @@ function fillSearchPageFromResults(matchResults) {
         {title: "Kanji", "data": "match_data.kanji"},
         {title: "Kana", "data": "match_data.kana"},
         {title: "English", "data": "match_data.english"},
+        {title: "JLPT level", "data": "match_data.jlpt_level"},
     ]);
 
     if (fuzzyMatchCount > 0) {
@@ -76,7 +77,8 @@ function fillSearchPageFromResults(matchResults) {
             {title: "Kanji", "data": "match_data.kanji"},
             {title: "Kana", "data": "match_data.kana"},
             {title: "English", "data": "match_data.english"},
-            {title: "Similarity score", "data": "fuzzy_ratio"}
+            {title: "JLPT level", "data": "match_data.jlpt_level"},
+            {title: "Similarity", "data": "fuzzy_ratio"}
         ])
     }
 
