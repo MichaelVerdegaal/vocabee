@@ -64,14 +64,6 @@ function fillSearchPageFromResults(matchResults) {
     ]);
 
     if (fuzzyMatchCount > 0) {
-
-        let fuzzyCollapseBtn = crel('btn', {
-            'id': 'fuzzyMatchCollapseBtn',
-            'class': 'btn btn-primary action-btn-gray',
-            'data-bs-target': '#fuzzyMatchCollapse',
-            'data-bs-toggle': 'collapse'
-        }, 'Show ' + fuzzyMatchCount + ' low-similarity results')
-        document.querySelector('#fuzzyMatchCollapse').before(fuzzyCollapseBtn)
         createVocabTable(fuzzyMatches, "#fuzzy-vocab-table", [
             {title: "ID", "data": "match_data.id"},
             {title: "Kanji", "data": "match_data.kanji"},
@@ -80,6 +72,19 @@ function fillSearchPageFromResults(matchResults) {
             {title: "JLPT level", "data": "match_data.jlpt_level"},
             {title: "Similarity", "data": "fuzzy_ratio"}
         ])
+
+        let fuzzyCollapseBtn = crel('btn', {
+            'id': 'fuzzyMatchCollapseBtn',
+            'class': 'btn btn-primary action-btn-gray',
+            'data-bs-target': '#fuzzyMatchCollapse',
+            'data-bs-toggle': 'collapse'
+        }, 'Show ' + fuzzyMatchCount + ' low-similarity results')
+        // Prevents responsiveness from breaking. Has something to do with the way the table is drawn in the collapse
+        fuzzyCollapseBtn.addEventListener('click', function () {
+            let table = $('#fuzzy-vocab-table').DataTable();
+            table.columns.adjust().draw();
+        })
+        document.querySelector('#fuzzyMatchCollapse').before(fuzzyCollapseBtn)
     }
 
     let resultText = perfectMatchCount + " matches in " + searchTime + " seconds";
