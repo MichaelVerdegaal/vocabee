@@ -117,7 +117,7 @@ function createExampleTable(examples, table_id, columns) {
         paging: false,
         bSortClasses: false,
         deferRender: true,
-        responsive: false,
+        responsive: true,
         oLanguage: {
             "sEmptyTable": "No examples available for this entry..."
         },
