@@ -7,7 +7,7 @@ Flask-Caching==1.10.1
 Flask-Minify==0.32
 Flask-SQLAlchemy==2.5.1
 Flask-SQLAlchemy-Caching==1.0.4
-frozendict==2.0.2
+frozendict==2.0.3
 fuzzywuzzy==0.18.0
 genanki==0.11.0
 greenlet==1.1.0
@@ -22,13 +22,13 @@ libsass==0.21.0
 MarkupSafe==2.0.1
 mysql-connector-python==8.0.25
 ply==3.11
-protobuf==3.17.2
+protobuf==3.17.3
 pystache==0.5.4
-python-dotenv==0.17.1
+python-dotenv==0.18.0
 python-Levenshtein==0.12.2
 PyYAML==5.4.1
 six==1.16.0
-SQLAlchemy==1.4.7
+SQLAlchemy==1.4.18
 SQLAlchemy-serializer==1.4.1
 waitress==2.0.0
 Werkzeug==2.0.1

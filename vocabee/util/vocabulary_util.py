@@ -30,9 +30,9 @@ def search_vocabulary(search_query, vocabulary_collection):
     :return: dict of match and perfect match counts, perfect matches and fuzzy matches
     """
     search_query = search_query.lower()
-
     perfect_matches = []
     matches = []
+
     for row in vocabulary_collection['entries']:
         for col in ['english', 'kana', 'kanji', 'id']:
             ratio = fuzz.partial_ratio(search_query, str(row[col]).lower())
