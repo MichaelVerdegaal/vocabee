@@ -41,7 +41,13 @@ function exampleOnClick(row_data, urlBase) {
     let kana = row_data.kana.split(/<a[^>]*>([\s\S]*?)<\/a>/)[1];
 
     fetch(requestUrl)
-        .then(isOk)
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else if (response.status === 404) {
+                return {'entries': []}
+            }
+        })
         .then(data => {
             fillExampleModal(kanji, kana, data.entries);
         })

@@ -133,7 +133,6 @@ function vocabEntryAdd(urlBase) {
             .then(isOk)
             .then(response => {
                 let vocabularyID = response.body.vocabulary_id;
-                console.log(vocabularyID);
                 createAndShowToast("Entry " + vocabularyID + " added!");
                 clearVocabFields();
                 document.querySelector('#vocabIDInput').value = vocabularyID;
