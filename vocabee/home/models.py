@@ -29,6 +29,9 @@ def tostr(cls):
 
 @tostr
 class Vocabulary(model, SerializerMixin):
+    """
+    Class that holds vocabulary entries
+    """
     __tablename__ = 'vocabulary'
     serialize_rules = ('-examples.vocabulary',)
 
@@ -42,8 +45,13 @@ class Vocabulary(model, SerializerMixin):
 
 @tostr
 class Example(model, SerializerMixin):
+    """
+    Class that holds example sentence entries, connected to a vocabulary entry
+    """
     __tablename__ = 'example'
     id = column(integer, primary_key=True)
     sentence_jp = column(string(500))
     sentence_en = column(string(500))
     vocab_id = column(integer, foreign_key('vocabulary.id'))
+
+
