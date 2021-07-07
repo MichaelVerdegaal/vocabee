@@ -1,13 +1,9 @@
-from sqlalchemy import Column, String, Integer, ForeignKey
+from flask_security import UserMixin, RoleMixin
+from sqlalchemy import Column, String, Integer, ForeignKey, Boolean, DateTime
+from sqlalchemy.orm import relationship, backref
 from sqlalchemy_serializer import SerializerMixin
-from sqlalchemy.orm import relationship
-from vocabee import db
 
-column = Column
-string = String
-integer = Integer
-foreign_key = ForeignKey
-model = db.Model
+from vocabee import db
 
 
 def tostr(cls):
@@ -28,30 +24,72 @@ def tostr(cls):
 
 
 @tostr
-class Vocabulary(model, SerializerMixin):
+class Vocabulary(db.Model, SerializerMixin):
     """
-    Class that holds vocabulary entries
+    Table that holds vocabulary entries
     """
     __tablename__ = 'vocabulary'
     serialize_rules = ('-examples.vocabulary',)
 
-    id = column(integer, primary_key=True)
-    kanji = column(string(100), nullable=True)
-    kana = column(string(300), nullable=False)
-    english = column(string(300), nullable=False)
-    jlpt_level = column(string(5), nullable=False)
+    id = Column(Integer, primary_key=True)
+    kanji = Column(String(100), nullable=True)
+    kana = Column(String(300), nullable=False)
+    english = Column(String(300), nullable=False)
+    jlpt_level = Column(String(5), nullable=False)
     examples = relationship("Example", backref="vocabulary", lazy="dynamic")
 
 
 @tostr
-class Example(model, SerializerMixin):
+class Example(db.Model, SerializerMixin):
     """
-    Class that holds example sentence entries, connected to a vocabulary entry
+    Table that holds example sentence entries, connected to a vocabulary entry
     """
     __tablename__ = 'example'
-    id = column(integer, primary_key=True)
-    sentence_jp = column(string(500))
-    sentence_en = column(string(500))
-    vocab_id = column(integer, foreign_key('vocabulary.id'))
+    id = Column(Integer, primary_key=True)
+    sentence_jp = Column(String(500))
+    sentence_en = Column(String(500))
+    vocab_id = Column(Integer, ForeignKey('vocabulary.id'))
 
 
+# @tostr
+# class RolesUsers(db.Model):
+#     """
+#     ManyToMany table connecting User and Role
+#     """
+#     __tablename__ = 'roles_users'
+#     id = Column(Integer(), primary_key=True)
+#     user_id = Column('user_id', Integer(), ForeignKey('user.id'))
+#     role_id = Column('role_id', Integer(), ForeignKey('role.id'))
+
+
+@tostr
+class Role(db.Model, RoleMixin):
+    """
+    Table that holds user roles
+    """
+    __tablename__ = 'role'
+    id = Column(Integer(), primary_key=True)
+    name = Column(String(80), unique=True)
+    description = Column(String(255))
+
+
+@tostr
+class User(db.Model, UserMixin):
+    """
+    Table that holds user accounts
+    """
+    __tablename__ = 'user'
+    id = Column(Integer, primary_key=True)
+    email = Column(String(255), unique=True)
+    username = Column(String(255), unique=True, nullable=True)
+    password = Column(String(255), nullable=False)
+    last_login_at = Column(DateTime())
+    current_login_at = Column(DateTime())
+    last_login_ip = Column(String(100))
+    current_login_ip = Column(String(100))
+    login_count = Column(Integer)
+    active = Column(Boolean())
+    fs_uniquifier = Column(String(255), unique=True, nullable=False)
+    confirmed_at = Column(DateTime())
+    roles = relationship('Role', secondary='roles_users',
+                         backref=backref('users', lazy='dynamic'))
