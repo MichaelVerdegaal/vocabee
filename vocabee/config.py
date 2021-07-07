@@ -12,7 +12,7 @@ DEBUG = False
 CACHE_DEFAULT_TIMEOUT = 60
 
 # SQLAlchemy
-SQLALCHEMY_DATABASE_URI = f"mysql+mysqlconnector://{os.getenv('user')}:{os.getenv('password')}@{os.getenv('host')}:3306/{os.getenv('database')}"
+SQLALCHEMY_DATABASE_URI = f"mysql+mysqlconnector://{os.getenv('db_user')}:{os.getenv('db_password')}@{os.getenv('db_host')}:{os.getenv('db_port')}/{os.getenv('db_name')}"
 SQLALCHEMY_ECHO = False
 SQLALCHEMY_TRACK_MODIFICATIONS = True
 SQLALCHEMY_POOL_RECYCLE = 180
