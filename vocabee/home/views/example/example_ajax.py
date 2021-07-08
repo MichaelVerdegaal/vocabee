@@ -1,7 +1,7 @@
 from flask import Blueprint, request
 
-from vocabee.util.queries import (get_example_by_id, get_examples_by_vocabulary_id, update_example, add_example,
-                                  delete_example)
+from vocabee.queries.example import (get_example_by_id, get_examples_by_vocabulary_id, update_example, add_example,
+                                     delete_example)
 from vocabee.util.view_util import create_status
 
 example_ajax_bp = Blueprint('example_ajax', __name__, url_prefix='/example/ajax')

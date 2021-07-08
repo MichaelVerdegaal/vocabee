@@ -4,12 +4,12 @@ from flask import Blueprint, request, Response
 
 from vocabee.config import PROJECT_FOLDER
 from vocabee.util.anki_util import create_deck_by_level
-from vocabee.util.queries import (get_vocabulary_by_level, get_vocabulary_by_id, update_vocab, add_vocab, delete_vocab,
-                                  get_vocabulary_by_level_no_examples, get_all_vocabulary_no_examples)
+from vocabee.queries.vocabulary import (get_vocabulary_by_level, get_all_vocabulary_no_examples,
+                                        get_vocabulary_by_level_no_examples, get_vocabulary_by_id, update_vocab,
+                                        add_vocab, delete_vocab)
 from vocabee.util.view_util import create_status
 from vocabee.util.vocabulary_util import process_vocabulary, search_vocabulary
 from time import perf_counter
-
 
 vocabulary_ajax_bp = Blueprint('vocabulary_ajax', __name__, url_prefix='/vocabulary/ajax')
 
