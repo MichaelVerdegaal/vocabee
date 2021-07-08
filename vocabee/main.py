@@ -19,6 +19,9 @@ def inject_env():
 def handle_bad_request(e):
     return render_template("exceptions/400.html"), 400
 
+@app.errorhandler(werkzeug.exceptions.Forbidden)
+def handle_forbidden_request(e):
+    return render_template("exceptions/403.html"), 403
 
 @app.errorhandler(werkzeug.exceptions.NotFound)
 def handle_not_found_request(e):
