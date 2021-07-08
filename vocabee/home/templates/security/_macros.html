@@ -1,0 +1,55 @@
+{# macro to render email/password inputs and submit button #}
+{% macro render_login_field(field, label_text) %}
+    <div class="mb-3">
+        <span class="fw-light h6">{{ field.label(class_="form-label", text=label_text) }}</span> {{ field(**kwargs)|safe }}
+    </div>
+{% endmacro %}
+
+{# macro to render remember me checkbox #}
+{% macro render_login_field_check(field, label_text) %}
+    <div class="mb-3 form-check">
+        <span class="fw-light h6">{{ field.label(class_="form-check-label", text=label_text) }}</span> {{ field(**kwargs)|safe }}
+    </div>
+{% endmacro %}
+
+{% macro render_login_form_error() %}
+    {% for field in varargs %}
+        {% if field.errors %}
+            {% for error in field.errors %}
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    {{ error }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endfor %}
+{% endmacro %}
+
+{% macro render_field_with_errors(field) %}
+    <p>
+        {{ field.label }} {{ field(**kwargs)|safe }}
+        {% if field.errors %}
+            <ul>
+                {% for error in field.errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </p>
+{% endmacro %}
+
+{% macro render_field(field) %}
+    {{ field(**kwargs)|safe }}
+{% endmacro %}
+
+{% macro render_field_errors(field) %}
+    <p>
+        {% if field and field.errors %}
+            <ul class="list-unstyled">
+                {% for error in field.errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </p>
+{% endmacro %}

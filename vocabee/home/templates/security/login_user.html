@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% from "security/_macros.html" import render_field_with_errors, render_field, render_field_errors %}
+
+{% block container %}
+    <title>Login - VocaBee</title>
+
+    <div class="container-fluid text-container">
+        <h1>Login</h1>
+        <p>
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+            ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+            nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit
+            anim id est laborum."
+        </p>
+    </div>
+
+    <form action="{{ url_for_security('login') }}" method="POST" name="login_user_form">
+        {{ login_user_form.hidden_tag() }}
+        {{ render_field_with_errors(login_user_form.email) }}
+        {{ render_field_with_errors(login_user_form.password) }}
+        {{ render_field_with_errors(login_user_form.remember) }}
+        {{ render_field_errors(login_user_form.csrf_token) }}
+        {{ render_field(login_user_form.submit) }}
+    </form>
+
+    {% include "security/_menu.html" %}
+
+{% endblock %}
