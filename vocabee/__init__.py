@@ -11,7 +11,6 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_sqlalchemy_caching import CachingQuery
 
 from vocabee.config import PROJECT_FOLDER, APP_FOLDER, STATIC_FOLDER
-from .home.models import User, Role
 
 # Environment variables
 load_dotenv(os.path.join(PROJECT_FOLDER, '.env'))
@@ -25,6 +24,8 @@ cache = Cache(config={'CACHE_TYPE': 'simple'})
 sass.compile(dirname=(os.path.join(STATIC_FOLDER, 'sass'), os.path.join(STATIC_FOLDER, 'css')),
              output_style='compressed')
 # Flask-Security setup
+from .home.models import User, Role
+
 user_datastore = SQLAlchemyUserDatastore(db, User, Role)
 
 
@@ -50,7 +51,7 @@ def create_app():
         app.register_blueprint(vocabulary_ajax.vocabulary_ajax_bp)
         app.register_blueprint(example_ajax.example_ajax_bp)
         app.register_blueprint(user.user_bp)
-        # app.register_blueprint(admin.admin_bp)
+        app.register_blueprint(admin.admin_bp)
 
         # Flask-Security setup
         security = Security(app, user_datastore)
