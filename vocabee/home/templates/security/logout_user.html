@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block container %}
+    <title>Log out - VocaBee</title>
+
+    <div class="container-fluid text-container">
+        <h1 class="text-center">You are being logged out</h1>
+        <p class="text-center">
+            In a few seconds you'll be redirected to the home screen. If this doesn't happen,
+            <a href="{{ url_for('home.home') }}">click here to go back </a>
+        </p>
+    </div>
+
+    <script>
+    async function redirectHome() {
+        await new Promise(r => setTimeout(r, 5000));
+        let homeUrl = "{{ url_for('home.home') }}";
+        window.location.replace(homeUrl);
+    }
+    redirectHome();
+    </script>
+{% endblock %}
