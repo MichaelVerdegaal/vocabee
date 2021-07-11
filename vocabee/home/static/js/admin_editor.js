@@ -1,16 +1,3 @@
-function postRequest(url, data) {
-    /**
-     * Helper function to send a post request.
-     */
-    return fetch(url, {
-        credentials: 'same-origin',
-        method: 'POST',
-        mode: 'cors',
-        body: JSON.stringify(data),
-        headers: {'Content-Type': 'application/json'},
-    });
-}
-
 function clearVocabFields() {
     /**
      * Clears the input vields from the vocabulary editor

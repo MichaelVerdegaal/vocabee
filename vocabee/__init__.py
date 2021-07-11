@@ -38,9 +38,10 @@ def create_app():
 
     with app.app_context():
         from .home import models
-        from .home.views import home, admin, user
+        from .home.views import home, admin
         from .home.views.vocabulary import vocabulary, vocabulary_ajax
         from .home.views.example import example_ajax
+        from .home.views.user import user, user_ajax
 
         # Create tables that don't exist yet
         db.create_all()
@@ -48,10 +49,13 @@ def create_app():
         # Add url routes
         app.register_blueprint(home.home_bp)
         app.register_blueprint(vocabulary.vocabulary_bp)
-        app.register_blueprint(vocabulary_ajax.vocabulary_ajax_bp)
-        app.register_blueprint(example_ajax.example_ajax_bp)
         app.register_blueprint(user.user_bp)
         app.register_blueprint(admin.admin_bp)
+
+        # Add AJAX routes
+        app.register_blueprint(vocabulary_ajax.vocabulary_ajax_bp)
+        app.register_blueprint(example_ajax.example_ajax_bp)
+        app.register_blueprint(user_ajax.user_ajax_bp)
 
         # Flask-Security setup
         security = Security(app, user_datastore)

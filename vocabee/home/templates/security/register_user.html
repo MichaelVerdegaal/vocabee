@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% from "security/_macros.html" import render_field_errors %}
+
+{% block container %}
+    <title>Register - VocaBee</title>
+
+    <script src="{{ url_for('static', filename='js/user_utilities.js') }}"></script>
+
+    <div class="align-items-center">
+        <div class="row">
+            <div class="col-xxl"></div>
+
+            <div class="col-xxl">
+                <div class="container-fluid text-container text-center">
+                    <h1>Register</h1>
+                    <p>
+                        Create an account and make full use of all our learning tools
+                    </p>
+                </div>
+                <div class="container-fluid" id="login-content-container">
+                    <form>
+                        <div class="mb-3 row">
+                            <div class="form-floating">
+                                <input type="email" class="form-control" id="emailInput" value=""
+                                       placeholder="name@example.com">
+                                <label for="emailInput">Email address</label>
+                            </div>
+                        </div>
+
+                        <div class="mb-3 row">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="usernameInput" value=""
+                                       placeholder="myUsername101">
+                                <label for="usernameInput">Username</label>
+                            </div>
+                        </div>
+
+                        <div class="mb-3 row">
+                            <div class="form-floating">
+                                <input class="form-control" id="passwordInput" placeholder="password"
+                                       type="password" value="">
+                                <label for="passwordInput">Password</label>
+                            </div>
+                        </div>
+
+                        <div class="mb-3 row">
+                            <div class="form-floating">
+                                <input class="form-control" id="passwordRepeatInput"
+                                       placeholder="password" type="password" value="">
+                                <label for="passwordRepeatInput">Repeat Password</label>
+                            </div>
+                        </div>
+
+                        <div class="mb-4 row">
+                            <button class="btn btn-primary action-btn" id="registerBtn" title="Log me in" type="button"
+                                    style="width: 100%">
+                                Register
+                            </button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+
+            <div class="col-xxl"></div>
+        </div>
+    </div>
+
+    {% include "security/_menu.html" %}
+
+    <script>
+        document.querySelector('#registerBtn').addEventListener('click', function () {
+            let email = document.querySelector('#emailInput').value;
+            let username = document.querySelector('#usernameInput').value;
+            let password = document.querySelector('#passwordInput').value
+            let passwordRepeat = document.querySelector('#passwordRepeatInput').value;
+
+            password = utf8_to_b64(password);
+            passwordRepeat = utf8_to_b64(passwordRepeat);
+
+            let registerBaseUrl = '{{ url_for('user_ajax.register') }}';
+            registerAccount(registerBaseUrl, email, username, password)
+        })
+    </script>
+
+{% endblock %}

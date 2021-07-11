@@ -3,6 +3,7 @@ from flask_security import hash_password
 from vocabee import db, user_datastore
 
 
+# TODO: remove this when account functionality is finished
 def setup_test_users():
     """
     Placeholder function to create some tests accounts

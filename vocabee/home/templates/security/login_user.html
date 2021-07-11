@@ -12,7 +12,7 @@
                 <div class="container-fluid text-container text-center">
                     <h1>Welcome back</h1>
                     <p>
-                        Log in to keep your lists up to date.
+                        Sign in to keep your lists up to date.
                     </p>
                 </div>
                 <div class="container-fluid" id="login-content-container">
@@ -24,7 +24,7 @@
                             <div class="form-floating">
                                 <input type="email" name="email" class="form-control" id="emailInput" value=""
                                        placeholder="name@example.com">
-                                <label for="emailInput"> Email address</label>
+                                <label for="emailInput">Email address</label>
                             </div>
                         </div>
 
@@ -32,7 +32,7 @@
                             <div class="form-floating">
                                 <input class="form-control" id="passwordInput" name="password" placeholder="password"
                                        type="password" value="">
-                                <label for="passwordInput"> Password</label>
+                                <label for="passwordInput">Password</label>
                             </div>
                         </div>
 
@@ -48,10 +48,10 @@
                         </div>
 
                         <div class="mb-4 row">
-                            <button class="btn btn-primary action-btn-gray" id="loginBtn" title="Register an account"
-                                    type="submit" value="login" style="width: 100%">
+                            <a class="btn btn-primary action-btn-gray" href="{{ url_for('user.register_page') }}"
+                               id="registerBtn" style="width: 100%" title="Register an account">
                                 Not a user yet? Register here
-                            </button>
+                            </a>
                         </div>
                     </form>
                 </div>
