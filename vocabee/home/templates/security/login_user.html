@@ -1,52 +1,65 @@
 {% extends "base.html" %}
-{% from "security/_macros.html" import render_field_with_errors, render_field, render_field_errors %}
+{% from "security/_macros.html" import render_field_errors %}
 
 {% block container %}
     <title>Login - VocaBee</title>
 
-    <div class="container-fluid text-container">
-        <h1>Welcome back</h1>
-        <p>
-            Sign in to keep your lists up to date.
-        </p>
-    </div>
+    <div class="align-items-center">
+        <div class="row">
+            <div class="col-xxl"></div>
 
-
-    <div class="container-fluid" id="login-content-container">
-        <div class="col-lg-6">
-            <form action="{{ url_for_security('login') }}" method="POST" name="login_user_form">
-                {{ login_user_form.hidden_tag() }}
-                {{ render_field_errors(login_user_form.csrf_token) }}
-
-                <div class="mb-3 row">
-                    <div class="form-floating">
-                        <input type="email" name="email" class="form-control" id="emailInput" value=""
-                               placeholder="name@example.com">
-                        <label for="emailInput"> Email address</label>
-                    </div>
+            <div class="col-xxl">
+                <div class="container-fluid text-container text-center">
+                    <h1>Welcome back</h1>
+                    <p>
+                        Log in to keep your lists up to date.
+                    </p>
                 </div>
+                <div class="container-fluid" id="login-content-container">
+                    <form action="{{ url_for_security('login') }}" method="POST" name="login_user_form">
+                        {{ login_user_form.hidden_tag() }}
+                        {{ render_field_errors(login_user_form.csrf_token) }}
 
-                <div class="mb-3 row">
-                    <div class="form-floating">
-                        <input class="form-control" id="passwordInput" name="password" placeholder="password"
-                               type="password" value="">
-                        <label for="passwordInput"> Password</label>
-                    </div>
+                        <div class="mb-3 row">
+                            <div class="form-floating">
+                                <input type="email" name="email" class="form-control" id="emailInput" value=""
+                                       placeholder="name@example.com">
+                                <label for="emailInput"> Email address</label>
+                            </div>
+                        </div>
+
+                        <div class="mb-3 row">
+                            <div class="form-floating">
+                                <input class="form-control" id="passwordInput" name="password" placeholder="password"
+                                       type="password" value="">
+                                <label for="passwordInput"> Password</label>
+                            </div>
+                        </div>
+
+                        <div class="mb-4 row">
+                            <a href="no.com" class="text-right">Forgot password?</a>
+                        </div>
+
+                        <div class="mb-4 row">
+                            <button class="btn btn-primary action-btn" id="loginBtn" title="Log me in" type="submit"
+                                    value="login" style="width: 100%">
+                                Login
+                            </button>
+                        </div>
+
+                        <div class="mb-4 row">
+                            <button class="btn btn-primary action-btn-gray" id="loginBtn" title="Register an account"
+                                    type="submit" value="login" style="width: 100%">
+                                Not a user yet? Register here
+                            </button>
+                        </div>
+                    </form>
                 </div>
+            </div>
 
-                <div class="mb-4 row">
-                    <a href="no.com" class="text-right">Forgot password?</a>
-                </div>
-
-                <div class="mb-4 row">
-                    <button class="btn btn-primary action-btn" id="loginBtn" title="Log me in" type="submit"
-                            value="login" style="width: 100%">
-                        Login
-                    </button>
-                </div>
-
-            </form>
+            <div class="col-xxl"></div>
         </div>
+
     </div>
 
 
