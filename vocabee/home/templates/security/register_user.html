@@ -70,14 +70,6 @@
 
     <script>
         document.querySelector('#registerBtn').addEventListener('click', function () {
-            let email = document.querySelector('#emailInput').value;
-            let username = document.querySelector('#usernameInput').value;
-            let password = document.querySelector('#passwordInput').value
-            let passwordRepeat = document.querySelector('#passwordRepeatInput').value;
-
-            password = utf8_to_b64(password);
-            passwordRepeat = utf8_to_b64(passwordRepeat);
-
             let registerBaseUrl = '{{ url_for('user_ajax.register') }}';
             registerAccount(registerBaseUrl, email, username, password)
         })

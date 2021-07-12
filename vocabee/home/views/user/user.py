@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template_string, render_template
 from flask_security import auth_required, logout_user
 
-from vocabee.queries.user import setup_test_users, setup_roles
+from vocabee.util.user import setup_test_users, setup_roles
 
 user_bp = Blueprint('user', __name__, url_prefix='/user')
 setup_roles()
