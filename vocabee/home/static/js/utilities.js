@@ -31,11 +31,3 @@ function createAndShowToast(message) {
     let bsAlert = new bootstrap.Toast(document.getElementById('liveToast'));
     bsAlert.show();
 }
-
-function utf8_to_b64(str) {
-    /**
-     * Encodes a string to base64, following https://developer.mozilla.org/en-US/docs/Glossary/Base64
-     * @type {String} str - string to encode
-     */
-    return window.btoa(unescape(encodeURIComponent(str)));
-}

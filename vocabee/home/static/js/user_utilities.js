@@ -9,9 +9,7 @@ function registerAccount(registerUrl, registerSuccessUrl) {
     let password = document.querySelector('#passwordInput').value
     let passwordRepeat = document.querySelector('#passwordRepeatInput').value;
 
-    password = utf8_to_b64(password);
-    passwordRepeat = utf8_to_b64(passwordRepeat);
-    postRequest(registerUrl, {email: email, username: username, password: password})
+    postRequest(registerUrl, {email: email, username: username, password: password, password_repeat: passwordRepeat})
         .then(response => {
             return response.json();
         })

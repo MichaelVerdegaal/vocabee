@@ -1,5 +1,3 @@
-import base64
-
 from email_validator import validate_email, EmailNotValidError
 from flask_security import hash_password
 
@@ -37,7 +35,7 @@ def setup_roles():
     db.session.commit()
 
 
-def register_user(email, username, password, roles=None):
+def register_user(email, username, password, password_repeat, roles=None):
     """
     Registers a user if it complies with all the checks
     :param email: email address
@@ -63,13 +61,15 @@ def register_user(email, username, password, roles=None):
 
     # Check for empty fields, these shouldn't be possible if the front-end validated correctly, but can't hurt to check
     if not username:
-        return create_status(400, description="Username can't be empty", continue_register='false')
+        return create_status(400, description="Username field can't be empty", continue_register='false')
     if not password:
-        return create_status(400, description="Password can't be empty", continue_register='false')
+        return create_status(400, description="Password field can't be empty", continue_register='false')
 
-    # Decode and hash password
-    unobfuscated_password = base64.b64decode(password)
-    hashed_password = hash_password(unobfuscated_password)
+    if password != password_repeat:
+        return create_status(400, description="The passwords don't match", continue_register='false')
+
+    # Hash password
+    hashed_password = hash_password(password)
 
     # Register the user to the database
     user_datastore.create_user(email=email, username=username, password=hashed_password, roles=roles)
