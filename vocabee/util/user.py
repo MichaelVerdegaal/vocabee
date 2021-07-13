@@ -51,11 +51,8 @@ def register_user(email, username, password, roles=None):
         roles = ['user']
 
     # Check for existing accounts
-    if user_datastore.find_user(email=email):
-        return create_status(400, description="An account with this email already exists", continue_register='redirect')
-
-    if user_datastore.find_user(username=username):
-        return create_status(400, description="An account with this username already exists", continue_register='false')
+    if user_datastore.find_user(email=email) or user_datastore.find_user(username=username):
+        return create_status(400, description="An account with this email already exists", continue_register='false')
 
     # Validate email and normalize
     try:

@@ -52,8 +52,8 @@
                         </div>
 
                         <div class="mb-4 row">
-                            <button class="btn btn-primary action-btn" id="registerBtn" title="Log me in" type="button"
-                                    style="width: 100%">
+                            <button class="btn btn-primary action-btn" id="registerBtn" style="width: 100%"
+                                    title="Register an account" type="button">
                                 Register
                             </button>
                         </div>
@@ -66,12 +66,17 @@
         </div>
     </div>
 
+    <div id="toastContainer">
+
+    </div>
+
     {% include "security/_menu.html" %}
 
     <script>
         document.querySelector('#registerBtn').addEventListener('click', function () {
-            let registerBaseUrl = '{{ url_for('user_ajax.register') }}';
-            registerAccount(registerBaseUrl, email, username, password)
+            let registerUrl = '{{ url_for('user_ajax.register') }}';
+            let registerSuccessUrl = '{{ url_for('user.register_successful_page') }}';
+            registerAccount(registerUrl, registerSuccessUrl)
         })
     </script>
 

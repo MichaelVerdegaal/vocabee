@@ -25,3 +25,9 @@ def logout():
 @user_bp.route("/register")
 def register_page():
     return render_template("security/register_user.html")
+
+
+@user_bp.route("/register-sucess")
+def register_successful_page():
+    return render_template("security/register_successful.html")
+

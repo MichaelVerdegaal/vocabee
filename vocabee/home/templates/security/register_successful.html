@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block container %}
+    <title>Register success - VocaBee</title>
+
+    <div class="align-items-center">
+        <div class="row">
+            <div class="col-xxl"></div>
+
+            <div class="col-xxl">
+                <div class="container-fluid text-container text-center">
+                    <h1>Success!</h1>
+                    <p>
+                        Your account was created! You can now login.
+                    </p>
+                </div>
+
+                <div class="container-fluid" id="login-content-container">
+                    <form>
+                        <div class="mb-4 row">
+                            <!--TODO this button still doesn't do anything -->
+                            <button class="btn btn-primary action-btn" id="loginBtn" title="Log me in" type="submit"
+                                    value="login" style="width: 100%">
+                                Login
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+
+            <div class="col-xxl"></div>
+        </div>
+    </div>
+
+{% endblock %}
