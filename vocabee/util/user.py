@@ -41,6 +41,7 @@ def register_user(email, username, password, password_repeat, roles=None):
     :param email: email address
     :param username: username to display
     :param password: password
+    :param password_repeat: password repeated
     :param roles: user roles
     :return: status message. This one also specifies what action to take for the front-end, and also a user-readable
     error-message if applicable
@@ -64,6 +65,8 @@ def register_user(email, username, password, password_repeat, roles=None):
         return create_status(400, description="Username field can't be empty", continue_register='false')
     if not password:
         return create_status(400, description="Password field can't be empty", continue_register='false')
+    if not password_repeat:
+        return create_status(400, description="Password repeat field can't be empty", continue_register='false')
 
     if password != password_repeat:
         return create_status(400, description="The passwords don't match", continue_register='false')
