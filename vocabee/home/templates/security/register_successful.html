@@ -18,11 +18,13 @@
                 <div class="container-fluid" id="login-content-container">
                     <form>
                         <div class="mb-4 row">
-                            <!--TODO this button still doesn't do anything -->
-                            <button class="btn btn-primary action-btn" id="loginBtn" title="Log me in" type="submit"
-                                    value="login" style="width: 100%">
-                                Login
-                            </button>
+                            <a href="{{ url_for('user.login') }}">
+                                <button class="btn btn-primary action-btn" id="loginBtn" title="To login page"
+                                        type="button" style="width: 100%">
+                                    Login
+                                </button>
+                            </a>
+
                         </div>
                     </form>
                 </div>
