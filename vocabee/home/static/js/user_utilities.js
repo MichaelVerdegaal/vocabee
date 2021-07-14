@@ -4,24 +4,52 @@ function registerAccount(registerUrl, registerSuccessUrl) {
      * @param {String} registerUrl - endpoint to send request to
      * @param {String} registerUrl - url to redirect to after successful register
      */
-    let email = document.querySelector('#emailInput').value;
-    let username = document.querySelector('#usernameInput').value;
-    let password = document.querySelector('#passwordInput').value
-    let passwordRepeat = document.querySelector('#passwordRepeatInput').value;
+    let email = document.querySelector('#emailInput');
+    let username = document.querySelector('#usernameInput');
+    let password = document.querySelector('#passwordInput');
+    let passwordRepeat = document.querySelector('#passwordRepeatInput');
 
-    postRequest(registerUrl, {email: email, username: username, password: password, password_repeat: passwordRepeat})
+    postRequest(registerUrl, {
+        email: email.value,
+        username: username.value,
+        password: password.value,
+        password_repeat: passwordRepeat.value
+    })
         .then(response => {
             return response.json();
         })
         .then(response => {
-            let response_description = response.description;
             let continueRegisterFlow = response.body.continue_register;
-            console.log(response_description);
+            let fieldsReport = response.body.fields;
+
             switch (continueRegisterFlow) {
-                case 'false':
-                    createAndShowToast(response_description)
+                case false:
+                    if (fieldsReport.email.valid === 'true') {
+                        email.className = "form-control is-valid";
+                    } else {
+                        email.className = "form-control is-invalid";
+                        document.querySelector('#emailInvalidLabel').textContent = fieldsReport.email.error;
+                    }
+                    if (fieldsReport.username.valid === 'true') {
+                        username.className = "form-control is-valid";
+                    } else {
+                        username.className = "form-control is-invalid";
+                        document.querySelector('#usernameInvalidLabel').textContent = fieldsReport.username.error;
+                    }
+                    if (fieldsReport.password.valid === 'true') {
+                        password.className = "form-control is-valid";
+                    } else {
+                        password.className = "form-control is-invalid";
+                        document.querySelector('#passwordInvalidLabel').textContent = fieldsReport.password.error;
+                    }
+                    if (fieldsReport.password_repeat.valid === 'true') {
+                        passwordRepeat.className = "form-control is-valid";
+                    } else {
+                        passwordRepeat.className = "form-control is-invalid";
+                        document.querySelector('#passwordRepeatInvalidLabel').textContent = fieldsReport.password_repeat.error;
+                    }
                     break;
-                case 'true':
+                case true:
                     window.location.replace(registerSuccessUrl);
                     break;
             }

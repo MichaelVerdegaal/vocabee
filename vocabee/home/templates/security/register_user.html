@@ -18,12 +18,18 @@
                     </p>
                 </div>
                 <div class="container-fluid" id="login-content-container">
-                    <form>
+                    <form class="needs-validation">
                         <div class="mb-3 row">
                             <div class="form-floating">
                                 <input type="email" class="form-control" id="emailInput" value=""
                                        placeholder="name@example.com">
                                 <label for="emailInput">Email address</label>
+                                <div class="valid-feedback" id="emailValidLabel">
+                                    Looks good!
+                                </div>
+                                <div class="invalid-feedback" id="emailInvalidLabel">
+                                    Please provide a valid email address
+                                </div>
                             </div>
                         </div>
 
@@ -32,6 +38,12 @@
                                 <input type="text" class="form-control" id="usernameInput" value=""
                                        placeholder="myUsername101">
                                 <label for="usernameInput">Username</label>
+                                <div class="valid-feedback" id="usernameValidLabel">
+                                    Looks good!
+                                </div>
+                                <div class="invalid-feedback" id="usernameInvalidLabel">
+                                    Please provide a valid username
+                                </div>
                             </div>
                         </div>
 
@@ -40,6 +52,12 @@
                                 <input class="form-control" id="passwordInput" placeholder="password"
                                        type="password" value="">
                                 <label for="passwordInput">Password</label>
+                                <div class="valid-feedback" id="passwordValidLabel">
+                                    Looks good!
+                                </div>
+                                <div class="invalid-feedback" id="passwordInvalidLabel">
+                                    Please provide a valid password
+                                </div>
                             </div>
                         </div>
 
@@ -48,6 +66,12 @@
                                 <input class="form-control" id="passwordRepeatInput"
                                        placeholder="password" type="password" value="">
                                 <label for="passwordRepeatInput">Repeat Password</label>
+                                <div class="valid-feedback" id="passwordRepeatValidLabel">
+                                    Looks good!
+                                </div>
+                                <div class="invalid-feedback" id="passwordRepeatInvalidLabel">
+                                    Please provide a valid password
+                                </div>
                             </div>
                         </div>
 
