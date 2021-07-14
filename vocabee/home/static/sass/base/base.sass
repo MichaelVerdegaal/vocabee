@@ -66,3 +66,8 @@ input:focus
 
 .form-floating > label
   left: unset
+
+// This line makes sure that chrome-autofill doesn't add a blue background color, which breaks bootstrap
+// validation visuals. Ref: https://stackoverflow.com/q/58263122/7174982
+input:-webkit-autofill
+  -webkit-box-shadow: 0 0 0 50px white inset !important
