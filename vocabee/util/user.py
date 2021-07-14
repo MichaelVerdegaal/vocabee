@@ -1,6 +1,6 @@
 from email_validator import validate_email, EmailNotValidError
 from flask_security import hash_password
-
+import re
 from vocabee import db, user_datastore
 from vocabee.util.view_util import create_status
 
@@ -53,8 +53,10 @@ def validate_register_fields(email, username, password, password_repeat):
     fields = {field: {'valid': 'true', 'error': []} for field in ['email', 'username', 'password', 'password_repeat']}
 
     # Check for existing accounts
-    if user_datastore.find_user(email=email) or user_datastore.find_user(username=username):
+    if user_datastore.find_user(email=email):
         set_field_invalid('email', "An account with this email already exists")
+    if user_datastore.find_user(username=username):
+        set_field_invalid('username', "An account with this username already exists")
 
     # Validate email and normalize
     try:
@@ -68,8 +70,10 @@ def validate_register_fields(email, username, password, password_repeat):
         set_field_invalid('username', "Username field can't be empty")
     if not password:
         set_field_invalid('password', "Password field can't be empty")
-    if not password_repeat:
-        set_field_invalid('password_repeat', "Password repeat field can't be empty")
+
+    # Only allow certain characters for the username, as a form of normalizing
+    if not re.match("^[a-zA-Z0-9_.-]+$", username):
+        set_field_invalid('username', "Username can only consist of letters, numbers and these special characters .-_")
 
     if password != password_repeat:
         set_field_invalid('password', "The passwords don't match")
