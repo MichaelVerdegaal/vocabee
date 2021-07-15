@@ -11,13 +11,6 @@
     outline: none
     box-shadow: none
 
-  #main-navbar #accountBtn
-    margin-left: 10px
-    color: $mainwhite
-
-    &:hover
-      color: $secondarywhite
-
   #main-navbar #navigation
     margin-top: 0
 
@@ -28,6 +21,23 @@
       &:hover
         color: $secondarywhite
 
+
+#accountDropdown
+  margin-left: 0
+  padding-bottom: 5px
+
+  #accountBtn #accountBtnIcon
+    color: $mainwhite
+
+    &:hover
+      color: $secondarywhite
+
+
+#loginBtnNav, #registerBtnNav
+  margin-bottom: 10px
+
+#registerBtnNav
+  margin-left: 5px
 
 @media (min-width: $navbar-breakpoint)
   .navbar #main-navbar
@@ -43,3 +53,15 @@
     text-decoration: none
     box-shadow: 0 0.175em $mainwhite !important
     color: $mainwhite
+
+  #accountDropdown
+    margin-left: 10px
+    padding-bottom: 0
+
+  #loginBtnNav
+    margin-left: 10px
+    margin-bottom: 0
+
+  #registerBtnNav
+    margin-left: 5px
+    margin-bottom: 0

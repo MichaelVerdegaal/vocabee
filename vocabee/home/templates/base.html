@@ -87,7 +87,7 @@
         <div class="form-row">
             <div class="input-group input-group-sm">
                 <input class="form-control" id="entrySearchInput" placeholder="Search for vocabulary" type="text">
-                <button class="btn btn-primary action-btn" id="entrySearchBtn" title="Search entries">
+                <button class="btn btn-primary action-btn-gray" id="entrySearchBtn" title="Search entries">
                     <i class="bi bi-14 bi-search"></i>
                 </button>
             </div>
@@ -95,13 +95,29 @@
 
         <hr>
 
+        {% if current_user.is_authenticated %}
+            <div class="dropdown" id="accountDropdown">
+                <button class="btn btn-sm btn-primary action-btn dropdown-toggle" type="button" id="accountBtn"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="bi bi-12 bi-person-fill" id="accountBtnIcon"></i>
+                    {{ current_user.username }}
+                </button>
+                <ul class="dropdown-menu dropdown-menu-start dropdown-menu-lg-end" aria-labelledby="dropdownMenuButton1">
+                    <li><a class="dropdown-item disabled" href="#">My account</a></li>
+                    <li><a class="dropdown-item" href="{{ url_for('user.logout') }}">Logout</a></li>
+                </ul>
+            </div>
 
-        <a href="{{ url_for('user.login') }}">
-            <i class="bi bi-12 bi-person-fill" id="accountBtn"></i>
-        </a>
-        <a href="{{ url_for('user.logout') }}" style="margin-left: 20px">
-            LOGOUT
-        </a>
+        {% else %}
+            <a class="btn btn-sm btn-primary action-btn-gray" href="{{ url_for('user.login') }}" id="loginBtnNav"
+               title="Log me in">
+                Login
+            </a>
+            <a class="btn btn-sm btn-primary action-btn" href="{{ url_for('user.register_page') }}" id="registerBtnNav"
+               title="Register an account">
+                Register
+            </a>
+        {% endif %}
 
     </div>
 </nav>
