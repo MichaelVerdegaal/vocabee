@@ -16,8 +16,6 @@
     <!--Ref: https://fonts.google.com/specimen/Open+Sans-->
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,700;1,400&display=swap"
           rel="stylesheet">
-    <!-- Ref: https://google.github.io/material-design-icons-->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- Ref: https://github.com/KoryNunn/crel-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crel/4.2.1/crel.min.js"
             integrity="sha512-sgCmD7q2qJ2H2Slkb+g7X3AGL7Uo87ul4DjA5h+B/fgjOnhhEek6Kmei9Os+KBT+BkVN32S0uxo3pPFMouKCbw=="
@@ -75,6 +73,7 @@
     </button>
 
     <div class="collapse navbar-collapse" id="main-navbar">
+        <hr>
         <ul class="navbar-nav me-auto mb-2 mb-lg-0" id="navigation">
             {% for href, id, caption in navigation_bar %}
                 <li class="nav-item {% if id == active_page %} active {% endif %}">
@@ -83,15 +82,26 @@
             {% endfor %}
         </ul>
 
+        <hr>
+
         <div class="form-row">
             <div class="input-group input-group-sm">
                 <input class="form-control" id="entrySearchInput" placeholder="Search for vocabulary" type="text">
                 <button class="btn btn-primary action-btn" id="entrySearchBtn" title="Search entries">
-                    <span class='material-icons md-14'>search</span></button>
+                    <i class="bi bi-14 bi-search"></i>
+                </button>
             </div>
         </div>
-        <a href="{{ url_for('user.login') }}" style="margin-left: 20px">LOGIN</a>
-        <a href="{{ url_for('user.logout') }}" style="margin-left: 20px">LOGOUT</a>
+
+        <hr>
+
+
+        <a href="{{ url_for('user.login') }}">
+            <i class="bi bi-12 bi-person-fill" id="accountBtn"></i>
+        </a>
+        <a href="{{ url_for('user.logout') }}" style="margin-left: 20px">
+            LOGOUT
+        </a>
 
     </div>
 </nav>

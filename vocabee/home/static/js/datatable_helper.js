@@ -59,10 +59,10 @@ function createVocabBrowserTable(vocabEndpoint, table_id, level) {
         },
         language: {
             paginate: {
-                previous: '<span class="material-icons">chevron_left</span>',
-                next: '<span class="material-icons">chevron_right</span>',
-                first: '<span class="material-icons">first_page</span>',
-                last: '<span class="material-icons">last_page</span>'
+                previous: '<i class="bi bi-chevron-left"></i>',
+                next: '<i class="bi bi-chevron-right"></i>',
+                first: '<i class="bi bi-chevron-bar-left"></i>',
+                last: '<i class="bi bi-chevron-bar-right"></i>'
             }
         }
     });

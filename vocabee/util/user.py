@@ -73,7 +73,8 @@ def validate_register_fields(email, username, password, password_repeat):
 
     # Only allow certain characters for the username, as a form of normalizing
     if not re.match("^[a-zA-Z0-9_.-]+$", username):
-        set_field_invalid('username', "Username can only consist of letters, numbers and these special characters .-_")
+        set_field_invalid('username', "Username can only consist of letters, numbers and these special "
+                                      "characters .-_ (period, dash and underline)")
 
     if password != password_repeat:
         set_field_invalid('password', "The passwords don't match")
