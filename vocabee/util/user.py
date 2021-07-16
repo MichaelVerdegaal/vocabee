@@ -1,12 +1,12 @@
 from email_validator import validate_email, EmailNotValidError
 from flask_security import hash_password
 import re
-from vocabee import db, user_datastore
+from vocabee import user_datastore
 from vocabee.util.view_util import create_status
 
 
 # TODO: remove this when account functionality is finished
-def setup_test_users():
+def setup_test_users(db):
     """
     Placeholder function to create some tests accounts
     """
@@ -22,7 +22,7 @@ def setup_test_users():
     db.session.commit()
 
 
-def setup_roles():
+def setup_roles(db):
     """
     Sets up the user roles, if they haven't been created already.
     """

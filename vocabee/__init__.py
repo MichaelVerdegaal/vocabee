@@ -43,9 +43,6 @@ def create_app():
         from .home.views.example import example_ajax
         from .home.views.user import user, user_ajax
 
-        # Create tables that don't exist yet
-        db.create_all()
-
         # Add url routes
         app.register_blueprint(home.home_bp)
         app.register_blueprint(vocabulary.vocabulary_bp)

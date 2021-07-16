@@ -1,17 +1,12 @@
 from flask import Blueprint, render_template_string, render_template
 from flask_security import auth_required, logout_user
 
-from vocabee.util.user import setup_test_users, setup_roles
-
 user_bp = Blueprint('user', __name__, url_prefix='/user')
-setup_roles()
 
 
 @user_bp.route("/login")
 @auth_required()
 def login():
-    # TODO: remove this when account functionality is finished
-    setup_test_users()
     return render_template_string("Hello {{ current_user.email }}, with role {{ current_user.roles[0].name}}")
 
 
@@ -30,4 +25,3 @@ def register_page():
 @user_bp.route("/register-sucess")
 def register_successful_page():
     return render_template("security/register_successful.html")
-
