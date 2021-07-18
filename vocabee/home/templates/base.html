@@ -61,8 +61,8 @@
     (url_for('home.home'), 'home', 'Home'),
     (url_for('vocabulary.vocabulary_index'), 'vocabulary', 'Vocabulary'),
     (url_for('vocabulary.flashcards'), 'flashcards', 'Flashcards'),
-    (url_for('home.about'), 'about', 'About')
-    ] -%}
+    (url_for('home.about'), 'about', 'About'),
+] -%}
 
 {% set active_page = active_page|default('index') -%}
 
@@ -123,7 +123,6 @@
                 Register
             </a>
         {% endif %}
-
     </div>
 </nav>
 <!--end navbar-->
@@ -155,5 +154,8 @@
     <span class="text-muted footer-text">© 2021 Michael Verdegaal, All rights reserved</span>
     <a class="footer-link" href="https://www.patreon.com/bePatron?u=40086356" target="_blank" rel="noopener">Support
         VocaBee!</a>
+    {% if current_user.has_role('admin') %}
+    <a class="footer-link" href="{{ url_for('admin.editor') }}">Admin editor</a>
+    {% endif %}
 </footer>
 </html>
