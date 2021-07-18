@@ -3,17 +3,107 @@
 {% block container %}
     <title>My account - VocaBee</title>
 
-    <div class="container-fluid text-container">
-        <h1>...</h1>
-        <p>
-            ...
-        </p>
+    <!--Stylesheets -->
+    <link href="{{ url_for('static', filename='css/pages/account.css') }}" rel="stylesheet">
+
+
+
+    <div class="align-items-center">
+        <div class="row">
+            <div class="col-xxl-2"></div>
+
+            <div class="col-xxl-8">
+                <div class="container-fluid" id="login-content-container">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs nav-fill" id="myTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="accountTab" data-bs-toggle="tab"
+                                    data-bs-target="#accountTabContent"
+                                    type="button" role="tab" aria-controls="account" aria-selected="false">Account
+                            </button>
+                        </li>
+                    </ul>
+
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="accountTabContent" role="tabpanel"
+                             aria-labelledby="accountTab">
+                            <div class="container-fluid text-container text-center">
+                                <h1>My account</h1>
+                                <p>
+                                    Inspect your personal information
+                                </p>
+                            </div>
+                            <form>
+                                <div class="mb-3 row">
+                                    <div class="mb-2 col-xl">
+                                        <div class="form-floating">
+                                            <input type="email" name="email" class="form-control" id="emailInput"
+                                                   value="{{ current_user.email }}"
+                                                   placeholder="name@example.com">
+                                            <label for="emailInput">Email address</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl">
+                                        <div class="form-floating">
+                                            <input type="text" name="username" class="form-control"
+                                                   id="usernameInput"
+                                                   value="{{ current_user.username }}"
+                                                   placeholder="username">
+                                            <label for="usernameInput">Username</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mb-5 row">
+                                    <button class="btn btn-primary action-btn" id="emailUsernameUpdateBtn"
+                                            style="width: 100%"
+                                            title="Update email/username" type="button">
+                                        Update my details
+                                    </button>
+                                </div>
+
+                                <hr>
+                                <div class="mb-3 row">
+                                    <div class="form-floating">
+                                        <input class="form-control" id="passwordInput" name="password"
+                                               placeholder="password"
+                                               type="password" value="">
+                                        <label for="passwordInput">Password</label>
+                                    </div>
+                                </div>
+
+                                <div class="mb-5 row">
+                                    <button class="btn btn-primary action-btn" id="passwordUpdateBtn"
+                                            style="width: 100%"
+                                            title="Change password" type="button">
+                                        Change password
+                                    </button>
+                                </div>
+
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xxl-2"></div>
+        </div>
+
     </div>
 
-    <div class="container-fluid">
-    </div>
 
     <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            document.getElementById('accountTab').click();
+        });
+
+        document.querySelector('#emailUsernameUpdateBtn').addEventListener('click', function () {
+            alert("Sorry, but changing acocunt information is not supported yet. Sorry for the inconvenience!");
+        })
+        document.querySelector('#passwordUpdateBtn').addEventListener('click', function () {
+            alert("Sorry, but changing acocunt information is not supported yet. Sorry for the inconvenience!");
+        })
     </script>
 
 {% endblock %}

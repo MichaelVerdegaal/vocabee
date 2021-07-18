@@ -12,13 +12,16 @@ def setup_test_users(db):
     """
     admin_user = user_datastore.find_user(email="admin@me.com")
     if not admin_user:
-        user_datastore.create_user(email="admin@me.com", password=hash_password("password"), roles=['admin'])
+        user_datastore.create_user(email="admin@me.com", username='admin', password=hash_password("password"),
+                                   roles=['admin'])
     editor_user = user_datastore.find_user(email="editor@me.com")
     if not editor_user:
-        user_datastore.create_user(email="editor@me.com", password=hash_password("password"), roles=['editor'])
+        user_datastore.create_user(email="editor@me.com", username='editor', password=hash_password("password"),
+                                   roles=['editor'])
     normal_user = user_datastore.find_user(email="user@me.com")
     if not normal_user:
-        user_datastore.create_user(email="user@me.com", password=hash_password("password"), roles=['user'])
+        user_datastore.create_user(email="user@me.com", username='user', password=hash_password("password"),
+                                   roles=['user'])
     db.session.commit()
 
 
@@ -44,6 +47,7 @@ def validate_register_fields(email, username, password, password_repeat):
     :param password_repeat: password repeated
     :return: continue_register boolean, field check report , email (normalized if applicable)
     """
+
     def set_field_invalid(field, error):
         """Quick helper function for the fields to lessen the amount of code"""
         fields[field]['valid'] = 'false'
@@ -83,7 +87,7 @@ def validate_register_fields(email, username, password, password_repeat):
     return continue_register, fields, email
 
 
-def register_user(email, username, password, password_repeat, roles=None):
+def register_user(db, email, username, password, password_repeat, roles=None):
     """
     Registers a user if it complies with all the checks
     :param email: email address
