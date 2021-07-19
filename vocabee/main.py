@@ -7,7 +7,7 @@ from flask import send_from_directory, request
 from vocabee import create_app, db
 from vocabee.config import STATIC_FOLDER
 from vocabee.util.database_util import init_db
-from vocabee.util.user import setup_test_users, setup_roles
+from vocabee.util.user import setup_roles
 
 app = create_app()
 
@@ -21,8 +21,6 @@ def setup_db():
     """
     init_db(db)
     setup_roles(db)
-    # TODO: remove this line when account functionality is finished
-    setup_test_users(db)
 
 
 @app.context_processor

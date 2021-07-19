@@ -1,28 +1,10 @@
+import re
+
 from email_validator import validate_email, EmailNotValidError
 from flask_security import hash_password
-import re
+
 from vocabee import user_datastore
 from vocabee.util.view_util import create_status
-
-
-# TODO: remove this when account functionality is finished
-def setup_test_users(db):
-    """
-    Placeholder function to create some tests accounts
-    """
-    admin_user = user_datastore.find_user(email="admin@me.com")
-    if not admin_user:
-        user_datastore.create_user(email="admin@me.com", username='admin', password=hash_password("password"),
-                                   roles=['admin'])
-    editor_user = user_datastore.find_user(email="editor@me.com")
-    if not editor_user:
-        user_datastore.create_user(email="editor@me.com", username='editor', password=hash_password("password"),
-                                   roles=['editor'])
-    normal_user = user_datastore.find_user(email="user@me.com")
-    if not normal_user:
-        user_datastore.create_user(email="user@me.com", username='user', password=hash_password("password"),
-                                   roles=['user'])
-    db.session.commit()
 
 
 def setup_roles(db):
