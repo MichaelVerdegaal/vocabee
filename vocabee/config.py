@@ -31,3 +31,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 # Bcrypt is set as default SECURITY_PASSWORD_HASH, which requires a salt
 # Generate a good salt using: secrets.SystemRandom().getrandbits(128)
 SECURITY_PASSWORD_SALT = os.environ.get("SECURITY_PASSWORD_SALT" )
+
+# Track user stats. The specific fields can be found in the User model.
+# Ref: https://flask-security-too.readthedocs.io/en/stable/configuration.html#trackable
+SECURITY_TRACKABLE = True
