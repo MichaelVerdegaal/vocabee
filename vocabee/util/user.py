@@ -27,11 +27,11 @@ def validate_register_fields(email, username, password, password_repeat):
     :param username: username to display
     :param password: password
     :param password_repeat: password repeated
-    :return: continue_register boolean, field check report , email (normalized if applicable)
+    :return: field check report as dict, email (normalized if applicable)
     """
 
     def set_field_invalid(field, error):
-        """Quick helper function for the fields to lessen the amount of code"""
+        """Quick helper function for the fields, to lessen the amount of code"""
         fields[field]['valid'] = 'false'
         fields[field]['error'].append(error)
 
@@ -43,6 +43,7 @@ def validate_register_fields(email, username, password, password_repeat):
     if user_datastore.find_user(username=username):
         set_field_invalid('username', "An account with this username already exists")
 
+    ### Email field ###
     # Validate email and normalize
     try:
         valid = validate_email(email)
@@ -50,16 +51,21 @@ def validate_register_fields(email, username, password, password_repeat):
     except EmailNotValidError as e:
         set_field_invalid('email', f"{str(e)}")
 
-    # Check for empty fields, these shouldn't be possible if the front-end validated correctly, but can't hurt to check
+    ### Username field ###
     if not username:
         set_field_invalid('username', "Username field can't be empty")
-    if not password:
-        set_field_invalid('password', "Password field can't be empty")
-
+    if len(username) > 24:
+        set_field_invalid('username', "Username is too long, please limit it to maximum 24 characters")
     # Only allow certain characters for the username, as a form of normalizing
     if not re.match("^[a-zA-Z0-9_.-]+$", username):
         set_field_invalid('username', "Username can only consist of letters, numbers and these special "
                                       "characters .-_ (period, dash and underline)")
+
+    ### Password field ###
+    if len(password) < 6:
+        set_field_invalid('password', "Password is too short, please write a new one between 6-18 characters")
+    elif len(password) > 18:
+        set_field_invalid('password', "Password is too long, please write a new one between 6-18 characters")
 
     if password != password_repeat:
         set_field_invalid('password', "The passwords don't match")
