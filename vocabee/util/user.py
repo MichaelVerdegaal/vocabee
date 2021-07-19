@@ -35,7 +35,6 @@ def validate_register_fields(email, username, password, password_repeat):
         fields[field]['valid'] = 'false'
         fields[field]['error'].append(error)
 
-    continue_register = True
     fields = {field: {'valid': 'true', 'error': []} for field in ['email', 'username', 'password', 'password_repeat']}
 
     # Check for existing accounts
@@ -66,7 +65,7 @@ def validate_register_fields(email, username, password, password_repeat):
         set_field_invalid('password', "The passwords don't match")
         set_field_invalid('password_repeat', "The passwords don't match")
 
-    return continue_register, fields, email
+    return fields, email
 
 
 def register_user(db, email, username, password, password_repeat, roles=None):
@@ -83,16 +82,13 @@ def register_user(db, email, username, password, password_repeat, roles=None):
     if roles is None:
         roles = ['user']
 
-    continue_register, fields, email = validate_register_fields(email, username, password, password_repeat)
+    fields, email = validate_register_fields(email, username, password, password_repeat)
 
     # If, and only if we don't have any invalid fields we actually register the user
     if any('false' in field.values() for field in fields.values()):
-        continue_register = False
-
-    if continue_register:
+        return create_status(400, continue_register=False, fields=fields)
+    else:
         # Hash password and register the user to the database
         user_datastore.create_user(email=email, username=username, password=hash_password(password), roles=roles)
         db.session.commit()
-        return create_status(200, continue_register=continue_register, fields=fields)
-    else:
-        return create_status(400, continue_register=continue_register, fields=fields)
+        return create_status(200, continue_register=True, fields=fields)
