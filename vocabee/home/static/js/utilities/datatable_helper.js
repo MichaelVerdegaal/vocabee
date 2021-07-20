@@ -1,3 +1,10 @@
+const PAGINATE = {
+    previous: '<i class="bi bi-chevron-left"></i>',
+    next: '<i class="bi bi-chevron-right"></i>',
+    first: '<i class="bi bi-chevron-bar-left"></i>',
+    last: '<i class="bi bi-chevron-bar-right"></i>'
+}
+
 function createVocabBrowserTable(vocabEndpoint, table_id, level) {
     /**
      * Generate and fill a datatable with vocabulary data sourced from an endpoint. Includes example button
@@ -58,12 +65,7 @@ function createVocabBrowserTable(vocabEndpoint, table_id, level) {
             "sEmptyTable": "No vocabulary available, something probably went wrong..."
         },
         language: {
-            paginate: {
-                previous: '<i class="bi bi-chevron-left"></i>',
-                next: '<i class="bi bi-chevron-right"></i>',
-                first: '<i class="bi bi-chevron-bar-left"></i>',
-                last: '<i class="bi bi-chevron-bar-right"></i>'
-            }
+            paginate: PAGINATE
         }
     });
 }
@@ -93,12 +95,7 @@ function createVocabTable(vocabulary, table_id, columns) {
             "sEmptyTable": "No matches..."
         },
         language: {
-            paginate: {
-                previous: '<span class="material-icons">chevron_left</span>',
-                next: '<span class="material-icons">chevron_right</span>',
-                first: '<span class="material-icons">first_page</span>',
-                last: '<span class="material-icons">last_page</span>'
-            }
+            paginate: PAGINATE
         }
     });
 }

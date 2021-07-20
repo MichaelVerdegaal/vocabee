@@ -16,8 +16,6 @@ from vocabee.config import PROJECT_FOLDER, APP_FOLDER, STATIC_FOLDER
 load_dotenv(os.path.join(PROJECT_FOLDER, '.env'))
 # SQLAlchemy integration
 db = SQLAlchemy(query_class=CachingQuery)
-# Flask-Security setup
-fsqla.FsModels.set_db_info(db)
 # Caching
 cache = Cache(config={'CACHE_TYPE': 'simple'})
 # Compile SASS to CSS
@@ -26,6 +24,7 @@ sass.compile(dirname=(os.path.join(STATIC_FOLDER, 'sass'), os.path.join(STATIC_F
 # Flask-Security setup
 from .home.models import User, Role
 
+fsqla.FsModels.set_db_info(db)
 user_datastore = SQLAlchemyUserDatastore(db, User, Role)
 
 

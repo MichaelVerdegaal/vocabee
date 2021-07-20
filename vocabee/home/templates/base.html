@@ -25,8 +25,8 @@
             integrity="sha512-sgCmD7q2qJ2H2Slkb+g7X3AGL7Uo87ul4DjA5h+B/fgjOnhhEek6Kmei9Os+KBT+BkVN32S0uxo3pPFMouKCbw=="
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!--Custom stylesheets and scripts-->
-    <script src="{{ url_for('static', filename='js/utilities.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/searching.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/utilities/misc_utilities.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/vocabulary/searching.js') }}"></script>
     <link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet">
     <!--Ref: https://code.jquery.com/ -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
@@ -36,7 +36,7 @@
     <link rel="stylesheet" type="text/css"
           href="https://cdn.datatables.net/v/bs4/dt-1.10.20/r-2.2.3/datatables.min.css"/>
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.20/r-2.2.3/datatables.min.js"></script>
-    <script src="{{ url_for('static', filename='js/full_numbers_no_ellipses.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/utilities/full_numbers_no_ellipses.js') }}"></script>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id={{ GA_TRACKING_ID }}"></script>
     <script>
