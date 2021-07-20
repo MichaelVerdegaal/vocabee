@@ -40,23 +40,11 @@ a
   flex: 1 0 auto
 
 // Icons
-.bi-14
-  font-size: 14px
+$sizes: 14px, 18px, 24px, 30px, 36px, 48px
 
-.bi-18
-  font-size: 18px
-
-.bi-24
-  font-size: 24px
-
-.bi-30
-  font-size: 30px
-
-.bi-36
-  font-size: 36px
-
-.bi-48
-  font-size: 48px
+@each $size in $sizes
+  .bi-#{$size}
+    font-size: $size
 
 // Input fields
 input:focus

@@ -1,6 +1,23 @@
 @import '../abstract/variables'
 
 // This sass file contains button styling for buttons used in multiple places
+@mixin btnStyle($mainColor, $secondaryColor)
+  border-color: $mainColor !important
+  background-color: $mainColor !important
+  color: $mainwhite !important
+
+  &:hover, &:active
+    background-color: $secondaryColor !important
+    border-color: $secondaryColor !important
+
+@mixin btnOutlineStyle($mainColor, $secondaryColor)
+  color: $mainColor !important
+  border-color: $mainColor !important
+
+  &:hover, &:active
+    background-color: $secondaryColor !important
+    border-color: $secondaryColor !important
+    color: $mainwhite !important
 
 /////General styling
 // Remove box-shadow from every button
@@ -11,83 +28,31 @@ a, button, button:hover:focus, button:active:focus, button:focus
 // Generic button. Orange. Use this if you have no reason to use any other
 .action-btn, .action-btn:focus,
 .dropdown-toggle, .dropdown-toggle:focus
-  border-color: $mainorange !important
-  background-color: $mainorange !important
-  color: $mainwhite !important
-
-  &:hover, &:active
-    background-color: $secondaryorange !important
-    border-color: $secondaryorange !important
+  @include btnStyle($mainorange, $secondaryorange)
 
 // Generic button. Green.
 .action-btn-green, .action-btn-green:focus
-  border-color: $maingreen !important
-  background-color: $maingreen !important
-  color: $mainwhite !important
-
-  &:hover, &:active
-    background-color: $secondarygreen !important
-    border-color: $secondarygreen !important
+  @include btnStyle($maingreen, $secondarygreen)
 
 // Generic button. Gray.
 .action-btn-gray, .action-btn-gray:focus
-  border-color: $maingray !important
-  background-color: $maingray !important
-  color: $mainwhite !important
-
-  &:hover, &:active
-    background-color: $secondarygray !important
-    border-color: $secondarygray !important
-
-// Generic button. Gray.
-.action-btn-gray, .action-btn-gray:focus
-  border-color: $maingray !important
-  background-color: $maingray !important
-  color: $mainwhite !important
-
-  &:hover, &:active
-    background-color: $secondarygray !important
-    border-color: $secondarygray !important
+  @include btnStyle($maingray, $secondarygray)
 
 // Generic button. Red.
 .action-btn-red, .action-btn-red:focus
-  border-color: $mainred !important
-  background-color: $mainred !important
-  color: $mainwhite !important
-
-  &:hover, &:active
-    background-color: $secondaryred !important
-    border-color: $secondaryred !important
+  @include btnStyle($mainred, $secondaryred)
 
 // Generic button. Action disabled.
 .action-btn.disabled, .action-btn.disabled:focus
-  border-color: $maingray !important
-  background-color: $maingray !important
-  color: $mainwhite !important
-
-  &:hover, &:active
-    background-color: $maingray !important
-    border-color: $maingray !important
+  @include btnStyle($maingray, $maingray)
 
 /////Outline buttons
 // Generic outline button. Orange.
 .btn-outline-primary
-  color: $mainorange !important
-  border-color: $mainorange !important
-
-  &:hover, &:active
-    background-color: $secondaryorange !important
-    border-color: $secondaryorange !important
-    color: $mainwhite !important
+  @include btnOutlineStyle($mainorange, $secondaryorange)
 
 .btn-outline-success
-  color: $maingreen !important
-  border-color: $maingreen !important
-
-  &:hover, &:active
-    background-color: $secondarygreen !important
-    border-color: $secondarygreen !important
-    color: $mainwhite !important
+  @include btnOutlineStyle($maingreen, $secondarygreen)
 
 /////Dropdowns
 // Dropdown styling
