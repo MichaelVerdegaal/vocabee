@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, redirect, url_for
-from flask_security import auth_required, logout_user
+from flask_security import auth_required, logout_user, current_user
 
 user_bp = Blueprint('user', __name__, url_prefix='/user')
 
@@ -19,12 +19,18 @@ def logout():
 
 @user_bp.route("/register")
 def register_page():
-    return render_template("security/register_user.html")
+    if current_user.is_authenticated:
+        return redirect(url_for('home.home'))
+    else:
+        return render_template("security/register_user.html")
 
 
 @user_bp.route("/register-sucess")
 def register_successful_page():
-    return render_template("security/register_successful.html")
+    if current_user.is_authenticated:
+        return redirect(url_for('home.home'))
+    else:
+        return render_template("security/register_successful.html")
 
 
 @user_bp.route("/account")
