@@ -36,8 +36,13 @@ span.dtr-data
   box-shadow: none
 
   &:hover
-    background-color: $mainorange
-    color: $mainwhite
+    // Need to be important as otherwise the focus sass hass priority
+    background-color: $mainorange !important
+    color: $mainwhite !important
+
+  &:focus
+    color: $mainblack
+    background-color: #ffffff
 
   .material-icons
     font-size: unset
