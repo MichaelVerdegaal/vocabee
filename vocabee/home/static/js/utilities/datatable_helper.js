@@ -5,6 +5,7 @@ const PAGINATE = {
     last: '<i class="bi bi-chevron-bar-right"></i>'
 }
 
+// TODO: make a clear decision between having the objects in strings or not, for consistency sake
 function createVocabBrowserTable(vocabEndpoint, table_id, level) {
     /**
      * Generate and fill a datatable with vocabulary data sourced from an endpoint. Includes example button
@@ -31,12 +32,14 @@ function createVocabBrowserTable(vocabEndpoint, table_id, level) {
             dataSrc: "entries",
             contentType: "application/json; charset=utf-8",
         },
+
         columns: [
             {title: "ID", "data": "id"},
             {title: "Kanji", "data": "kanji"},
             {title: "Kana", "data": "kana"},
             {title: "English", "data": "english"},
             {
+                data: "id",
                 title: "Examples",
                 class: "example-column",
                 orderable: false,
@@ -46,10 +49,6 @@ function createVocabBrowserTable(vocabEndpoint, table_id, level) {
                 }
             }
         ],
-        deferRender: true,
-        bSortClasses: false,
-        responsive: true,
-        autoWidth: false,
         columnDefs: [
             {width: '5%', targets: 0},
             {width: '10%', targets: 1},
@@ -57,6 +56,12 @@ function createVocabBrowserTable(vocabEndpoint, table_id, level) {
             {width: '50%', targets: 3},
             {width: '5%', targets: 4},
         ],
+
+        deferRender: true,
+        bSortClasses: false,
+        responsive: true,
+        autoWidth: false,
+
         pageLength: 10,
         lengthMenu: [[10, 25, 50], [10, 25, 50]],
         pagingType: "full_numbers_no_ellipses",
