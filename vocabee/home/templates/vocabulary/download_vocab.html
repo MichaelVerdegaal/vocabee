@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+{% set active_page = "flashcards" %}
+
+{% block container %}
+    <title>Anki decks - VocaBee</title>
+    <!--Stylesheets -->
+    <link href="{{ url_for('static', filename='css/pages/download_vocab.css') }}" rel="stylesheet">
+
+
+    <div class="align-items-center">
+        <div class="row">
+            <div class="col-xl-3"></div>
+
+            <div class="col-xl-6">
+                <div class="container-fluid text-container text-center">
+                    <h1>Download</h1>
+                    <p>
+                        Select your choice of vocabulary, and download it to an Anki deck or file.
+                    </p>
+                </div>
+
+                <ul class="nav nav-tabs nav-fill" id="pills-tab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="flashcardTab" data-bs-toggle="pill"
+                                data-bs-target="#flashcardTabContent" type="button" role="tab">
+                            Flashcards
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="exportfileTab" data-bs-toggle="pill"
+                                data-bs-target="#exportfileTabContent" type="button" role="tab">
+                            Export to file
+                        </button>
+                    </li>
+                </ul>
+                <div class="tab-content" id="pills-tabContent">
+                    <div class="tab-pane fade show active" id="flashcardTabContent" role="tabpanel">
+                        <form>
+                            <div class="mb-3 row">
+                                <label for="levelSelect" class="form-label">Select your level of vocabulary</label>
+                                <select class="form-select" id="levelSelect">
+                                    <option value="5">JLPT N5</option>
+                                    <option value="4">JLPT N4</option>
+                                    <option value="3">JLPT N3</option>
+                                    <option value="2">JLPT N2</option>
+                                    <option value="1">JLPT N1</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-5 row">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="exampleCheck" checked>
+                                    <label class="form-check-label" for="exampleCheck">
+                                        Include example sentences
+                                    </label>
+                                </div>
+                                <div id="exampleCheckHelp" class="form-text">Note that this will increase the download
+                                    time.
+                                </div>
+                            </div>
+
+                            <div class="mb-5 row">
+                                <a class="btn btn-primary action-btn" title="Download deck"
+                                   id="deckDownloadBtn" style="width: 100%" download>
+                                    Download deck
+                                </a>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="tab-pane fade" id="exportfileTabContent" role="tabpanel">
+                        <form>
+                            <div class="mb-3 row">
+                                <label for="levelSelect" class="form-label">Select your level of vocabulary</label>
+                                <select class="form-select" id="levelSelect">
+                                    <option value="5">JLPT N5</option>
+                                    <option value="4">JLPT N4</option>
+                                    <option value="3">JLPT N3</option>
+                                    <option value="2">JLPT N2</option>
+                                    <option value="1">JLPT N1</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-3 row">
+                                <label for="fileFormatSelect" class="form-label">Select the file format you want to
+                                    download</label>
+                                <select class="form-select" id="fileFormatSelect">
+                                    <option value="docx">Word file (.docx)</option>
+                                    <option value="xlsx">Excel file (.xlsx)</option>
+                                    <option value="json">Json file (.json)</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-5 row">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="exampleCheck" checked>
+                                    <label class="form-check-label" for="exampleCheck">
+                                        Include example sentences
+                                    </label>
+                                </div>
+                                <div id="exampleCheckHelp" class="form-text">Note that this will increase the download
+                                    time.
+                                </div>
+                            </div>
+
+                            <div class="mb-5 row">
+                                <a class="btn btn-primary action-btn" title="Download deck"
+                                   id="deckDownloadBtn" style="width: 100%" download>
+                                    Download deck
+                                </a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-3"></div>
+        </div>
+
+    </div>
+
+    <script>
+
+    </script>
+{% endblock %}

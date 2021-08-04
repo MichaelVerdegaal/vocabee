@@ -81,6 +81,7 @@
             $('#vocab-table').DataTable.ext.pager.numbers_length = 3;
         });
 
+        // Example select button function
         $("#vocab-table").on('click', '.example-select', function () {
             let urlBase = "{{ url_for('example_ajax.examples_get_by_vocabulary_id', vocabulary_id=1) }}";
             // Get data from all rows, including hidden ones. Ref: https://stackoverflow.com/a/38515622

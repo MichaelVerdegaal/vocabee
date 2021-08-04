@@ -52,6 +52,19 @@ def flashcards():
         abort(404)
 
 
+@vocabulary_bp.route('/download')
+@cache.cached(timeout=30)
+def download_page():
+    """
+    Renders the download page
+    :return: Webpage
+    """
+    try:
+        return render_template("vocabulary/download_vocab.html")
+    except TemplateNotFound:
+        abort(404)
+
+
 @vocabulary_bp.route('/searchresults')
 @cache.cached(timeout=30)
 def search_results():
