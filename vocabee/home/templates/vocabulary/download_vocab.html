@@ -5,6 +5,7 @@
     <title>Anki decks - VocaBee</title>
     <!--Stylesheets -->
     <link href="{{ url_for('static', filename='css/pages/download_vocab.css') }}" rel="stylesheet">
+    <script src="{{ url_for('static', filename='js/vocabulary/download.js') }}"></script>
 
 
     <div class="align-items-center">
@@ -36,9 +37,9 @@
                 <div class="tab-content" id="pills-tabContent">
                     <div class="tab-pane fade show active" id="flashcardTabContent" role="tabpanel">
                         <form>
-                            <div class="mb-3 row">
-                                <label for="levelSelect" class="form-label">Select your level of vocabulary</label>
-                                <select class="form-select" id="levelSelect">
+                            <div class="mb-4 row">
+                                <label for="levelSelectOne" class="form-label">Select your level of vocabulary</label>
+                                <select class="form-select" id="levelSelectOne">
                                     <option value="5">JLPT N5</option>
                                     <option value="4">JLPT N4</option>
                                     <option value="3">JLPT N3</option>
@@ -49,8 +50,8 @@
 
                             <div class="mb-5 row">
                                 <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" id="exampleCheck" checked>
-                                    <label class="form-check-label" for="exampleCheck">
+                                    <input class="form-check-input" type="checkbox" id="exampleCheckOne" checked>
+                                    <label class="form-check-label" for="exampleCheckOne">
                                         Include example sentences
                                     </label>
                                 </div>
@@ -69,9 +70,9 @@
                     </div>
                     <div class="tab-pane fade" id="exportfileTabContent" role="tabpanel">
                         <form>
-                            <div class="mb-3 row">
-                                <label for="levelSelect" class="form-label">Select your level of vocabulary</label>
-                                <select class="form-select" id="levelSelect">
+                            <div class="mb-4 row">
+                                <label for="levelSelectTwo" class="form-label">Select your level of vocabulary</label>
+                                <select class="form-select" id="levelSelectTwo">
                                     <option value="5">JLPT N5</option>
                                     <option value="4">JLPT N4</option>
                                     <option value="3">JLPT N3</option>
@@ -80,7 +81,7 @@
                                 </select>
                             </div>
 
-                            <div class="mb-3 row">
+                            <div class="mb-4 row">
                                 <label for="fileFormatSelect" class="form-label">Select the file format you want to
                                     download</label>
                                 <select class="form-select" id="fileFormatSelect">
@@ -92,8 +93,8 @@
 
                             <div class="mb-5 row">
                                 <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" id="exampleCheck" checked>
-                                    <label class="form-check-label" for="exampleCheck">
+                                    <input class="form-check-input" type="checkbox" id="exampleCheckTwo" checked>
+                                    <label class="form-check-label" for="exampleCheckTwo">
                                         Include example sentences
                                     </label>
                                 </div>
@@ -104,8 +105,8 @@
 
                             <div class="mb-5 row">
                                 <a class="btn btn-primary action-btn" title="Download deck"
-                                   id="deckDownloadBtn" style="width: 100%" download>
-                                    Download deck
+                                   id="fileDownloadBtn" style="width: 100%" download>
+                                    Download file
                                 </a>
                             </div>
                         </form>
@@ -119,6 +120,15 @@
     </div>
 
     <script>
+        let deckUrlBase = "{{ url_for('vocabulary_ajax.vocabulary_download_decko') }}";
+        let fileUrlBase = "{{ url_for('vocabulary_ajax.vocabulary_download_file') }}";
 
+        document.querySelector('#deckDownloadBtn').addEventListener('click', function () {
+            processDeckForm(deckUrlBase);
+        })
+
+        document.querySelector('#fileDownloadBtn').addEventListener('click', function () {
+            processFileForm(fileUrlBase);
+        })
     </script>
 {% endblock %}
