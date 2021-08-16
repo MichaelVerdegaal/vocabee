@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% set active_page = "flashcards" %}
+{% set active_page = "download" %}
 
 {% block container %}
     <title>Anki decks - VocaBee</title>
@@ -28,7 +28,7 @@
                         </button>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="exportfileTab" data-bs-toggle="pill"
+                        <button class="nav-link disabled" id="exportfileTab" data-bs-toggle="pill"
                                 data-bs-target="#exportfileTabContent" type="button" role="tab">
                             Export to file
                         </button>
@@ -120,7 +120,7 @@
     </div>
 
     <script>
-        let deckUrlBase = "{{ url_for('vocabulary_ajax.vocabulary_download_decko') }}";
+        let deckUrlBase = "{{ url_for('vocabulary_ajax.vocabulary_download_deck') }}";
         let fileUrlBase = "{{ url_for('vocabulary_ajax.vocabulary_download_file') }}";
 
         document.querySelector('#deckDownloadBtn').addEventListener('click', function () {

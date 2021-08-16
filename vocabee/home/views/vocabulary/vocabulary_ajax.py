@@ -117,7 +117,7 @@ def vocabulary_entry_delete():
 
 
 @vocabulary_ajax_bp.route('/source/download/deck', methods=['POST'])
-def vocabulary_download_decko():
+def vocabulary_download_deck():
     request_data = request.json
     vocabulary_level = request_data.get('vocab_level', "5")
     status, vocabulary = get_vocabulary_by_level(vocabulary_level)
@@ -139,26 +139,3 @@ def vocabulary_download_decko():
 @vocabulary_ajax_bp.route('/source/download/file')
 def vocabulary_download_file():
     return {'test': "hi"}
-
-
-@vocabulary_ajax_bp.route('/source/anki/<int:vocabulary_level>')
-def vocabulary_download_deck(vocabulary_level):
-    """
-    Creates download response for generated anki decks
-    :param vocabulary_level: Valid JLPT vocabulary level (1-5)
-    :return: downloaded file
-    """
-    status, vocabulary = get_vocabulary_by_level(vocabulary_level)
-    if status['code'] == 200:
-        filename = f'vocabee{vocabulary_level}.apkg'
-        deck_path = os.path.join(PROJECT_FOLDER, filename)
-        create_deck_by_level(vocabulary, vocabulary_level, filename)
-
-        # Ref: https://stackoverflow.com/a/57998006/7174982
-        with open(deck_path, 'rb') as f:
-            data = f.readlines()
-        os.remove(deck_path)
-        return Response(data, headers={'Content-Type': 'application/octet-stream',
-                                       'Content-Disposition': f'attachment; filename={filename};'}), 200
-    else:
-        return status, 500

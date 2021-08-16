@@ -39,19 +39,6 @@ def vocabulary_browser(vocabulary_level):
             abort(404)
 
 
-@vocabulary_bp.route('/flashcards')
-@cache.cached(timeout=30)
-def flashcards():
-    """
-    Renders the Anki deck page
-    :return: Webpage
-    """
-    try:
-        return render_template("vocabulary/flashcards.html")
-    except TemplateNotFound:
-        abort(404)
-
-
 @vocabulary_bp.route('/download')
 @cache.cached(timeout=30)
 def download_page():
