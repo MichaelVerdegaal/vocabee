@@ -43,16 +43,12 @@ def create_note(example_list, kana, kanji, english):
     :param english: english text
     :return: anki note
     """
-    examples = example_list[:3]
     example_string = ''
-    if examples:
-        example_string = create_example_note_string(examples)
+    if example_list:
+        example_string = create_example_note_string(example_list[:3])
         example_string = f'<hr><br><h2>Example usage</h2>{example_string}'
 
-    if kanji:
-        kanji = f"/{kanji}"
-    else:
-        kanji = ""
+    kanji = f"/{kanji}" if kanji else ""
     return genanki.Note(model=vocabulary_model, fields=[kana, kanji, english, example_string])
 
 
@@ -70,13 +66,17 @@ def create_deck(level):
     return my_deck
 
 
-def fill_deck(vocabulary_list, deck):
+def fill_deck(vocabulary_list, deck, include_examples):
     """
     Creates a notelist and add it to the deck
     :param vocabulary_list: vocabulary list
     :param deck: anki deck
     """
-    notelist = [create_note(v.examples, v.kana, v.kanji, v.english) for v in vocabulary_list]
+    # TODO: Redo include_examples to be cleaner
+    if include_examples:
+        notelist = [create_note(v.examples, v.kana, v.kanji, v.english) for v in vocabulary_list]
+    else:
+        notelist = [create_note(None, v.kana, v.kanji, v.english) for v in vocabulary_list]
     deck.notes = notelist
 
 
@@ -91,7 +91,7 @@ def write_deck(deck, filename):
     return filename
 
 
-def create_deck_by_level(vocabulary, level, filename):
+def create_deck_by_level(vocabulary, level, filename, include_examples):
     """
     Creates and writes to an anki deck from a vocabulary list
     :param vocabulary: vocabulary list
@@ -100,5 +100,5 @@ def create_deck_by_level(vocabulary, level, filename):
     :return: name of the generated file
     """
     new_deck = create_deck(level)
-    fill_deck(vocabulary, new_deck)
+    fill_deck(vocabulary, new_deck, include_examples)
     write_deck(new_deck, filename)
